@@ -6,12 +6,14 @@
 
 import React, { useState } from 'react';
 
+import Finish from './components/Finish';
 import Welcome from './components/Welcome';
 
 import './index.scss';
 
 enum Steps {
     WELCOME,
+    FINISH,
 }
 
 export default () => {
@@ -19,13 +21,19 @@ export default () => {
         Steps.WELCOME
         // '--first-launch' ? Steps.WELCOME : Steps.DETECT
     );
+
     const props = {
         back: () => {
-            setCurrentStep(Math.max(0, currentStep - 1));
+            setCurrentStep(Math.max(Steps.WELCOME, currentStep - 1));
         },
-        // next: () => {
-        //     setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
-        // },
+        next: () => {
+            setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
+        },
     };
-    return currentStep === Steps.WELCOME && <Welcome />;
+    return (
+        <>
+            {currentStep === Steps.WELCOME && <Welcome {...props} />}
+            {currentStep === Steps.FINISH && <Finish {...props} />}
+        </>
+    );
 };

@@ -7,21 +7,33 @@
 import React, { ReactNode } from 'react';
 import { Logo } from 'pc-nrfconnect-shared';
 
-export default ({
-    content,
-    footer,
-}: {
-    content: ReactNode;
-    footer: ReactNode;
-}) => (
-    <div className="tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between">
-        <div className="tw-flex tw-h-16 tw-w-full tw-items-center tw-justify-between tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-font-bold tw-uppercase tw-text-white">
-            <p>Quickstart</p>
-            <div className="tw-h-10 tw-w-10">
-                <Logo />
-            </div>
+const Header = () => (
+    <div className="tw-flex tw-h-16 tw-w-full tw-items-center tw-justify-between tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-font-bold tw-uppercase tw-text-white">
+        <p>Quickstart</p>
+        <div className="tw-h-10 tw-w-10">
+            <Logo />
         </div>
-        <div className="tw-m-4 tw-text-sm">{content}</div>
-        <div className="tw-mb-8"> {footer}</div>
     </div>
 );
+
+const Content = ({ children }: { children: ReactNode }) => (
+    <div className="tw-m-4 tw-flex tw-max-w-xs tw-flex-col tw-justify-center tw-gap-10 tw-text-center tw-text-sm tw-text-gray-700">
+        {children}
+    </div>
+);
+
+const Footer = ({ children }: { children: ReactNode }) => (
+    <div className="tw-mb-8 tw-flex tw-flex-row tw-gap-2"> {children}</div>
+);
+
+const Main = ({ children }: { children: ReactNode }) => (
+    <div className="tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between">
+        {children}
+    </div>
+);
+
+Main.Header = Header;
+Main.Content = Content;
+Main.Footer = Footer;
+
+export default Main;
