@@ -16,18 +16,42 @@ const Header = () => (
     </div>
 );
 
-const Content = ({ children }: { children: ReactNode }) => (
-    <div className="tw-m-4 tw-flex tw-max-w-xs tw-flex-col tw-justify-center tw-gap-10 tw-text-center tw-text-sm tw-text-gray-700">
+const Content = ({
+    className = '',
+    children,
+}: {
+    className?: string;
+    children: ReactNode;
+}) => (
+    <div
+        className={`tw-m-4 tw-flex tw-max-w-xs tw-flex-col tw-justify-center tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
+    >
         {children}
     </div>
 );
 
-const Footer = ({ children }: { children: ReactNode }) => (
-    <div className="tw-mb-8 tw-flex tw-flex-row tw-gap-2"> {children}</div>
+const Footer = ({
+    className = '',
+    children,
+}: {
+    className?: string;
+    children: ReactNode;
+}) => (
+    <div className={`tw-mb-8 tw-flex tw-flex-row tw-gap-2 ${className}`}>
+        {children}
+    </div>
 );
 
-const Main = ({ children }: { children: ReactNode }) => (
-    <div className="tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between">
+const Main = ({
+    className = '',
+    children,
+}: {
+    className?: string;
+    children: ReactNode;
+}) => (
+    <div
+        className={`tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between ${className}`}
+    >
         {children}
     </div>
 );
