@@ -41,21 +41,23 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                 <Button variant="secondary" large onClick={back}>
                     Back
                 </Button>
-                <Button variant="secondary" large onClick={next}>
-                    Skip
-                </Button>
-                <Button
-                    variant="primary"
-                    large
-                    onClick={() => {
-                        if (nickname.trim().length > 0) {
-                            // TODO: Send nickname to backend
-                        }
-                        next();
-                    }}
-                >
-                    Next
-                </Button>
+                <div className="tw-flex tw-flex-row tw-gap-2 tw-pl-20">
+                    <Button variant="secondary" large onClick={next}>
+                        Skip
+                    </Button>
+                    <Button
+                        variant="primary"
+                        large
+                        onClick={() => {
+                            if (nickname.trim().length > 0) {
+                                // TODO: Send nickname to backend
+                            }
+                            next();
+                        }}
+                    >
+                        Next
+                    </Button>
+                </div>
             </Main.Footer>
         </Main>
     );
