@@ -7,13 +7,14 @@
 import React from 'react';
 import { Button } from 'pc-nrfconnect-shared';
 
+import Heading from './Heading';
 import Main from './Main';
 
 export default ({ back }: { back: () => void }) => (
     <Main>
         <Main.Header />
         <Main.Content>
-            <h1 className="tw-text-lg tw-font-medium">Finished Quickstart</h1>
+            <Heading>Finished Quickstart</Heading>
             <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
                 <p>You now have finished all the steps</p>
                 <p>

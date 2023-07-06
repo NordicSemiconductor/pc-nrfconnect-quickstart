@@ -7,6 +7,7 @@
 import React from 'react';
 import { Button } from 'pc-nrfconnect-shared';
 
+import Heading from './Heading';
 import Main from './Main';
 
 export default ({ back, next }: { back: () => void; next: () => void }) => {
@@ -17,9 +18,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
         <Main>
             <Main.Header />
             <Main.Content>
-                <h1 className="tw-text-lg tw-font-medium">
-                    First, give your kit a custom name
-                </h1>
+                <Heading>First, give your kit a custom name</Heading>
                 <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
                     <div className="tw-flex tw-flex-col tw-items-center">
                         <div className="tw-self-end tw-text-xs">{`${nickname.length}/${maxLength}`}</div>
