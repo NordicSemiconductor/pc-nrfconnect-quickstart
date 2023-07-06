@@ -13,10 +13,8 @@ export default ({ back }: { back: () => void }) => (
     <Main>
         <Main.Header />
         <Main.Content>
-            <h1 className="tw-mb-10 tw-text-lg tw-font-medium">
-                Finished Quickstart
-            </h1>
-            <div className="tw-flex tw-flex-col tw-gap-4">
+            <h1 className="tw-text-lg tw-font-medium">Finished Quickstart</h1>
+            <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
                 <p>You now have finished all the steps</p>
                 <p>
                     Quickstart can be opened at any time from nRF Connect for

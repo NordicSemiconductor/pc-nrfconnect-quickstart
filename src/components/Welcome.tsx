@@ -12,7 +12,7 @@ import Main from './Main';
 export default ({ next }: { next: () => void }) => (
     <Main>
         <Main.Header />
-        <Main.Content>
+        <Main.Content className="tw-gap-4">
             <p>
                 Get started quickly by updating and verifying functionality,
                 installing dependencies, SDK, toolchain and more.

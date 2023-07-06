@@ -24,7 +24,7 @@ const Content = ({
     children: ReactNode;
 }) => (
     <div
-        className={`tw-m-4 tw-flex tw-max-w-xs tw-flex-col tw-justify-center tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
+        className={`tw-flex tw-max-w-xs tw-flex-col tw-justify-center tw-p-4 tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
     >
         {children}
     </div>
@@ -37,7 +37,7 @@ const Footer = ({
     className?: string;
     children: ReactNode;
 }) => (
-    <div className={`tw-mb-8 tw-flex tw-flex-row tw-gap-2 ${className}`}>
+    <div className={`tw-flex tw-flex-row tw-gap-2 tw-pb-8 ${className}`}>
         {children}
     </div>
 );
