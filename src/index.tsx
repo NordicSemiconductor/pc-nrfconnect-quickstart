@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 
 import Develop from './components/Develop';
 import Finish from './components/Finish';
+import Introduction from './components/Introduction';
 import Learn from './components/Learn';
 import Personalize from './components/Personalize';
 import Welcome from './components/Welcome';
@@ -16,6 +17,7 @@ import './index.scss';
 
 enum Steps {
     WELCOME,
+    INTRODUCTION,
     PERSONALIZE,
     LEARN,
     DEVELOP,
@@ -36,9 +38,11 @@ export default () => {
             setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
         },
     };
+
     return (
         <>
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
+            {currentStep === Steps.INTRODUCTION && <Introduction {...props} />}
             {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
             {currentStep === Steps.LEARN && <Learn {...props} />}
             {currentStep === Steps.DEVELOP && <Develop {...props} />}

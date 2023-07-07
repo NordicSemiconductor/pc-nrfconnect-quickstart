@@ -24,7 +24,7 @@ const Content = ({
     children: ReactNode;
 }) => (
     <div
-        className={`tw-flex tw-max-w-md tw-flex-col tw-justify-center tw-p-8 tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
+        className={`tw-flex tw-max-w-md tw-flex-col tw-items-center tw-justify-center tw-p-8 tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
     >
         {children}
     </div>
