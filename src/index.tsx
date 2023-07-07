@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 
 import Develop from './components/Develop';
 import Finish from './components/Finish';
+import Learn from './components/Learn';
 import Personalize from './components/Personalize';
 import Welcome from './components/Welcome';
 
@@ -16,6 +17,7 @@ import './index.scss';
 enum Steps {
     WELCOME,
     PERSONALIZE,
+    LEARN,
     DEVELOP,
     FINISH,
 }
@@ -38,6 +40,7 @@ export default () => {
         <>
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
             {currentStep === Steps.FINISH && <Finish {...props} />}
+            {currentStep === Steps.LEARN && <Learn {...props} />}
             {currentStep === Steps.DEVELOP && <Develop {...props} />}
             {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
         </>
