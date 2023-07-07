@@ -20,7 +20,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => (
             <div className="tw-pb-10">
                 <DeviceLogo
                     device={testingDevice}
-                    className="tw-h-14 tw-w-20 tw-fill-primary"
+                    className="tw-h-14 tw-w-20 tw-fill-gray-700"
                 />
             </div>
             <Heading>Let&apos;s get started with the \\device//</Heading>
