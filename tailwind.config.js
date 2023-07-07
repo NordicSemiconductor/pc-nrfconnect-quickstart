@@ -8,4 +8,5 @@ const baseConfig = require('pc-nrfconnect-shared/config/tailwind.config.js');
 
 module.exports = {
     ...baseConfig,
+    corePlugins: { preflight: true },
 };
