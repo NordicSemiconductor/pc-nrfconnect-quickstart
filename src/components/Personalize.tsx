@@ -19,8 +19,8 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             <Main.Header />
             <Main.Content>
                 <Heading>First, give your kit a custom name</Heading>
-                <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
-                    <div className="tw-flex tw-flex-col tw-items-center">
+                <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
+                    <div className="tw-flex tw-w-64 tw-flex-col tw-items-center">
                         <div className="tw-self-end tw-text-xs">{`${nickname.length}/${maxLength}`}</div>
                         <input
                             placeholder="Name your device"
