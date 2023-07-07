@@ -39,10 +39,10 @@ export default () => {
     return (
         <>
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
-            {currentStep === Steps.FINISH && <Finish {...props} />}
+            {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
             {currentStep === Steps.LEARN && <Learn {...props} />}
             {currentStep === Steps.DEVELOP && <Develop {...props} />}
-            {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
+            {currentStep === Steps.FINISH && <Finish {...props} />}
         </>
     );
 };
