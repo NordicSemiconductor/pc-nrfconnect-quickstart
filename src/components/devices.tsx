@@ -20,11 +20,34 @@ const devices = [
             'programmer',
             'IdentityProvisioning',
         ],
+        firmware: [
+            {
+                name: 'Serial LTE Monitor',
+                description:
+                    'Use this application if you want to evaluate the cellular modem using an external MCU.',
+                file: '',
+            },
+            {
+                name: 'Asset Tracker V2',
+                description:
+                    'Use this pplication if you want to evaluate interactions with the cloud.',
+                file: '',
+            },
+            {
+                name: 'Modem Shell',
+                description:
+                    'Use this application if you want to evaluate various device connectivity features such as data throughput.',
+                file: '',
+            },
+        ],
     },
 ];
+
+export const deviceLogo = (device: string) =>
+    devices.find(({ device: d }) => d === device)?.logo;
 
 export const deviceApps = (device: string) =>
     devices.find(({ device: d }) => d === device)?.apps ?? [];
 
-export const deviceLogo = (device: string) =>
-    devices.find(({ device: d }) => d === device)?.logo;
+export const deviceFirmware = (device: string) =>
+    devices.find(({ device: d }) => d === device)?.firmware ?? [];

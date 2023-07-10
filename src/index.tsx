@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 
 import Apps from './components/Apps';
 import Develop from './components/Develop';
+import Evaluate from './components/Evaluate';
 import Finish from './components/Finish';
 import Introduction from './components/Introduction';
 import Learn from './components/Learn';
@@ -20,6 +21,7 @@ enum Steps {
     WELCOME,
     INTRODUCTION,
     PERSONALIZE,
+    EVALUATE,
     APPS,
     LEARN,
     DEVELOP,
@@ -46,6 +48,7 @@ export default () => {
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
             {currentStep === Steps.INTRODUCTION && <Introduction {...props} />}
             {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
+            {currentStep === Steps.EVALUATE && <Evaluate {...props} />}
             {currentStep === Steps.APPS && <Apps {...props} />}
             {currentStep === Steps.LEARN && <Learn {...props} />}
             {currentStep === Steps.DEVELOP && <Develop {...props} />}
