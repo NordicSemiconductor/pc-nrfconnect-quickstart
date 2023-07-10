@@ -36,7 +36,7 @@ const testAppContent = {
 };
 export default ({ back, next }: { back: () => void; next: () => void }) => (
     <Main>
-        <Main.Header />
+        <Main.Header showDevice />
         <Main.Content className="tw-gap-6">
             <Heading>Install recommended apps</Heading>
             <p>You can always add and remove apps later.</p>

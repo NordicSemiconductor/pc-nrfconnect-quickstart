@@ -15,7 +15,7 @@ const testingDevice = 'nRF9161 DK';
 
 export default ({ back, next }: { back: () => void; next: () => void }) => (
     <Main>
-        <Main.Header />
+        <Main.Header showDevice />
         <Main.Content>
             <div className="tw-pb-10">
                 <DeviceLogo

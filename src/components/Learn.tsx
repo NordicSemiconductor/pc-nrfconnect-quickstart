@@ -18,7 +18,7 @@ const links = [
 
 export default ({ back, next }: { back: () => void; next: () => void }) => (
     <Main>
-        <Main.Header />
+        <Main.Header showDevice />
         <Main.Content>
             <Heading>
                 We recommend these resources for learning more about \\device//

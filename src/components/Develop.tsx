@@ -12,7 +12,7 @@ import Main from './Main';
 
 export default ({ back, next }: { back: () => void; next: () => void }) => (
     <Main>
-        <Main.Header />
+        <Main.Header showDevice />
         <Main.Content>
             <Heading>Install nRF Connect SDK and Toolchain</Heading>
             <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">

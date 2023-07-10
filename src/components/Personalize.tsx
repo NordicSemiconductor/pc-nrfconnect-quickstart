@@ -16,7 +16,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
 
     return (
         <Main>
-            <Main.Header />
+            <Main.Header showDevice />
             <Main.Content>
                 <Heading>First, give your kit a custom name</Heading>
                 <div className="tw-flex tw-flex-col tw-items-center tw-gap-12 tw-pt-10">

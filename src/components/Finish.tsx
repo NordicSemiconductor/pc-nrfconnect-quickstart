@@ -12,7 +12,7 @@ import Main from './Main';
 
 export default ({ back }: { back: () => void }) => (
     <Main>
-        <Main.Header />
+        <Main.Header showDevice />
         <Main.Content>
             <Heading>Finished Quickstart</Heading>
             <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
