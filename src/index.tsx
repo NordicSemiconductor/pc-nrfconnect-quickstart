@@ -38,7 +38,11 @@ export default () => {
 
     const props = {
         back: () => {
-            setCurrentStep(Math.max(Steps.WELCOME, currentStep - 1));
+            if (currentStep === Steps.APPS) {
+                setCurrentStep(Steps.EVALUATE);
+            } else {
+                setCurrentStep(Math.max(Steps.WELCOME, currentStep - 1));
+            }
         },
         next: () => {
             setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
