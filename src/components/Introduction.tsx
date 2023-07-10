@@ -24,7 +24,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => (
                 />
             </div>
             <Heading>Let&apos;s get started with the \\device//</Heading>
-            <div className="tw-pt-10">
+            <div className="tw-max-w-sm tw-pt-10">
                 <p>\\Device capabilities//</p>
             </div>
         </Main.Content>

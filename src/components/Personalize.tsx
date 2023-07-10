@@ -30,7 +30,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                             className="tw-h-8 tw-w-full tw-border tw-border-solid tw-border-gray-300 tw-px-2 tw-py-4"
                         />
                     </div>
-                    <p>
+                    <p className="tw-max-w-sm">
                         We&apos;ll remember and display the custom name when you
                         use our apps. You can always change the name later.
                         Click skip if you prefer to keep the default name.

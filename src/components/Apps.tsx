@@ -40,7 +40,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => (
         <Main.Content className="tw-gap-6">
             <Heading>Install recommended apps</Heading>
             <p>You can always add and remove apps later.</p>
-            <div className="tw-flex tw-flex-col tw-gap-3">
+            <div className="tw-flex tw-flex-col tw-items-start tw-gap-3">
                 {deviceApps(testDevice).map(app => (
                     <div key={app} className="tw-flex tw-flex-row tw-gap-4">
                         <input type="checkbox" className="" />
