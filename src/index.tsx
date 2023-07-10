@@ -13,6 +13,7 @@ import Finish from './components/Finish';
 import Introduction from './components/Introduction';
 import Learn from './components/Learn';
 import Personalize from './components/Personalize';
+import Program from './components/Program';
 import Welcome from './components/Welcome';
 
 import './index.scss';
@@ -22,6 +23,7 @@ enum Steps {
     INTRODUCTION,
     PERSONALIZE,
     EVALUATE,
+    PROGRAM,
     APPS,
     LEARN,
     DEVELOP,
@@ -49,6 +51,7 @@ export default () => {
             {currentStep === Steps.INTRODUCTION && <Introduction {...props} />}
             {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
             {currentStep === Steps.EVALUATE && <Evaluate {...props} />}
+            {currentStep === Steps.PROGRAM && <Program {...props} />}
             {currentStep === Steps.APPS && <Apps {...props} />}
             {currentStep === Steps.LEARN && <Learn {...props} />}
             {currentStep === Steps.DEVELOP && <Develop {...props} />}
