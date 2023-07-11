@@ -15,10 +15,9 @@ const devices = [
         device: 'nRF9161 DK',
         logo: Logo91,
         apps: [
-            'cellularmonitor',
-            'serial-terminal',
-            'programmer',
-            'IdentityProvisioning',
+            'pc-nrfconnect-cellularmonitor',
+            'pc-nrfconnect-serial-terminal',
+            'pc-nrfconnect-programmer',
         ],
         firmware: [
             {
