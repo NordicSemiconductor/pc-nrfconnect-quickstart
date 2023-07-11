@@ -1,0 +1,34 @@
+/*
+ * Copyright (c) 2015 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
+ */
+
+@import '~pc-nrfconnect-shared/styles';
+
+@mixin scrollbars-helper(
+    $background-color,
+    $scrollbar-color,
+    $scrollbar-hover-color
+) {
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-corner {
+        width: 14px;
+        height: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $scrollbar-color;
+        border-radius: 14px;
+        border: 5px solid $background-color;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $scrollbar-hover-color;
+    }
+}
+
+.scrollbar {
+    overflow-y: auto;
+    @include scrollbars-helper($gray-50, $gray-500, $gray-700);
+}

@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 
 import Apps from './components/Apps';
+import Connect from './components/Connect';
 import Develop from './components/Develop';
 import Evaluate from './components/Evaluate';
 import Finish from './components/Finish';
@@ -20,6 +21,7 @@ import './index.scss';
 
 enum Steps {
     WELCOME,
+    CONNECT,
     INTRODUCTION,
     PERSONALIZE,
     EVALUATE,
@@ -52,6 +54,7 @@ export default () => {
     return (
         <>
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
+            {currentStep === Steps.CONNECT && <Connect {...props} />}
             {currentStep === Steps.INTRODUCTION && <Introduction {...props} />}
             {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
             {currentStep === Steps.EVALUATE && <Evaluate {...props} />}
