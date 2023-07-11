@@ -34,8 +34,7 @@ enum Steps {
 
 export default () => {
     const [currentStep, setCurrentStep] = useState(
-        Steps.WELCOME
-        // '--first-launch' ? Steps.WELCOME : Steps.DETECT
+        process.argv.includes('--first-launch') ? Steps.WELCOME : Steps.CONNECT
     );
 
     const props = {
