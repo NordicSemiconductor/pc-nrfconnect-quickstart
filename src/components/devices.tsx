@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React from 'react';
-
 // @ts-expect-error svg imports are fine
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import Logo91 from '!!@svgr!../../resources/nRF91-Series-logo.svg';
