@@ -10,7 +10,15 @@ import { Button } from 'pc-nrfconnect-shared';
 import Heading from './Heading';
 import Main from './Main';
 
-export default ({ back, next }: { back: () => void; next: () => void }) => (
+export default ({
+    back,
+    next,
+    openApp,
+}: {
+    back: () => void;
+    next: () => void;
+    openApp: (app: string) => void;
+}) => (
     <Main>
         <Main.Header showDevice />
         <Main.Content className="tw-max-w-sm">
@@ -39,7 +47,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => (
                 variant="primary"
                 large
                 onClick={() => {
-                    // TODO: Launch Toolchain Manager
+                    openApp('pc-nrfconnect-toolchain-manager');
 
                     next();
                 }}

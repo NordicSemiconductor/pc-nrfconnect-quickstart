@@ -5,6 +5,9 @@
  */
 
 import React, { useState } from 'react';
+import { getCurrentWindow } from '@electron/remote';
+import { ipcRenderer } from 'electron';
+import { openAppWindow } from 'pc-nrfconnect-shared';
 
 import Apps from './components/Apps';
 import Connect from './components/Connect';
@@ -47,6 +50,15 @@ export default () => {
         },
         next: () => {
             setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
+        },
+        quit: () => {
+            getCurrentWindow().close();
+        },
+        openLauncher: () => {
+            ipcRenderer.send('open-app-launcher');
+        },
+        openApp: (app: string) => {
+            openAppWindow({ name: app, source: 'official' });
         },
     };
 

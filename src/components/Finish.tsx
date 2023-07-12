@@ -10,7 +10,18 @@ import { Button } from 'pc-nrfconnect-shared';
 import Heading from './Heading';
 import Main from './Main';
 
-export default ({ back }: { back: () => void }) => (
+const testApp = 'pc-nrfconnect-cellularmonitor';
+export default ({
+    back,
+    quit,
+    openLauncher,
+    openApp,
+}: {
+    back: () => void;
+    quit: () => void;
+    openLauncher: () => void;
+    openApp: (app: string) => void;
+}) => (
     <Main>
         <Main.Header showDevice />
         <Main.Content className="tw-max-w-sm">
@@ -35,7 +46,15 @@ export default ({ back }: { back: () => void }) => (
             <Button variant="secondary" large onClick={back}>
                 Back
             </Button>
-            <Button variant="primary" large onClick={() => {}}>
+            <Button
+                variant="primary"
+                large
+                onClick={() => {
+                    openLauncher();
+                    openApp(testApp);
+                    quit();
+                }}
+            >
                 Exit and open nRF Connect for Desktop
             </Button>
         </Main.Footer>
