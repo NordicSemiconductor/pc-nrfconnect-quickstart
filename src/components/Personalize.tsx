@@ -5,13 +5,19 @@
  */
 
 import React from 'react';
-import { Button } from 'pc-nrfconnect-shared';
+import {
+    Button,
+    getPersistedNickname,
+    persistNickname,
+} from 'pc-nrfconnect-shared';
 
 import Heading from './Heading';
 import Main from './Main';
 
 export default ({ back, next }: { back: () => void; next: () => void }) => {
-    const [nickname, setNickname] = React.useState('');
+    const [nickname, setNickname] = React.useState(
+        getPersistedNickname('serialnumber')
+    );
     const maxLength = 20;
 
     return (
@@ -50,7 +56,8 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                         large
                         onClick={() => {
                             if (nickname.trim().length > 0) {
-                                // TODO: Send nickname to backend
+                                // TODO set nickname in redux store so other tab titles get updated
+                                persistNickname('serialnumber', nickname);
                             }
                             next();
                         }}
