@@ -44,23 +44,28 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             <Main.Content className="tw-gap-6">
                 <Heading>Install recommended apps</Heading>
                 <p>You can always add and remove apps later.</p>
-                <div className="tw-flex tw-flex-col tw-items-start tw-gap-3">
                     {apps.map(app => (
+                <div className="tw-flex tw-flex-col tw-items-start tw-gap-1">
                         <div
                             key={app.displayName}
-                            className="tw-flex tw-flex-row tw-gap-4"
+                            className="tw-relative tw-flex tw-flex-row tw-gap-4"
                         >
-                            <input
-                                type="checkbox"
-                                checked={!!app.installed}
-                                className=""
-                            />
-                            <div className="tw-flex tw-flex-col tw-text-left">
+                            <div className="tw-pt-0.5">
+                                <input
+                                    type="checkbox"
+                                    id="app-checkbox"
+                                    className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-[0.0675rem] after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
+                                />
+                            </div>
+                            <label
+                                htmlFor="app-checkbox"
+                                className="tw-flex tw-cursor-pointer tw-flex-col tw-text-left"
+                            >
                                 <p className="tw-font-bold">
                                     {app.displayName}
                                 </p>
                                 <p>{app.description}</p>
-                            </div>
+                            </label>
                         </div>
                     ))}
                 </div>
