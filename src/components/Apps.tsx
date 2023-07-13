@@ -35,19 +35,22 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            <input
-                type="checkbox"
-                id={app.name}
-                disabled={!!app.installed}
-                onClick={event =>
-                    onClick(
-                        (
-                            event as unknown as React.ChangeEvent<HTMLInputElement>
-                        ).target.checked
-                    )
-                }
-                className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-[0.0675rem] after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
-            />
+            {!app.installed && (
+                <input
+                    type="checkbox"
+                    id={app.name}
+                    disabled={!!app.installed}
+                    onClick={event =>
+                        onClick(
+                            (
+                                event as unknown as React.ChangeEvent<HTMLInputElement>
+                            ).target.checked
+                        )
+                    }
+                    className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-[0.0675rem] after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
+                />
+            )}
+            {app.installed && <> : ) </>}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
             <p className="tw-cursor-pointer tw-font-bold">{app.displayName}</p>
@@ -83,10 +86,19 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             })
         );
 
-    const installApp = (app: App) => {
+    const installApp = (appToBeInstalled: App) => {
         ipcRenderer
-            .invoke('apps:install-downloadable-app', app)
-            .then(() => setAppSelected(app, true))
+            .invoke('apps:install-downloadable-app', appToBeInstalled)
+            .then(installedApp =>
+                setRecommendedApps(
+                    recommendedApps.map(app => {
+                        if (app.name === installedApp.name) {
+                            return installedApp;
+                        }
+                        return app;
+                    })
+                )
+            )
             .catch(e => console.error(e));
     };
 
@@ -120,10 +132,14 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                             }
                         });
 
-                        next();
+                        if (!recommendedApps.some(app => app.selected)) {
+                            next();
+                        }
                     }}
                 >
-                    Install
+                    {recommendedApps.some(app => app.selected)
+                        ? 'Install'
+                        : 'Next'}
                 </Button>
             </Main.Footer>
         </Main>
