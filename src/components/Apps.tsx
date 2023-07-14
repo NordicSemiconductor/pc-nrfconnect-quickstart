@@ -79,7 +79,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
     const setAppSelected = (app: App, selected: boolean) =>
         setRecommendedApps(
             recommendedApps.map(a => {
-                if (a === app) {
+                if (a.name === app.name) {
                     a.selected = selected;
                 }
                 return a;
@@ -91,12 +91,9 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             .invoke('apps:install-downloadable-app', appToBeInstalled)
             .then(installedApp =>
                 setRecommendedApps(
-                    recommendedApps.map(app => {
-                        if (app.name === installedApp.name) {
-                            return installedApp;
-                        }
-                        return app;
-                    })
+                    recommendedApps.map(app =>
+                        app.name === installedApp.name ? installedApp : app
+                    )
                 )
             )
             .catch(e => console.error(e));
