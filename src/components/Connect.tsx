@@ -87,6 +87,7 @@ export default ({ next }: { next: () => void }) => {
                     )}
                 </div>
             </Main.Content>
+            <Main.Footer />
         </Main>
     );
 };
