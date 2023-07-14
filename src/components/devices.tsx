@@ -8,6 +8,15 @@
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import Logo91 from '!!@svgr!../../resources/nRF91-Series-logo.svg';
 
+const shared = {
+    apps: ['pc-nrfconnect-toolchain-manager'],
+    links: [
+        { label: 'Nordic Academy - Cellular IoT Fundamentals', href: '' },
+        { label: 'Nordic Academy - nRF Connect SDK Fundamentals', href: '' },
+        { label: 'Infocenter - \\\\Device// Hardware Details', href: '' },
+    ],
+};
+
 const devices = [
     {
         device: 'nRF9161 DK',
@@ -17,6 +26,7 @@ const devices = [
             'pc-nrfconnect-serial-terminal',
             'pc-nrfconnect-programmer',
         ],
+        links: [],
         firmware: [
             {
                 name: 'Serial LTE Monitor',
@@ -43,8 +53,16 @@ const devices = [
 export const deviceLogo = (device: string) =>
     devices.find(({ device: d }) => d === device)?.logo;
 
-export const deviceApps = (device: string) =>
-    devices.find(({ device: d }) => d === device)?.apps ?? [];
+export const deviceApps = (device: string) => [
+    ...[devices.find(({ device: d }) => d === device)?.apps ?? []],
+    ...shared.links,
+];
+
+export const deviceLinks = (device: string) =>
+    [
+        ...[devices.find(({ device: d }) => d === device)?.links ?? []],
+        ...shared.links,
+    ] as { label: string; href: string }[];
 
 export const deviceFirmware = (device: string) =>
     devices.find(({ device: d }) => d === device)?.firmware ?? [];
