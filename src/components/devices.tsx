@@ -27,7 +27,7 @@ const devices = [
             'pc-nrfconnect-programmer',
         ],
         links: [],
-        firmware: [
+        choices: [
             {
                 name: 'Serial LTE Monitor',
                 description:
@@ -50,6 +50,19 @@ const devices = [
     },
 ];
 
+interface EvaluationChoice {
+    name: string;
+    description: string;
+    file: string;
+    app: string;
+}
+
+let choice: EvaluationChoice | undefined;
+export const setEvaluationChoice = (evaluationChoice: EvaluationChoice) => {
+    choice = evaluationChoice;
+};
+export const getEvaluationChoice = () => choice;
+
 export const deviceLogo = (device: string) =>
     devices.find(({ device: d }) => d === device)?.logo;
 
@@ -64,5 +77,5 @@ export const deviceLinks = (device: string) =>
         ...shared.links,
     ] as { label: string; href: string }[];
 
-export const deviceFirmware = (device: string) =>
-    devices.find(({ device: d }) => d === device)?.firmware ?? [];
+export const deviceEvaluationChoices = (device: string) =>
+    devices.find(({ device: d }) => d === device)?.choices ?? [];

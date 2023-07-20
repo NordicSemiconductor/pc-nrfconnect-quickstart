@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { deviceFirmware } from './devices';
+import { deviceEvaluationChoices } from './devices';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -25,22 +25,22 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                     the app you select.
                 </p>
                 <div className="tw-flex tw-flex-row tw-gap-2">
-                    {deviceFirmware(testDevice).map(firmware => (
+                    {deviceEvaluationChoices(testDevice).map(choice => (
                         <div
-                            key={firmware.name}
+                            key={choice.name}
                             className={`tw-flex tw-w-44 tw-flex-col tw-gap-2 tw-border tw-border-solid tw-border-gray-500 tw-p-4 tw-text-left tw-text-xs ${
-                                selected === firmware.name
+                                selected === choice.name
                                     ? 'tw-bg-primary tw-text-white'
                                     : 'tw-bg-gray-50'
                             }`}
                         >
-                            <p className="tw-font-bold">{firmware.name}</p>
-                            <p className="tw-flex-1">{firmware.description}</p>
+                            <p className="tw-font-bold">{choice.name}</p>
+                            <p className="tw-flex-1">{choice.description}</p>
                             <Button
                                 variant="secondary"
-                                onClick={() => setSelected(firmware.name)}
+                                onClick={() => setSelected(choice.name)}
                                 className={classNames(
-                                    selected === firmware.name &&
+                                    selected === choice.name &&
                                         'tw-pointer-events-none tw-cursor-none tw-opacity-0'
                                 )}
                             >
