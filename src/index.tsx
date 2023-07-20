@@ -3,7 +3,6 @@
  *
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
-
 import React, { useState } from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import { ipcRenderer } from 'electron';

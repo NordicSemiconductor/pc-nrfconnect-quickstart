@@ -12,12 +12,12 @@ import Main from './Main';
 
 const invokeIfSpaceOrEnterPressed =
     (onClick: React.KeyboardEventHandler<Element>) =>
-        (event: React.KeyboardEvent) => {
-            event.stopPropagation();
-            if (event.key === ' ' || event.key === 'Enter') {
-                onClick(event);
-            }
-        };
+    (event: React.KeyboardEvent) => {
+        event.stopPropagation();
+        if (event.key === ' ' || event.key === 'Enter') {
+            onClick(event);
+        }
+    };
 
 export default ({ next }: { next: () => void }) => {
     const [devices, setDevices] = useState<{ name: string; kit: string }[]>([
