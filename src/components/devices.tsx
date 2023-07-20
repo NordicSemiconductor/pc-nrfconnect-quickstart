@@ -33,18 +33,21 @@ const devices = [
                 description:
                     'Use this application if you want to evaluate the cellular modem using an external MCU.',
                 file: '',
+                app: 'pc-nrfconnect-cellularmonitor',
             },
             {
                 name: 'Asset Tracker V2',
                 description:
                     'Use this pplication if you want to evaluate interactions with the cloud.',
                 file: '',
+                app: 'pc-nrfconnect-cellularmonitor',
             },
             {
                 name: 'Modem Shell',
                 description:
                     'Use this application if you want to evaluate various device connectivity features such as data throughput.',
                 file: '',
+                app: 'pc-nrfconnect-cellularmonitor',
             },
         ],
     },
