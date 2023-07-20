@@ -67,13 +67,13 @@ export const deviceLogo = (device: string) =>
     devices.find(({ device: d }) => d === device)?.logo;
 
 export const deviceApps = (device: string) => [
-    ...[devices.find(({ device: d }) => d === device)?.apps ?? []],
-    ...shared.links,
+    ...(devices.find(({ device: d }) => d === device)?.apps ?? []),
+    ...shared.apps,
 ];
 
 export const deviceLinks = (device: string) =>
     [
-        ...[devices.find(({ device: d }) => d === device)?.links ?? []],
+        ...(devices.find(({ device: d }) => d === device)?.links ?? []),
         ...shared.links,
     ] as { label: string; href: string }[];
 
