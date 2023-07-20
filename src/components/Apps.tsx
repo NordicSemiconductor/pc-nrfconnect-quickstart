@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import { ipcRenderer } from 'electron';
 import { Button } from 'pc-nrfconnect-shared';
+import { lt } from 'semver';
 
 import { deviceApps } from './devices';
 import Heading from './Heading';
@@ -21,6 +22,8 @@ interface App {
     source: string;
     installed: object;
     selected: boolean;
+    latestVersion: string;
+    currentVersion: string;
 }
 
 const AppItem = ({
@@ -35,6 +38,7 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
+            <p>{lt(app.currentVersion, app.latestVersion) ? 'UPDATE' : ''}</p>
             {!app.installed && (
                 <input
                     type="checkbox"
