@@ -9,7 +9,7 @@ import { ipcRenderer } from 'electron';
 import { Button } from 'pc-nrfconnect-shared';
 import { lt } from 'semver';
 
-import { deviceApps } from './devices';
+import { deviceApps } from '../features/devices';
 import Heading from './Heading';
 import Main from './Main';
 

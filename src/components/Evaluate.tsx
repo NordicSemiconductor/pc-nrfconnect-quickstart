@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { deviceEvaluationChoices } from './devices';
+import { deviceEvaluationChoices } from '../features/devices';
 import Heading from './Heading';
 import Main from './Main';
 

@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import { deviceLogo } from './devices';
+import { deviceLogo } from '../features/devices';
 
 export default ({
     device,

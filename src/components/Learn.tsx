@@ -7,7 +7,7 @@
 import React from 'react';
 import { Button, openUrl } from 'pc-nrfconnect-shared';
 
-import { deviceLinks } from './devices';
+import { deviceLinks } from '../features/devices';
 import Heading from './Heading';
 import Main from './Main';
 
