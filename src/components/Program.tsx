@@ -5,8 +5,11 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Button } from 'pc-nrfconnect-shared';
+import { enumerate } from '@nordicsemiconductor/nrf-device-lib-js';
+import { Button, Device, getDeviceLibContext } from 'pc-nrfconnect-shared';
 
+import { program } from '../features/deviceLib';
+import { deviceEvaluationChoices } from '../features/devices';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -19,20 +22,19 @@ const ProgressBar = ({ percentage }: { percentage: number }) => (
     </div>
 );
 
-type TestFirmware = { type: string; name: string; progress: number };
-
-const ProgramContent = ({ firmware }: { firmware: TestFirmware[] }) => (
+const ProgramContent = ({ firmware }: { firmware: object[] }) => (
     <>
         <Heading>Programming...</Heading>
         <p className="tw-pt-4">This might take a few minutes. Please wait.</p>
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
-            {firmware.map(({ type, name, progress }) => (
+            {/* @ts-expect-error no type definitions for this yet */}
+            {firmware.map(({ type: format, name, progress: progressInfo }) => (
                 <div key={name} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-justify-between">
-                        <p>{type}</p>
+                        <p>{format}</p>
                         <p className="tw-text-primary">{name}</p>
                     </div>
-                    <ProgressBar percentage={progress} />
+                    <ProgressBar percentage={progressInfo.progressPercentage} />
                 </div>
             ))}
         </div>
@@ -58,38 +60,76 @@ const SuccessContent = () => (
     </>
 );
 
-const testFirmware = [
-    { type: 'Modem', name: 'Firmware 1.3.5' },
-    { type: 'Application', name: 'Serial LTE Modem' },
-];
+const testDevice = 'NRF9161 DK';
+const testChoiceIndex = 1;
 
+export type JlinkOperationName =
+    | 'program'
+    | 'core-info'
+    | 'protection-get'
+    | 'protection-set'
+    | 'register-read'
+    | 'fw-read-info'
+    | 'fw-read'
+    | 'fw-verify'
+    | 'recover'
+    | 'reset'
+    | 'erase';
+
+export type OperationResult = 'success' | 'fail';
+
+interface Operation {
+    name: string; // operation name
+    amountOfSteps: number;
+    description: string;
+    operation: JlinkOperationName;
+    progressPercentage: number;
+    duration?: number;
+    result?: OperationResult;
+    message?: string; // not present in some cases
+    step: number;
+}
+
+export interface CallbackParameters {
+    context: number;
+    taskID: number;
+    progressJson: Operation;
+}
 export default ({ back, next }: { back: () => void; next: () => void }) => {
-    const [firmware, setFirmware] = useState<TestFirmware[]>(
-        testFirmware.map(f => ({ ...f, progress: 0 }))
+    const [firmware, setFirmware] = useState<object[]>(
+        deviceEvaluationChoices(testDevice)[testChoiceIndex].firmware
     );
 
     const finishedProgramming = firmware.every(f => f.progress === 100);
 
     useEffect(() => {
-        const timeout = setInterval(() => {
-            const firstNonFullIndex = firmware.findIndex(
-                f => f.progress !== 100
-            );
-            if (firstNonFullIndex !== -1) {
-                setFirmware(
-                    firmware.map((f, index) => {
-                        if (firstNonFullIndex === index)
-                            return { ...f, progress: f.progress + 5 };
-                        return f;
-                    })
-                );
-            }
-        }, 100);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, [firmware]);
+        try {
+            enumerate(getDeviceLibContext() as unknown as number, {
+                jlink: true,
+                modem: true,
+                serialPorts: true,
+            }).then(devices => {
+                if (devices.length) {
+                    program(
+                        devices[0],
+                        progress =>
+                            progress.taskID < firmware.length &&
+                            setFirmware(value => [
+                                ...value,
+                                {
+                                    ...value[progress.taskID],
+                                    progressInfo: progress.progressJson,
+                                },
+                            ]),
+                        firmware
+                    );
+                }
+                console.log('no devices');
+            });
+        } catch (err) {
+            console.log('enumerate', err);
+        }
+    }, []);
 
     return (
         <Main>
