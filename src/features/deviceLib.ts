@@ -5,11 +5,54 @@
  */
 
 import {
+    Device,
     // @ts-expect-error no type definitions for this yet
     deviceControlExecuteOperations,
+    DeviceTraits,
+    enumerate,
+    startHotplugEvents,
+    stopHotplugEvents,
 } from '@nordicsemiconductor/nrf-device-lib-js';
 import path from 'path';
-import { Device, getDeviceLibContext } from 'pc-nrfconnect-shared';
+import { getDeviceLibContext } from 'pc-nrfconnect-shared';
+
+const requiredTraits: DeviceTraits = {
+    jlink: true,
+    serialPorts: true,
+    modem: true,
+};
+
+export const watchDevices = async (
+    deviceArrived: (device: Device) => void,
+    deviceLeft: (deviceId: number) => void
+) => {
+    const initialDevices = await enumerate(
+        getDeviceLibContext() as unknown as number,
+        requiredTraits
+    );
+
+    const hotplugEventsId = startHotplugEvents(
+        getDeviceLibContext() as unknown as number,
+        err => {
+            if (err) console.log(err);
+        },
+        event => {
+            switch (event.event_type) {
+                case 'NRFDL_DEVICE_EVENT_ARRIVED':
+                    if (event.device && event.device.serialNumber) {
+                        deviceArrived(event.device);
+                    }
+                    break;
+                case 'NRFDL_DEVICE_EVENT_LEFT':
+                    deviceLeft(event.device_id);
+                    break;
+            }
+        }
+    );
+
+    initialDevices.forEach(deviceArrived);
+    return () => stopHotplugEvents(hotplugEventsId);
+};
 
 const labelToFormat = (label: string) => {
     switch (label) {

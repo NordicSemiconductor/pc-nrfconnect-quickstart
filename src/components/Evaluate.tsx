@@ -5,15 +5,22 @@
  */
 
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
+import { setSelectedChoice } from '../features/choiceSlice';
 import { deviceEvaluationChoices } from '../features/devices';
+import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
-const testDevice = 'nRF9161 DK';
 export default ({ back, next }: { back: () => void; next: () => void }) => {
-    const [selected, setSelected] = useState('');
+    const dispatch = useDispatch();
+    const device = useSelector(getSelectedDevice);
+    const [selected, setSelected] = useState<object>();
+
+    // device can never be undefined here
+    if (!device) return null;
 
     return (
         <Main>
@@ -25,11 +32,11 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                     the app you select.
                 </p>
                 <div className="tw-flex tw-flex-row tw-gap-2">
-                    {deviceEvaluationChoices(testDevice).map(choice => (
+                    {deviceEvaluationChoices(device).map(choice => (
                         <div
                             key={choice.name}
                             className={`tw-flex tw-w-44 tw-flex-col tw-gap-2 tw-border tw-border-solid tw-border-gray-500 tw-p-4 tw-text-left tw-text-xs ${
-                                selected === choice.name
+                                selected?.name === choice.name
                                     ? 'tw-bg-primary tw-text-white'
                                     : 'tw-bg-gray-50'
                             }`}
@@ -38,9 +45,9 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                             <p className="tw-flex-1">{choice.description}</p>
                             <Button
                                 variant="secondary"
-                                onClick={() => setSelected(choice.name)}
+                                onClick={() => setSelected(choice)}
                                 className={classNames(
-                                    selected === choice.name &&
+                                    selected?.name === choice.name &&
                                         'tw-pointer-events-none tw-cursor-none tw-opacity-0'
                                 )}
                             >
@@ -59,7 +66,9 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                     large
                     disabled={!selected}
                     onClick={() => {
-                        // TODO: move to programming stage (either new step or state in this step?)
+                        if (!selected) return;
+
+                        dispatch(setSelectedChoice(selected));
 
                         next();
                     }}

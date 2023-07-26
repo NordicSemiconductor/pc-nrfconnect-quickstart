@@ -5,11 +5,12 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { enumerate } from '@nordicsemiconductor/nrf-device-lib-js';
-import { Button, Device, getDeviceLibContext } from 'pc-nrfconnect-shared';
+import { useSelector } from 'react-redux';
+import { Button } from 'pc-nrfconnect-shared';
 
+import { getSelectedChoice } from '../features/choiceSlice';
 import { program } from '../features/deviceLib';
-import { deviceEvaluationChoices } from '../features/devices';
+import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -28,11 +29,11 @@ const ProgramContent = ({ firmware }: { firmware: object[] }) => (
         <p className="tw-pt-4">This might take a few minutes. Please wait.</p>
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
             {/* @ts-expect-error no type definitions for this yet */}
-            {firmware.map(({ type: format, name, progress: progressInfo }) => (
-                <div key={name} className="tw-flex tw-flex-col tw-gap-1">
+            {firmware.map(({ format, file, progressInfo }) => (
+                <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-justify-between">
                         <p>{format}</p>
-                        <p className="tw-text-primary">{name}</p>
+                        <p className="tw-text-primary">{file}</p>
                     </div>
                     <ProgressBar percentage={progressInfo.progressPercentage} />
                 </div>
@@ -59,9 +60,6 @@ const SuccessContent = () => (
         </div>
     </>
 );
-
-const testDevice = 'NRF9161 DK';
-const testChoiceIndex = 1;
 
 export type JlinkOperationName =
     | 'program'
@@ -95,41 +93,57 @@ export interface CallbackParameters {
     taskID: number;
     progressJson: Operation;
 }
-export default ({ back, next }: { back: () => void; next: () => void }) => {
-    const [firmware, setFirmware] = useState<object[]>(
-        deviceEvaluationChoices(testDevice)[testChoiceIndex].firmware
-    );
 
-    const finishedProgramming = firmware.every(f => f.progress === 100);
+export default ({ back, next }: { back: () => void; next: () => void }) => {
+    const device = useSelector(getSelectedDevice);
+    const choice = useSelector(getSelectedChoice);
+    const [firmware, setFirmware] = useState<
+        {
+            format: string;
+            file: string;
+            progressInfo: { progressPercentage: number };
+        }[]
+    >([]);
 
     useEffect(() => {
+        if (!choice) return;
+        setFirmware(
+            choice.firmware.map(f => ({
+                ...f,
+                progressInfo: { progressPercentage: 0 },
+            }))
+        );
+    }, [choice]);
+
+    const finishedProgramming =
+        firmware.length &&
+        firmware.every(f => f.progressInfo.progressPercentage === 100);
+
+    useEffect(() => {
+        // device can never be undefined here
+        if (!device || firmware.length === 0) return;
+
         try {
-            enumerate(getDeviceLibContext() as unknown as number, {
-                jlink: true,
-                modem: true,
-                serialPorts: true,
-            }).then(devices => {
-                if (devices.length) {
-                    program(
-                        devices[0],
-                        progress =>
-                            progress.taskID < firmware.length &&
-                            setFirmware(value => [
-                                ...value,
-                                {
-                                    ...value[progress.taskID],
-                                    progressInfo: progress.progressJson,
-                                },
-                            ]),
-                        firmware
-                    );
-                }
-                console.log('no devices');
-            });
+            program(
+                device,
+                firmware,
+                progress =>
+                    // @ts-expect-error no type definitions for this yet
+                    progress.taskID < firmware.length &&
+                    setFirmware(value => [
+                        ...value,
+                        {
+                            // @ts-expect-error no type definitions for this yet
+                            ...value[progress.taskID],
+                            // @ts-expect-error no type definitions for this yet
+                            progressInfo: progress.progressJson,
+                        },
+                    ])
+            );
         } catch (err) {
             console.log('enumerate', err);
         }
-    }, []);
+    }, [firmware, device]);
 
     return (
         <Main>

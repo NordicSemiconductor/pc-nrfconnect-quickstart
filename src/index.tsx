@@ -3,7 +3,9 @@
  *
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { getCurrentWindow } from '@electron/remote';
 import { ipcRenderer } from 'electron';
 import { openAppWindow } from 'pc-nrfconnect-shared';
@@ -18,6 +20,13 @@ import Learn from './components/Learn';
 import Personalize from './components/Personalize';
 import Program from './components/Program';
 import Welcome from './components/Welcome';
+import { watchDevices } from './features/deviceLib';
+import {
+    addDevice,
+    getSelectedDevice,
+    removeDevice,
+} from './features/deviceSlice';
+import store, { Dispatch } from './features/store';
 
 import './index.scss';
 
@@ -34,10 +43,27 @@ enum Steps {
     FINISH,
 }
 
-export default () => {
+const App = () => {
+    const dispatch = useDispatch<Dispatch>();
+    const device = useSelector(getSelectedDevice);
     const [currentStep, setCurrentStep] = useState(
         process.argv.includes('--first-launch') ? Steps.WELCOME : Steps.CONNECT
     );
+
+    useEffect(() => {
+        const cleanup = watchDevices(
+            newDevice => {
+                dispatch(addDevice(newDevice));
+            },
+            deviceId => {
+                dispatch(removeDevice(deviceId));
+            }
+        );
+
+        return () => {
+            cleanup.then(cb => cb());
+        };
+    }, [device, dispatch]);
 
     const props = {
         back: () => {
@@ -76,3 +102,8 @@ export default () => {
         </>
     );
 };
+export default () => (
+    <Provider store={store}>
+        <App />
+    </Provider>
+);

@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import React from 'react';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+
 // @ts-expect-error svg imports are fine
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import Logo91 from '!!@svgr!../../resources/nRF91-Series-logo.svg';
@@ -19,7 +22,8 @@ const shared = {
 
 const devices = [
     {
-        device: 'nRF9161 DK',
+        boardVersion: 'pca10090',
+        name: 'nRF9160 DK',
         logo: Logo91,
         apps: [
             'pc-nrfconnect-cellularmonitor',
@@ -93,19 +97,36 @@ export const setEvaluationChoice = (evaluationChoice: EvaluationChoice) => {
 };
 export const getEvaluationChoice = () => choice;
 
-export const deviceLogo = (device: string) =>
-    devices.find(({ device: d }) => d === device)?.logo;
+const getDevice = (device: Device) =>
+    devices.find(
+        d =>
+            d.boardVersion.toLowerCase() ===
+            device.jlink?.boardVersion.toLowerCase()
+    );
 
-export const deviceApps = (device: string) => [
-    ...(devices.find(({ device: d }) => d === device)?.apps ?? []),
+export const deviceName = (device: Device) => getDevice(device)?.name;
+
+export const DeviceLogo = ({
+    device,
+    className = '',
+}: {
+    device: Device;
+    className?: string;
+}) => {
+    const Logo = getDevice(device)?.logo;
+    return Logo ? <Logo className={className} /> : null;
+};
+
+export const deviceApps = (device: Device) => [
+    ...(getDevice(device)?.apps ?? []),
     ...shared.apps,
 ];
 
-export const deviceLinks = (device: string) =>
-    [
-        ...(devices.find(({ device: d }) => d === device)?.links ?? []),
-        ...shared.links,
-    ] as { label: string; href: string }[];
+export const deviceLinks = (device: Device) =>
+    [...(getDevice(device)?.links ?? []), ...shared.links] as {
+        label: string;
+        href: string;
+    }[];
 
-export const deviceEvaluationChoices = (device: string) =>
-    devices.find(({ device: d }) => d === device)?.choices ?? [];
+export const deviceEvaluationChoices = (device: Device) =>
+    getDevice(device)?.choices ?? [];

@@ -5,15 +5,15 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ipcRenderer } from 'electron';
 import { Button } from 'pc-nrfconnect-shared';
 import { lt } from 'semver';
 
 import { deviceApps } from '../features/devices';
+import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
-
-const testDevice = 'nRF9161 DK';
 
 interface App {
     displayName: string;
@@ -64,9 +64,12 @@ const AppItem = ({
 );
 
 export default ({ back, next }: { back: () => void; next: () => void }) => {
+    const device = useSelector(getSelectedDevice);
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {
+        // device can never be undefined here
+        if (!device) return;
         ipcRenderer
             .invoke('apps:get-downloadable-apps')
             .then(({ apps }: { apps: App[] }) => {
@@ -74,11 +77,11 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                     apps.filter(
                         app =>
                             app.source === 'official' &&
-                            deviceApps(testDevice).includes(app.name)
+                            deviceApps(device).includes(app.name)
                     )
                 );
             });
-    }, []);
+    }, [device]);
 
     const setAppSelected = (app: App, selected: boolean) =>
         setRecommendedApps(

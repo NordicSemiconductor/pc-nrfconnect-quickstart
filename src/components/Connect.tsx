@@ -4,9 +4,16 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import DeviceLogo from './DeviceLogo';
+import { DeviceLogo, deviceName } from '../features/devices';
+import {
+    deselectDevice,
+    getConnectedDevices,
+    setSelectedDevice,
+} from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -20,18 +27,32 @@ const invokeIfSpaceOrEnterPressed =
     };
 
 export default ({ next }: { next: () => void }) => {
-    const [devices, setDevices] = useState<{ name: string; kit: string }[]>([
-        { name: 'Testing', kit: 'nRF9161 DK' },
-        { name: 'Testing2', kit: 'nRF9161 DK' },
-        { name: 'Testing3', kit: 'nRF9161 DK' },
-        { name: 'Testing4', kit: 'nRF9161 DK' },
-        { name: 'Testing5', kit: 'nRF9161 DK' },
-        { name: 'Testing6', kit: 'nRF9161 DK' },
-    ]);
-    const [timeout, setTimeout] = useState(true);
+    const dispatch = useDispatch();
+    const devices = useSelector(getConnectedDevices);
+    const [longSearchDuration, setLongSearchDuration] = useState(false);
 
-    const onClick = () => {
-        // TODO: select device
+    useEffect(() => {
+        // This is relevant for when we come BACK to this step
+        dispatch(deselectDevice());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (devices.length) {
+            setLongSearchDuration(false);
+            return;
+        }
+
+        const timeout = setTimeout(() => {
+            setLongSearchDuration(true);
+        }, 5000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [devices]);
+
+    const onClick = (device: Device) => {
+        dispatch(setSelectedDevice(device));
 
         next();
     };
@@ -47,24 +68,26 @@ export default ({ next }: { next: () => void }) => {
                 </Heading>
                 <div className="tw-p-8">
                     <div className="scrollbar tw-max-h-40 tw-w-48 tw-bg-gray-50">
-                        {devices.map(d => (
+                        {devices.map(device => (
                             <div
-                                key={d.name}
+                                key={device.serialNumber}
                                 tabIndex={0}
                                 role="button"
-                                onKeyUp={invokeIfSpaceOrEnterPressed(onClick)}
-                                onClick={onClick}
+                                onKeyUp={invokeIfSpaceOrEnterPressed(() =>
+                                    onClick(device)
+                                )}
+                                onClick={() => onClick(device)}
                                 className="tw-flex tw-w-full tw-cursor-pointer tw-flex-row tw-items-center tw-gap-1 tw-border-b tw-border-solid tw-px-2 tw-py-1 last:tw-border-b-0 hover:tw-bg-white"
                             >
                                 <DeviceLogo
-                                    device={d.kit}
+                                    device={device}
                                     className="tw-h-5 tw-w-6 tw-fill-gray-700"
                                 />
                                 <div className="tw-flex tw-flex-col tw-text-left">
                                     <p>
-                                        <b>{d.kit}</b>
+                                        <b>{deviceName(device)}</b>
                                     </p>
-                                    <p>{d.name}</p>
+                                    <p>{device.serialNumber}</p>
                                 </div>
                             </div>
                         ))}
@@ -73,7 +96,7 @@ export default ({ next }: { next: () => void }) => {
                 <div className="tw-flex tw-flex-col tw-justify-center tw-gap-4">
                     <p>Searching icon/spinner</p>
                     <p>Searching for devices</p>
-                    {timeout && (
+                    {longSearchDuration && (
                         <div>
                             <p>This is taking a while.</p>
                             <p>
