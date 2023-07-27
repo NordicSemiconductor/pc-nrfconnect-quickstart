@@ -6,12 +6,9 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import type { Choice } from './devicesGuides';
 import type { State } from './store';
 
-interface Choice {
-    name: string;
-    firmware: { format: string; file: string }[];
-}
 interface ChoiceState {
     selectedChoice: Choice | undefined;
 }

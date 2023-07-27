@@ -8,7 +8,7 @@ import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Logo } from 'pc-nrfconnect-shared';
 
-import { DeviceLogo, deviceName } from '../features/devices';
+import { DeviceLogo, deviceName } from '../features/devicesGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 
 const Header = ({ showDevice }: { showDevice?: boolean }) => {

@@ -10,9 +10,16 @@ import { Button } from 'pc-nrfconnect-shared';
 
 import { getSelectedChoice } from '../features/choiceSlice';
 import { program } from '../features/deviceLib';
+import type { Firmware } from '../features/devicesGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
+
+interface FirmwareWithProgress extends Firmware {
+    progressInfo: {
+        progressPercentage: number;
+    };
+}
 
 const ProgressBar = ({ percentage }: { percentage: number }) => (
     <div className="tw-h-1 tw-w-full tw-bg-gray-50">
@@ -23,12 +30,11 @@ const ProgressBar = ({ percentage }: { percentage: number }) => (
     </div>
 );
 
-const ProgramContent = ({ firmware }: { firmware: object[] }) => (
+const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
     <>
         <Heading>Programming...</Heading>
         <p className="tw-pt-4">This might take a few minutes. Please wait.</p>
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
-            {/* @ts-expect-error no type definitions for this yet */}
             {firmware.map(({ format, file, progressInfo }) => (
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-justify-between">
@@ -61,49 +67,10 @@ const SuccessContent = () => (
     </>
 );
 
-export type JlinkOperationName =
-    | 'program'
-    | 'core-info'
-    | 'protection-get'
-    | 'protection-set'
-    | 'register-read'
-    | 'fw-read-info'
-    | 'fw-read'
-    | 'fw-verify'
-    | 'recover'
-    | 'reset'
-    | 'erase';
-
-export type OperationResult = 'success' | 'fail';
-
-interface Operation {
-    name: string; // operation name
-    amountOfSteps: number;
-    description: string;
-    operation: JlinkOperationName;
-    progressPercentage: number;
-    duration?: number;
-    result?: OperationResult;
-    message?: string; // not present in some cases
-    step: number;
-}
-
-export interface CallbackParameters {
-    context: number;
-    taskID: number;
-    progressJson: Operation;
-}
-
 export default ({ back, next }: { back: () => void; next: () => void }) => {
     const device = useSelector(getSelectedDevice);
     const choice = useSelector(getSelectedChoice);
-    const [firmware, setFirmware] = useState<
-        {
-            format: string;
-            file: string;
-            progressInfo: { progressPercentage: number };
-        }[]
-    >([]);
+    const [firmware, setFirmware] = useState<FirmwareWithProgress[]>([]);
 
     useEffect(() => {
         if (!choice) return;
@@ -128,14 +95,11 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                 device,
                 firmware,
                 progress =>
-                    // @ts-expect-error no type definitions for this yet
                     progress.taskID < firmware.length &&
                     setFirmware(value => [
                         ...value,
                         {
-                            // @ts-expect-error no type definitions for this yet
                             ...value[progress.taskID],
-                            // @ts-expect-error no type definitions for this yet
                             progressInfo: progress.progressJson,
                         },
                     ])

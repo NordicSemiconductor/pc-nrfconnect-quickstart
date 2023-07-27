@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
 import { setSelectedChoice } from '../features/choiceSlice';
-import { deviceEvaluationChoices } from '../features/devices';
+import { Choice, deviceEvaluationChoices } from '../features/devicesGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
@@ -17,7 +17,7 @@ import Main from './Main';
 export default ({ back, next }: { back: () => void; next: () => void }) => {
     const dispatch = useDispatch();
     const device = useSelector(getSelectedDevice);
-    const [selected, setSelected] = useState<object>();
+    const [selected, setSelected] = useState<Choice>();
 
     // device can never be undefined here
     if (!device) return null;

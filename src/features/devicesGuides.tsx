@@ -11,7 +11,33 @@ import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import Logo91 from '!!@svgr!../../resources/nRF91-Series-logo.svg';
 
-const shared = {
+export interface Firmware {
+    format: string;
+    file: string;
+}
+
+export interface Choice {
+    name: string;
+    description: string;
+    firmware: Firmware[];
+    app: string;
+}
+
+export interface Link {
+    label: string;
+    href: string;
+}
+
+export interface DeviceGuide {
+    boardVersion: string;
+    deviceName: string;
+    logo: React.ElementType;
+    apps: string[];
+    links: Link[];
+    choices: Choice[];
+}
+
+const shared: { apps: string[]; links: Link[] } = {
     apps: ['pc-nrfconnect-toolchain-manager'],
     links: [
         { label: 'Nordic Academy - Cellular IoT Fundamentals', href: '' },
@@ -20,10 +46,10 @@ const shared = {
     ],
 };
 
-const devices = [
+const devices: DeviceGuide[] = [
     {
         boardVersion: 'pca10090',
-        name: 'nRF9160 DK',
+        deviceName: 'nRF9160 DK',
         logo: Logo91,
         apps: [
             'pc-nrfconnect-cellularmonitor',
@@ -97,14 +123,15 @@ export const setEvaluationChoice = (evaluationChoice: EvaluationChoice) => {
 };
 export const getEvaluationChoice = () => choice;
 
-const getDevice = (device: Device) =>
+const getDeviceGuide = (device: Device) =>
     devices.find(
         d =>
             d.boardVersion.toLowerCase() ===
             device.jlink?.boardVersion.toLowerCase()
     );
 
-export const deviceName = (device: Device) => getDevice(device)?.name;
+export const deviceName = (device: Device) =>
+    getDeviceGuide(device)?.deviceName;
 
 export const DeviceLogo = ({
     device,
@@ -113,20 +140,20 @@ export const DeviceLogo = ({
     device: Device;
     className?: string;
 }) => {
-    const Logo = getDevice(device)?.logo;
+    const Logo = getDeviceGuide(device)?.logo;
     return Logo ? <Logo className={className} /> : null;
 };
 
 export const deviceApps = (device: Device) => [
-    ...(getDevice(device)?.apps ?? []),
+    ...(getDeviceGuide(device)?.apps ?? []),
     ...shared.apps,
 ];
 
 export const deviceLinks = (device: Device) =>
-    [...(getDevice(device)?.links ?? []), ...shared.links] as {
+    [...(getDeviceGuide(device)?.links ?? []), ...shared.links] as {
         label: string;
         href: string;
     }[];
 
 export const deviceEvaluationChoices = (device: Device) =>
-    getDevice(device)?.choices ?? [];
+    getDeviceGuide(device)?.choices ?? [];

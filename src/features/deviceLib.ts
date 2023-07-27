@@ -10,11 +10,14 @@ import {
     deviceControlExecuteOperations,
     DeviceTraits,
     enumerate,
+    Progress,
     startHotplugEvents,
     stopHotplugEvents,
 } from '@nordicsemiconductor/nrf-device-lib-js';
 import path from 'path';
 import { getDeviceLibContext } from 'pc-nrfconnect-shared';
+
+import type { Firmware } from './devicesGuides';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,
@@ -67,12 +70,11 @@ const labelToFormat = (label: string) => {
 
 export const program = async (
     device: Device,
-    firmware: object[],
-    progressCb: (progress: unknown) => void
+    firmware: Firmware[],
+    progressCb: (progress: Progress.CallbackParameters) => void
 ) => {
     const operations = [];
     operations.push(
-        // @ts-expect-error no type definitions for this yet
         firmware.map(({ format, file }, index) => ({
             operationId: index,
             operation: {
@@ -103,11 +105,10 @@ export const program = async (
         await deviceControlExecuteOperations(
             getDeviceLibContext(),
             device.id,
-            (err: unknown) => {
+            (err: Error) => {
                 if (err) console.log('err', err);
-                else console.log('no err');
             },
-            (err: unknown) => console.log('doc', err),
+            (err: Error) => console.log('doc', err),
             progressCb,
             {
                 operations,
