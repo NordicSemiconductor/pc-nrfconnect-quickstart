@@ -45,7 +45,7 @@ enum Steps {
 
 const App = () => {
     const dispatch = useDispatch<Dispatch>();
-    const device = useSelector(getSelectedDevice);
+    const selectedDevice = useSelector(getSelectedDevice);
     const [currentStep, setCurrentStep] = useState(
         process.argv.includes('--first-launch') ? Steps.WELCOME : Steps.CONNECT
     );
@@ -63,7 +63,7 @@ const App = () => {
         return () => {
             cleanup.then(cb => cb());
         };
-    }, [device, dispatch]);
+    }, [selectedDevice, dispatch]);
 
     const props = {
         back: () => {
