@@ -48,7 +48,8 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                                 onClick={() => setSelected(choice)}
                                 className={classNames(
                                     selected?.name === choice.name &&
-                                        'tw-pointer-events-none tw-cursor-none tw-opacity-0'
+                                        'tw-pointer-events-none tw-cursor-none tw-opacity-0',
+                                    'tw-w-full'
                                 )}
                             >
                                 Select
