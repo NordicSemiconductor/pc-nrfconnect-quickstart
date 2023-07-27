@@ -109,9 +109,7 @@ export const program = async (
         (err?: Error) => {
             if (err) throw err;
         },
-        (err?: Error) => {
-            if (err) throw err;
-        },
+        () => {},
         progressCb,
         {
             operations,
