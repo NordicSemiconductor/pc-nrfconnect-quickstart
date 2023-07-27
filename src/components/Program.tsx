@@ -105,11 +105,11 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                             value.map((f, index) =>
                                 index === taskId
                                     ? {
-                                        ...f,
-                                        progressInfo:
-                                            // TODO: can be removed when device lib types are updated
-                                            progress.progressJson as ExtendedOperation,
-                                    }
+                                          ...f,
+                                          progressInfo:
+                                              // TODO: can be removed when device lib types are updated
+                                              progress.progressJson as ExtendedOperation,
+                                      }
                                     : f
                             )
                         );
