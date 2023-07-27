@@ -26,6 +26,8 @@ interface App {
     currentVersion: string;
 }
 
+const hasUpdate = (app: App) => lt(app.currentVersion, app.latestVersion);
+
 const AppItem = ({
     app,
     onClick,
@@ -38,26 +40,28 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            <p>{lt(app.currentVersion, app.latestVersion) ? 'UPDATE' : ''}</p>
-            {!app.installed && (
-                <input
-                    type="checkbox"
-                    id={app.name}
-                    disabled={!!app.installed}
-                    onClick={event =>
-                        onClick(
-                            (
-                                event as unknown as React.ChangeEvent<HTMLInputElement>
-                            ).target.checked
-                        )
-                    }
-                    className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-[0.0675rem] after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
-                />
-            )}
-            {app.installed && <> : ) </>}
+            {!app.installed ||
+                (hasUpdate(app) && (
+                    <input
+                        type="checkbox"
+                        id={app.name}
+                        disabled={!!app.installed && !hasUpdate(app)}
+                        onClick={event =>
+                            onClick(
+                                (
+                                    event as unknown as React.ChangeEvent<HTMLInputElement>
+                                ).target.checked
+                            )
+                        }
+                        className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
+                    />
+                ))}
+            {app.installed && !hasUpdate(app) && <> : ) </>}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
-            <p className="tw-cursor-pointer tw-font-bold">{app.displayName}</p>
+            <p className="tw-cursor-pointer tw-font-bold">
+                {app.displayName} {hasUpdate(app) && 'UPDATE'}
+            </p>
             <p className="tw-cursor-pointer">{app.description}</p>
         </label>
     </div>
@@ -106,6 +110,8 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             .catch(e => console.error(e));
     };
 
+    const anySelected = recommendedApps.some(app => app.selected);
+
     return (
         <Main>
             <Main.Header showDevice />
@@ -130,20 +136,21 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                     variant="primary"
                     large
                     onClick={() => {
-                        recommendedApps.forEach(app => {
-                            if (!app.installed && app.selected) {
-                                installApp(app);
-                            }
-                        });
-
-                        if (!recommendedApps.some(app => app.selected)) {
+                        if (!anySelected) {
                             next();
+                        } else {
+                            recommendedApps.forEach(app => {
+                                if (
+                                    (!app.installed || hasUpdate(app)) &&
+                                    app.selected
+                                ) {
+                                    installApp(app);
+                                }
+                            });
                         }
                     }}
                 >
-                    {recommendedApps.some(app => app.selected)
-                        ? 'Install'
-                        : 'Next'}
+                    {anySelected ? 'Install' : 'Next'}
                 </Button>
             </Main.Footer>
         </Main>
