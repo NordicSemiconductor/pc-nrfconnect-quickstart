@@ -75,46 +75,46 @@ export const program = async (
 ) => {
     const operations = [];
     operations.push(
-        firmware.map(({ format, file }, index) => ({
-            operationId: index,
-            operation: {
-                type: 'program',
-                firmware: {
-                    format: labelToFormat(format),
-                    file: path.resolve(
-                        __dirname,
-                        '..',
-                        'resources',
-                        'firmware',
-                        file
-                    ),
+        ...firmware
+            .filter((_, index) => index === 1)
+            .map(({ format, file }, index) => ({
+                operationId: index.toString(),
+                operation: {
+                    type: 'program',
+                    firmware: {
+                        format: labelToFormat(format),
+                        file: path.resolve(
+                            __dirname,
+                            '..',
+                            'resources',
+                            'firmware',
+                            file
+                        ),
+                    },
                 },
-            },
-        }))
+            }))
     );
 
     operations.push({
+        operationId: operations.length.toString(),
         operation: {
             type: 'reset',
-            operationId: operations.length,
             option: 'RESET_SYSTEM',
         },
     });
 
-    try {
-        await deviceControlExecuteOperations(
-            getDeviceLibContext(),
-            device.id,
-            (err: Error) => {
-                if (err) console.log('err', err);
-            },
-            (err: Error) => console.log('doc', err),
-            progressCb,
-            {
-                operations,
-            }
-        );
-    } catch (error) {
-        console.log('in catch', error);
-    }
+    await deviceControlExecuteOperations(
+        getDeviceLibContext(),
+        device.id,
+        (err?: Error) => {
+            if (err) throw err;
+        },
+        (err?: Error) => {
+            if (err) throw err;
+        },
+        progressCb,
+        {
+            operations,
+        }
+    );
 };

@@ -64,12 +64,12 @@ const devices: DeviceGuide[] = [
                     'Use this application if you want to evaluate the cellular modem using an external MCU.',
                 firmware: [
                     {
-                        format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
-                    },
-                    {
                         format: 'modem',
                         file: 'mfw_nrf9160_1.3.4.zip',
+                    },
+                    {
+                        format: 'application',
+                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -80,12 +80,12 @@ const devices: DeviceGuide[] = [
                     'Use this application if you want to evaluate interactions with the cloud.',
                 firmware: [
                     {
-                        format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
-                    },
-                    {
                         format: 'modem',
                         file: 'mfw_nrf9160_1.3.4.zip',
+                    },
+                    {
+                        format: 'application',
+                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -96,12 +96,12 @@ const devices: DeviceGuide[] = [
                     'Use this application if you want to evaluate various device connectivity features such as data throughput.',
                 firmware: [
                     {
-                        format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
-                    },
-                    {
                         format: 'modem',
                         file: 'mfw_nrf9160_1.3.4.zip',
+                    },
+                    {
+                        format: 'application',
+                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',

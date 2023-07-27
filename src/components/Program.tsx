@@ -82,20 +82,15 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
         );
     }, [choice]);
 
-    const finishedProgramming =
-        firmware.length &&
-        firmware.every(f => f.progressInfo.progressPercentage === 100);
-
     useEffect(() => {
-        // device can never be undefined here
-        if (!device || firmware.length === 0) return;
+        if (!device || !choice || choice.firmware.length === 0) return;
 
         try {
             program(
                 device,
-                firmware,
+                choice.firmware,
                 progress =>
-                    progress.taskID < firmware.length &&
+                    progress.taskID < choice.firmware.length &&
                     setFirmware(value => [
                         ...value,
                         {
@@ -105,9 +100,13 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                     ])
             );
         } catch (err) {
-            console.log('enumerate', err);
+            console.log('Failed to program:', err);
         }
-    }, [firmware, device]);
+    }, [device, choice]);
+
+    const finishedProgramming =
+        firmware.length &&
+        firmware.every(f => f.progressInfo.progressPercentage === 100);
 
     return (
         <Main>
