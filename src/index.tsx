@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { getCurrentWindow } from '@electron/remote';
 import { ipcRenderer } from 'electron';
-import { openAppWindow } from 'pc-nrfconnect-shared';
+import { ErrorBoundary, openAppWindow } from 'pc-nrfconnect-shared';
 
 import Apps from './components/Apps';
 import Connect from './components/Connect';
@@ -23,6 +23,7 @@ import Welcome from './components/Welcome';
 import { watchDevices } from './features/deviceLib';
 import {
     addDevice,
+    getConnectedDevices,
     getSelectedDevice,
     removeDevice,
 } from './features/deviceSlice';
@@ -105,8 +106,30 @@ const App = () => {
         </>
     );
 };
+
+const ConnectedToErrorBoundary: React.FC = ({ children }) => {
+    const connectedDevices = useSelector(getConnectedDevices);
+    const selectedDevice = useSelector(getSelectedDevice);
+
+    return (
+        <ErrorBoundary
+            devices={connectedDevices}
+            selectedDevice={selectedDevice}
+            selectedSerialNumber={selectedDevice?.serialNumber}
+        >
+            {children}
+        </ErrorBoundary>
+    );
+};
+
+const ConnectedToStore: React.FC = ({ children }) => (
+    <Provider store={store}>{children}</Provider>
+);
+
 export default () => (
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <ConnectedToStore>
+        <ConnectedToErrorBoundary>
+            <App />
+        </ConnectedToErrorBoundary>
+    </ConnectedToStore>
 );
