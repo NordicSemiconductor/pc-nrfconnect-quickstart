@@ -82,8 +82,11 @@ const App = () => {
         openLauncher: () => {
             ipcRenderer.send('open-app-launcher');
         },
-        openApp: (app: string) => {
-            openAppWindow({ name: app, source: 'official' });
+        openApp: (app: string, serialNumber?: string) => {
+            openAppWindow(
+                { name: app, source: 'official' },
+                serialNumber ? { device: { serialNumber } } : undefined
+            );
         },
     };
 
