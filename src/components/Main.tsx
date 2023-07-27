@@ -6,7 +6,7 @@
 
 import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Logo } from 'pc-nrfconnect-shared';
+import { getPersistedNickname, Logo } from 'pc-nrfconnect-shared';
 
 import { DeviceLogo, deviceName } from '../features/devicesGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
@@ -23,7 +23,10 @@ const Header = ({ showDevice }: { showDevice?: boolean }) => {
                         device={device}
                         className="tw-h-5 tw-w-6 tw-fill-white"
                     />
-                    <p>{deviceName(device)}</p>
+                    <p>
+                        {getPersistedNickname(device.serialNumber) ||
+                            deviceName(device)}
+                    </p>
                 </div>
             )}
             <div className="tw-flex tw-flex-1 tw-flex-row tw-justify-end">

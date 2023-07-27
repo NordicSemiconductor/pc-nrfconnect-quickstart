@@ -5,18 +5,21 @@
  */
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
     Button,
     getPersistedNickname,
     persistNickname,
 } from 'pc-nrfconnect-shared';
 
+import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
 export default ({ back, next }: { back: () => void; next: () => void }) => {
+    const device = useSelector(getSelectedDevice);
     const [nickname, setNickname] = React.useState(
-        getPersistedNickname('serialnumber')
+        device ? getPersistedNickname(device.serialNumber) : ''
     );
     const maxLength = 20;
 
@@ -55,9 +58,9 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                         variant="primary"
                         large
                         onClick={() => {
-                            if (nickname.trim().length > 0) {
+                            if (nickname.trim().length > 0 && device) {
                                 // TODO set nickname in redux store so other tab titles get updated
-                                persistNickname('serialnumber', nickname);
+                                persistNickname(device.serialNumber, nickname);
                             }
                             next();
                         }}
