@@ -6,6 +6,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
 import { getSelectedChoice } from '../features/choiceSlice';
@@ -15,10 +16,14 @@ import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
+// TODO: can be removed when device lib types are updated
+interface ExtendedOperation extends Progress.Operation {
+    state: string;
+    operationId: string;
+}
+
 interface FirmwareWithProgress extends Firmware {
-    progressInfo: {
-        progressPercentage: number;
-    };
+    progressInfo?: ExtendedOperation;
 }
 
 const ProgressBar = ({ percentage }: { percentage: number }) => (
@@ -39,9 +44,12 @@ const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-justify-between">
                         <p>{format}</p>
+                        {progressInfo?.message && <p>{progressInfo.message}</p>}
                         <p className="tw-text-primary">{file}</p>
                     </div>
-                    <ProgressBar percentage={progressInfo.progressPercentage} />
+                    <ProgressBar
+                        percentage={progressInfo?.progressPercentage || 0}
+                    />
                 </div>
             ))}
         </div>
@@ -74,12 +82,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
 
     useEffect(() => {
         if (!choice) return;
-        setFirmware(
-            choice.firmware.map(f => ({
-                ...f,
-                progressInfo: { progressPercentage: 0 },
-            }))
-        );
+        setFirmware([...choice.firmware]);
     }, [choice]);
 
     useEffect(() => {
@@ -89,24 +92,38 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             program(
                 device,
                 choice.firmware,
-                progress =>
-                    progress.taskID < choice.firmware.length &&
-                    setFirmware(value => [
-                        ...value,
-                        {
-                            ...value[progress.taskID],
-                            progressInfo: progress.progressJson,
-                        },
-                    ])
+
+                progress => {
+                    const taskId = Number.parseInt(
+                        // TODO: can be removed when device lib types are updated
+                        (progress.progressJson as ExtendedOperation)
+                            .operationId,
+                        10
+                    );
+                    if (taskId < choice.firmware.length)
+                        setFirmware(value =>
+                            value.map((f, index) =>
+                                index === taskId
+                                    ? {
+                                        ...f,
+                                        progressInfo:
+                                            // TODO: can be removed when device lib types are updated
+                                            progress.progressJson as ExtendedOperation,
+                                    }
+                                    : f
+                            )
+                        );
+                }
             );
         } catch (err) {
             console.log('Failed to program:', err);
         }
     }, [device, choice]);
 
+    // TODO: this only waits for all firmwares to be programmed but not for device reset. should it be changed?
+    // TODO: add delay?
     const finishedProgramming =
-        firmware.length &&
-        firmware.every(f => f.progressInfo.progressPercentage === 100);
+        firmware.length && firmware.every(f => f.progressInfo?.state === 'end');
 
     return (
         <Main>
