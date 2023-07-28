@@ -8,7 +8,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from 'pc-nrfconnect-shared';
 
-import { DeviceLogo } from '../features/devicesGuides';
+import { DeviceLogo, deviceName } from '../features/devicesGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
@@ -28,7 +28,9 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                         className="tw-h-14 tw-w-20 tw-fill-gray-700"
                     />
                 </div>
-                <Heading>Let&apos;s get started with the \\device//</Heading>
+                <Heading>
+                    Let&apos;s get started with the {deviceName(device)}
+                </Heading>
                 <div className="tw-max-w-sm tw-pt-10">
                     <p>\\Device capabilities//</p>
                 </div>
