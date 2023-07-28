@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
 import { setSelectedChoice } from '../features/choiceSlice';
-import { Choice, deviceEvaluationChoices } from '../features/devicesGuides';
+import { Choice, deviceEvaluationChoices } from '../features/deviceGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';

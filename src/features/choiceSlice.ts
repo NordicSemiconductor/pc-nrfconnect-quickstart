@@ -6,7 +6,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { Choice } from './devicesGuides';
+import type { Choice } from './deviceGuides';
 import type { State } from './store';
 
 interface ChoiceState {

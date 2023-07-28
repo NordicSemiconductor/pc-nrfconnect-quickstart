@@ -8,7 +8,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from 'pc-nrfconnect-shared';
 
-import { DeviceLogo, deviceName } from '../features/devicesGuides';
+import { DeviceLogo, deviceName } from '../features/deviceGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';

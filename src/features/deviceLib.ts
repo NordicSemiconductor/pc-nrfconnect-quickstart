@@ -17,7 +17,7 @@ import {
 import path from 'path';
 import { getDeviceLibContext } from 'pc-nrfconnect-shared';
 
-import type { Firmware } from './devicesGuides';
+import type { Firmware } from './deviceGuides';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,

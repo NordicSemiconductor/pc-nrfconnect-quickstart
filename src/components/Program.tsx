@@ -11,7 +11,7 @@ import { Button } from 'pc-nrfconnect-shared';
 
 import { getSelectedChoice } from '../features/choiceSlice';
 import { program } from '../features/deviceLib';
-import type { Firmware } from '../features/devicesGuides';
+import type { Firmware } from '../features/deviceGuides';
 import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';

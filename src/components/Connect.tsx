@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { DeviceLogo, deviceName } from '../features/devicesGuides';
+import { DeviceLogo, deviceName } from '../features/deviceGuides';
 import {
     deselectDevice,
     getConnectedDevices,
