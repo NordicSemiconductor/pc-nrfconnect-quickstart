@@ -23,10 +23,11 @@ interface App {
     installed: object;
     selected: boolean;
     latestVersion: string;
-    currentVersion: string;
+    currentVersion?: string;
 }
 
-const hasUpdate = (app: App) => lt(app.currentVersion, app.latestVersion);
+const hasUpdate = (app: App) =>
+    app.currentVersion && lt(app.currentVersion, app.latestVersion);
 
 const AppItem = ({
     app,
@@ -40,22 +41,21 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            {!app.installed ||
-                (hasUpdate(app) && (
-                    <input
-                        type="checkbox"
-                        id={app.name}
-                        disabled={!!app.installed && !hasUpdate(app)}
-                        onClick={event =>
-                            onClick(
-                                (
-                                    event as unknown as React.ChangeEvent<HTMLInputElement>
-                                ).target.checked
-                            )
-                        }
-                        className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
-                    />
-                ))}
+            {(!app.installed || hasUpdate(app)) && (
+                <input
+                    type="checkbox"
+                    id={app.name}
+                    disabled={!!app.installed && !hasUpdate(app)}
+                    onClick={event =>
+                        onClick(
+                            (
+                                event as unknown as React.ChangeEvent<HTMLInputElement>
+                            ).target.checked
+                        )
+                    }
+                    className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
+                />
+            )}
             {app.installed && !hasUpdate(app) && <> : ) </>}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
