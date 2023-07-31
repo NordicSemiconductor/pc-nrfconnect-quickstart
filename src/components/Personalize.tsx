@@ -65,7 +65,6 @@ export default ({
                         large
                         onClick={() => {
                             if (nickname.trim().length > 0 && device) {
-                                // TODO set nickname in redux store so other tab titles get updated
                                 persistNickname(device.serialNumber, nickname);
                             }
                             next();
