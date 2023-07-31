@@ -5,38 +5,33 @@
  */
 
 import React, { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { getPersistedNickname, Logo } from 'pc-nrfconnect-shared';
 
 import { DeviceLogo, deviceName } from '../features/deviceGuides';
-import { getSelectedDevice } from '../features/deviceSlice';
 
-const Header = ({ showDevice }: { showDevice?: boolean }) => {
-    const device = useSelector(getSelectedDevice);
-
-    return (
-        <div className="tw-flex tw-h-16 tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-text-white">
-            <p className="tw-flex-1 tw-font-bold tw-uppercase">Quickstart</p>
-            {showDevice && device && (
-                <div className="tw-flex tw-flex-row tw-items-center tw-gap-3">
-                    <DeviceLogo
-                        device={device}
-                        className="tw-h-5 tw-w-6 tw-fill-white"
-                    />
-                    <p>
-                        {getPersistedNickname(device.serialNumber) ||
-                            deviceName(device)}
-                    </p>
-                </div>
-            )}
-            <div className="tw-flex tw-flex-1 tw-flex-row tw-justify-end">
-                <div className="tw-h-10 tw-w-10">
-                    <Logo />
-                </div>
+const Header = ({ device }: { device?: Device }) => (
+    <div className="tw-flex tw-h-16 tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-text-white">
+        <p className="tw-flex-1 tw-font-bold tw-uppercase">Quickstart</p>
+        {device && (
+            <div className="tw-flex tw-flex-row tw-items-center tw-gap-3">
+                <DeviceLogo
+                    device={device}
+                    className="tw-h-5 tw-w-6 tw-fill-white"
+                />
+                <p>
+                    {getPersistedNickname(device.serialNumber) ||
+                        deviceName(device)}
+                </p>
+            </div>
+        )}
+        <div className="tw-flex tw-flex-1 tw-flex-row tw-justify-end">
+            <div className="tw-h-10 tw-w-10">
+                <Logo />
             </div>
         </div>
-    );
-};
+    </div>
+);
 
 const Content = ({
     className = '',

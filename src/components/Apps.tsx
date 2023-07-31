@@ -5,13 +5,12 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { ipcRenderer } from 'electron';
 import { Button } from 'pc-nrfconnect-shared';
 import { lt } from 'semver';
 
 import { deviceApps } from '../features/deviceGuides';
-import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -67,13 +66,18 @@ const AppItem = ({
     </div>
 );
 
-export default ({ back, next }: { back: () => void; next: () => void }) => {
-    const device = useSelector(getSelectedDevice);
+export default ({
+    back,
+    next,
+    device,
+}: {
+    back: () => void;
+    next: () => void;
+    device: Device;
+}) => {
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {
-        // device can never be undefined here
-        if (!device) return;
         ipcRenderer
             .invoke('apps:get-downloadable-apps')
             .then(({ apps }: { apps: App[] }) => {
@@ -114,7 +118,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
 
     return (
         <Main>
-            <Main.Header showDevice />
+            <Main.Header device={device} />
             <Main.Content className="tw-gap-6">
                 <Heading>Install recommended apps</Heading>
                 <p>You can always add and remove apps later.</p>

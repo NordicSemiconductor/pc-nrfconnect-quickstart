@@ -5,19 +5,25 @@
  */
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import {
     Button,
     getPersistedNickname,
     persistNickname,
 } from 'pc-nrfconnect-shared';
 
-import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
-export default ({ back, next }: { back: () => void; next: () => void }) => {
-    const device = useSelector(getSelectedDevice);
+export default ({
+    back,
+    next,
+    device,
+}: {
+    back: () => void;
+    next: () => void;
+    device: Device;
+}) => {
     const [nickname, setNickname] = React.useState(
         device ? getPersistedNickname(device.serialNumber) : ''
     );
@@ -25,7 +31,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
 
     return (
         <Main>
-            <Main.Header showDevice />
+            <Main.Header device={device} />
             <Main.Content>
                 <Heading>First, give your kit a custom name</Heading>
                 <div className="tw-flex tw-flex-col tw-items-center tw-gap-12 tw-pt-10">

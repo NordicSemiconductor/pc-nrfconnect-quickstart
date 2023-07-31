@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
 import Heading from './Heading';
@@ -14,13 +15,15 @@ export default ({
     back,
     next,
     openApp,
+    device,
 }: {
     back: () => void;
     next: () => void;
     openApp: (app: string) => void;
+    device: Device;
 }) => (
     <Main>
-        <Main.Header showDevice />
+        <Main.Header device={device} />
         <Main.Content className="tw-max-w-sm">
             <Heading>Install nRF Connect SDK and Toolchain</Heading>
             <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">

@@ -5,26 +5,30 @@
  */
 
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
 import { setSelectedChoice } from '../features/choiceSlice';
 import { Choice, deviceEvaluationChoices } from '../features/deviceGuides';
-import { getSelectedDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
-export default ({ back, next }: { back: () => void; next: () => void }) => {
+export default ({
+    back,
+    next,
+    device,
+}: {
+    back: () => void;
+    next: () => void;
+    device: Device;
+}) => {
     const dispatch = useDispatch();
-    const device = useSelector(getSelectedDevice);
     const [selected, setSelected] = useState<Choice>();
-
-    // device can never be undefined here
-    if (!device) return null;
 
     return (
         <Main>
-            <Main.Header showDevice />
+            <Main.Header device={device} />
             <Main.Content className="tw-gap-8">
                 <Heading>Update and verify</Heading>
                 <p>

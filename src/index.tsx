@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { getCurrentWindow } from '@electron/remote';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { ipcRenderer } from 'electron';
 import { ErrorBoundary, openAppWindow } from 'pc-nrfconnect-shared';
 
@@ -26,6 +27,7 @@ import {
     getConnectedDevices,
     getSelectedDevice,
     removeDevice,
+    setSelectedDevice,
 } from './features/deviceSlice';
 import store, { Dispatch } from './features/store';
 
@@ -42,6 +44,19 @@ enum Steps {
     LEARN,
     DEVELOP,
     FINISH,
+}
+
+interface SharedProps {
+    device?: Device;
+    back: () => void;
+    next: () => void;
+    quit: () => void;
+    openLauncher: () => void;
+    openApp: (app: string, serialNumber?: string) => void;
+}
+
+interface SharedPropsWithDevice extends SharedProps {
+    device: Device;
 }
 
 const App = () => {
@@ -66,7 +81,8 @@ const App = () => {
         };
     }, [selectedDevice, dispatch]);
 
-    const props = {
+    const props: SharedProps = {
+        device: selectedDevice,
         back: () => {
             if (currentStep === Steps.APPS) {
                 setCurrentStep(Steps.EVALUATE);
@@ -95,14 +111,34 @@ const App = () => {
         <>
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
             {currentStep === Steps.CONNECT && <Connect {...props} />}
-            {currentStep === Steps.INTRODUCTION && <Introduction {...props} />}
-            {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
-            {currentStep === Steps.EVALUATE && <Evaluate {...props} />}
-            {currentStep === Steps.PROGRAM && <Program {...props} />}
-            {currentStep === Steps.APPS && <Apps {...props} />}
-            {currentStep === Steps.LEARN && <Learn {...props} />}
-            {currentStep === Steps.DEVELOP && <Develop {...props} />}
-            {currentStep === Steps.FINISH && <Finish {...props} />}
+            {selectedDevice && (
+                <>
+                    {currentStep === Steps.INTRODUCTION && (
+                        <Introduction {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.PERSONALIZE && (
+                        <Personalize {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.EVALUATE && (
+                        <Evaluate {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.PROGRAM && (
+                        <Program {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.APPS && (
+                        <Apps {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.LEARN && (
+                        <Learn {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.DEVELOP && (
+                        <Develop {...(props as SharedPropsWithDevice)} />
+                    )}
+                    {currentStep === Steps.FINISH && (
+                        <Finish {...(props as SharedPropsWithDevice)} />
+                    )}
+                </>
+            )}
         </>
     );
 };
