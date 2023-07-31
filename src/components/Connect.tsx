@@ -9,11 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
 import { DeviceLogo, deviceName } from '../features/deviceGuides';
-import {
-    deselectDevice,
-    getConnectedDevices,
-    setSelectedDevice,
-} from '../features/deviceSlice';
+import { deselectDevice, getConnectedDevices } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -26,7 +22,7 @@ const invokeIfSpaceOrEnterPressed =
         }
     };
 
-export default ({ next }: { next: () => void }) => {
+export default ({ next }: { next: (device: Device) => void }) => {
     const dispatch = useDispatch();
     const devices = useSelector(getConnectedDevices);
     const [longSearchDuration, setLongSearchDuration] = useState(false);
@@ -51,12 +47,6 @@ export default ({ next }: { next: () => void }) => {
         };
     }, [devices]);
 
-    const onClick = (device: Device) => {
-        dispatch(setSelectedDevice(device));
-
-        next();
-    };
-
     return (
         <Main>
             <Main.Header />
@@ -74,9 +64,9 @@ export default ({ next }: { next: () => void }) => {
                                 tabIndex={0}
                                 role="button"
                                 onKeyUp={invokeIfSpaceOrEnterPressed(() =>
-                                    onClick(device)
+                                    next(device)
                                 )}
-                                onClick={() => onClick(device)}
+                                onClick={() => next(device)}
                                 className="tw-flex tw-w-full tw-cursor-pointer tw-flex-row tw-items-center tw-gap-1 tw-border-b tw-border-solid tw-px-2 tw-py-1 last:tw-border-b-0 hover:tw-bg-white"
                             >
                                 <DeviceLogo

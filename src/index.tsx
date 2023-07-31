@@ -110,7 +110,15 @@ const App = () => {
     return (
         <>
             {currentStep === Steps.WELCOME && <Welcome {...props} />}
-            {currentStep === Steps.CONNECT && <Connect {...props} />}
+            {currentStep === Steps.CONNECT && (
+                <Connect
+                    {...props}
+                    next={(device: Device) => {
+                        dispatch(setSelectedDevice(device));
+                        props.next();
+                    }}
+                />
+            )}
             {selectedDevice && (
                 <>
                     {currentStep === Steps.INTRODUCTION && (
