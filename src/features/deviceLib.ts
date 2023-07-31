@@ -21,8 +21,8 @@ import type { Firmware } from './deviceGuides';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,
-    serialPorts: true,
     modem: true,
+    nordicUsb: true,
 };
 
 export const watchDevices = async (
