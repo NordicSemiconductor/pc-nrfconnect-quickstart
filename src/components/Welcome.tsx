@@ -11,7 +11,6 @@ import Main from './Main';
 
 export default ({ next, quit }: { next: () => void; quit: () => void }) => (
     <Main>
-        <Main.Header />
         <Main.Content className="tw-max-w-sm tw-gap-4">
             <p>
                 Get started quickly by updating and verifying functionality,

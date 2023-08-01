@@ -24,8 +24,7 @@ export default ({
     const [selected, setSelected] = useState<Choice>();
 
     return (
-        <Main>
-            <Main.Header device={device} />
+        <Main device={device}>
             <Main.Content className="tw-gap-8">
                 <Heading>Update and verify</Heading>
                 <p>

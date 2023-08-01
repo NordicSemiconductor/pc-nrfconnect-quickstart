@@ -127,8 +127,7 @@ export default ({
         firmware.length && firmware.every(f => f.progressInfo?.state === 'end');
 
     return (
-        <Main>
-            <Main.Header device={device} />
+        <Main device={device}>
             <Main.Content className="tw-w-full tw-max-w-3xl">
                 {finishedProgramming ? (
                     <SuccessContent />

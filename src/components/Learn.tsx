@@ -21,8 +21,7 @@ export default ({
     next: () => void;
     device: Device;
 }) => (
-    <Main>
-        <Main.Header device={device} />
+    <Main device={device}>
         <Main.Content>
             <Heading>
                 We recommend these resources for learning more about{' '}

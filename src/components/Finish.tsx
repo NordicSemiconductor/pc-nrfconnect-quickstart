@@ -20,8 +20,7 @@ export default ({
     finish: () => void;
     device: Device;
 }) => (
-    <Main>
-        <Main.Header device={device} />
+    <Main device={device}>
         <Main.Content className="tw-max-w-sm">
             <Heading>Finished Quickstart</Heading>
             <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">

@@ -22,8 +22,7 @@ export default ({
     openApp: (app: string) => void;
     device: Device;
 }) => (
-    <Main>
-        <Main.Header device={device} />
+    <Main device={device}>
         <Main.Content className="tw-max-w-sm">
             <Heading>Install nRF Connect SDK and Toolchain</Heading>
             <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">

@@ -117,8 +117,7 @@ export default ({
     const anySelected = recommendedApps.some(app => app.selected);
 
     return (
-        <Main>
-            <Main.Header device={device} />
+        <Main device={device}>
             <Main.Content className="tw-gap-6">
                 <Heading>Install recommended apps</Heading>
                 <p>You can always add and remove apps later.</p>

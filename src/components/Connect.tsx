@@ -62,7 +62,6 @@ export default ({ next }: { next: (device: Device) => void }) => {
 
     return (
         <Main>
-            <Main.Header />
             <Main.Content>
                 <Heading>
                     {connectedDevices.length

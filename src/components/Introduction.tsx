@@ -21,8 +21,7 @@ export default ({
     next: () => void;
     device: Device;
 }) => (
-    <Main>
-        <Main.Header device={device} />
+    <Main device={device}>
         <Main.Content>
             <div className="tw-pb-10">
                 <DeviceLogo

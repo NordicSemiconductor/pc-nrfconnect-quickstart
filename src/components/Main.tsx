@@ -64,18 +64,20 @@ const Footer = ({
 const Main = ({
     className = '',
     children,
+    device,
 }: {
     className?: string;
     children: ReactNode;
+    device?: Device;
 }) => (
     <div
         className={`tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between ${className}`}
     >
+        <Header device={device} />
         {children}
     </div>
 );
 
-Main.Header = Header;
 Main.Content = Content;
 Main.Footer = Footer;
 
