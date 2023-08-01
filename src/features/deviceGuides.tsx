@@ -125,7 +125,7 @@ export const getEvaluationChoice = () => choice;
 
 export const isSupportedDevice = (device: Device) =>
     deviceGuides
-        .map(d => d.boardVersion)
+        .map(d => d.boardVersion.toLowerCase())
         .includes(device.jlink?.boardVersion.toLowerCase() || '');
 
 const getDeviceGuide = (device: Device) =>
