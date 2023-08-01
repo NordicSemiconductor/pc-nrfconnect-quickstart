@@ -46,7 +46,7 @@ const shared: { apps: string[]; links: Link[] } = {
     ],
 };
 
-const devices: DeviceGuide[] = [
+const deviceGuides: DeviceGuide[] = [
     {
         boardVersion: 'pca10090',
         deviceName: 'nRF9160 DK',
@@ -124,7 +124,7 @@ export const setEvaluationChoice = (evaluationChoice: EvaluationChoice) => {
 export const getEvaluationChoice = () => choice;
 
 const getDeviceGuide = (device: Device) =>
-    devices.find(
+    deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
             device.jlink?.boardVersion.toLowerCase()
