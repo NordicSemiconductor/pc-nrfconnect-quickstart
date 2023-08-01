@@ -8,7 +8,7 @@ import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, openUrl } from 'pc-nrfconnect-shared';
 
-import { deviceLinks } from '../features/deviceGuides';
+import { deviceLinks, deviceName } from '../features/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -25,7 +25,8 @@ export default ({
         <Main.Header device={device} />
         <Main.Content>
             <Heading>
-                We recommend these resources for learning more about \\device//
+                We recommend these resources for learning more about{' '}
+                {deviceName(device)}
             </Heading>
             <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
                 {deviceLinks(device).map(({ label, href }) => (
