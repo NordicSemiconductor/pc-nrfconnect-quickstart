@@ -8,10 +8,10 @@ import React, { useEffect, useState } from 'react';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
-import type { Choice, Firmware } from '../features/deviceGuides';
-import { program } from '../features/deviceLib';
-import Heading from './Heading';
-import Main from './Main';
+import type { Choice, Firmware } from '../../features/deviceGuides';
+import { program } from '../../features/deviceLib';
+import Heading from '../Heading';
+import Main from '../Main';
 
 // TODO: can be removed when device lib types are updated
 interface ExtendedOperation extends Progress.Operation {
@@ -76,27 +76,23 @@ export default ({
     back,
     next,
     device,
-    choice,
+    selectedFirmware,
 }: {
     back: () => void;
     next: () => void;
     device: Device;
-    choice: Choice;
+    selectedFirmware: Firmware[];
 }) => {
-    const [firmware, setFirmware] = useState<FirmwareWithProgress[]>([]);
+    const [firmware, setFirmware] =
+        useState<FirmwareWithProgress[]>(selectedFirmware);
 
     useEffect(() => {
-        if (!choice) return;
-        setFirmware([...choice.firmware]);
-    }, [choice]);
-
-    useEffect(() => {
-        if (!choice || choice.firmware.length === 0) return;
+        if (selectedFirmware.length === 0) return;
 
         try {
             program(
                 device,
-                choice.firmware,
+                selectedFirmware,
 
                 progress => {
                     const taskId = Number.parseInt(
@@ -105,7 +101,7 @@ export default ({
                             .operationId,
                         10
                     );
-                    if (taskId < choice.firmware.length)
+                    if (taskId < selectedFirmware.length)
                         setFirmware(value =>
                             value.map((f, index) =>
                                 index === taskId
@@ -123,7 +119,7 @@ export default ({
         } catch (err) {
             console.log('Failed to program:', err);
         }
-    }, [device, choice]);
+    }, [device, selectedFirmware]);
 
     // TODO: this only waits for all firmwares to be programmed but not for device reset. should it be changed?
     // TODO: add delay?
@@ -141,22 +137,16 @@ export default ({
                 )}
             </Main.Content>
             <Main.Footer>
-                <Button
-                    variant="secondary"
-                    disabled={!finishedProgramming}
-                    large
-                    onClick={back}
-                >
-                    Back
-                </Button>
-                <Button
-                    variant="primary"
-                    disabled={!finishedProgramming}
-                    large
-                    onClick={next}
-                >
-                    Next
-                </Button>
+                {finishedProgramming && (
+                    <>
+                        <Button variant="secondary" large onClick={back}>
+                            Back
+                        </Button>
+                        <Button variant="primary" large onClick={next}>
+                            Next
+                        </Button>
+                    </>
+                )}
             </Main.Footer>
         </Main>
     );

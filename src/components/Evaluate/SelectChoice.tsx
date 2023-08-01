@@ -8,18 +8,16 @@ import React, { useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { Choice, deviceEvaluationChoices } from '../features/deviceGuides';
-import Heading from './Heading';
-import Main from './Main';
+import { Choice, deviceEvaluationChoices } from '../../features/deviceGuides';
+import Heading from '../Heading';
+import Main from '../Main';
 
 export default ({
     back,
-    next,
     device,
     selectChoice,
 }: {
     back: () => void;
-    next: () => void;
     device: Device;
     selectChoice: (choice: Choice) => void;
 }) => {
@@ -73,8 +71,6 @@ export default ({
                         if (!selected) return;
 
                         selectChoice(selected);
-
-                        next();
                     }}
                 >
                     Program

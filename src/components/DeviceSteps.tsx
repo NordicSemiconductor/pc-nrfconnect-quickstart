@@ -18,13 +18,11 @@ import Finish from './Finish';
 import Introduction from './Introduction';
 import Learn from './Learn';
 import Personalize from './Personalize';
-import Program from './Program';
 
 enum Steps {
     INTRODUCTION,
     PERSONALIZE,
     EVALUATE,
-    PROGRAM,
     APPS,
     LEARN,
     DEVELOP,
@@ -46,8 +44,6 @@ export default ({
         back: () => {
             if (currentStep === Steps.INTRODUCTION) {
                 goBackToConnect();
-            } else if (currentStep - 1 === Steps.PROGRAM) {
-                setCurrentStep(Steps.EVALUATE);
             } else {
                 setCurrentStep(currentStep - 1);
             }
@@ -69,9 +65,6 @@ export default ({
             {currentStep === Steps.PERSONALIZE && <Personalize {...props} />}
             {currentStep === Steps.EVALUATE && (
                 <Evaluate {...props} selectChoice={setChoice} />
-            )}
-            {currentStep === Steps.PROGRAM && choice && (
-                <Program {...props} choice={choice} />
             )}
             {currentStep === Steps.APPS && <Apps {...props} />}
             {currentStep === Steps.LEARN && <Learn {...props} />}
