@@ -5,11 +5,17 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { DeviceLogo, deviceName } from '../features/deviceGuides';
-import { deselectDevice, getConnectedDevices } from '../features/deviceSlice';
+import {
+    DeviceLogo,
+    deviceName,
+    getValidDevices,
+} from '../features/deviceGuides';
+import {
+    connectedDevicesEvents,
+    getConnectedDevices,
+} from '../features/deviceLib';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -23,17 +29,23 @@ const invokeIfSpaceOrEnterPressed =
     };
 
 export default ({ next }: { next: (device: Device) => void }) => {
-    const dispatch = useDispatch();
-    const devices = useSelector(getConnectedDevices);
+    const [connectedDevices, setConnectedDevices] = useState<Device[]>([]);
     const [longSearchDuration, setLongSearchDuration] = useState(false);
 
     useEffect(() => {
-        // This is relevant for when we come BACK to this step
-        dispatch(deselectDevice());
-    }, [dispatch]);
+        setConnectedDevices(getConnectedDevices());
+        connectedDevicesEvents.on('update', setConnectedDevices);
+
+        return () => {
+            connectedDevicesEvents.removeListener(
+                'update',
+                setConnectedDevices
+            );
+        };
+    }, []);
 
     useEffect(() => {
-        if (devices.length) {
+        if (connectedDevices.length) {
             setLongSearchDuration(false);
             return;
         }
@@ -45,42 +57,48 @@ export default ({ next }: { next: (device: Device) => void }) => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [devices]);
+    }, [connectedDevices]);
 
     return (
         <Main>
             <Main.Header />
             <Main.Content>
                 <Heading>
-                    {devices.length
+                    {connectedDevices.length
                         ? 'Select your kit'
                         : 'Connect a Nordic kit to your PC'}
                 </Heading>
                 <div className="tw-p-8">
                     <div className="scrollbar tw-max-h-40 tw-w-48 tw-bg-gray-50">
-                        {devices.map(device => (
-                            <div
-                                key={device.serialNumber}
-                                tabIndex={0}
-                                role="button"
-                                onKeyUp={invokeIfSpaceOrEnterPressed(() =>
-                                    next(device)
-                                )}
-                                onClick={() => next(device)}
-                                className="tw-flex tw-w-full tw-cursor-pointer tw-flex-row tw-items-center tw-gap-1 tw-border-b tw-border-solid tw-px-2 tw-py-1 last:tw-border-b-0 hover:tw-bg-white"
-                            >
-                                <DeviceLogo
-                                    device={device}
-                                    className="tw-h-5 tw-w-6 tw-fill-gray-700"
-                                />
-                                <div className="tw-flex tw-flex-col tw-text-left">
-                                    <p>
-                                        <b>{deviceName(device)}</b>
-                                    </p>
-                                    <p>{device.serialNumber}</p>
+                        {connectedDevices
+                            .filter(device =>
+                                getValidDevices().includes(
+                                    device.jlink?.boardVersion || ''
+                                )
+                            )
+                            .map(device => (
+                                <div
+                                    key={device.serialNumber}
+                                    tabIndex={0}
+                                    role="button"
+                                    onKeyUp={invokeIfSpaceOrEnterPressed(() =>
+                                        next(device)
+                                    )}
+                                    onClick={() => next(device)}
+                                    className="tw-flex tw-w-full tw-cursor-pointer tw-flex-row tw-items-center tw-gap-1 tw-border-b tw-border-solid tw-px-2 tw-py-1 last:tw-border-b-0 hover:tw-bg-white"
+                                >
+                                    <DeviceLogo
+                                        device={device}
+                                        className="tw-h-5 tw-w-6 tw-fill-gray-700"
+                                    />
+                                    <div className="tw-flex tw-flex-col tw-text-left">
+                                        <p>
+                                            <b>{deviceName(device)}</b>
+                                        </p>
+                                        <p>{device.serialNumber}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </div>
                 <div className="tw-flex tw-flex-col tw-justify-center tw-gap-4">

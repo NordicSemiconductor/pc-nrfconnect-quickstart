@@ -5,11 +5,9 @@
  */
 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { setSelectedChoice } from '../features/choiceSlice';
 import { Choice, deviceEvaluationChoices } from '../features/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
@@ -18,12 +16,13 @@ export default ({
     back,
     next,
     device,
+    selectChoice,
 }: {
     back: () => void;
     next: () => void;
     device: Device;
+    selectChoice: (choice: Choice) => void;
 }) => {
-    const dispatch = useDispatch();
     const [selected, setSelected] = useState<Choice>();
 
     return (
@@ -73,7 +72,7 @@ export default ({
                     onClick={() => {
                         if (!selected) return;
 
-                        dispatch(setSelectedChoice(selected));
+                        selectChoice(selected);
 
                         next();
                     }}

@@ -14,21 +14,37 @@ import {
     startHotplugEvents,
     stopHotplugEvents,
 } from '@nordicsemiconductor/nrf-device-lib-js';
+import EventEmitter from 'events';
 import path from 'path';
 import { getDeviceLibContext } from 'pc-nrfconnect-shared';
 
 import type { Firmware } from './deviceGuides';
 
+const connectedDevices = new Map<string, Device>();
+export const connectedDevicesEvents = new EventEmitter();
+
+const addDevice = (device: Device) => {
+    connectedDevices.set(device.serialNumber, device);
+    connectedDevicesEvents.emit('update', connectedDevices);
+};
+
+const removeDevice = (deviceId: number) => {
+    connectedDevices.forEach(device => {
+        if (device.id === deviceId) {
+            connectedDevices.delete(device.serialNumber);
+            connectedDevicesEvents.emit('update', connectedDevices);
+        }
+    });
+};
+
+export const getConnectedDevices = () => [...connectedDevices.values()];
 const requiredTraits: DeviceTraits = {
     jlink: true,
     modem: true,
     nordicUsb: true,
 };
 
-export const watchDevices = async (
-    deviceArrived: (device: Device) => void,
-    deviceLeft: (deviceId: number) => void
-) => {
+export const startWatchingDevices = async () => {
     const initialDevices = await enumerate(
         getDeviceLibContext() as unknown as number,
         requiredTraits
@@ -43,17 +59,17 @@ export const watchDevices = async (
             switch (event.event_type) {
                 case 'NRFDL_DEVICE_EVENT_ARRIVED':
                     if (event.device && event.device.serialNumber) {
-                        deviceArrived(event.device);
+                        addDevice(event.device);
                     }
                     break;
                 case 'NRFDL_DEVICE_EVENT_LEFT':
-                    deviceLeft(event.device_id);
+                    removeDevice(event.device_id);
                     break;
             }
         }
     );
 
-    initialDevices.forEach(deviceArrived);
+    initialDevices.forEach(addDevice);
     return () => stopHotplugEvents(hotplugEventsId);
 };
 

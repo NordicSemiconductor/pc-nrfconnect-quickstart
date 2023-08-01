@@ -9,15 +9,7 @@ import { Button } from 'pc-nrfconnect-shared';
 
 import Main from './Main';
 
-export default ({
-    next,
-    quit,
-    openLauncher,
-}: {
-    next: () => void;
-    quit: () => void;
-    openLauncher: () => void;
-}) => (
+export default ({ next, quit }: { next: () => void; quit: () => void }) => (
     <Main>
         <Main.Header />
         <Main.Content className="tw-max-w-sm tw-gap-4">
@@ -31,14 +23,7 @@ export default ({
             </p>
         </Main.Content>
         <Main.Footer>
-            <Button
-                variant="secondary"
-                large
-                onClick={() => {
-                    openLauncher();
-                    quit();
-                }}
-            >
+            <Button variant="secondary" large onClick={quit}>
                 Quit Quickstart
             </Button>
             <Button variant="primary" large onClick={next}>

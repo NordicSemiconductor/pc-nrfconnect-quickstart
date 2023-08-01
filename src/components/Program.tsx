@@ -5,12 +5,10 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
-import { getSelectedChoice } from '../features/choiceSlice';
-import type { Firmware } from '../features/deviceGuides';
+import type { Choice, Firmware } from '../features/deviceGuides';
 import { program } from '../features/deviceLib';
 import Heading from './Heading';
 import Main from './Main';
@@ -78,12 +76,13 @@ export default ({
     back,
     next,
     device,
+    choice,
 }: {
     back: () => void;
     next: () => void;
     device: Device;
+    choice: Choice;
 }) => {
-    const choice = useSelector(getSelectedChoice);
     const [firmware, setFirmware] = useState<FirmwareWithProgress[]>([]);
 
     useEffect(() => {
