@@ -123,7 +123,10 @@ export const setEvaluationChoice = (evaluationChoice: EvaluationChoice) => {
 };
 export const getEvaluationChoice = () => choice;
 
-export const getValidDevices = () => deviceGuides.map(d => d.boardVersion);
+export const isSupportedDevice = (device: Device) =>
+    deviceGuides
+        .map(d => d.boardVersion)
+        .includes(device.jlink?.boardVersion.toLowerCase() || '');
 
 const getDeviceGuide = (device: Device) =>
     deviceGuides.find(

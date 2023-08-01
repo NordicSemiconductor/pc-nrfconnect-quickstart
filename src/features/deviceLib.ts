@@ -23,21 +23,21 @@ import type { Firmware } from './deviceGuides';
 const connectedDevices = new Map<string, Device>();
 export const connectedDevicesEvents = new EventEmitter();
 
+export const getConnectedDevices = () => [...connectedDevices.values()];
 const addDevice = (device: Device) => {
     connectedDevices.set(device.serialNumber, device);
-    connectedDevicesEvents.emit('update', connectedDevices);
+    connectedDevicesEvents.emit('update', getConnectedDevices());
 };
 
 const removeDevice = (deviceId: number) => {
     connectedDevices.forEach(device => {
         if (device.id === deviceId) {
             connectedDevices.delete(device.serialNumber);
-            connectedDevicesEvents.emit('update', connectedDevices);
+            connectedDevicesEvents.emit('update', getConnectedDevices());
         }
     });
 };
 
-export const getConnectedDevices = () => [...connectedDevices.values()];
 const requiredTraits: DeviceTraits = {
     jlink: true,
     modem: true,
