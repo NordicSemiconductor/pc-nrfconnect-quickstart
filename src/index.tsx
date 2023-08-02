@@ -31,10 +31,6 @@ const getInitialStep = () => {
     if (process.argv.includes('--first-launch')) {
         return Steps.WELCOME;
     }
-    if (process.argv.includes('--device')) {
-        // setDevice
-        return Steps.DEVICE_STEPS;
-    }
     return Steps.CONNECT;
 };
 
@@ -46,8 +42,21 @@ export default () => {
     const [currentStep, setCurrentStep] = useState(getInitialStep());
 
     useEffect(() => {
+        const serialIndex = process.argv.findIndex(
+            arg => arg === '--deviceSerial'
+        );
+        const deviceSerial =
+            serialIndex > -1 ? process.argv[serialIndex + 1] : undefined;
+
         connectedDevicesEvents.on('update', setConnectedDevices);
-        const cleanup = startWatchingDevices();
+        const cleanup = startWatchingDevices((devices: Device[]) => {
+            if (deviceSerial) {
+                setSelectedDevice(
+                    devices.find(d => d.serialNumber === deviceSerial)
+                );
+                setCurrentStep(Steps.DEVICE_STEPS);
+            }
+        });
 
         return () => {
             cleanup.then(cb => cb());

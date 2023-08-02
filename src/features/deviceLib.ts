@@ -44,11 +44,14 @@ const requiredTraits: DeviceTraits = {
     nordicUsb: true,
 };
 
-export const startWatchingDevices = async () => {
+export const startWatchingDevices = async (
+    onEnumeration: (devices: Device[]) => void
+) => {
     const initialDevices = await enumerate(
         getDeviceLibContext() as unknown as number,
         requiredTraits
     );
+    onEnumeration(initialDevices);
 
     const hotplugEventsId = startHotplugEvents(
         getDeviceLibContext() as unknown as number,
