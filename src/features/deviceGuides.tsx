@@ -6,10 +6,7 @@
 
 import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-
-// @ts-expect-error svg imports are fine
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
-import Logo91 from '!!@svgr!../../resources/nRF91-Series-logo.svg';
+import { deviceInfo } from 'pc-nrfconnect-shared';
 
 export interface Firmware {
     format: string;
@@ -30,8 +27,6 @@ export interface Link {
 
 export interface DeviceGuide {
     boardVersion: string;
-    deviceName: string;
-    logo: React.ElementType;
     apps: string[];
     links: Link[];
     choices: Choice[];
@@ -49,8 +44,6 @@ const shared: { apps: string[]; links: Link[] } = {
 const deviceGuides: DeviceGuide[] = [
     {
         boardVersion: 'pca10090',
-        deviceName: 'nRF9160 DK',
-        logo: Logo91,
         apps: [
             'pc-nrfconnect-cellularmonitor',
             'pc-nrfconnect-serial-terminal',
@@ -135,18 +128,17 @@ const getDeviceGuide = (device: Device) =>
             device.jlink?.boardVersion.toLowerCase()
     );
 
-export const deviceName = (device: Device) =>
-    getDeviceGuide(device)?.deviceName;
+export const deviceName = (device: Device) => deviceInfo(device).name;
 
-export const DeviceLogo = ({
+export const DeviceIcon = ({
     device,
     className = '',
 }: {
     device: Device;
     className?: string;
 }) => {
-    const Logo = getDeviceGuide(device)?.logo;
-    return Logo ? <Logo className={className} /> : null;
+    const Icon = deviceInfo(device).icon;
+    return Icon ? <Icon className={className} /> : null;
 };
 
 export const deviceApps = (device: Device) => [
@@ -154,6 +146,7 @@ export const deviceApps = (device: Device) => [
     ...shared.apps,
 ];
 
+// TODO: concat deviceInfo links?
 export const deviceLinks = (device: Device) =>
     [...(getDeviceGuide(device)?.links ?? []), ...shared.links] as {
         label: string;
