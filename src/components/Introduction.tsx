@@ -8,7 +8,7 @@ import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
-import { DeviceLogo, deviceName } from '../features/deviceGuides';
+import { DeviceIcon, deviceName } from '../features/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -24,7 +24,7 @@ export default ({
     <Main device={device}>
         <Main.Content>
             <div className="tw-pb-10">
-                <DeviceLogo
+                <DeviceIcon
                     device={device}
                     className="tw-h-14 tw-w-20 tw-fill-gray-700"
                 />

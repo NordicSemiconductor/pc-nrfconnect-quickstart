@@ -8,14 +8,14 @@ import React, { ReactNode } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { getPersistedNickname, Logo } from 'pc-nrfconnect-shared';
 
-import { DeviceLogo, deviceName } from '../features/deviceGuides';
+import { DeviceIcon, deviceName } from '../features/deviceGuides';
 
 const Header = ({ device }: { device?: Device }) => (
     <div className="tw-flex tw-h-16 tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-text-white">
         <p className="tw-flex-1 tw-font-bold tw-uppercase">Quickstart</p>
         {device && (
             <div className="tw-flex tw-flex-row tw-items-center tw-gap-3">
-                <DeviceLogo
+                <DeviceIcon
                     device={device}
                     className="tw-h-5 tw-w-6 tw-fill-white"
                 />
