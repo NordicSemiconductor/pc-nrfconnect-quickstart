@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { ipcRenderer } from 'electron';
@@ -39,25 +39,28 @@ export default ({
     const [currentStep, setCurrentStep] = useState(Steps.INTRODUCTION);
     const [choice, setChoice] = useState<Choice>();
 
-    const props = {
-        device,
-        back: () => {
-            if (currentStep === Steps.INTRODUCTION) {
-                goBackToConnect();
-            } else {
-                setCurrentStep(currentStep - 1);
-            }
-        },
-        next: () => {
-            setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
-        },
-        openApp: (app: string, serialNumber?: string) => {
-            openAppWindow(
-                { name: app, source: 'official' },
-                serialNumber ? { device: { serialNumber } } : undefined
-            );
-        },
-    };
+    const props = useMemo(
+        () => ({
+            device,
+            back: () => {
+                if (currentStep === Steps.INTRODUCTION) {
+                    goBackToConnect();
+                } else {
+                    setCurrentStep(currentStep - 1);
+                }
+            },
+            next: () => {
+                setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
+            },
+            openApp: (app: string, serialNumber?: string) => {
+                openAppWindow(
+                    { name: app, source: 'official' },
+                    serialNumber ? { device: { serialNumber } } : undefined
+                );
+            },
+        }),
+        [device, currentStep, goBackToConnect]
+    );
 
     return (
         <>
