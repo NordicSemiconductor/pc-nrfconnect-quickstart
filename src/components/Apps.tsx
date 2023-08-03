@@ -6,27 +6,24 @@
 
 import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { ipcRenderer } from 'electron';
-import { Button } from 'pc-nrfconnect-shared';
+import { apps, Button } from 'pc-nrfconnect-shared';
+import {
+    DownloadableApp,
+    InstalledDownloadableApp,
+} from 'pc-nrfconnect-shared/typings/generated/ipc/apps';
 import { lt } from 'semver';
 
 import { deviceApps } from '../features/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 
-interface App {
-    displayName: string;
-    description: string;
-    name: string;
-    source: string;
-    installed: object;
+type App = DownloadableApp & {
     selected: boolean;
-    latestVersion: string;
-    currentVersion?: string;
-}
+};
 
 const hasUpdate = (app: App) =>
-    app.currentVersion && lt(app.currentVersion, app.latestVersion);
+    (app as InstalledDownloadableApp).currentVersion &&
+    lt((app as InstalledDownloadableApp).currentVersion, app.latestVersion);
 
 const AppItem = ({
     app,
@@ -40,11 +37,15 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            {(!app.installed || hasUpdate(app)) && (
+            {(!(app as InstalledDownloadableApp).installed ||
+                hasUpdate(app)) && (
                 <input
                     type="checkbox"
                     id={app.name}
-                    disabled={!!app.installed && !hasUpdate(app)}
+                    disabled={
+                        !!(app as InstalledDownloadableApp).installed &&
+                        !hasUpdate(app)
+                    }
                     onClick={event =>
                         onClick(
                             (
@@ -55,7 +56,9 @@ const AppItem = ({
                     className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
                 />
             )}
-            {app.installed && !hasUpdate(app) && <> : ) </>}
+            {(app as InstalledDownloadableApp).installed && !hasUpdate(app) && (
+                <> : ) </>
+            )}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
             <p className="tw-cursor-pointer tw-font-bold">
@@ -78,17 +81,17 @@ export default ({
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {
-        ipcRenderer
-            .invoke('apps:get-downloadable-apps')
-            .then(({ apps }: { apps: App[] }) => {
-                setRecommendedApps(
-                    apps.filter(
+        apps.getDownloadableApps().then(({ apps: downloadableApps }) => {
+            setRecommendedApps(
+                downloadableApps
+                    .filter(
                         app =>
                             app.source === 'official' &&
                             deviceApps(device).includes(app.name)
                     )
-                );
-            });
+                    .map(app => ({ ...app, selected: false }))
+            );
+        });
     }, [device]);
 
     const setAppSelected = (app: App, selected: boolean) =>
@@ -102,12 +105,13 @@ export default ({
         );
 
     const installApp = (appToBeInstalled: App) => {
-        ipcRenderer
-            .invoke('apps:install-downloadable-app', appToBeInstalled)
+        apps.installDownloadableApp(appToBeInstalled)
             .then(installedApp =>
                 setRecommendedApps(
                     recommendedApps.map(app =>
-                        app.name === installedApp.name ? installedApp : app
+                        app.name === installedApp.name
+                            ? { ...app, selected: false }
+                            : app
                     )
                 )
             )
@@ -144,7 +148,9 @@ export default ({
                         } else {
                             recommendedApps.forEach(app => {
                                 if (
-                                    (!app.installed || hasUpdate(app)) &&
+                                    (!(app as InstalledDownloadableApp)
+                                        .installed ||
+                                        hasUpdate(app)) &&
                                     app.selected
                                 ) {
                                     installApp(app);

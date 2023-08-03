@@ -7,8 +7,7 @@
 import React, { useMemo, useState } from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { ipcRenderer } from 'electron';
-import { openAppWindow } from 'pc-nrfconnect-shared';
+import { openWindow } from 'pc-nrfconnect-shared';
 
 import { Choice } from '../features/deviceGuides';
 import Apps from './Apps';
@@ -53,7 +52,7 @@ export default ({
                 setCurrentStep(Math.min(Steps.FINISH, currentStep + 1));
             },
             openApp: (app: string, serialNumber?: string) => {
-                openAppWindow(
+                openWindow.openApp(
                     { name: app, source: 'official' },
                     serialNumber ? { device: { serialNumber } } : undefined
                 );
@@ -76,7 +75,7 @@ export default ({
                 <Finish
                     {...props}
                     finish={() => {
-                        ipcRenderer.send('open-app-launcher');
+                        openWindow.openLauncher();
                         if (choice?.app) {
                             props.openApp(choice.app, device?.serialNumber);
                         }
