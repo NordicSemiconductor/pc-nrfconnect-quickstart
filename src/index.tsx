@@ -7,8 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { ipcRenderer } from 'electron';
-import { ErrorBoundary } from 'pc-nrfconnect-shared';
+import { ErrorBoundary, openWindow } from 'pc-nrfconnect-shared';
 
 import Connect from './components/Connect';
 import DeviceSteps from './components/DeviceSteps';
@@ -63,7 +62,7 @@ export default () => {
             {currentStep === Steps.WELCOME && (
                 <Welcome
                     quit={() => {
-                        ipcRenderer.send('open-app-launcher');
+                        openWindow.openLauncher();
                         getCurrentWindow().close();
                     }}
                     next={() => setCurrentStep(Steps.CONNECT)}
