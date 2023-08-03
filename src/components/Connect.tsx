@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
 import {
@@ -28,22 +28,46 @@ const invokeIfSpaceOrEnterPressed =
         }
     };
 
+let firstConnect = true;
+const serialIndex = process.argv.findIndex(arg => arg === '--deviceSerial');
+const deviceSerial =
+    serialIndex > -1 ? process.argv[serialIndex + 1] : undefined;
+
 export default ({ next }: { next: (device: Device) => void }) => {
     const [connectedDevices, setConnectedDevices] = useState<Device[]>([]);
     const [longSearchDuration, setLongSearchDuration] = useState(false);
+
+    const connectAndNext = useCallback(
+        (device: Device) => {
+            firstConnect = false;
+            next(device);
+        },
+        [next]
+    );
 
     useEffect(() => {
         setConnectedDevices(getConnectedDevices());
 
         const handler = (devices: Device[]) => {
-            setConnectedDevices(devices.filter(isSupportedDevice));
+            const supportedDevices = devices.filter(isSupportedDevice);
+
+            if (deviceSerial && firstConnect) {
+                const autoConnectDevice = supportedDevices.find(
+                    d => d.serialNumber === deviceSerial
+                );
+                if (autoConnectDevice) {
+                    connectAndNext(autoConnectDevice);
+                }
+            }
+
+            setConnectedDevices(supportedDevices);
         };
         connectedDevicesEvents.on('update', handler);
 
         return () => {
             connectedDevicesEvents.removeListener('update', handler);
         };
-    }, []);
+    }, [connectAndNext]);
 
     useEffect(() => {
         if (connectedDevices.length) {
@@ -76,9 +100,9 @@ export default ({ next }: { next: (device: Device) => void }) => {
                                 tabIndex={0}
                                 role="button"
                                 onKeyUp={invokeIfSpaceOrEnterPressed(() =>
-                                    next(device)
+                                    connectAndNext(device)
                                 )}
-                                onClick={() => next(device)}
+                                onClick={() => connectAndNext(device)}
                                 className="tw-flex tw-w-full tw-cursor-pointer tw-flex-row tw-items-center tw-gap-1 tw-border-b tw-border-solid tw-px-2 tw-py-1 last:tw-border-b-0 hover:tw-bg-white"
                             >
                                 <DeviceLogo
