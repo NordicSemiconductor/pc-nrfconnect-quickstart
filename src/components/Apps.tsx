@@ -6,12 +6,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { apps, Button } from 'pc-nrfconnect-shared';
-import {
-    DownloadableApp,
-    InstalledDownloadableApp,
-} from 'pc-nrfconnect-shared/typings/generated/ipc/apps';
-import { lt } from 'semver';
+import { apps, Button, DownloadableApp } from 'pc-nrfconnect-shared';
 
 import { deviceApps } from '../features/deviceGuides';
 import Heading from './Heading';
@@ -21,9 +16,8 @@ type App = DownloadableApp & {
     selected: boolean;
 };
 
-const hasUpdate = (app: App) =>
-    (app as InstalledDownloadableApp).currentVersion &&
-    lt((app as InstalledDownloadableApp).currentVersion, app.latestVersion);
+const canBeInstalled = (app: DownloadableApp) =>
+    !apps.isInstalled(app) || apps.isUpdatable(app);
 
 const AppItem = ({
     app,
@@ -37,32 +31,20 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            {(!(app as InstalledDownloadableApp).installed ||
-                hasUpdate(app)) && (
+            {canBeInstalled(app) && (
                 <input
                     type="checkbox"
                     id={app.name}
-                    disabled={
-                        !!(app as InstalledDownloadableApp).installed &&
-                        !hasUpdate(app)
-                    }
-                    onClick={event =>
-                        onClick(
-                            (
-                                event as unknown as React.ChangeEvent<HTMLInputElement>
-                            ).target.checked
-                        )
-                    }
+                    disabled={!canBeInstalled(app)}
+                    onClick={event => onClick(event.currentTarget.checked)}
                     className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
                 />
             )}
-            {(app as InstalledDownloadableApp).installed && !hasUpdate(app) && (
-                <> : ) </>
-            )}
+            {!canBeInstalled(app) && <>: ) </>}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
             <p className="tw-cursor-pointer tw-font-bold">
-                {app.displayName} {hasUpdate(app) && 'UPDATE'}
+                {app.displayName} {apps.isUpdatable(app) && 'UPDATE'}
             </p>
             <p className="tw-cursor-pointer">{app.description}</p>
         </label>
@@ -148,9 +130,8 @@ export default ({
                         } else {
                             recommendedApps.forEach(app => {
                                 if (
-                                    (!(app as InstalledDownloadableApp)
-                                        .installed ||
-                                        hasUpdate(app)) &&
+                                    (!apps.isInstalled(app) ||
+                                        apps.isUpdatable(app)) &&
                                     app.selected
                                 ) {
                                     installApp(app);
