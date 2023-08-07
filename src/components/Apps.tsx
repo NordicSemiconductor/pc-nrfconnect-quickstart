@@ -129,11 +129,7 @@ export default ({
                             next();
                         } else {
                             recommendedApps.forEach(app => {
-                                if (
-                                    (!apps.isInstalled(app) ||
-                                        apps.isUpdatable(app)) &&
-                                    app.selected
-                                ) {
+                                if (canBeInstalled(app) && app.selected) {
                                     installApp(app);
                                 }
                             });
