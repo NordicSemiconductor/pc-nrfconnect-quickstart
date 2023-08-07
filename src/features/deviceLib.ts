@@ -69,7 +69,7 @@ export const startWatchingDevices = async () => {
         }
     );
 
-    initialDevices.forEach(addDevice);
+    initialDevices.filter(device => device.serialNumber).forEach(addDevice);
     return () => stopHotplugEvents(hotplugEventsId);
 };
 
