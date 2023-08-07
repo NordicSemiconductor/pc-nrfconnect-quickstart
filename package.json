@@ -36,7 +36,7 @@
         "prepare": "husky install"
     },
     "devDependencies": {
-        "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v78"
+        "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v79"
     },
     "eslintConfig": {
         "extends": "./node_modules/pc-nrfconnect-shared/config/eslintrc"
