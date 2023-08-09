@@ -7,7 +7,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 
-import device from '../features/deviceSlice';
+import device from '../features/device/deviceSlice';
 
 export const store = configureStore({
     reducer: { device },

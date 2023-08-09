@@ -13,13 +13,13 @@ import { store, useAppDispatch, useAppSelector } from './app/store';
 import Connect from './components/Connect';
 import DeviceSteps from './components/DeviceSteps';
 import Welcome from './components/Welcome';
-import { startWatchingDevices } from './features/deviceLib';
+import { startWatchingDevices } from './features/device/deviceLib';
 import {
     addDevice,
     getConnectedDevices,
     getSelectedDevice,
     removeDevice,
-} from './features/deviceSlice';
+} from './features/device/deviceSlice';
 
 import './index.scss';
 

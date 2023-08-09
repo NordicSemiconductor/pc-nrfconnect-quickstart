@@ -8,7 +8,7 @@ import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
-import { DeviceIcon, deviceName } from '../features/deviceGuides';
+import { DeviceIcon, deviceName } from '../features/device/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 

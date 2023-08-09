@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { Choice, Firmware } from '../../features/deviceGuides';
+import { Choice, Firmware } from '../../features/device/deviceGuides';
 import Program from './Program';
 import SelectChoice from './SelectChoice';
 

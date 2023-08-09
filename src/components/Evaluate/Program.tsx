@@ -8,8 +8,8 @@ import React, { useEffect, useState } from 'react';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
-import type { Firmware } from '../../features/deviceGuides';
-import { program } from '../../features/deviceLib';
+import type { Firmware } from '../../features/device/deviceGuides';
+import { program } from '../../features/device/deviceLib';
 import Heading from '../Heading';
 import Main from '../Main';
 

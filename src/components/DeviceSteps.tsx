@@ -9,8 +9,11 @@ import { getCurrentWindow } from '@electron/remote';
 import { openWindow } from 'pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../app/store';
-import { Choice } from '../features/deviceGuides';
-import { getSelectedDevice, selectDevice } from '../features/deviceSlice';
+import { Choice } from '../features/device/deviceGuides';
+import {
+    getSelectedDevice,
+    selectDevice,
+} from '../features/device/deviceSlice';
 import Apps from './Apps';
 import Develop from './Develop';
 import Evaluate from './Evaluate';

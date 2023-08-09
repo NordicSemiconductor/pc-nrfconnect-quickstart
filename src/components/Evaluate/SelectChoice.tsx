@@ -8,7 +8,10 @@ import React, { useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { Choice, deviceEvaluationChoices } from '../../features/deviceGuides';
+import {
+    Choice,
+    deviceEvaluationChoices,
+} from '../../features/device/deviceGuides';
 import Heading from '../Heading';
 import Main from '../Main';
 

@@ -12,8 +12,11 @@ import {
     DeviceIcon,
     deviceName,
     isSupportedDevice,
-} from '../features/deviceGuides';
-import { getConnectedDevices, selectDevice } from '../features/deviceSlice';
+} from '../features/device/deviceGuides';
+import {
+    getConnectedDevices,
+    selectDevice,
+} from '../features/device/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 

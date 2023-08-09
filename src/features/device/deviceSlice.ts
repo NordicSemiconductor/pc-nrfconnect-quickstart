@@ -7,7 +7,7 @@
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { type RootState } from '../app/store';
+import { type RootState } from '../../app/store';
 
 interface State {
     connectedDevices: Map<string, Device>;
@@ -18,7 +18,7 @@ const initialState: State = {
     connectedDevices: new Map(),
 };
 
-const deviceSlice = createSlice({
+const slice = createSlice({
     name: 'device',
     initialState,
     reducers: {
@@ -43,7 +43,7 @@ const deviceSlice = createSlice({
     },
 });
 
-export const { addDevice, removeDevice, selectDevice } = deviceSlice.actions;
+export const { addDevice, removeDevice, selectDevice } = slice.actions;
 
 export const getConnectedDevices = (state: RootState) => [
     ...state.device.connectedDevices.values(),
@@ -51,4 +51,4 @@ export const getConnectedDevices = (state: RootState) => [
 export const getSelectedDevice = (state: RootState) =>
     state.device.selectedDevice;
 
-export default deviceSlice.reducer;
+export default slice.reducer;

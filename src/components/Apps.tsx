@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { apps, Button, DownloadableApp } from 'pc-nrfconnect-shared';
 
-import { deviceApps } from '../features/deviceGuides';
+import { deviceApps } from '../features/device/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 
