@@ -6,10 +6,11 @@
 
 import React, { useMemo, useState } from 'react';
 import { getCurrentWindow } from '@electron/remote';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { openWindow } from 'pc-nrfconnect-shared';
 
+import { useAppDispatch, useAppSelector } from '../app/store';
 import { Choice } from '../features/deviceGuides';
+import { getSelectedDevice, selectDevice } from '../features/deviceSlice';
 import Apps from './Apps';
 import Develop from './Develop';
 import Evaluate from './Evaluate';
@@ -28,21 +29,20 @@ enum Steps {
     FINISH,
 }
 
-export default ({
-    device,
-    goBackToConnect,
-}: {
-    device: Device;
-    goBackToConnect: () => void;
-}) => {
+export default ({ goBackToConnect }: { goBackToConnect: () => void }) => {
+    const dispatch = useAppDispatch();
     const [currentStep, setCurrentStep] = useState(Steps.INTRODUCTION);
     const [choice, setChoice] = useState<Choice>();
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- Because one cannot progress here without selecting a device, we are sure it is defined
+    const device = useAppSelector(getSelectedDevice)!;
 
     const props = useMemo(
         () => ({
             device,
             back: () => {
                 if (currentStep === Steps.INTRODUCTION) {
+                    dispatch(selectDevice(undefined));
                     goBackToConnect();
                 } else {
                     setCurrentStep(currentStep - 1);
@@ -58,7 +58,7 @@ export default ({
                 );
             },
         }),
-        [device, currentStep, goBackToConnect]
+        [device, currentStep, dispatch, goBackToConnect]
     );
 
     return (

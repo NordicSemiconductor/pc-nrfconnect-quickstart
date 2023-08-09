@@ -5,18 +5,21 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { Provider } from 'react-redux';
 import { getCurrentWindow } from '@electron/remote';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { ErrorBoundary, openWindow } from 'pc-nrfconnect-shared';
 
+import { store, useAppDispatch, useAppSelector } from './app/store';
 import Connect from './components/Connect';
 import DeviceSteps from './components/DeviceSteps';
 import Welcome from './components/Welcome';
+import { startWatchingDevices } from './features/deviceLib';
 import {
-    connectedDevicesEvents,
+    addDevice,
     getConnectedDevices,
-    startWatchingDevices,
-} from './features/deviceLib';
+    getSelectedDevice,
+    removeDevice,
+} from './features/deviceSlice';
 
 import './index.scss';
 
@@ -26,39 +29,43 @@ enum Steps {
     DEVICE_STEPS,
 }
 
-const getInitialStep = () => {
-    if (process.argv.includes('--first-launch')) {
-        return Steps.WELCOME;
-    }
-    return Steps.CONNECT;
-};
-
-export default () => {
-    const [connectedDevices, setConnectedDevices] = useState<Device[]>(
-        getConnectedDevices()
-    );
-    const [selectedDevice, setSelectedDevice] = useState<Device>();
-    const [currentStep, setCurrentStep] = useState(getInitialStep());
-
-    useEffect(() => {
-        connectedDevicesEvents.on('update', setConnectedDevices);
-        const cleanup = startWatchingDevices();
-
-        return () => {
-            cleanup.then(cb => cb());
-            connectedDevicesEvents.removeListener(
-                'update',
-                setConnectedDevices
-            );
-        };
-    }, []);
+const ConnectedErrorBoundary: React.FC = ({ children }) => {
+    const devices = useAppSelector(getConnectedDevices);
+    const selectedDevice = useAppSelector(getSelectedDevice);
 
     return (
         <ErrorBoundary
-            devices={connectedDevices}
+            devices={devices}
             selectedDevice={selectedDevice}
-            selectedSerialNumber={selectedDevice?.serialNumber}
+            selectedSerialNumber={selectedDevice?.serialNumber ?? undefined}
         >
+            {children}
+        </ErrorBoundary>
+    );
+};
+
+const getInitialStep = () =>
+    process.argv.includes('--first-launch') ? Steps.WELCOME : Steps.CONNECT;
+
+const useDevicesInStore = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(
+        () =>
+            startWatchingDevices(
+                device => dispatch(addDevice(device)),
+                deviceId => dispatch(removeDevice(deviceId))
+            ),
+        [dispatch]
+    );
+};
+
+const App = () => {
+    useDevicesInStore();
+    const [currentStep, setCurrentStep] = useState(getInitialStep());
+
+    return (
+        <>
             {currentStep === Steps.WELCOME && (
                 <Welcome
                     quit={() => {
@@ -70,21 +77,26 @@ export default () => {
             )}
             {currentStep === Steps.CONNECT && (
                 <Connect
-                    next={(device: Device) => {
-                        setSelectedDevice(device);
+                    next={() => {
                         setCurrentStep(Steps.DEVICE_STEPS);
                     }}
                 />
             )}
-            {currentStep === Steps.DEVICE_STEPS && selectedDevice && (
+            {currentStep === Steps.DEVICE_STEPS && (
                 <DeviceSteps
-                    device={selectedDevice}
                     goBackToConnect={() => {
-                        setSelectedDevice(undefined);
                         setCurrentStep(Steps.CONNECT);
                     }}
                 />
             )}
-        </ErrorBoundary>
+        </>
     );
 };
+
+export default () => (
+    <Provider store={store}>
+        <ConnectedErrorBoundary>
+            <App />
+        </ConnectedErrorBoundary>
+    </Provider>
+);

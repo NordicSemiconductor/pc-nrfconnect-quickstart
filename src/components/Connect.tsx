@@ -7,15 +7,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
+import { useAppDispatch, useAppSelector } from '../app/store';
 import {
     DeviceIcon,
     deviceName,
     isSupportedDevice,
 } from '../features/deviceGuides';
-import {
-    connectedDevicesEvents,
-    getConnectedDevices,
-} from '../features/deviceLib';
+import { getConnectedDevices, selectDevice } from '../features/deviceSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -33,41 +31,33 @@ const serialIndex = process.argv.findIndex(arg => arg === '--deviceSerial');
 const deviceSerial =
     serialIndex > -1 ? process.argv[serialIndex + 1] : undefined;
 
-export default ({ next }: { next: (device: Device) => void }) => {
-    const [connectedDevices, setConnectedDevices] = useState<Device[]>([]);
+export default ({ next }: { next: () => void }) => {
+    const dispatch = useAppDispatch();
+    const connectedDevices = useAppSelector(getConnectedDevices);
+
     const [longSearchDuration, setLongSearchDuration] = useState(false);
 
     const connectAndNext = useCallback(
         (device: Device) => {
+            dispatch(selectDevice(device));
             firstConnect = false;
-            next(device);
+            next();
         },
-        [next]
+        [next, dispatch]
     );
 
     useEffect(() => {
-        setConnectedDevices(getConnectedDevices());
+        const supportedDevices = connectedDevices.filter(isSupportedDevice);
 
-        const handler = (devices: Device[]) => {
-            const supportedDevices = devices.filter(isSupportedDevice);
-
-            if (deviceSerial && firstConnect) {
-                const autoConnectDevice = supportedDevices.find(
-                    d => d.serialNumber === deviceSerial
-                );
-                if (autoConnectDevice) {
-                    connectAndNext(autoConnectDevice);
-                }
+        if (deviceSerial && firstConnect) {
+            const autoConnectDevice = supportedDevices.find(
+                d => d.serialNumber === deviceSerial
+            );
+            if (autoConnectDevice) {
+                connectAndNext(autoConnectDevice);
             }
-
-            setConnectedDevices(supportedDevices);
-        };
-        connectedDevicesEvents.on('update', handler);
-
-        return () => {
-            connectedDevicesEvents.removeListener('update', handler);
-        };
-    }, [connectAndNext]);
+        }
+    }, [connectedDevices, connectAndNext]);
 
     useEffect(() => {
         if (connectedDevices.length) {

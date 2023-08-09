@@ -8,69 +8,61 @@ import {
     Device,
     // @ts-expect-error no type definitions for this yet
     deviceControlExecuteOperations,
-    DeviceTraits,
     enumerate,
     Progress,
     startHotplugEvents,
     stopHotplugEvents,
 } from '@nordicsemiconductor/nrf-device-lib-js';
-import EventEmitter from 'events';
 import path from 'path';
 import { getDeviceLibContext } from 'pc-nrfconnect-shared';
 
 import type { Firmware } from './deviceGuides';
 
-const connectedDevices = new Map<string, Device>();
-export const connectedDevicesEvents = new EventEmitter();
-
-export const getConnectedDevices = () => [...connectedDevices.values()];
-const addDevice = (device: Device) => {
-    connectedDevices.set(device.serialNumber, device);
-    connectedDevicesEvents.emit('update', getConnectedDevices());
-};
-
-const removeDevice = (deviceId: number) => {
-    connectedDevices.forEach(device => {
-        if (device.id === deviceId) {
-            connectedDevices.delete(device.serialNumber);
-            connectedDevicesEvents.emit('update', getConnectedDevices());
-        }
-    });
-};
-
-const requiredTraits: DeviceTraits = {
+const requiredTraits = {
     jlink: true,
     modem: true,
     nordicUsb: true,
 };
 
-export const startWatchingDevices = async () => {
-    const initialDevices = await enumerate(
-        getDeviceLibContext() as unknown as number,
-        requiredTraits
-    );
+export const startWatchingDevices = (
+    onAddedDevice: (device: Device) => void,
+    onRemovedDevice: (deviceId: number) => void
+) => {
+    let hotplugEventsId: number | undefined;
+    const context = getDeviceLibContext();
 
-    const hotplugEventsId = startHotplugEvents(
-        getDeviceLibContext() as unknown as number,
-        err => {
-            if (err) console.log(err);
-        },
-        event => {
-            switch (event.event_type) {
-                case 'NRFDL_DEVICE_EVENT_ARRIVED':
-                    if (event.device && event.device.serialNumber) {
-                        addDevice(event.device);
-                    }
-                    break;
-                case 'NRFDL_DEVICE_EVENT_LEFT':
-                    removeDevice(event.device_id);
-                    break;
+    // @ts-expect-error -- the type definition for `enumerate` is outdated, is fixed in a later version
+    enumerate(context, requiredTraits).then(initialDevices => {
+        initialDevices
+            .filter(device => device.serialNumber)
+            .forEach(onAddedDevice);
+
+        hotplugEventsId = startHotplugEvents(
+            // @ts-expect-error -- the type definition for `startHotplugEvents` is outdated, is fixed in a later version
+            context,
+            err => {
+                if (err) console.log(err);
+            },
+            event => {
+                switch (event.event_type) {
+                    case 'NRFDL_DEVICE_EVENT_ARRIVED':
+                        if (event.device && event.device.serialNumber) {
+                            onAddedDevice(event.device);
+                        }
+                        break;
+                    case 'NRFDL_DEVICE_EVENT_LEFT':
+                        onRemovedDevice(event.device_id);
+                        break;
+                }
             }
-        }
-    );
+        );
+    });
 
-    initialDevices.filter(device => device.serialNumber).forEach(addDevice);
-    return () => stopHotplugEvents(hotplugEventsId);
+    return () => {
+        if (hotplugEventsId != null) {
+            stopHotplugEvents(hotplugEventsId);
+        }
+    };
 };
 
 const labelToFormat = (label: string) => {
