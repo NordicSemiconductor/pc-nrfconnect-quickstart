@@ -91,24 +91,22 @@ export const program = async (
 ) => {
     const operations = [];
     operations.push(
-        ...firmware
-            .filter((_, index) => index === 1)
-            .map(({ format, file }, index) => ({
-                operationId: index.toString(),
-                operation: {
-                    type: 'program',
-                    firmware: {
-                        format: labelToFormat(format),
-                        file: path.resolve(
-                            __dirname,
-                            '..',
-                            'resources',
-                            'firmware',
-                            file
-                        ),
-                    },
+        ...firmware.map(({ format, file }, index) => ({
+            operationId: index.toString(),
+            operation: {
+                type: 'program',
+                firmware: {
+                    format: labelToFormat(format),
+                    file: path.resolve(
+                        __dirname,
+                        '..',
+                        'resources',
+                        'firmware',
+                        file
+                    ),
                 },
-            }))
+            },
+        }))
     );
 
     operations.push({
