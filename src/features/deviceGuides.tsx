@@ -62,7 +62,7 @@ const deviceGuides: DeviceGuide[] = [
                     },
                     {
                         format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
+                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -94,7 +94,7 @@ const deviceGuides: DeviceGuide[] = [
                     },
                     {
                         format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02-8f26142b.hex',
+                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
