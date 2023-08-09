@@ -1,9 +1,9 @@
 {
     "name": "pc-nrfconnect-quickstart",
     "version": "0.0.1",
-    "description": "Starting point for creating nRF Connect apps",
+    "description": "Get started with a new NordicSemiconductor device",
     "displayName": "Quickstart",
-    "homepage": "https://github.com/NordicPlayground/pc-nrfcosnnect-quickstart",
+    "homepage": "https://github.com/NordicPlayground/pc-nrfconnect-quickstart",
     "repository": {
         "type": "git",
         "url": "https://github.com/NordicPlayground/pc-nrfconnect-quickstart.git"

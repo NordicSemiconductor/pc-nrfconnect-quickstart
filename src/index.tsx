@@ -37,7 +37,7 @@ export default () => {
     const [connectedDevices, setConnectedDevices] = useState<Device[]>(
         getConnectedDevices()
     );
-    const [selectedDevice, setSelectedDevice] = useState<Device | undefined>();
+    const [selectedDevice, setSelectedDevice] = useState<Device>();
     const [currentStep, setCurrentStep] = useState(getInitialStep());
 
     useEffect(() => {
