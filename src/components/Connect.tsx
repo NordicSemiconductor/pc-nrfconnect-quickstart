@@ -65,11 +65,7 @@ export default ({ next }: { next: (device: Device) => void }) => {
     return (
         <Main>
             <Main.Content>
-                <Heading>
-                    {connectedDevices.length
-                        ? 'Select your kit'
-                        : 'Connect a Nordic kit to your PC'}
-                </Heading>
+                <Heading>Connect a Nordic kit to your PC</Heading>
                 <div className="tw-flex tw-flex-col tw-justify-center tw-gap-4">
                     <p>Searching icon/spinner</p>
                     <p>Searching for devices</p>
