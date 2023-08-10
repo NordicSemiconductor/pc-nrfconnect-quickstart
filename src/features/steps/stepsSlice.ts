@@ -14,8 +14,19 @@ export enum MainStep {
     DEVICE_STEPS,
 }
 
+export enum DeviceStep {
+    INTRODUCTION,
+    PERSONALIZE,
+    EVALUATE,
+    APPS,
+    LEARN,
+    DEVELOP,
+    FINISH,
+}
+
 interface State {
     currentMainStep: MainStep;
+    currentDeviceStep: DeviceStep;
 }
 
 const initialMainStep = process.argv.includes('--first-launch')
@@ -24,6 +35,7 @@ const initialMainStep = process.argv.includes('--first-launch')
 
 const initialState: State = {
     currentMainStep: initialMainStep,
+    currentDeviceStep: DeviceStep.INTRODUCTION,
 };
 
 const slice = createSlice({
@@ -36,12 +48,26 @@ const slice = createSlice({
         ) => {
             state.currentMainStep = step;
         },
+
+        goToNextDeviceStep: state => {
+            if (state.currentDeviceStep !== DeviceStep.FINISH)
+                state.currentDeviceStep += 1;
+        },
+        goToPreviousDeviceStep: state => {
+            state.currentDeviceStep -= 1;
+        },
     },
 });
 
-export const { setCurrentMainStep } = slice.actions;
+export const {
+    goToNextDeviceStep,
+    goToPreviousDeviceStep,
+    setCurrentMainStep,
+} = slice.actions;
 
 export const getCurrentMainStep = (state: RootState) =>
     state.steps.currentMainStep;
+export const getCurrentDeviceStep = (state: RootState) =>
+    state.steps.currentDeviceStep;
 
 export default slice.reducer;
