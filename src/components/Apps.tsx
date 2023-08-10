@@ -107,7 +107,7 @@ export default ({
                 setRecommendedApps(
                     recommendedApps.map(app =>
                         app.name === installedApp.name
-                            ? { ...app, selected: false }
+                            ? { ...installedApp, selected: false }
                             : app
                     )
                 )
