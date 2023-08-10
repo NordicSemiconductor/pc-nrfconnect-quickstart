@@ -41,7 +41,7 @@ export default ({
                             onChange={event => setNickname(event.target.value)}
                             value={nickname}
                             maxLength={maxLength}
-                            className="tw-h-8 tw-w-full tw-border tw-border-solid tw-border-gray-300 tw-px-2 tw-py-4"
+                            className="tw-h-8 tw-w-full tw-border tw-border-solid tw-border-gray-300 tw-px-2 tw-py-4 focus:tw-outline-0"
                         />
                     </div>
                     <p className="tw-max-w-sm">
