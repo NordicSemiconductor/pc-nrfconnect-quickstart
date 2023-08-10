@@ -14,6 +14,7 @@ import {
     getSelectedDevice,
     selectDevice,
 } from '../features/device/deviceSlice';
+import { MainStep, setCurrentMainStep } from '../features/steps/stepsSlice';
 import Apps from './Apps';
 import Develop from './Develop';
 import Evaluate from './Evaluate';
@@ -32,7 +33,7 @@ enum Steps {
     FINISH,
 }
 
-export default ({ goBackToConnect }: { goBackToConnect: () => void }) => {
+export default () => {
     const dispatch = useAppDispatch();
     const [currentStep, setCurrentStep] = useState(Steps.INTRODUCTION);
     const [choice, setChoice] = useState<Choice>();
@@ -46,7 +47,7 @@ export default ({ goBackToConnect }: { goBackToConnect: () => void }) => {
             back: () => {
                 if (currentStep === Steps.INTRODUCTION) {
                     dispatch(selectDevice(undefined));
-                    goBackToConnect();
+                    dispatch(setCurrentMainStep(MainStep.CONNECT));
                 } else {
                     setCurrentStep(currentStep - 1);
                 }
@@ -61,7 +62,7 @@ export default ({ goBackToConnect }: { goBackToConnect: () => void }) => {
                 );
             },
         }),
-        [device, currentStep, dispatch, goBackToConnect]
+        [device, currentStep, dispatch]
     );
 
     return (

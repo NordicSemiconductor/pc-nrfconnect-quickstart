@@ -17,6 +17,7 @@ import {
     getConnectedDevices,
     selectDevice,
 } from '../features/device/deviceSlice';
+import { MainStep, setCurrentMainStep } from '../features/steps/stepsSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -34,7 +35,7 @@ const serialIndex = process.argv.findIndex(arg => arg === '--deviceSerial');
 const deviceSerial =
     serialIndex > -1 ? process.argv[serialIndex + 1] : undefined;
 
-export default ({ next }: { next: () => void }) => {
+export default () => {
     const dispatch = useAppDispatch();
     const connectedDevices = useAppSelector(getConnectedDevices);
 
@@ -44,9 +45,9 @@ export default ({ next }: { next: () => void }) => {
         (device: Device) => {
             dispatch(selectDevice(device));
             firstConnect = false;
-            next();
+            dispatch(setCurrentMainStep(MainStep.DEVICE_STEPS));
         },
-        [next, dispatch]
+        [dispatch]
     );
 
     useEffect(() => {

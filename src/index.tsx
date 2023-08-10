@@ -4,10 +4,9 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { getCurrentWindow } from '@electron/remote';
-import { ErrorBoundary, openWindow } from 'pc-nrfconnect-shared';
+import { ErrorBoundary } from 'pc-nrfconnect-shared';
 
 import { store, useAppDispatch, useAppSelector } from './app/store';
 import Connect from './components/Connect';
@@ -20,14 +19,9 @@ import {
     getSelectedDevice,
     removeDevice,
 } from './features/device/deviceSlice';
+import { getCurrentMainStep, MainStep } from './features/steps/stepsSlice';
 
 import './index.scss';
-
-enum Steps {
-    WELCOME,
-    CONNECT,
-    DEVICE_STEPS,
-}
 
 const ConnectedErrorBoundary: React.FC = ({ children }) => {
     const devices = useAppSelector(getConnectedDevices);
@@ -44,9 +38,6 @@ const ConnectedErrorBoundary: React.FC = ({ children }) => {
     );
 };
 
-const getInitialStep = () =>
-    process.argv.includes('--first-launch') ? Steps.WELCOME : Steps.CONNECT;
-
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
 
@@ -62,33 +53,13 @@ const useDevicesInStore = () => {
 
 const App = () => {
     useDevicesInStore();
-    const [currentStep, setCurrentStep] = useState(getInitialStep());
+    const currentStep = useAppSelector(getCurrentMainStep);
 
     return (
         <>
-            {currentStep === Steps.WELCOME && (
-                <Welcome
-                    quit={() => {
-                        openWindow.openLauncher();
-                        getCurrentWindow().close();
-                    }}
-                    next={() => setCurrentStep(Steps.CONNECT)}
-                />
-            )}
-            {currentStep === Steps.CONNECT && (
-                <Connect
-                    next={() => {
-                        setCurrentStep(Steps.DEVICE_STEPS);
-                    }}
-                />
-            )}
-            {currentStep === Steps.DEVICE_STEPS && (
-                <DeviceSteps
-                    goBackToConnect={() => {
-                        setCurrentStep(Steps.CONNECT);
-                    }}
-                />
-            )}
+            {currentStep === MainStep.WELCOME && <Welcome />}
+            {currentStep === MainStep.CONNECT && <Connect />}
+            {currentStep === MainStep.DEVICE_STEPS && <DeviceSteps />}
         </>
     );
 };
