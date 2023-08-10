@@ -4,17 +4,13 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
 
-export enum MainStep {
+export enum Step {
     WELCOME,
     CONNECT,
-    DEVICE_STEPS,
-}
-
-export enum DeviceStep {
     INTRODUCTION,
     PERSONALIZE,
     EVALUATE,
@@ -25,49 +21,32 @@ export enum DeviceStep {
 }
 
 interface State {
-    currentMainStep: MainStep;
-    currentDeviceStep: DeviceStep;
+    currentStep: Step;
 }
 
 const initialMainStep = process.argv.includes('--first-launch')
-    ? MainStep.WELCOME
-    : MainStep.CONNECT;
+    ? Step.WELCOME
+    : Step.CONNECT;
 
 const initialState: State = {
-    currentMainStep: initialMainStep,
-    currentDeviceStep: DeviceStep.INTRODUCTION,
+    currentStep: initialMainStep,
 };
 
 const slice = createSlice({
     name: 'steps',
     initialState,
     reducers: {
-        setCurrentMainStep: (
-            state,
-            { payload: step }: PayloadAction<MainStep>
-        ) => {
-            state.currentMainStep = step;
+        goToNextStep: state => {
+            state.currentStep += 1;
         },
-
-        goToNextDeviceStep: state => {
-            if (state.currentDeviceStep !== DeviceStep.FINISH)
-                state.currentDeviceStep += 1;
-        },
-        goToPreviousDeviceStep: state => {
-            state.currentDeviceStep -= 1;
+        goToPreviousStep: state => {
+            state.currentStep -= 1;
         },
     },
 });
 
-export const {
-    goToNextDeviceStep,
-    goToPreviousDeviceStep,
-    setCurrentMainStep,
-} = slice.actions;
+export const { goToNextStep, goToPreviousStep } = slice.actions;
 
-export const getCurrentMainStep = (state: RootState) =>
-    state.steps.currentMainStep;
-export const getCurrentDeviceStep = (state: RootState) =>
-    state.steps.currentDeviceStep;
+export const getCurrentStep = (state: RootState) => state.steps.currentStep;
 
 export default slice.reducer;

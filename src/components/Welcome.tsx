@@ -9,7 +9,7 @@ import { getCurrentWindow } from '@electron/remote';
 import { Button, openWindow } from 'pc-nrfconnect-shared';
 
 import { useAppDispatch } from '../app/store';
-import { MainStep, setCurrentMainStep } from '../features/steps/stepsSlice';
+import { goToNextStep } from '../features/steps/stepsSlice';
 import Main from './Main';
 
 export default () => {
@@ -20,7 +20,7 @@ export default () => {
         getCurrentWindow().close();
     };
 
-    const next = () => dispatch(setCurrentMainStep(MainStep.CONNECT));
+    const next = () => dispatch(goToNextStep());
 
     return (
         <Main>

@@ -15,12 +15,10 @@ import {
     selectDevice,
 } from '../features/device/deviceSlice';
 import {
-    DeviceStep,
-    getCurrentDeviceStep,
-    goToNextDeviceStep,
-    goToPreviousDeviceStep,
-    MainStep,
-    setCurrentMainStep,
+    getCurrentStep,
+    goToNextStep,
+    goToPreviousStep,
+    Step,
 } from '../features/steps/stepsSlice';
 import Apps from './Apps';
 import Develop from './Develop';
@@ -33,7 +31,7 @@ import Personalize from './Personalize';
 export default () => {
     const dispatch = useAppDispatch();
     const [choice, setChoice] = useState<Choice>();
-    const currentStep = useAppSelector(getCurrentDeviceStep);
+    const currentStep = useAppSelector(getCurrentStep);
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- Because one cannot progress here without selecting a device, we are sure it is defined
     const device = useAppSelector(getSelectedDevice)!;
@@ -42,15 +40,13 @@ export default () => {
         () => ({
             device,
             back: () => {
-                if (currentStep === DeviceStep.INTRODUCTION) {
+                if (currentStep === Step.INTRODUCTION) {
                     dispatch(selectDevice(undefined));
-                    dispatch(setCurrentMainStep(MainStep.CONNECT));
-                } else {
-                    dispatch(goToPreviousDeviceStep());
                 }
+                dispatch(goToPreviousStep());
             },
             next: () => {
-                dispatch(goToNextDeviceStep());
+                dispatch(goToNextStep());
             },
             openApp: (app: string, serialNumber?: string) => {
                 openWindow.openApp(
@@ -64,19 +60,15 @@ export default () => {
 
     return (
         <>
-            {currentStep === DeviceStep.INTRODUCTION && (
-                <Introduction {...props} />
-            )}
-            {currentStep === DeviceStep.PERSONALIZE && (
-                <Personalize {...props} />
-            )}
-            {currentStep === DeviceStep.EVALUATE && (
+            {currentStep === Step.INTRODUCTION && <Introduction {...props} />}
+            {currentStep === Step.PERSONALIZE && <Personalize {...props} />}
+            {currentStep === Step.EVALUATE && (
                 <Evaluate {...props} selectChoice={setChoice} />
             )}
-            {currentStep === DeviceStep.APPS && <Apps {...props} />}
-            {currentStep === DeviceStep.LEARN && <Learn {...props} />}
-            {currentStep === DeviceStep.DEVELOP && <Develop {...props} />}
-            {currentStep === DeviceStep.FINISH && (
+            {currentStep === Step.APPS && <Apps {...props} />}
+            {currentStep === Step.LEARN && <Learn {...props} />}
+            {currentStep === Step.DEVELOP && <Develop {...props} />}
+            {currentStep === Step.FINISH && (
                 <Finish
                     {...props}
                     finish={() => {

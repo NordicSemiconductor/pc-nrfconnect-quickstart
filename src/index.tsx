@@ -19,7 +19,7 @@ import {
     getSelectedDevice,
     removeDevice,
 } from './features/device/deviceSlice';
-import { getCurrentMainStep, MainStep } from './features/steps/stepsSlice';
+import { getCurrentStep, Step } from './features/steps/stepsSlice';
 
 import './index.scss';
 
@@ -53,15 +53,11 @@ const useDevicesInStore = () => {
 
 const App = () => {
     useDevicesInStore();
-    const currentStep = useAppSelector(getCurrentMainStep);
+    const currentStep = useAppSelector(getCurrentStep);
 
-    return (
-        <>
-            {currentStep === MainStep.WELCOME && <Welcome />}
-            {currentStep === MainStep.CONNECT && <Connect />}
-            {currentStep === MainStep.DEVICE_STEPS && <DeviceSteps />}
-        </>
-    );
+    if (currentStep === Step.WELCOME) return <Welcome />;
+    if (currentStep === Step.CONNECT) return <Connect />;
+    return <DeviceSteps />;
 };
 
 export default () => (

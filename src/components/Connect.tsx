@@ -17,7 +17,7 @@ import {
     getConnectedDevices,
     selectDevice,
 } from '../features/device/deviceSlice';
-import { MainStep, setCurrentMainStep } from '../features/steps/stepsSlice';
+import { goToNextStep } from '../features/steps/stepsSlice';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -45,7 +45,7 @@ export default () => {
         (device: Device) => {
             dispatch(selectDevice(device));
             firstConnect = false;
-            dispatch(setCurrentMainStep(MainStep.DEVICE_STEPS));
+            dispatch(goToNextStep());
         },
         [dispatch]
     );
