@@ -5,13 +5,11 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { getCurrentWindow } from '@electron/remote';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { ErrorBoundary, openWindow } from 'pc-nrfconnect-shared';
+import { ErrorBoundary } from 'pc-nrfconnect-shared';
 
 import Connect from './components/Connect';
 import DeviceSteps from './components/DeviceSteps';
-import Welcome from './components/Welcome';
 import {
     connectedDevicesEvents,
     getConnectedDevices,
@@ -20,25 +18,11 @@ import {
 
 import './index.scss';
 
-enum Steps {
-    WELCOME,
-    CONNECT,
-    DEVICE_STEPS,
-}
-
-const getInitialStep = () => {
-    if (process.argv.includes('--first-launch')) {
-        return Steps.WELCOME;
-    }
-    return Steps.CONNECT;
-};
-
 export default () => {
     const [connectedDevices, setConnectedDevices] = useState<Device[]>(
         getConnectedDevices()
     );
     const [selectedDevice, setSelectedDevice] = useState<Device>();
-    const [currentStep, setCurrentStep] = useState(getInitialStep());
 
     useEffect(() => {
         connectedDevicesEvents.on('update', setConnectedDevices);
@@ -59,29 +43,18 @@ export default () => {
             selectedDevice={selectedDevice}
             selectedSerialNumber={selectedDevice?.serialNumber}
         >
-            {currentStep === Steps.WELCOME && (
-                <Welcome
-                    quit={() => {
-                        openWindow.openLauncher();
-                        getCurrentWindow().close();
-                    }}
-                    next={() => setCurrentStep(Steps.CONNECT)}
-                />
-            )}
-            {currentStep === Steps.CONNECT && (
+            {!selectedDevice && (
                 <Connect
                     next={(device: Device) => {
                         setSelectedDevice(device);
-                        setCurrentStep(Steps.DEVICE_STEPS);
                     }}
                 />
             )}
-            {currentStep === Steps.DEVICE_STEPS && selectedDevice && (
+            {selectedDevice && (
                 <DeviceSteps
                     device={selectedDevice}
                     goBackToConnect={() => {
                         setSelectedDevice(undefined);
-                        setCurrentStep(Steps.CONNECT);
                     }}
                 />
             )}
