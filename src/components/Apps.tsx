@@ -16,9 +16,6 @@ type App = DownloadableApp & {
     selected: boolean;
 };
 
-const canBeInstalled = (app: DownloadableApp) =>
-    !apps.isInstalled(app) || apps.isUpdatable(app);
-
 const AppItem = ({
     app,
     onClick,
@@ -31,21 +28,18 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            {canBeInstalled(app) && (
+            {!apps.isInstalled(app) && (
                 <input
                     type="checkbox"
                     id={app.name}
-                    disabled={!canBeInstalled(app)}
+                    disabled={!apps.isInstalled(app)}
                     onClick={event => onClick(event.currentTarget.checked)}
                     className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
                 />
             )}
-            {!canBeInstalled(app) && <>: ) </>}
+            {apps.isInstalled(app) && <>: ) </>}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
-            <p className="tw-cursor-pointer tw-font-bold">
-                {app.displayName} {apps.isUpdatable(app) && 'UPDATE'}
-            </p>
             <p className="tw-cursor-pointer">{app.description}</p>
         </label>
     </div>
@@ -129,7 +123,7 @@ export default ({
                             next();
                         } else {
                             recommendedApps.forEach(app => {
-                                if (canBeInstalled(app) && app.selected) {
+                                if (!apps.isInstalled(app) && app.selected) {
                                     installApp(app);
                                 }
                             });
