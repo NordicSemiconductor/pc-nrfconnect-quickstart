@@ -70,11 +70,11 @@ const deviceGuides: DeviceGuide[] = [
                 firmware: [
                     {
                         format: 'modem',
-                        file: 'mfw_nrf9160_1.3.4.zip',
+                        file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
                         format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        file: 'slm-with-trace.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
                 ],
@@ -87,7 +87,7 @@ const deviceGuides: DeviceGuide[] = [
                 firmware: [
                     {
                         format: 'modem',
-                        file: 'mfw_nrf9160_1.3.4.zip',
+                        file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
                         format: 'application',
@@ -104,11 +104,11 @@ const deviceGuides: DeviceGuide[] = [
                 firmware: [
                     {
                         format: 'modem',
-                        file: 'mfw_nrf9160_1.3.4.zip',
+                        file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
                         format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        file: 'nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                     },
                 ],
