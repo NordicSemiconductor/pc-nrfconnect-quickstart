@@ -40,18 +40,18 @@ export const App = () => {
 
     const currentStep = useAppSelector(getCurrentStep);
 
-    return (
-        <>
-            {currentStep === Step.WELCOME && <Welcome />}
-            {currentStep === Step.CONNECT && <Connect />}
-            {currentStep === Step.INTRODUCTION && <Introduction />}
-            {currentStep === Step.PERSONALIZE && <Personalize />}
-            {currentStep === Step.SELECT_FIRMWARE && <SelectFirmware />}
-            {currentStep === Step.PROGRAM && <Program />}
-            {currentStep === Step.APPS && <Apps />}
-            {currentStep === Step.LEARN && <Learn />}
-            {currentStep === Step.DEVELOP && <Develop />}
-            {currentStep === Step.FINISH && <Finish />}
-        </>
-    );
+    const Page = {
+        [Step.WELCOME]: Welcome,
+        [Step.CONNECT]: Connect,
+        [Step.INTRODUCTION]: Introduction,
+        [Step.PERSONALIZE]: Personalize,
+        [Step.SELECT_FIRMWARE]: SelectFirmware,
+        [Step.PROGRAM]: Program,
+        [Step.APPS]: Apps,
+        [Step.LEARN]: Learn,
+        [Step.DEVELOP]: Develop,
+        [Step.FINISH]: Finish,
+    }[currentStep];
+
+    return <Page />;
 };
