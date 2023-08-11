@@ -32,6 +32,10 @@ const ProgressBar = ({ percentage }: { percentage: number }) => (
     </div>
 );
 
+const getPercentage = (progressInfo: ExtendedOperation) =>
+    ((progressInfo.step - 1) / progressInfo.amountOfSteps) * 100 +
+    (1 / progressInfo.amountOfSteps) * progressInfo.progressPercentage;
+
 const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
     <>
         <Heading>Programming...</Heading>
@@ -44,7 +48,9 @@ const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
                         <p className="tw-text-primary">{file}</p>
                     </div>
                     <ProgressBar
-                        percentage={progressInfo?.progressPercentage || 0}
+                        percentage={
+                            progressInfo ? getPercentage(progressInfo) : 0
+                        }
                     />
                 </div>
             ))}
