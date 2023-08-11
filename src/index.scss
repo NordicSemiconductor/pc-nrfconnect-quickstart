@@ -8,6 +8,5 @@
 
 .scrollbar {
     overflow-y: auto;
-    @include scrollbars($gray-50
-    );
+    @include scrollbars($gray-50);
 }
