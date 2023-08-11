@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
@@ -39,7 +40,10 @@ const getPercentage = (progressInfo: ExtendedOperation) =>
 const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
     <>
         <Heading>Programming...</Heading>
-        <p className="tw-pt-4">This might take a few minutes. Please wait.</p>
+        <div className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-pt-4">
+            <p>This might take a few minutes. Please wait.</p>
+            <Spinner size="sm" animation="border" />
+        </div>
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
             {firmware.map(({ format, file, progressInfo }) => (
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
