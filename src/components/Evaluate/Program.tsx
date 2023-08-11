@@ -41,7 +41,6 @@ const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-justify-between">
                         <p>{format}</p>
-                        {progressInfo?.message && <p>{progressInfo.message}</p>}
                         <p className="tw-text-primary">{file}</p>
                     </div>
                     <ProgressBar
