@@ -6,10 +6,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
+import { shell } from '@electron/remote';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from 'pc-nrfconnect-shared';
 
-import type { Firmware } from '../../features/deviceGuides';
+import { Firmware, getFirmwareFolder } from '../../features/deviceGuides';
 import { program } from '../../features/deviceLib';
 import Heading from '../Heading';
 import Main from '../Main';
@@ -20,9 +21,9 @@ interface ExtendedOperation extends Progress.Operation {
     operationId: string;
 }
 
-interface FirmwareWithProgress extends Firmware {
+type FirmwareWithProgress = Firmware & {
     progressInfo?: ExtendedOperation;
-}
+};
 
 const ProgressBar = ({ percentage }: { percentage: number }) => (
     <div className="tw-h-1 tw-w-full tw-bg-gray-50">
@@ -39,21 +40,30 @@ const getPercentage = (progressInfo: ExtendedOperation) =>
 
 const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
     <>
-        <Heading>Programming...</Heading>
-        <div className="tw-flex tw-flex-row tw-items-center tw-gap-2 tw-pt-4">
-            <p>This might take a few minutes. Please wait.</p>
-            <Spinner size="sm" animation="border" />
-        </div>
+        <Heading>Programming</Heading>
+        <Spinner size="sm" animation="border" className="tw-py-4" />
+        <p>This might take a few minutes. Please wait.</p>
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
-            {firmware.map(({ format, file, progressInfo }) => (
-                <div key={file} className="tw-flex tw-flex-col tw-gap-1">
+            {firmware.map(f => (
+                <div key={f.file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-justify-between">
-                        <p>{format}</p>
-                        <p className="tw-text-primary">{file}</p>
+                        <p>{f.format}</p>
+                        <Button
+                            variant="link"
+                            onClick={() => {
+                                if (f.format === 'Application') {
+                                    shell.openExternal(f.link);
+                                } else {
+                                    shell.openPath(getFirmwareFolder());
+                                }
+                            }}
+                        >
+                            {f.file}
+                        </Button>
                     </div>
                     <ProgressBar
                         percentage={
-                            progressInfo ? getPercentage(progressInfo) : 0
+                            f.progressInfo ? getPercentage(f.progressInfo) : 0
                         }
                     />
                 </div>
