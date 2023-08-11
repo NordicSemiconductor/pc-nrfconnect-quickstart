@@ -6,6 +6,7 @@
 
 import React, { useEffect } from 'react';
 
+import { getAppState } from '../features/appState/appStateSlice';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
@@ -17,7 +18,7 @@ import Learn from '../features/steps/Learn';
 import Personalize from '../features/steps/Personalize';
 import Program from '../features/steps/Program';
 import SelectFirmware from '../features/steps/SelectFirmware';
-import { getCurrentStep, Step } from '../features/steps/stepsSlice';
+import Step from '../features/steps/Step';
 import Welcome from '../features/steps/Welcome';
 import { useAppDispatch, useAppSelector } from './store';
 
@@ -35,23 +36,30 @@ const useDevicesInStore = () => {
         [dispatch]
     );
 };
+
 export const App = () => {
     useDevicesInStore();
 
-    const currentStep = useAppSelector(getCurrentStep);
+    const state = useAppSelector(getAppState);
 
     return (
         <>
-            {currentStep === Step.WELCOME && <Welcome />}
-            {currentStep === Step.CONNECT && <Connect />}
-            {currentStep === Step.INTRODUCTION && <Introduction />}
-            {currentStep === Step.PERSONALIZE && <Personalize />}
-            {currentStep === Step.SELECT_FIRMWARE && <SelectFirmware />}
-            {currentStep === Step.PROGRAM && <Program />}
-            {currentStep === Step.APPS && <Apps />}
-            {currentStep === Step.LEARN && <Learn />}
-            {currentStep === Step.DEVELOP && <Develop />}
-            {currentStep === Step.FINISH && <Finish />}
+            {state.currentStep === Step.WELCOME && <Welcome />}
+            {state.currentStep === Step.CONNECT && <Connect />}
+            {state.currentStep === Step.INTRODUCTION && (
+                <Introduction {...state} />
+            )}
+            {state.currentStep === Step.PERSONALIZE && (
+                <Personalize {...state} />
+            )}
+            {state.currentStep === Step.SELECT_FIRMWARE && (
+                <SelectFirmware {...state} />
+            )}
+            {state.currentStep === Step.PROGRAM && <Program {...state} />}
+            {state.currentStep === Step.APPS && <Apps {...state} />}
+            {state.currentStep === Step.LEARN && <Learn {...state} />}
+            {state.currentStep === Step.DEVELOP && <Develop {...state} />}
+            {state.currentStep === Step.FINISH && <Finish {...state} />}
         </>
     );
 };

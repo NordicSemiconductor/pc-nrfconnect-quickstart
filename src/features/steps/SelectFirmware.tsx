@@ -5,20 +5,20 @@
  */
 
 import React, { useState } from 'react';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { useAppDispatch, useAppSelector } from '../../app/store';
+import { useAppDispatch } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
+import { setChoice } from '../appState/appStateSlice';
 import { Choice, deviceEvaluationChoices } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely, setChoice } from '../device/deviceSlice';
 import Heading from './Heading';
 
-export default () => {
+export default ({ device }: { device: Device }) => {
     const dispatch = useAppDispatch();
 
-    const device = useAppSelector(getSelectedDeviceUnsafely);
     const [selected, setSelected] = useState<Choice>();
 
     return (
@@ -61,11 +61,10 @@ export default () => {
                 <Next
                     label="Program"
                     disabled={!selected}
-                    onClick={next => {
+                    onClick={() => {
                         if (!selected) return;
 
                         dispatch(setChoice(selected));
-                        next();
                     }}
                 />
             </Main.Footer>

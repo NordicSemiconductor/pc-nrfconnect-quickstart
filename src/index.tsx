@@ -10,10 +10,8 @@ import { ErrorBoundary } from 'pc-nrfconnect-shared';
 
 import { App } from './app/App';
 import { store, useAppSelector } from './app/store';
-import {
-    getConnectedDevices,
-    getSelectedDevice,
-} from './features/device/deviceSlice';
+import { getSelectedDevice } from './features/appState/appStateSlice';
+import { getConnectedDevices } from './features/device/deviceSlice';
 
 const ConnectedErrorBoundary: React.FC = ({ children }) => {
     const devices = useAppSelector(getConnectedDevices);

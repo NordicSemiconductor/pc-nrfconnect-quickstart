@@ -5,18 +5,15 @@
  */
 
 import React from 'react';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { getPersistedNickname, persistNickname } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
 
-export default () => {
-    const device = useAppSelector(getSelectedDeviceUnsafely);
-
+export default ({ device }: { device: Device }) => {
     const [nickname, setNickname] = React.useState(
         getPersistedNickname(device.serialNumber) ?? ''
     );

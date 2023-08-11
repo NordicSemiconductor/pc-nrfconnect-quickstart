@@ -5,44 +5,33 @@
  */
 
 import React from 'react';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { DeviceIcon, deviceName } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
 import Heading from './Heading';
 
-export default () => {
-    const dispatch = useAppDispatch();
-    const device = useAppSelector(getSelectedDeviceUnsafely);
-
-    return (
-        <Main device={device}>
-            <Main.Content>
-                <div className="tw-pb-10">
-                    <DeviceIcon
-                        device={device}
-                        className="tw-h-14 tw-w-20 tw-fill-gray-700"
-                    />
-                </div>
-                <Heading>
-                    Let&apos;s get started with the {deviceName(device)}
-                </Heading>
-                <div className="tw-max-w-sm tw-pt-10">
-                    <p>\\Device capabilities//</p>
-                </div>
-            </Main.Content>
-            <Main.Footer className="tw-gap-20">
-                <Back
-                    onClick={back => {
-                        back();
-                        dispatch(selectDevice(undefined));
-                    }}
+export default ({ device }: { device: Device }) => (
+    <Main device={device}>
+        <Main.Content>
+            <div className="tw-pb-10">
+                <DeviceIcon
+                    device={device}
+                    className="tw-h-14 tw-w-20 tw-fill-gray-700"
                 />
-                <Next />
-            </Main.Footer>
-        </Main>
-    );
-};
+            </div>
+            <Heading>
+                Let&apos;s get started with the {deviceName(device)}
+            </Heading>
+            <div className="tw-max-w-sm tw-pt-10">
+                <p>\\Device capabilities//</p>
+            </div>
+        </Main.Content>
+        <Main.Footer className="tw-gap-20">
+            <Back />
+            <Next />
+        </Main.Footer>
+    </Main>
+);

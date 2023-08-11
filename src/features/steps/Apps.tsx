@@ -5,14 +5,13 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { apps, DownloadableApp } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceApps } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
 
 type App = DownloadableApp & {
@@ -54,8 +53,7 @@ const AppItem = ({
     </div>
 );
 
-export default () => {
-    const device = useAppSelector(getSelectedDeviceUnsafely);
+export default ({ device }: { device: Device }) => {
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {

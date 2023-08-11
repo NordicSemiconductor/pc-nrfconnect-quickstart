@@ -8,7 +8,7 @@ import React from 'react';
 import { Button, ButtonVariants } from 'pc-nrfconnect-shared';
 
 import { useAppDispatch } from '../app/store';
-import { goToNextStep } from '../features/steps/stepsSlice';
+import { goToNextStep } from '../features/appState/appStateSlice';
 
 export const Next = ({
     disabled,

@@ -8,12 +8,9 @@ import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
-import { type Choice } from './deviceGuides';
 
 interface State {
-    choice?: Choice;
     connectedDevices: Map<string, Device>;
-    selectedDevice?: Device;
 }
 
 const initialState: State = {
@@ -35,36 +32,12 @@ const slice = createSlice({
                 }
             });
         },
-
-        selectDevice: (
-            state,
-            { payload: device }: PayloadAction<Device | undefined>
-        ) => {
-            state.selectedDevice = device;
-        },
-
-        setChoice: (
-            state,
-            { payload: choice }: PayloadAction<Choice | undefined>
-        ) => {
-            state.choice = choice;
-        },
     },
 });
 
-export const { addDevice, removeDevice, selectDevice, setChoice } =
-    slice.actions;
+export const { addDevice, removeDevice } = slice.actions;
 
 export const getConnectedDevices = (state: RootState) => [
     ...state.device.connectedDevices.values(),
 ];
-export const getSelectedDevice = (state: RootState) =>
-    state.device.selectedDevice;
-
-export const getSelectedDeviceUnsafely = (state: RootState) =>
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- Because we are certain based on the step that a device is selected
-    state.device.selectedDevice!;
-
-export const getChoice = (state: RootState) => state.device.choice;
-
 export default slice.reducer;

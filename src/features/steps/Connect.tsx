@@ -9,14 +9,14 @@ import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import Main from '../../common/Main';
+import { selectDevice } from '../appState/appStateSlice';
 import {
     DeviceIcon,
     deviceName,
     isSupportedDevice,
 } from '../device/deviceGuides';
-import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
+import { getConnectedDevices } from '../device/deviceSlice';
 import Heading from './Heading';
-import { goToNextStep } from './stepsSlice';
 
 const invokeIfSpaceOrEnterPressed =
     (onClick: React.KeyboardEventHandler<Element>) =>
@@ -42,7 +42,6 @@ export default () => {
         (device: Device) => {
             dispatch(selectDevice(device));
             firstConnect = false;
-            dispatch(goToNextStep());
         },
         [dispatch]
     );

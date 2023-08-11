@@ -7,11 +7,11 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 
+import app from '../features/appState/appStateSlice';
 import device from '../features/device/deviceSlice';
-import steps from '../features/steps/stepsSlice';
 
 export const store = configureStore({
-    reducer: { device, steps },
+    reducer: { device, app },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
