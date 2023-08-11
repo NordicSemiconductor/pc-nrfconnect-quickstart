@@ -9,21 +9,11 @@ import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import path from 'path';
 import { deviceInfo } from 'pc-nrfconnect-shared';
 
-interface FirmwareFile {
-    format: string;
+export interface Firmware {
+    format: 'Modem' | 'Application';
     file: string;
-}
-
-interface ModemFirmware extends FirmwareFile {
-    format: 'Modem';
-}
-
-interface ApplicationFirmware extends FirmwareFile {
-    format: 'Application';
     link: string;
 }
-
-export type Firmware = ModemFirmware | ApplicationFirmware;
 
 export interface Link {
     label: string;
@@ -75,6 +65,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         format: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
+                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
                     },
                     {
                         format: 'Application',
@@ -92,6 +83,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         format: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
+                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
                     },
                     {
                         format: 'Application',
@@ -109,6 +101,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         format: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
+                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
                     },
                     {
                         format: 'Application',
