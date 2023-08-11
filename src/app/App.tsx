@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import { match } from 'ts-pattern';
 
 import { getAppState } from '../features/appState/appStateSlice';
 import { startWatchingDevices } from '../features/device/deviceLib';
@@ -40,26 +41,23 @@ const useDevicesInStore = () => {
 export const App = () => {
     useDevicesInStore();
 
-    const state = useAppSelector(getAppState);
+    const appState = useAppSelector(getAppState);
 
-    return (
-        <>
-            {state.currentStep === Step.WELCOME && <Welcome />}
-            {state.currentStep === Step.CONNECT && <Connect />}
-            {state.currentStep === Step.INTRODUCTION && (
-                <Introduction {...state} />
-            )}
-            {state.currentStep === Step.PERSONALIZE && (
-                <Personalize {...state} />
-            )}
-            {state.currentStep === Step.SELECT_FIRMWARE && (
-                <SelectFirmware {...state} />
-            )}
-            {state.currentStep === Step.PROGRAM && <Program {...state} />}
-            {state.currentStep === Step.APPS && <Apps {...state} />}
-            {state.currentStep === Step.LEARN && <Learn {...state} />}
-            {state.currentStep === Step.DEVELOP && <Develop {...state} />}
-            {state.currentStep === Step.FINISH && <Finish {...state} />}
-        </>
-    );
+    return match(appState)
+        .with({ currentStep: Step.WELCOME }, () => <Welcome />)
+        .with({ currentStep: Step.CONNECT }, () => <Connect />)
+        .with({ currentStep: Step.INTRODUCTION }, state => (
+            <Introduction {...state} />
+        ))
+        .with({ currentStep: Step.PERSONALIZE }, state => (
+            <Personalize {...state} />
+        ))
+        .with({ currentStep: Step.SELECT_FIRMWARE }, state => (
+            <SelectFirmware {...state} />
+        ))
+        .with({ currentStep: Step.PROGRAM }, state => <Program {...state} />)
+        .with({ currentStep: Step.APPS }, state => <Apps {...state} />)
+        .with({ currentStep: Step.LEARN }, state => <Learn {...state} />)
+        .with({ currentStep: Step.DEVELOP }, state => <Develop {...state} />)
+        .with({ currentStep: Step.FINISH }, state => <Finish {...state} />);
 };

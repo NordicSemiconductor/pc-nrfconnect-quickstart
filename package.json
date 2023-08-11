@@ -41,5 +41,8 @@
     "eslintConfig": {
         "extends": "./node_modules/pc-nrfconnect-shared/config/eslintrc"
     },
-    "prettier": "./node_modules/pc-nrfconnect-shared/config/prettier.config.js"
+    "prettier": "./node_modules/pc-nrfconnect-shared/config/prettier.config.js",
+    "dependencies": {
+        "ts-pattern": "^5.0.5"
+    }
 }
