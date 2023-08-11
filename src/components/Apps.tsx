@@ -5,12 +5,15 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { apps, Button, DownloadableApp } from 'pc-nrfconnect-shared';
+import { apps, DownloadableApp } from 'pc-nrfconnect-shared';
 
+import { useAppSelector } from '../app/store';
 import { deviceApps } from '../features/device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
+import { Back } from './Back';
 import Heading from './Heading';
 import Main from './Main';
+import { Next } from './Next';
 
 type App = DownloadableApp & {
     selected: boolean;
@@ -51,15 +54,8 @@ const AppItem = ({
     </div>
 );
 
-export default ({
-    back,
-    next,
-    device,
-}: {
-    back: () => void;
-    next: () => void;
-    device: Device;
-}) => {
+export default () => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {
@@ -118,13 +114,10 @@ export default ({
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Button variant="secondary" large onClick={back}>
-                    Back
-                </Button>
-                <Button
-                    variant="primary"
-                    large
-                    onClick={() => {
+                <Back />
+                <Next
+                    label={anySelected ? 'Install' : 'Next'}
+                    onClick={next => {
                         if (!anySelected) {
                             next();
                         } else {
@@ -135,9 +128,7 @@ export default ({
                             });
                         }
                     }}
-                >
-                    {anySelected ? 'Install' : 'Next'}
-                </Button>
+                />
             </Main.Footer>
         </Main>
     );

@@ -5,13 +5,16 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
-import { Button } from 'pc-nrfconnect-shared';
+import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import type { Firmware } from '../../features/device/deviceGuides';
-import { program } from '../../features/device/deviceLib';
-import Heading from '../Heading';
-import Main from '../Main';
+import { useAppSelector } from '../app/store';
+import type { Choice, Firmware } from '../features/device/deviceGuides';
+import { program } from '../features/device/deviceLib';
+import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
+import { Back } from './Back';
+import Heading from './Heading';
+import Main from './Main';
+import { Next } from './Next';
 
 // TODO: can be removed when device lib types are updated
 interface ExtendedOperation extends Progress.Operation {
@@ -73,16 +76,14 @@ const SuccessContent = () => (
 );
 
 export default ({
-    back,
-    next,
-    device,
+    selectChoice,
     selectedFirmware,
 }: {
-    back: () => void;
-    next: () => void;
-    device: Device;
+    selectChoice: (choice?: Choice) => void;
     selectedFirmware: Firmware[];
 }) => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+
     const [firmware, setFirmware] =
         useState<FirmwareWithProgress[]>(selectedFirmware);
 
@@ -138,12 +139,13 @@ export default ({
             <Main.Footer>
                 {finishedProgramming && (
                     <>
-                        <Button variant="secondary" large onClick={back}>
-                            Back
-                        </Button>
-                        <Button variant="primary" large onClick={next}>
-                            Next
-                        </Button>
+                        <Back
+                            onClick={back => {
+                                back();
+                                selectChoice(undefined);
+                            }}
+                        />
+                        <Next />
                     </>
                 )}
             </Main.Footer>

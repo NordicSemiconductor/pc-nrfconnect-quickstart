@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2023 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
+ */
+
+import React from 'react';
+import { Button } from 'pc-nrfconnect-shared';
+
+import { useAppDispatch } from '../app/store';
+import { goToPreviousStep } from '../features/steps/stepsSlice';
+
+export const Back = ({ onClick }: { onClick?: (back: () => void) => void }) => {
+    const dispatch = useAppDispatch();
+    const back = () => dispatch(goToPreviousStep());
+
+    return (
+        <Button
+            variant="secondary"
+            large
+            onClick={() => {
+                if (onClick != null) {
+                    onClick(back);
+                } else {
+                    back();
+                }
+            }}
+        >
+            Back
+        </Button>
+    );
+};

@@ -5,49 +5,43 @@
  */
 
 import React from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, openUrl } from 'pc-nrfconnect-shared';
 
+import { useAppSelector } from '../app/store';
 import { deviceLinks, deviceName } from '../features/device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
+import { Back } from './Back';
 import Heading from './Heading';
 import Main from './Main';
+import { Next } from './Next';
 
-export default ({
-    back,
-    next,
-    device,
-}: {
-    back: () => void;
-    next: () => void;
-    device: Device;
-}) => (
-    <Main device={device}>
-        <Main.Content>
-            <Heading>
-                We recommend these resources for learning more about{' '}
-                {deviceName(device)}
-            </Heading>
-            <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
-                {deviceLinks(device).map(({ label, href }) => (
-                    <Button
-                        key={label}
-                        variant="link-button"
-                        onClick={() => openUrl(href)}
-                        large
-                        className="tw-w-96 tw-text-left"
-                    >
-                        {label}
-                    </Button>
-                ))}
-            </div>
-        </Main.Content>
-        <Main.Footer>
-            <Button variant="secondary" large onClick={back}>
-                Back
-            </Button>
-            <Button variant="primary" large onClick={next}>
-                Next
-            </Button>
-        </Main.Footer>
-    </Main>
-);
+export default () => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    return (
+        <Main device={device}>
+            <Main.Content>
+                <Heading>
+                    We recommend these resources for learning more about{' '}
+                    {deviceName(device)}
+                </Heading>
+                <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
+                    {deviceLinks(device).map(({ label, href }) => (
+                        <Button
+                            key={label}
+                            variant="link-button"
+                            onClick={() => openUrl(href)}
+                            large
+                            className="tw-w-96 tw-text-left"
+                        >
+                            {label}
+                        </Button>
+                    ))}
+                </div>
+            </Main.Content>
+            <Main.Footer>
+                <Back />
+                <Next />
+            </Main.Footer>
+        </Main>
+    );
+};

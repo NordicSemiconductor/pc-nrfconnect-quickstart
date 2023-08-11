@@ -4,14 +4,22 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { ErrorBoundary } from 'pc-nrfconnect-shared';
 
 import { store, useAppDispatch, useAppSelector } from './app/store';
+import Apps from './components/Apps';
 import Connect from './components/Connect';
-import DeviceSteps from './components/DeviceSteps';
+import Develop from './components/Develop';
+import Finish from './components/Finish';
+import Introduction from './components/Introduction';
+import Learn from './components/Learn';
+import Personalize from './components/Personalize';
+import Program from './components/Program';
+import SelectFirmware from './components/SelectFirmware';
 import Welcome from './components/Welcome';
+import { Choice } from './features/device/deviceGuides';
 import { startWatchingDevices } from './features/device/deviceLib';
 import {
     addDevice,
@@ -53,11 +61,33 @@ const useDevicesInStore = () => {
 
 const App = () => {
     useDevicesInStore();
+
+    const [choice, setChoice] = useState<Choice>();
     const currentStep = useAppSelector(getCurrentStep);
 
-    if (currentStep === Step.WELCOME) return <Welcome />;
-    if (currentStep === Step.CONNECT) return <Connect />;
-    return <DeviceSteps />;
+    return (
+        <>
+            {currentStep === Step.WELCOME && <Welcome />}
+            {currentStep === Step.CONNECT && <Connect />}
+            {currentStep === Step.INTRODUCTION && <Introduction />}
+            {currentStep === Step.PERSONALIZE && <Personalize />}
+            {currentStep === Step.SELECT_FIRMWARE && (
+                <SelectFirmware selectChoice={setChoice} />
+            )}
+            {currentStep === Step.PROGRAM && (
+                <Program
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice
+                    selectedFirmware={choice!.firmware}
+                    selectChoice={setChoice}
+                />
+            )}
+            {currentStep === Step.APPS && <Apps />}
+            {currentStep === Step.LEARN && <Learn />}
+            {currentStep === Step.DEVELOP && <Develop />}
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice */}
+            {currentStep === Step.FINISH && <Finish choice={choice!} />}
+        </>
+    );
 };
 
 export default () => (

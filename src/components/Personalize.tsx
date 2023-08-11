@@ -5,27 +5,20 @@
  */
 
 import React from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import {
-    Button,
-    getPersistedNickname,
-    persistNickname,
-} from 'pc-nrfconnect-shared';
+import { getPersistedNickname, persistNickname } from 'pc-nrfconnect-shared';
 
+import { useAppSelector } from '../app/store';
+import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
+import { Back } from './Back';
 import Heading from './Heading';
 import Main from './Main';
+import { Next } from './Next';
 
-export default ({
-    back,
-    next,
-    device,
-}: {
-    back: () => void;
-    next: () => void;
-    device: Device;
-}) => {
+export default () => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+
     const [nickname, setNickname] = React.useState(
-        device ? getPersistedNickname(device.serialNumber) : ''
+        getPersistedNickname(device.serialNumber) ?? ''
     );
     const maxLength = 20;
 
@@ -52,25 +45,18 @@ export default ({
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Button variant="secondary" large onClick={back}>
-                    Back
-                </Button>
+                <Back />
                 <div className="tw-flex tw-flex-row tw-gap-2 tw-pl-20">
-                    <Button variant="secondary" large onClick={next}>
-                        Skip
-                    </Button>
-                    <Button
-                        variant="primary"
-                        large
-                        onClick={() => {
+                    <Next label="Skip" variant="secondary" />
+                    <Next
+                        onClick={next => {
                             if (nickname.trim().length > 0 && device) {
                                 persistNickname(device.serialNumber, nickname);
                             }
+
                             next();
                         }}
-                    >
-                        Next
-                    </Button>
+                    />
                 </div>
             </Main.Footer>
         </Main>
