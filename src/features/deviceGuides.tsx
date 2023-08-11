@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+import path from 'path';
 import { deviceInfo } from 'pc-nrfconnect-shared';
 
 interface FirmwareFile {
@@ -43,6 +44,9 @@ export interface DeviceGuide {
     links: Link[];
     choices: Choice[];
 }
+
+export const getFirmwareFolder = () =>
+    path.resolve(__dirname, '..', 'resources', 'firmware');
 
 const shared: { apps: string[]; links: Link[] } = {
     apps: ['pc-nrfconnect-toolchain-manager'],
