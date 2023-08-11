@@ -103,19 +103,6 @@ const deviceGuides: DeviceGuide[] = [
     },
 ];
 
-interface EvaluationChoice {
-    name: string;
-    description: string;
-    firmware: { format: 'modem' | 'application'; file: string }[];
-    app: string;
-}
-
-let choice: EvaluationChoice | undefined;
-export const setEvaluationChoice = (evaluationChoice: EvaluationChoice) => {
-    choice = evaluationChoice;
-};
-export const getEvaluationChoice = () => choice;
-
 export const isSupportedDevice = (device: Device) =>
     deviceGuides
         .map(d => d.boardVersion.toLowerCase())
