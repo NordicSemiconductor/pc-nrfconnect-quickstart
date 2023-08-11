@@ -18,7 +18,7 @@ import EventEmitter from 'events';
 import path from 'path';
 import { getDeviceLibContext } from 'pc-nrfconnect-shared';
 
-import type { Firmware } from './deviceGuides';
+import { Firmware, getFirmwareFolder } from './deviceGuides';
 
 const connectedDevices = new Map<string, Device>();
 export const connectedDevicesEvents = new EventEmitter();
@@ -97,13 +97,7 @@ export const program = async (
                 type: 'program',
                 firmware: {
                     format: labelToFormat(format),
-                    file: path.resolve(
-                        __dirname,
-                        '..',
-                        'resources',
-                        'firmware',
-                        file
-                    ),
+                    file: path.join(getFirmwareFolder(), file),
                 },
             },
         }))

@@ -6,12 +6,24 @@
 
 import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+import path from 'path';
 import { deviceInfo } from 'pc-nrfconnect-shared';
 
-export interface Firmware {
+interface FirmwareFile {
     format: string;
     file: string;
 }
+
+interface ModemFirmware extends FirmwareFile {
+    format: 'Modem';
+}
+
+interface ApplicationFirmware extends FirmwareFile {
+    format: 'Application';
+    link: string;
+}
+
+export type Firmware = ModemFirmware | ApplicationFirmware;
 
 export interface Link {
     label: string;
@@ -32,6 +44,9 @@ export interface DeviceGuide {
     links: Link[];
     choices: Choice[];
 }
+
+export const getFirmwareFolder = () =>
+    path.resolve(__dirname, '..', 'resources', 'firmware');
 
 const shared: { apps: string[]; links: Link[] } = {
     apps: ['pc-nrfconnect-toolchain-manager'],
@@ -58,12 +73,13 @@ const deviceGuides: DeviceGuide[] = [
                     'Use this application if you want to evaluate the cellular modem using an external MCU.',
                 firmware: [
                     {
-                        format: 'modem',
-                        file: 'mfw_nrf9160_1.3.4.zip',
+                        format: 'Modem',
+                        file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
-                        format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        format: 'Application',
+                        file: 'slm-with-trace.hex',
+                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -74,12 +90,13 @@ const deviceGuides: DeviceGuide[] = [
                     'Use this application if you want to evaluate interactions with the cloud.',
                 firmware: [
                     {
-                        format: 'modem',
-                        file: 'mfw_nrf9160_1.3.4.zip',
+                        format: 'Modem',
+                        file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
-                        format: 'application',
+                        format: 'Application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -90,12 +107,13 @@ const deviceGuides: DeviceGuide[] = [
                     'Use this application if you want to evaluate various device connectivity features such as data throughput.',
                 firmware: [
                     {
-                        format: 'modem',
-                        file: 'mfw_nrf9160_1.3.4.zip',
+                        format: 'Modem',
+                        file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
-                        format: 'application',
-                        file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        format: 'Application',
+                        file: 'nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex',
+                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
