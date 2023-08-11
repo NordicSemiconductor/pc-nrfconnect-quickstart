@@ -7,19 +7,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { useAppDispatch, useAppSelector } from '../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import Main from '../../common/Main';
 import {
     DeviceIcon,
     deviceName,
     isSupportedDevice,
-} from '../features/device/deviceGuides';
-import {
-    getConnectedDevices,
-    selectDevice,
-} from '../features/device/deviceSlice';
-import { goToNextStep } from '../features/steps/stepsSlice';
+} from '../device/deviceGuides';
+import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
+import { goToNextStep } from './stepsSlice';
 
 const invokeIfSpaceOrEnterPressed =
     (onClick: React.KeyboardEventHandler<Element>) =>

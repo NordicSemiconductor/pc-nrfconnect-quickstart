@@ -7,14 +7,14 @@
 import React, { useEffect, useState } from 'react';
 import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { useAppSelector } from '../app/store';
-import type { Choice, Firmware } from '../features/device/deviceGuides';
-import { program } from '../features/device/deviceLib';
-import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
-import { Back } from './Back';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import type { Choice, Firmware } from '../device/deviceGuides';
+import { program } from '../device/deviceLib';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
-import { Next } from './Next';
 
 // TODO: can be removed when device lib types are updated
 interface ExtendedOperation extends Progress.Operation {

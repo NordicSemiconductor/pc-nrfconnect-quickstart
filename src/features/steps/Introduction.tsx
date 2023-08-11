@@ -6,16 +6,13 @@
 
 import React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../app/store';
-import { DeviceIcon, deviceName } from '../features/device/deviceGuides';
-import {
-    getSelectedDeviceUnsafely,
-    selectDevice,
-} from '../features/device/deviceSlice';
-import { Back } from './Back';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { DeviceIcon, deviceName } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
-import { Next } from './Next';
 
 export default () => {
     const dispatch = useAppDispatch();

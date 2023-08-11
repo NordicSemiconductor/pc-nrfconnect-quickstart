@@ -8,13 +8,13 @@ import React from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import { openWindow } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../app/store';
-import { Choice } from '../features/device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
-import { Back } from './Back';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { Choice } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
-import { Next } from './Next';
 
 export default ({ choice }: { choice: Choice }) => {
     const device = useAppSelector(getSelectedDeviceUnsafely);

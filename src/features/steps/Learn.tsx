@@ -7,13 +7,13 @@
 import React from 'react';
 import { Button, openUrl } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../app/store';
-import { deviceLinks, deviceName } from '../features/device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
-import { Back } from './Back';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { deviceLinks, deviceName } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
-import { Next } from './Next';
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);

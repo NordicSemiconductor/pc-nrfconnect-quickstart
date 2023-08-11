@@ -6,21 +6,17 @@
 
 import React from 'react';
 import { getCurrentWindow } from '@electron/remote';
-import { Button, openWindow } from 'pc-nrfconnect-shared';
+import { openWindow } from 'pc-nrfconnect-shared';
 
-import { useAppDispatch } from '../app/store';
-import { goToNextStep } from '../features/steps/stepsSlice';
-import Main from './Main';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
 
 export default () => {
-    const dispatch = useAppDispatch();
-
     const quit = () => {
         openWindow.openLauncher();
         getCurrentWindow().close();
     };
-
-    const next = () => dispatch(goToNextStep());
 
     return (
         <Main>
@@ -35,12 +31,8 @@ export default () => {
                 </p>
             </Main.Content>
             <Main.Footer>
-                <Button variant="secondary" large onClick={quit}>
-                    Quit Quickstart
-                </Button>
-                <Button variant="primary" large onClick={next}>
-                    Next
-                </Button>
+                <Back label="Quit Quickstart" onClick={quit} />
+                <Next />
             </Main.Footer>
         </Main>
     );

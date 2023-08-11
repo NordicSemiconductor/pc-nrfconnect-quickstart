@@ -10,7 +10,13 @@ import { Button } from 'pc-nrfconnect-shared';
 import { useAppDispatch } from '../app/store';
 import { goToPreviousStep } from '../features/steps/stepsSlice';
 
-export const Back = ({ onClick }: { onClick?: (back: () => void) => void }) => {
+export const Back = ({
+    label,
+    onClick,
+}: {
+    label?: string;
+    onClick?: (back: () => void) => void;
+}) => {
     const dispatch = useAppDispatch();
     const back = () => dispatch(goToPreviousStep());
 
@@ -26,7 +32,7 @@ export const Back = ({ onClick }: { onClick?: (back: () => void) => void }) => {
                 }
             }}
         >
-            Back
+            {label ?? 'Back'}
         </Button>
     );
 };

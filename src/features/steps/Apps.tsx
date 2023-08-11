@@ -7,13 +7,13 @@
 import React, { useEffect, useState } from 'react';
 import { apps, DownloadableApp } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../app/store';
-import { deviceApps } from '../features/device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
-import { Back } from './Back';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { deviceApps } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
-import { Next } from './Next';
 
 type App = DownloadableApp & {
     selected: boolean;

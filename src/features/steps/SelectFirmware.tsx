@@ -7,16 +7,13 @@
 import React, { useState } from 'react';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../app/store';
-import {
-    Choice,
-    deviceEvaluationChoices,
-} from '../features/device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../features/device/deviceSlice';
-import { Back } from './Back';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { Choice, deviceEvaluationChoices } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
-import Main from './Main';
-import { Next } from './Next';
 
 export default ({
     selectChoice,
