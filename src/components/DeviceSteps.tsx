@@ -41,6 +41,7 @@ export default ({
     const props = useMemo(
         () => ({
             device,
+            choice,
             back: () => {
                 if (currentStep === Steps.INTRODUCTION) {
                     goBackToConnect();
@@ -58,7 +59,7 @@ export default ({
                 );
             },
         }),
-        [device, currentStep, goBackToConnect]
+        [device, currentStep, goBackToConnect, choice]
     );
 
     return (

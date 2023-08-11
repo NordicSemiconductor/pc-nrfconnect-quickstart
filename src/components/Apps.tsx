@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { apps, Button, DownloadableApp } from 'pc-nrfconnect-shared';
 
-import { deviceApps } from '../features/deviceGuides';
+import { Choice, deviceApps } from '../features/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -70,10 +70,12 @@ export default ({
     back,
     next,
     device,
+    choice,
 }: {
     back: () => void;
     next: () => void;
     device: Device;
+    choice?: Choice;
 }) => {
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
@@ -84,12 +86,12 @@ export default ({
                     .filter(
                         app =>
                             app.source === 'official' &&
-                            deviceApps(device).includes(app.name)
+                            deviceApps(device, choice).includes(app.name)
                     )
                     .map(app => ({ ...app, selected: false }))
             );
         });
-    }, [device]);
+    }, [device, choice]);
 
     const setAppSelected = (app: App, selected: boolean) =>
         setRecommendedApps(

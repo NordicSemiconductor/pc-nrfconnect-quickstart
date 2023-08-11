@@ -128,10 +128,15 @@ export const DeviceIcon = ({
     return Icon ? <Icon className={className} /> : null;
 };
 
-export const deviceApps = (device: Device) => [
-    ...(getDeviceGuide(device)?.apps ?? []),
-    ...shared.apps,
-];
+export const deviceApps = (device: Device, choice?: Choice) =>
+    [
+        ...(getDeviceGuide(device)?.apps ?? []),
+        ...(choice?.app ? [choice.app] : []),
+        ...shared.apps,
+    ].reduce<string[]>(
+        (acc, app) => (acc.includes(app) ? acc : [...acc, app]),
+        []
+    );
 
 // TODO: concat deviceInfo links?
 export const deviceLinks = (device: Device) =>
