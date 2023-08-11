@@ -8,10 +8,21 @@ import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { deviceInfo } from 'pc-nrfconnect-shared';
 
-export interface Firmware {
+interface FirmwareFile {
     format: string;
     file: string;
 }
+
+interface ModemFirmware extends FirmwareFile {
+    format: 'modem';
+}
+
+interface ApplicationFirmware extends FirmwareFile {
+    format: 'application';
+    link: string;
+}
+
+export type Firmware = ModemFirmware | ApplicationFirmware;
 
 export interface Link {
     label: string;
@@ -64,6 +75,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         format: 'application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -80,6 +92,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         format: 'application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -96,6 +109,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         format: 'application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
+                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
