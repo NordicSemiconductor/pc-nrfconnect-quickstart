@@ -7,19 +7,17 @@
 import React, { useState } from 'react';
 import { Button, classNames } from 'pc-nrfconnect-shared';
 
-import { useAppSelector } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { Choice, deviceEvaluationChoices } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
+import { getSelectedDeviceUnsafely, setChoice } from '../device/deviceSlice';
 import Heading from './Heading';
 
-export default ({
-    selectChoice,
-}: {
-    selectChoice: (choice?: Choice) => void;
-}) => {
+export default () => {
+    const dispatch = useAppDispatch();
+
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [selected, setSelected] = useState<Choice>();
 
@@ -66,7 +64,7 @@ export default ({
                     onClick={next => {
                         if (!selected) return;
 
-                        selectChoice(selected);
+                        dispatch(setChoice(selected));
                         next();
                     }}
                 />

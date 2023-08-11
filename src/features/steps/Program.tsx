@@ -7,13 +7,17 @@
 import React, { useEffect, useState } from 'react';
 import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 
-import { useAppSelector } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import type { Choice, Firmware } from '../device/deviceGuides';
+import type { Firmware } from '../device/deviceGuides';
 import { program } from '../device/deviceLib';
-import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
+import {
+    getChoice,
+    getSelectedDeviceUnsafely,
+    setChoice,
+} from '../device/deviceSlice';
 import Heading from './Heading';
 
 // TODO: can be removed when device lib types are updated
@@ -75,14 +79,12 @@ const SuccessContent = () => (
     </>
 );
 
-export default ({
-    selectChoice,
-    selectedFirmware,
-}: {
-    selectChoice: (choice?: Choice) => void;
-    selectedFirmware: Firmware[];
-}) => {
+export default () => {
+    const dispatch = useAppDispatch();
+
     const device = useAppSelector(getSelectedDeviceUnsafely);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice
+    const selectedFirmware = useAppSelector(getChoice)!.firmware;
 
     const [firmware, setFirmware] =
         useState<FirmwareWithProgress[]>(selectedFirmware);
@@ -142,7 +144,7 @@ export default ({
                         <Back
                             onClick={back => {
                                 back();
-                                selectChoice(undefined);
+                                dispatch(setChoice(undefined));
                             }}
                         />
                         <Next />

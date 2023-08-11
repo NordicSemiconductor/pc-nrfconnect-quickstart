@@ -12,11 +12,12 @@ import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import { Choice } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
+import { getChoice, getSelectedDeviceUnsafely } from '../device/deviceSlice';
 import Heading from './Heading';
 
-export default ({ choice }: { choice: Choice }) => {
+export default () => {
+    const choice = useAppSelector(getChoice);
+
     const device = useAppSelector(getSelectedDeviceUnsafely);
     return (
         <Main device={device}>
@@ -44,7 +45,7 @@ export default ({ choice }: { choice: Choice }) => {
                     label="Exit and open nRF Connect for Desktop"
                     onClick={() => {
                         openWindow.openLauncher();
-                        if (choice.app) {
+                        if (choice?.app) {
                             openWindow.openApp(
                                 { source: 'official', name: choice.app },
                                 {

@@ -4,9 +4,8 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { Choice } from '../features/device/deviceGuides';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
@@ -39,7 +38,6 @@ const useDevicesInStore = () => {
 export const App = () => {
     useDevicesInStore();
 
-    const [choice, setChoice] = useState<Choice>();
     const currentStep = useAppSelector(getCurrentStep);
 
     return (
@@ -48,21 +46,12 @@ export const App = () => {
             {currentStep === Step.CONNECT && <Connect />}
             {currentStep === Step.INTRODUCTION && <Introduction />}
             {currentStep === Step.PERSONALIZE && <Personalize />}
-            {currentStep === Step.SELECT_FIRMWARE && (
-                <SelectFirmware selectChoice={setChoice} />
-            )}
-            {currentStep === Step.PROGRAM && (
-                <Program
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice
-                    selectedFirmware={choice!.firmware}
-                    selectChoice={setChoice}
-                />
-            )}
+            {currentStep === Step.SELECT_FIRMWARE && <SelectFirmware />}
+            {currentStep === Step.PROGRAM && <Program />}
             {currentStep === Step.APPS && <Apps />}
             {currentStep === Step.LEARN && <Learn />}
             {currentStep === Step.DEVELOP && <Develop />}
-            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice */}
-            {currentStep === Step.FINISH && <Finish choice={choice!} />}
+            {currentStep === Step.FINISH && <Finish />}
         </>
     );
 };
