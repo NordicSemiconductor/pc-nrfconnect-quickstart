@@ -42,6 +42,11 @@ const slice = createSlice({
         },
         goToPreviousStep: state => {
             state.currentStep -= 1;
+
+            if (state.currentStep === Step.PROGRAM) {
+                // Jump over program step when going back
+                state.currentStep -= 1;
+            }
         },
     },
 });
