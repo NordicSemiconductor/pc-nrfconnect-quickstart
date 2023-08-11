@@ -13,16 +13,17 @@ export interface Firmware {
     file: string;
 }
 
+export interface Link {
+    label: string;
+    href: string;
+}
+
 export interface Choice {
     name: string;
     description: string;
     firmware: Firmware[];
     app: string;
-}
-
-export interface Link {
-    label: string;
-    href: string;
+    links?: Link[];
 }
 
 export interface DeviceGuide {
@@ -139,11 +140,15 @@ export const deviceApps = (device: Device, choice?: Choice) =>
     );
 
 // TODO: concat deviceInfo links?
-export const deviceLinks = (device: Device) =>
-    [...(getDeviceGuide(device)?.links ?? []), ...shared.links] as {
-        label: string;
-        href: string;
-    }[];
+export const deviceLinks = (device: Device, choice?: Choice) =>
+    [
+        ...(getDeviceGuide(device)?.links ?? []),
+        ...shared.links,
+        ...(choice?.links ?? []),
+    ].reduce<Link[]>(
+        (acc, link) => (acc.includes(link) ? acc : [...acc, link]),
+        []
+    );
 
 export const deviceEvaluationChoices = (device: Device) =>
     getDeviceGuide(device)?.choices ?? [];

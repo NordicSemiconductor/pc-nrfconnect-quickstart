@@ -8,7 +8,7 @@ import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, openUrl } from 'pc-nrfconnect-shared';
 
-import { deviceLinks, deviceName } from '../features/deviceGuides';
+import { Choice, deviceLinks, deviceName } from '../features/deviceGuides';
 import Heading from './Heading';
 import Main from './Main';
 
@@ -16,10 +16,12 @@ export default ({
     back,
     next,
     device,
+    choice,
 }: {
     back: () => void;
     next: () => void;
     device: Device;
+    choice?: Choice;
 }) => (
     <Main device={device}>
         <Main.Content>
@@ -28,7 +30,7 @@ export default ({
                 {deviceName(device)}
             </Heading>
             <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
-                {deviceLinks(device).map(({ label, href }) => (
+                {deviceLinks(device, choice).map(({ label, href }) => (
                     <Button
                         key={label}
                         variant="link-button"
