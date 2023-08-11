@@ -15,11 +15,11 @@ interface FirmwareFile {
 }
 
 interface ModemFirmware extends FirmwareFile {
-    format: 'modem';
+    format: 'Modem';
 }
 
 interface ApplicationFirmware extends FirmwareFile {
-    format: 'application';
+    format: 'Application';
     link: string;
 }
 
@@ -73,11 +73,11 @@ const deviceGuides: DeviceGuide[] = [
                     'Use this application if you want to evaluate the cellular modem using an external MCU.',
                 firmware: [
                     {
-                        format: 'modem',
+                        format: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
-                        format: 'application',
+                        format: 'Application',
                         file: 'slm-with-trace.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
@@ -90,11 +90,11 @@ const deviceGuides: DeviceGuide[] = [
                     'Use this application if you want to evaluate interactions with the cloud.',
                 firmware: [
                     {
-                        format: 'modem',
+                        format: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
-                        format: 'application',
+                        format: 'Application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                     },
@@ -107,11 +107,11 @@ const deviceGuides: DeviceGuide[] = [
                     'Use this application if you want to evaluate various device connectivity features such as data throughput.',
                 firmware: [
                     {
-                        format: 'modem',
+                        format: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
                     },
                     {
-                        format: 'application',
+                        format: 'Application',
                         file: 'nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                     },
