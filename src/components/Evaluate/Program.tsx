@@ -76,17 +76,7 @@ const SuccessContent = () => (
     <>
         <Heading>Success!</Heading>
         <div className="tw-max-w-sm tw-pt-10">
-            <p>
-                Device was programmed and we successfully communicated with the
-                kit.
-            </p>
-            <p className="tw-pt-4">
-                Contact support on{' '}
-                <u>
-                    <strong>DevZone</strong>
-                </u>{' '}
-                if verification fails.
-            </p>
+            <p>Device was programmed successfully.</p>
         </div>
     </>
 );
