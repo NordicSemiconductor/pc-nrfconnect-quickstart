@@ -73,11 +73,11 @@ export const startWatchingDevices = async () => {
     return () => stopHotplugEvents(hotplugEventsId);
 };
 
-const labelToFormat = (label: string) => {
+const labelToFormat = (label: Firmware['format']) => {
     switch (label) {
-        case 'modem':
+        case 'Modem':
             return 'NRFDL_FW_NRF91_MODEM';
-        case 'application':
+        case 'Application':
             return 'NRFDL_FW_INTEL_HEX';
         default:
             throw new Error(`Unknown label: ${label}`);
