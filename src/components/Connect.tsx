@@ -6,6 +6,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { isSupportedDevice } from '../features/deviceGuides';
 import {
@@ -66,8 +67,8 @@ export default ({ next }: { next: (device: Device) => void }) => {
         <Main>
             <Main.Content>
                 <Heading>Connect a Nordic kit to your PC</Heading>
-                <div className="tw-flex tw-flex-col tw-justify-center tw-gap-4">
-                    <p>Searching icon/spinner</p>
+                <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-4 tw-pt-4">
+                    <Spinner size="sm" />
                     <p>Searching for devices</p>
                     {longSearchDuration && (
                         <div>
