@@ -10,6 +10,7 @@ import {
     apps,
     Button,
     DownloadableApp,
+    Spinner,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Choice, deviceApps } from '../features/deviceGuides';
@@ -18,6 +19,7 @@ import Main from './Main';
 
 type App = DownloadableApp & {
     selected: boolean;
+    installing: boolean;
 };
 
 const InstalledCheckBox = () => (
@@ -63,14 +65,15 @@ const AppItem = ({
         className="tw-relative tw-flex tw-flex-row tw-gap-4"
     >
         <div className="tw-pt-0.5">
-            {apps.isInstalled(app) ? (
-                <InstalledCheckBox />
-            ) : (
+            {!apps.isInstalled(app) && !app.installing && (
                 <AppCheckBox
+                    id={app.name}
                     checked={apps.isInstalled(app) || app.selected}
                     onClick={onClick}
                 />
             )}
+            {app.installing && <Spinner size="sm" />}
+            {apps.isInstalled(app) && <InstalledCheckBox />}
         </div>
         <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
             <p className={selectableStyle(app)}>
@@ -103,7 +106,11 @@ export default ({
                             app.source === 'official' &&
                             deviceApps(device, choice).includes(app.name)
                     )
-                    .map(app => ({ ...app, selected: false }))
+                    .map(app => ({
+                        ...app,
+                        selected: false,
+                        installing: false,
+                    }))
             );
         });
     }, [device, choice]);
@@ -124,7 +131,11 @@ export default ({
                 setRecommendedApps(
                     recommendedApps.map(app =>
                         app.name === installedApp.name
-                            ? { ...installedApp, selected: false }
+                            ? {
+                                  ...installedApp,
+                                  selected: false,
+                                  installing: false,
+                              }
                             : app
                     )
                 )
@@ -162,6 +173,13 @@ export default ({
                         } else {
                             recommendedApps.forEach(app => {
                                 if (!apps.isInstalled(app) && app.selected) {
+                                    setRecommendedApps(
+                                        recommendedApps.map(a =>
+                                            a === app
+                                                ? { ...app, installing: true }
+                                                : a
+                                        )
+                                    );
                                     installApp(app);
                                 }
                             });
