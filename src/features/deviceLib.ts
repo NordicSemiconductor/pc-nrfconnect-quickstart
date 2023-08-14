@@ -16,7 +16,7 @@ import {
 } from '@nordicsemiconductor/nrf-device-lib-js';
 import EventEmitter from 'events';
 import path from 'path';
-import { getDeviceLibContext } from 'pc-nrfconnect-shared';
+import { getDeviceLibContext } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Firmware, getFirmwareFolder } from './deviceGuides';
 

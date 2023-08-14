@@ -6,7 +6,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { apps, Button, DownloadableApp } from 'pc-nrfconnect-shared';
+import {
+    apps,
+    Button,
+    DownloadableApp,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Choice, deviceApps } from '../features/deviceGuides';
 import Heading from './Heading';

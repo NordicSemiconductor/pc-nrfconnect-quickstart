@@ -7,7 +7,7 @@
 import React, { useMemo, useState } from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { openWindow } from 'pc-nrfconnect-shared';
+import { openWindow } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Choice } from '../features/deviceGuides';
 import Apps from './Apps';

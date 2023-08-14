@@ -10,7 +10,7 @@ import {
     Button,
     getPersistedNickname,
     persistNickname,
-} from 'pc-nrfconnect-shared';
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import Heading from './Heading';
 import Main from './Main';

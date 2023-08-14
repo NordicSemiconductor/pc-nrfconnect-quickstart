@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { shell } from '@electron/remote';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
-import { Button } from 'pc-nrfconnect-shared';
+import { Button } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Firmware } from '../../features/deviceGuides';
 import { program } from '../../features/deviceLib';
