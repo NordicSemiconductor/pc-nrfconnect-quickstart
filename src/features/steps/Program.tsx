@@ -7,22 +7,24 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { shell } from '@electron/remote';
-import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
+import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { Firmware } from '../../features/deviceGuides';
-import { program } from '../../features/deviceLib';
-import Heading from '../Heading';
-import Main from '../Main';
-
-// TODO: can be removed when device lib types are updated
-interface ExtendedOperation extends Progress.Operation {
-    state: string;
-    operationId: string;
-}
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Heading from '../../common/Heading';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import type { Firmware } from '../device/deviceGuides';
+import { program } from '../device/deviceLib';
+import {
+    getChoice,
+    getSelectedDeviceUnsafely,
+    setChoice,
+} from '../device/deviceSlice';
 
 type FirmwareWithProgress = Firmware & {
-    progressInfo?: ExtendedOperation;
+    progressInfo?: Progress.Operation;
 };
 
 const ProgressBar = ({ percentage }: { percentage: number }) => (
@@ -34,7 +36,7 @@ const ProgressBar = ({ percentage }: { percentage: number }) => (
     </div>
 );
 
-const getPercentage = (progressInfo: ExtendedOperation) =>
+const getPercentage = (progressInfo: Progress.Operation) =>
     ((progressInfo.step - 1) / progressInfo.amountOfSteps) * 100 +
     (1 / progressInfo.amountOfSteps) * progressInfo.progressPercentage;
 
@@ -80,17 +82,12 @@ const SuccessContent = () => (
     </>
 );
 
-export default ({
-    back,
-    next,
-    device,
-    selectedFirmware,
-}: {
-    back: () => void;
-    next: () => void;
-    device: Device;
-    selectedFirmware: Firmware[];
-}) => {
+export default () => {
+    const dispatch = useAppDispatch();
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice
+    const selectedFirmware = useAppSelector(getChoice)!.firmware;
+
     const [firmware, setFirmware] =
         useState<FirmwareWithProgress[]>(selectedFirmware);
     const [finishedProgramming, setFinishedProgramming] = useState(false);
@@ -103,10 +100,10 @@ export default ({
                 device,
                 selectedFirmware,
                 progress => {
+                    if (!progress.progressJson.operationId) return;
+
                     const taskId = Number.parseInt(
-                        // TODO: can be removed when device lib types are updated
-                        (progress.progressJson as ExtendedOperation)
-                            .operationId,
+                        progress.progressJson.operationId,
                         10
                     );
                     if (taskId < selectedFirmware.length)
@@ -115,9 +112,7 @@ export default ({
                                 index === taskId
                                     ? {
                                           ...f,
-                                          progressInfo:
-                                              // TODO: can be removed when device lib types are updated
-                                              progress.progressJson as ExtendedOperation,
+                                          progressInfo: progress.progressJson,
                                       }
                                     : f
                             )
@@ -148,12 +143,13 @@ export default ({
             <Main.Footer>
                 {finishedProgramming && (
                     <>
-                        <Button variant="secondary" large onClick={back}>
-                            Back
-                        </Button>
-                        <Button variant="primary" large onClick={next}>
-                            Next
-                        </Button>
+                        <Back
+                            onClick={back => {
+                                dispatch(setChoice(undefined));
+                                back();
+                            }}
+                        />
+                        <Next />
                     </>
                 )}
             </Main.Footer>

@@ -6,37 +6,20 @@
 
 import {
     Device,
-    // @ts-expect-error no type definitions for this yet
     deviceControlExecuteOperations,
     DeviceTraits,
     enumerate,
+    Error,
+    JLinkPluginOperationsArguments,
     Progress,
     startHotplugEvents,
     stopHotplugEvents,
 } from '@nordicsemiconductor/nrf-device-lib-js';
-import EventEmitter from 'events';
-import path from 'path';
 import { getDeviceLibContext } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import path from 'path';
 
 import { Firmware, getFirmwareFolder } from './deviceGuides';
-
-const connectedDevices = new Map<string, Device>();
-export const connectedDevicesEvents = new EventEmitter();
-
-export const getConnectedDevices = () => [...connectedDevices.values()];
-const addDevice = (device: Device) => {
-    connectedDevices.set(device.serialNumber, device);
-    connectedDevicesEvents.emit('update', getConnectedDevices());
-};
-
-const removeDevice = (deviceId: number) => {
-    connectedDevices.forEach(device => {
-        if (device.id === deviceId) {
-            connectedDevices.delete(device.serialNumber);
-            connectedDevicesEvents.emit('update', getConnectedDevices());
-        }
-    });
-};
+import { DeviceWithRequiredSerialNumber } from './deviceSlice';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,
@@ -44,33 +27,46 @@ const requiredTraits: DeviceTraits = {
     nordicUsb: true,
 };
 
-export const startWatchingDevices = async () => {
-    const initialDevices = await enumerate(
-        getDeviceLibContext() as unknown as number,
-        requiredTraits
-    );
+const hasSerialNumber = (
+    device: Device
+): device is DeviceWithRequiredSerialNumber =>
+    'serialNumber' in device && device.serialNumber !== undefined;
 
-    const hotplugEventsId = startHotplugEvents(
-        getDeviceLibContext() as unknown as number,
-        err => {
-            if (err) console.log(err);
-        },
-        event => {
-            switch (event.event_type) {
-                case 'NRFDL_DEVICE_EVENT_ARRIVED':
-                    if (event.device && event.device.serialNumber) {
-                        addDevice(event.device);
-                    }
-                    break;
-                case 'NRFDL_DEVICE_EVENT_LEFT':
-                    removeDevice(event.device_id);
-                    break;
+export const startWatchingDevices = (
+    onAddedDevice: (device: DeviceWithRequiredSerialNumber) => void,
+    onRemovedDevice: (deviceId: number) => void
+) => {
+    let hotplugEventsId: bigint | undefined;
+    const context = getDeviceLibContext();
+
+    enumerate(context, requiredTraits).then(initialDevices => {
+        initialDevices.filter(hasSerialNumber).forEach(onAddedDevice);
+
+        hotplugEventsId = startHotplugEvents(
+            context,
+            err => {
+                if (err) console.log(err);
+            },
+            event => {
+                switch (event.event_type) {
+                    case 'NRFDL_DEVICE_EVENT_ARRIVED':
+                        if (event.device && hasSerialNumber(event.device)) {
+                            onAddedDevice(event.device);
+                        }
+                        break;
+                    case 'NRFDL_DEVICE_EVENT_LEFT':
+                        onRemovedDevice(event.device_id);
+                        break;
+                }
             }
-        }
-    );
+        );
+    });
 
-    initialDevices.filter(device => device.serialNumber).forEach(addDevice);
-    return () => stopHotplugEvents(hotplugEventsId);
+    return () => {
+        if (hotplugEventsId) {
+            stopHotplugEvents(hotplugEventsId);
+        }
+    };
 };
 
 const labelToFormat = (label: Firmware['format']) => {
@@ -88,14 +84,14 @@ export const program = async (
     device: Device,
     firmware: Firmware[],
     progressCb: (progress: Progress.CallbackParameters) => void,
-    completeCb: (err?: Error) => void
+    completeCb: (error?: Error) => void
 ) => {
-    const operations = [];
+    const operations: JLinkPluginOperationsArguments[] = [];
     operations.push(
         ...firmware.map(({ format, file }, index) => ({
             operationId: index.toString(),
             operation: {
-                type: 'program',
+                type: 'program' as const,
                 firmware: {
                     format: labelToFormat(format),
                     file: path.join(getFirmwareFolder(), file),

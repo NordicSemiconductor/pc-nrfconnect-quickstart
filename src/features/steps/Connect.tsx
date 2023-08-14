@@ -5,19 +5,20 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { isSupportedDevice } from '../features/deviceGuides';
-import {
-    connectedDevicesEvents,
-    getConnectedDevices,
-} from '../features/deviceLib';
-import Heading from './Heading';
-import Main from './Main';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import Heading from '../../common/Heading';
+import Main from '../../common/Main';
+import { isSupportedDevice } from '../device/deviceGuides';
+import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
+import { goToNextStep } from './stepsSlice';
 
-export default ({ next }: { next: (device: Device) => void }) => {
-    const [connectedDevices, setConnectedDevices] = useState<Device[]>([]);
+export default () => {
+    const dispatch = useAppDispatch();
+    const supportedDevices =
+        useAppSelector(getConnectedDevices).filter(isSupportedDevice);
+
     const [longSearchDuration, setLongSearchDuration] = useState(false);
     const [hasWaitedMinDuration, setHasWaitedMinDuration] = useState(false);
 
@@ -28,28 +29,14 @@ export default ({ next }: { next: (device: Device) => void }) => {
     }, []);
 
     useEffect(() => {
-        if (hasWaitedMinDuration && connectedDevices.length) {
-            next(connectedDevices[0]);
+        if (hasWaitedMinDuration && supportedDevices.length) {
+            dispatch(selectDevice(supportedDevices[0]));
+            dispatch(goToNextStep());
         }
-    }, [hasWaitedMinDuration, connectedDevices, next]);
+    }, [hasWaitedMinDuration, supportedDevices, dispatch]);
 
     useEffect(() => {
-        setConnectedDevices(getConnectedDevices());
-
-        const handler = (devices: Device[]) => {
-            const supportedDevices = devices.filter(isSupportedDevice);
-
-            setConnectedDevices(supportedDevices);
-        };
-        connectedDevicesEvents.on('update', handler);
-
-        return () => {
-            connectedDevicesEvents.removeListener('update', handler);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (connectedDevices.length) {
+        if (supportedDevices.length) {
             setLongSearchDuration(false);
             return;
         }
@@ -61,7 +48,7 @@ export default ({ next }: { next: (device: Device) => void }) => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [connectedDevices]);
+    }, [supportedDevices]);
 
     return (
         <Main>

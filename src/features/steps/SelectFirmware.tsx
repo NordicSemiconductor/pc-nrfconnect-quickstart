@@ -4,24 +4,22 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+import React from 'react';
 import { Button, classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { Choice, deviceEvaluationChoices } from '../../features/deviceGuides';
-import Heading from '../Heading';
-import Main from '../Main';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Heading from '../../common/Heading';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { Choice, deviceEvaluationChoices } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely, setChoice } from '../device/deviceSlice';
 
-export default ({
-    back,
-    device,
-    selectChoice,
-}: {
-    back: () => void;
-    device: Device;
-    selectChoice: (choice: Choice) => void;
-}) => {
-    const [selected, setSelected] = useState<Choice>();
+export default () => {
+    const dispatch = useAppDispatch();
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+
+    const [selected, setSelected] = React.useState<Choice>();
 
     return (
         <Main device={device}>
@@ -59,21 +57,17 @@ export default ({
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Button variant="secondary" large onClick={back}>
-                    Back
-                </Button>
-                <Button
-                    variant="primary"
-                    large
+                <Back />
+                <Next
+                    label="Program"
                     disabled={!selected}
-                    onClick={() => {
+                    onClick={next => {
                         if (!selected) return;
 
-                        selectChoice(selected);
+                        dispatch(setChoice(selected));
+                        next();
                     }}
-                >
-                    Program
-                </Button>
+                />
             </Main.Footer>
         </Main>
     );
