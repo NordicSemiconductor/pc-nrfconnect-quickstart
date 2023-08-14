@@ -5,12 +5,15 @@
  */
 
 import React, { ReactNode } from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { getPersistedNickname, Logo } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    getPersistedNickname,
+    Logo,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { DeviceIcon, deviceName } from '../features/deviceGuides';
+import { DeviceIcon, deviceName } from '../features/device/deviceGuides';
+import { DeviceWithRequiredSerialNumber } from '../features/device/deviceSlice';
 
-const Header = ({ device }: { device?: Device }) => (
+const Header = ({ device }: { device?: DeviceWithRequiredSerialNumber }) => (
     <div className="tw-flex tw-h-16 tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-text-white">
         <p className="tw-flex-1 tw-font-bold tw-uppercase">Quickstart</p>
         {device && (
@@ -68,7 +71,7 @@ const Main = ({
 }: {
     className?: string;
     children: ReactNode;
-    device?: Device;
+    device?: DeviceWithRequiredSerialNumber;
 }) => (
     <div
         className={`tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between ${className}`}

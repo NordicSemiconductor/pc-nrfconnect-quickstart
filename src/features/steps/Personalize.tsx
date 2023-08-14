@@ -5,25 +5,21 @@
  */
 
 import React from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import {
-    Button,
     getPersistedNickname,
     persistNickname,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import Heading from './Heading';
-import Main from './Main';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Heading from '../../common/Heading';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
-export default ({
-    back,
-    next,
-    device,
-}: {
-    back: () => void;
-    next: () => void;
-    device: Device;
-}) => {
+export default () => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+
     const [nickname, setNickname] = React.useState(
         device ? getPersistedNickname(device.serialNumber) : ''
     );
@@ -52,25 +48,17 @@ export default ({
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Button variant="secondary" large onClick={back}>
-                    Back
-                </Button>
+                <Back />
                 <div className="tw-flex tw-flex-row tw-gap-2 tw-pl-20">
-                    <Button variant="secondary" large onClick={next}>
-                        Skip
-                    </Button>
-                    <Button
-                        variant="primary"
-                        large
-                        onClick={() => {
+                    <Next label="Skip" variant="secondary" />
+                    <Next
+                        onClick={next => {
                             if (nickname.trim().length > 0 && device) {
                                 persistNickname(device.serialNumber, nickname);
                             }
                             next();
                         }}
-                    >
-                        Next
-                    </Button>
+                    />
                 </div>
             </Main.Footer>
         </Main>

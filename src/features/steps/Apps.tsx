@@ -5,17 +5,19 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import {
     apps,
-    Button,
     DownloadableApp,
     Spinner,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { Choice, deviceApps } from '../features/deviceGuides';
-import Heading from './Heading';
-import Main from './Main';
+import { useAppSelector } from '../../app/store';
+import { Back } from '../../common/Back';
+import Heading from '../../common/Heading';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import { deviceApps } from '../device/deviceGuides';
+import { getChoice, getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 type App = DownloadableApp & {
     selected: boolean;
@@ -84,17 +86,9 @@ const AppItem = ({
     </div>
 );
 
-export default ({
-    back,
-    next,
-    device,
-    choice,
-}: {
-    back: () => void;
-    next: () => void;
-    device: Device;
-    choice?: Choice;
-}) => {
+export default () => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    const choice = useAppSelector(getChoice);
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {
@@ -161,13 +155,11 @@ export default ({
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Button variant="secondary" large onClick={back}>
-                    Back
-                </Button>
-                <Button
+                <Back />
+                <Next
+                    label={anySelected ? 'Install' : 'Next'}
                     variant="primary"
-                    large
-                    onClick={() => {
+                    onClick={next => {
                         if (!anySelected) {
                             next();
                         } else {
@@ -185,9 +177,7 @@ export default ({
                             });
                         }
                     }}
-                >
-                    {anySelected ? 'Install' : 'Next'}
-                </Button>
+                />
             </Main.Footer>
         </Main>
     );
