@@ -6,7 +6,7 @@
 
 import React, { ReactNode } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { getPersistedNickname, Logo } from 'pc-nrfconnect-shared';
+import { getPersistedNickname, Logo } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { DeviceIcon, deviceName } from '../features/deviceGuides';
 

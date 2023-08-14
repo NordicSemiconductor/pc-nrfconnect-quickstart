@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+import { deviceInfo } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import path from 'path';
-import { deviceInfo } from 'pc-nrfconnect-shared';
 
 export interface Firmware {
     format: 'Modem' | 'Application';
@@ -118,13 +118,13 @@ const deviceGuides: DeviceGuide[] = [
 export const isSupportedDevice = (device: Device) =>
     deviceGuides
         .map(d => d.boardVersion.toLowerCase())
-        .includes(device.jlink?.boardVersion.toLowerCase() || '');
+        .includes(device.jlink?.boardVersion?.toLowerCase() || '');
 
 const getDeviceGuide = (device: Device) =>
     deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
-            device.jlink?.boardVersion.toLowerCase()
+            device.jlink?.boardVersion?.toLowerCase()
     );
 
 export const deviceName = (device: Device) => deviceInfo(device).name;

@@ -6,7 +6,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { ErrorBoundary } from 'pc-nrfconnect-shared';
+import { ErrorBoundary } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import Connect from './components/Connect';
 import DeviceSteps from './components/DeviceSteps';

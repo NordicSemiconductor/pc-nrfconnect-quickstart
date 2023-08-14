@@ -16,7 +16,7 @@ import {
 } from '@nordicsemiconductor/nrf-device-lib-js';
 import EventEmitter from 'events';
 import path from 'path';
-import { getDeviceLibContext } from 'pc-nrfconnect-shared';
+import { getDeviceLibContext } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Firmware, getFirmwareFolder } from './deviceGuides';
 
@@ -73,11 +73,11 @@ export const startWatchingDevices = async () => {
     return () => stopHotplugEvents(hotplugEventsId);
 };
 
-const labelToFormat = (label: string) => {
+const labelToFormat = (label: Firmware['format']) => {
     switch (label) {
-        case 'modem':
+        case 'Modem':
             return 'NRFDL_FW_NRF91_MODEM';
-        case 'application':
+        case 'Application':
             return 'NRFDL_FW_INTEL_HEX';
         default:
             throw new Error(`Unknown label: ${label}`);
@@ -87,7 +87,8 @@ const labelToFormat = (label: string) => {
 export const program = async (
     device: Device,
     firmware: Firmware[],
-    progressCb: (progress: Progress.CallbackParameters) => void
+    progressCb: (progress: Progress.CallbackParameters) => void,
+    completeCb: (err?: Error) => void
 ) => {
     const operations = [];
     operations.push(
@@ -114,9 +115,7 @@ export const program = async (
     await deviceControlExecuteOperations(
         getDeviceLibContext(),
         device.id,
-        (err?: Error) => {
-            if (err) throw err;
-        },
+        completeCb,
         () => {},
         progressCb,
         {

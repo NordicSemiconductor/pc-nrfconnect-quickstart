@@ -8,9 +8,9 @@ import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { shell } from '@electron/remote';
 import { Device, Progress } from '@nordicsemiconductor/nrf-device-lib-js';
-import { Button } from 'pc-nrfconnect-shared';
+import { Button } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { Firmware, getFirmwareFolder } from '../../features/deviceGuides';
+import { Firmware } from '../../features/deviceGuides';
 import { program } from '../../features/deviceLib';
 import Heading from '../Heading';
 import Main from '../Main';
@@ -41,7 +41,9 @@ const getPercentage = (progressInfo: ExtendedOperation) =>
 const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
     <>
         <Heading>Programming</Heading>
-        <Spinner size="sm" animation="border" className="tw-py-4" />
+        <div className="tw-py-4">
+            <Spinner size="sm" animation="border" />
+        </div>
         <p>This might take a few minutes. Please wait.</p>
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
             {firmware.map(({ file, format, link, progressInfo }) => (
@@ -50,6 +52,7 @@ const ProgramContent = ({ firmware }: { firmware: FirmwareWithProgress[] }) => (
                         <p>{format}</p>
                         <Button
                             variant="link"
+                            large
                             onClick={() => {
                                 shell.openExternal(link);
                             }}
@@ -90,6 +93,7 @@ export default ({
 }) => {
     const [firmware, setFirmware] =
         useState<FirmwareWithProgress[]>(selectedFirmware);
+    const [finishedProgramming, setFinishedProgramming] = useState(false);
 
     useEffect(() => {
         if (selectedFirmware.length === 0) return;
@@ -98,7 +102,6 @@ export default ({
             program(
                 device,
                 selectedFirmware,
-
                 progress => {
                     const taskId = Number.parseInt(
                         // TODO: can be removed when device lib types are updated
@@ -119,17 +122,19 @@ export default ({
                                     : f
                             )
                         );
+                },
+                err => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        setTimeout(() => setFinishedProgramming(true), 1000);
+                    }
                 }
             );
         } catch (err) {
             console.log('Failed to program:', err);
         }
     }, [device, selectedFirmware]);
-
-    // TODO: this only waits for all firmwares to be programmed but not for device reset. should it be changed?
-    // TODO: add delay?
-    const finishedProgramming =
-        firmware.length && firmware.every(f => f.progressInfo?.state === 'end');
 
     return (
         <Main device={device}>

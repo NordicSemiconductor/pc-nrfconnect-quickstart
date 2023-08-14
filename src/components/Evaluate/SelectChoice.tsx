@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
-import { Button, classNames } from 'pc-nrfconnect-shared';
+import { Button, classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Choice, deviceEvaluationChoices } from '../../features/deviceGuides';
 import Heading from '../Heading';

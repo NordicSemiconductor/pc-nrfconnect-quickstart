@@ -35,11 +35,11 @@
         "nordic-publish": "node ./dist/nordic-publish.js",
         "prepare": "husky install"
     },
-    "devDependencies": {
-        "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v80"
-    },
     "eslintConfig": {
-        "extends": "./node_modules/pc-nrfconnect-shared/config/eslintrc"
+        "extends": "./node_modules/@nordicsemiconductor/pc-nrfconnect-shared/config/eslintrc"
     },
-    "prettier": "./node_modules/pc-nrfconnect-shared/config/prettier.config.js"
+    "prettier": "@nordicsemiconductor/pc-nrfconnect-shared/config/prettier.config.js",
+    "devDependencies": {
+        "@nordicsemiconductor/pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v83"
+    }
 }
