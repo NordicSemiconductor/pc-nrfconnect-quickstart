@@ -31,14 +31,17 @@ const InstalledCheckBox = () => (
 );
 
 const AppCheckBox = ({
+    id,
     checked,
     onClick,
 }: {
+    id: string;
     checked: boolean;
     onClick: (selected: boolean) => void;
 }) => (
     <input
         type="checkbox"
+        id={id}
         checked={checked}
         onClick={event => onClick(event.currentTarget.checked)}
         className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
