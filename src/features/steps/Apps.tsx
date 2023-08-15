@@ -143,7 +143,11 @@ export default () => {
         <Main device={device}>
             <Main.Content className="tw-gap-6">
                 <Heading>Install recommended apps</Heading>
-                <p>You can always add and remove apps later.</p>
+                {recommendedApps.some(app => !apps.isInstalled(app)) ? (
+                    <p>You can always add and remove apps later.</p>
+                ) : (
+                    <p>All recommended apps already installed</p>
+                )}
                 <div className="tw-flex tw-flex-col tw-items-start tw-gap-1">
                     {recommendedApps.map(app => (
                         <AppItem
