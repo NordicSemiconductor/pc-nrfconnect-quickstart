@@ -16,16 +16,17 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
-import { setChoice } from '../../device/deviceSlice';
+import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 import { getProgrammingError } from './programSlice';
 
 export default () => {
     const dispatch = useAppDispatch();
+    const device = useAppSelector(getSelectedDeviceUnsafely);
     const error = useAppSelector(getProgrammingError);
 
     return (
-        <Main>
+        <Main device={device}>
             <Main.Content>
                 <Heading>Failed to program device</Heading>
                 <div className="tw-max-w-sm tw-pt-10">

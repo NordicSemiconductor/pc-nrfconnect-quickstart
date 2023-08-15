@@ -9,11 +9,16 @@ import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import Heading from '../../../common/Heading';
-import { selectedDeviceIsConnected } from '../../device/deviceSlice';
+import Main from '../../../common/Main';
+import {
+    getSelectedDeviceUnsafely,
+    selectedDeviceIsConnected,
+} from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 
 export default () => {
     const dispatch = useAppDispatch();
+    const device = useAppSelector(getSelectedDeviceUnsafely);
     const deviceIsConnected = useAppSelector(selectedDeviceIsConnected);
 
     // TODO: Does this cause a flicker?
@@ -24,14 +29,18 @@ export default () => {
     }, [deviceIsConnected, dispatch]);
 
     return (
-        <>
-            <Heading>Device not connected</Heading>
-            <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">
-                <Spinner size="sm" />
-                <p>
-                    Ensure that your device is connected in order to program it
-                </p>
-            </div>
-        </>
+        <Main device={device}>
+            <Main.Content>
+                <Heading>Device not connected</Heading>
+                <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">
+                    <Spinner size="sm" />
+                    <p>
+                        Ensure that your device is connected in order to program
+                        it
+                    </p>
+                </div>
+            </Main.Content>
+            <Main.Footer />
+        </Main>
     );
 };
