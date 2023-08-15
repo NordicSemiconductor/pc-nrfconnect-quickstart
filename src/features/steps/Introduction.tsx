@@ -11,7 +11,11 @@ import { Back } from '../../common/Back';
 import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import { DeviceIcon, deviceName } from '../device/deviceGuides';
+import {
+    deviceDescription,
+    DeviceIcon,
+    deviceName,
+} from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
 
 export default () => {
@@ -31,7 +35,7 @@ export default () => {
                     Let&apos;s get started with the {deviceName(device)}
                 </Heading>
                 <div className="tw-max-w-sm tw-pt-10">
-                    <p>\\Device capabilities//</p>
+                    <p>{deviceDescription(device)}</p>
                 </div>
             </Main.Content>
             <Main.Footer className="tw-gap-20">

@@ -30,6 +30,7 @@ export interface Choice {
 
 export interface DeviceGuide {
     boardVersion: string;
+    description: string;
     apps: string[];
     links: Link[];
     choices: Choice[];
@@ -55,6 +56,8 @@ const deviceGuides: DeviceGuide[] = [
             'pc-nrfconnect-serial-terminal',
             'pc-nrfconnect-programmer',
         ],
+        description:
+            'The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications. It includes a SEGGER J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all Io pins, and relevant module interfaces.',
         links: [],
         choices: [
             {
@@ -128,6 +131,9 @@ const getDeviceGuide = (device: Device) =>
     );
 
 export const deviceName = (device: Device) => deviceInfo(device).name;
+
+export const deviceDescription = (device: Device) =>
+    getDeviceGuide(device)?.description || '';
 
 export const DeviceIcon = ({
     device,
