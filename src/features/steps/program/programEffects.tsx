@@ -23,7 +23,10 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     const device = getSelectedDeviceUnsafely(getState());
     const firmware = getChoiceUnsafely(getState()).firmware;
 
-    if (!deviceConnected) return;
+    if (!deviceConnected) {
+        dispatch(setProgrammingState(ProgrammingState.NO_DEVICE_CONNECTED));
+        return;
+    }
 
     dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
     dispatch(setProgrammingProgress(firmware));
