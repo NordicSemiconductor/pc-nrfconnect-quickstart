@@ -24,10 +24,10 @@ export default () => {
     return (
         <Main device={device}>
             <Main.Content className="tw-gap-8">
-                <Heading>Update and verify</Heading>
+                <Heading>Select application</Heading>
                 <p>
-                    This will program the latest modem firmware \\firmware// and
-                    the app you select.
+                    This will program the application and the latest modem
+                    firmware
                 </p>
                 <div className="tw-flex tw-flex-row tw-gap-2">
                     {deviceEvaluationChoices(device).map(choice => (

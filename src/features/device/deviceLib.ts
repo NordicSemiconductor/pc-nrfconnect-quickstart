@@ -80,7 +80,7 @@ const labelToFormat = (label: Firmware['format']) => {
     }
 };
 
-export const program = async (
+export const program = (
     device: Device,
     firmware: Firmware[],
     progressCb: (progress: Progress.CallbackParameters) => void,
@@ -108,7 +108,7 @@ export const program = async (
         },
     });
 
-    await deviceControlExecuteOperations(
+    deviceControlExecuteOperations(
         getDeviceLibContext(),
         device.id,
         completeCb,

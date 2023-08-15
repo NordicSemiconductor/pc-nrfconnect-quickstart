@@ -4,12 +4,13 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useMemo, useState } from 'react';
-import { shell } from '@electron/remote';
+import React, { useEffect, useState } from 'react';
+import { getCurrentWindow, shell } from '@electron/remote';
 import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import {
     Button,
     describeError,
+    openWindow,
     Spinner,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
@@ -21,6 +22,7 @@ import { Next } from '../../common/Next';
 import type { Firmware } from '../device/deviceGuides';
 import { program } from '../device/deviceLib';
 import {
+    DeviceWithRequiredSerialNumber,
     getChoice,
     getConnectedDevices,
     getSelectedDeviceUnsafely,
@@ -84,7 +86,7 @@ const ProgramContent = ({
         } catch (err) {
             onFinished(err);
         }
-    });
+    }, [firmware, device, onFinished]);
 
     return (
         <>
@@ -145,15 +147,40 @@ const SuccessContent = () => (
     </>
 );
 
-const WaitForDevice = () => (
-    <>
-        <Heading>No device connected</Heading>
-        <div className="tw-flex tw-max-w-sm tw-flex-col tw-justify-center tw-gap-4 tw-pt-10">
-            <Spinner size="sm" />
-            <p>Ensure that your device is connected</p>
-        </div>
-    </>
-);
+const selectedDeviceIsConnected = (
+    device: DeviceWithRequiredSerialNumber,
+    connectedDevices: DeviceWithRequiredSerialNumber[]
+) =>
+    connectedDevices.some(
+        connectedDevice => connectedDevice.serialNumber === device.serialNumber
+    );
+
+const WaitForDevice = ({
+    deviceConnected,
+}: {
+    deviceConnected: () => void;
+}) => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    const connectedDevices = useAppSelector(getConnectedDevices);
+
+    useEffect(() => {
+        if (selectedDeviceIsConnected(device, connectedDevices)) {
+            deviceConnected();
+        }
+    });
+
+    return (
+        <>
+            <Heading>Device not connected</Heading>
+            <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">
+                <Spinner size="sm" />
+                <p>
+                    Ensure that your device is connected in order to program it
+                </p>
+            </div>
+        </>
+    );
+};
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -162,18 +189,13 @@ export default () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- It is impossible to progress without having made a choice
     const selectedFirmware = useAppSelector(getChoice)!.firmware;
 
-    const selectedDeviceIsConnected = useMemo(
-        () =>
-            connectedDevices.some(
-                connectedDevice =>
-                    connectedDevice.serialNumber === device.serialNumber
-            ),
-        [connectedDevices, device]
-    );
-
     const [programmingState, setProgrammingState] = useState<
         'idle' | 'progress' | 'success' | 'error'
-    >(selectedDeviceIsConnected ? 'progress' : 'idle');
+    >(
+        selectedDeviceIsConnected(device, connectedDevices)
+            ? 'progress'
+            : 'idle'
+    );
     const [programmingError, setProgrammingError] = useState<
         unknown | undefined
     >();
@@ -181,7 +203,11 @@ export default () => {
     return (
         <Main device={device}>
             <Main.Content className="tw-w-full tw-max-w-3xl">
-                {programmingState === 'idle' && <WaitForDevice />}
+                {programmingState === 'idle' && (
+                    <WaitForDevice
+                        deviceConnected={() => setProgrammingState('progress')}
+                    />
+                )}
                 {programmingState === 'progress' && (
                     <ProgramContent
                         firmware={selectedFirmware}
@@ -189,11 +215,8 @@ export default () => {
                             if (error) {
                                 /* Currently this is not usable as multiple error messages
                                  * can be returned for a single successful batch operation */
-
                                 // setProgrammingError(error);
                                 // setProgrammingState('error');
-
-                                setProgrammingState('success');
                             } else {
                                 setProgrammingState('success');
                             }
@@ -215,6 +238,33 @@ export default () => {
                             }}
                         />
                         <Next />
+                    </>
+                )}
+                {programmingState === 'error' && (
+                    <>
+                        <Back
+                            onClick={back => {
+                                dispatch(setChoice(undefined));
+                                back();
+                            }}
+                        />
+                        <Button
+                            variant="primary"
+                            large
+                            onClick={() => setProgrammingState('progress')}
+                        >
+                            Retry
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            large
+                            onClick={() => {
+                                openWindow.openLauncher();
+                                getCurrentWindow().close();
+                            }}
+                        >
+                            Quit
+                        </Button>
                     </>
                 )}
             </Main.Footer>

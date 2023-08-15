@@ -32,6 +32,9 @@ const slice = createSlice({
             state,
             { payload: device }: PayloadAction<DeviceWithRequiredSerialNumber>
         ) => {
+            if (state.selectedDevice?.serialNumber === device.serialNumber) {
+                state.selectedDevice = device;
+            }
             state.connectedDevices.set(device.serialNumber, device);
         },
 
