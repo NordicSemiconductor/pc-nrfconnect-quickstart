@@ -47,7 +47,7 @@ export default () => {
                                 key={file}
                                 className="tw-flex tw-flex-col tw-gap-1"
                             >
-                                <div className="tw-flex tw-flex-row tw-justify-between">
+                                <div className="tw-flex tw-flex-row tw-items-center tw-justify-between">
                                     <p>{format}</p>
                                     <Button
                                         variant="link"
