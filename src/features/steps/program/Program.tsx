@@ -34,7 +34,7 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content>
+            <Main.Content className="tw-w-full tw-max-w-3xl">
                 <Heading>Programming</Heading>
                 <div className="tw-py-4">
                     <Spinner size="sm" />
