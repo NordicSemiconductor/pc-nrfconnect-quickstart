@@ -21,7 +21,6 @@ export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const deviceIsConnected = useAppSelector(selectedDeviceIsConnected);
 
-    // TODO: Does this cause a flicker?
     useEffect(() => {
         if (deviceIsConnected) {
             dispatch(startProgramming());
