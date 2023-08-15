@@ -14,6 +14,7 @@ import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { Choice, deviceEvaluationChoices } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely, setChoice } from '../device/deviceSlice';
+import { startProgramming } from './program/programEffects';
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -65,6 +66,7 @@ export default () => {
                         if (!selected) return;
 
                         dispatch(setChoice(selected));
+                        dispatch(startProgramming());
                         next();
                     }}
                 />

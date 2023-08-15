@@ -73,10 +73,18 @@ export const getConnectedDevices = (state: RootState) => [
 export const getSelectedDevice = (state: RootState) =>
     state.device.selectedDevice;
 
+export const selectedDeviceIsConnected = (state: RootState) =>
+    state.device.connectedDevices.has(
+        state.device.selectedDevice?.serialNumber ?? ''
+    );
+
 export const getSelectedDeviceUnsafely = (state: RootState) =>
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- Because we are certain based on the step that a device is selected
     state.device.selectedDevice!;
 
 export const getChoice = (state: RootState) => state.device.choice;
+export const getChoiceUnsafely = (state: RootState) =>
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- Because we are certain based on the step that the user made a choice
+    state.device.choice!;
 
 export default slice.reducer;
