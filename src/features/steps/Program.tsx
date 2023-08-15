@@ -84,7 +84,7 @@ const ProgramContent = ({
         } catch (err) {
             onFinished(err);
         }
-    });
+    }, [firmware, device, onFinished]);
 
     return (
         <>
