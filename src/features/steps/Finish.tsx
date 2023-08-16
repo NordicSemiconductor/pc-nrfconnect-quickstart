@@ -41,7 +41,7 @@ export default () => {
             <Main.Footer>
                 <Back />
                 <Next
-                    label="Exit and open nRF Connect for Desktop"
+                    label="Exit"
                     onClick={() => {
                         openWindow.openLauncher();
                         getCurrentWindow().close();
