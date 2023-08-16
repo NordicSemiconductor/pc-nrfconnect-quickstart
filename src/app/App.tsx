@@ -23,6 +23,8 @@ import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
 
+usageData.init({ name: 'pc-nrfconnect-quickstart ', version: '0.0.1' });
+
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
 
@@ -43,8 +45,6 @@ export const App = () => {
     // Telemetry when user changes step
     useEffect(() => {
         const currentStepName = Step[currentStep];
-        console.log(`changed step${currentStepName}`);
-
         usageData.sendUsageData(`Step ${currentStepName}`);
     }, [currentStep]);
 

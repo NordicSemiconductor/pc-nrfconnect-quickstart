@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    deviceInfo,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { type AppThunk } from '../../../app/store';
 import { program } from '../../device/deviceLib';
@@ -35,7 +38,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
 
     firmware.forEach(fw =>
         usageData.sendUsageData(
-            `Programming device ${device.jlink?.deviceFamily}`,
+            `Programming device ${deviceInfo(device).name}`,
             fw.file
         )
     );
