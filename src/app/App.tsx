@@ -15,7 +15,7 @@ import Finish from '../features/steps/Finish';
 import Introduction from '../features/steps/Introduction';
 import Learn from '../features/steps/Learn';
 import Personalize from '../features/steps/Personalize';
-import Program from '../features/steps/Program';
+import Program from '../features/steps/program';
 import SelectFirmware from '../features/steps/SelectFirmware';
 import { getCurrentStep, Step } from '../features/steps/stepsSlice';
 import { useAppDispatch, useAppSelector } from './store';
