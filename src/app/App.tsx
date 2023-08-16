@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
@@ -38,6 +39,14 @@ export const App = () => {
     useDevicesInStore();
 
     const currentStep = useAppSelector(getCurrentStep);
+
+    // Telemetry when user changes step
+    useEffect(() => {
+        const currentStepName = Step[currentStep];
+        console.log(`changed step${currentStepName}`);
+
+        usageData.sendUsageData(`Step ${currentStepName}`);
+    }, [currentStep]);
 
     return (
         <>

@@ -9,6 +9,7 @@ import {
     apps,
     DownloadableApp,
     Spinner,
+    usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
@@ -175,6 +176,9 @@ export default () => {
                                                 ? { ...app, installing: true }
                                                 : a
                                         )
+                                    );
+                                    usageData.sendUsageData(
+                                        `Installing app ${app}`
                                     );
                                     installApp(app);
                                 }

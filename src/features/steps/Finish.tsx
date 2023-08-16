@@ -6,7 +6,10 @@
 
 import React from 'react';
 import { getCurrentWindow } from '@electron/remote';
-import { openWindow } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    openWindow,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
@@ -43,6 +46,7 @@ export default () => {
                 <Next
                     label="Exit"
                     onClick={() => {
+                        usageData.sendUsageData('Exit quickstart');
                         openWindow.openLauncher();
                         getCurrentWindow().close();
                     }}
