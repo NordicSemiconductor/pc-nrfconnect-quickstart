@@ -5,7 +5,11 @@
  */
 
 import React from 'react';
-import { Button, openUrl } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    Button,
+    openUrl,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
@@ -31,7 +35,10 @@ export default () => {
                         <Button
                             key={label}
                             variant="link-button"
-                            onClick={() => openUrl(href)}
+                            onClick={() => {
+                                usageData.sendUsageData('Opening url', href);
+                                openUrl(href);
+                            }}
                             large
                             className="tw-w-96 tw-text-left"
                         >

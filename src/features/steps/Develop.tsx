@@ -5,7 +5,10 @@
  */
 
 import React from 'react';
-import { openWindow } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    openWindow,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
@@ -42,6 +45,7 @@ export default () => {
                 <Next
                     label="Launch Toolchain Manager"
                     onClick={next => {
+                        usageData.sendUsageData('Launch Toolchain Manager');
                         openWindow.openApp({
                             name: 'pc-nrfconnect-toolchain-manager',
                             source: 'official',

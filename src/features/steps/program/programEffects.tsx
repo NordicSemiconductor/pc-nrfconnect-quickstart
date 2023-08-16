@@ -4,6 +4,11 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import {
+    deviceInfo,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
+
 import { type AppThunk } from '../../../app/store';
 import { program } from '../../device/deviceLib';
 import {
@@ -30,6 +35,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
 
     dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
     dispatch(setProgrammingProgress(firmware));
+
     try {
         program(
             device,

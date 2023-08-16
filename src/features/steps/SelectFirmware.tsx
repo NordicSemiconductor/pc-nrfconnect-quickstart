@@ -5,7 +5,12 @@
  */
 
 import React from 'react';
-import { Button, classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    Button,
+    classNames,
+    deviceInfo,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
@@ -64,6 +69,11 @@ export default () => {
                     disabled={!selected}
                     onClick={next => {
                         if (!selected) return;
+
+                        usageData.sendUsageData(
+                            `Select firmware ${selected.name}`,
+                            deviceInfo(device).name ?? 'Unknown device'
+                        );
 
                         dispatch(setChoice(selected));
                         dispatch(startProgramming());

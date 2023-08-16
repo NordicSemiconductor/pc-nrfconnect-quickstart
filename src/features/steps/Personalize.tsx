@@ -8,6 +8,7 @@ import React from 'react';
 import {
     getPersistedNickname,
     persistNickname,
+    usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
@@ -55,6 +56,7 @@ export default () => {
                         onClick={next => {
                             if (nickname.trim().length > 0 && device) {
                                 persistNickname(device.serialNumber, nickname);
+                                usageData.sendUsageData('Set device nickname');
                             }
                             next();
                         }}

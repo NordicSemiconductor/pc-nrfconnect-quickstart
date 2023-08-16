@@ -5,7 +5,9 @@
  */
 
 import React, { useEffect } from 'react';
+import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import packageJson from '../../package.json';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
@@ -21,6 +23,8 @@ import { getCurrentStep, Step } from '../features/steps/stepsSlice';
 import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
+
+usageData.init(packageJson);
 
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
@@ -38,6 +42,12 @@ export const App = () => {
     useDevicesInStore();
 
     const currentStep = useAppSelector(getCurrentStep);
+
+    // Telemetry when user changes step
+    useEffect(() => {
+        const currentStepName = Step[currentStep];
+        usageData.sendUsageData(`Step ${currentStepName}`);
+    }, [currentStep]);
 
     return (
         <>
