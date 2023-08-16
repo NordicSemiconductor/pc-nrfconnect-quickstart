@@ -36,13 +36,6 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
     dispatch(setProgrammingProgress(firmware));
 
-    firmware.forEach(fw =>
-        usageData.sendUsageData(
-            `Programming device ${deviceInfo(device).name}`,
-            fw.file
-        )
-    );
-
     try {
         program(
             device,
