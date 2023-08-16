@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import packageJson from '../../package.json';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
@@ -23,7 +24,7 @@ import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
 
-usageData.init({ name: 'pc-nrfconnect-quickstart ', version: '0.0.1' });
+usageData.init(packageJson);
 
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
