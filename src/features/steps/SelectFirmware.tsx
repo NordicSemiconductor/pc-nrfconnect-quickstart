@@ -47,6 +47,16 @@ export default () => {
                         >
                             <p className="tw-font-bold">{choice.name}</p>
                             <p className="tw-flex-1">{choice.description}</p>
+                            {choice.documentation && (
+                                <a
+                                    href={choice.documentation.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="tw-text-nordicBlue"
+                                >
+                                    {choice.documentation.label}
+                                </a>
+                            )}
                             <Button
                                 variant="secondary"
                                 onClick={() => setSelected(choice)}

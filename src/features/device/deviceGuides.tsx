@@ -24,6 +24,7 @@ export interface Choice {
     name: string;
     description: string;
     firmware: Firmware[];
+    documentation?: Link;
     app: string;
     links?: Link[];
 }
@@ -70,6 +71,10 @@ const deviceGuides: DeviceGuide[] = [
                 name: 'AT commands',
                 description:
                     'Use this application if you want to evaluate the cellular modem using AT commands.',
+                documentation: {
+                    label: 'Documentation',
+                    href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                },
                 firmware: [
                     {
                         format: 'Modem',
@@ -102,6 +107,10 @@ const deviceGuides: DeviceGuide[] = [
                 name: 'Cloud Connectivity',
                 description:
                     'Use this application if you want to evaluate cloud interaction, location services, GNSS and real-time configurations.',
+                documentation: {
+                    label: 'Documentation',
+                    href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                },
                 firmware: [
                     {
                         format: 'Modem',
@@ -126,6 +135,10 @@ const deviceGuides: DeviceGuide[] = [
                 name: 'Shell Command Line Interface',
                 description:
                     'Use this application if you want to evaluate throughput, connectivity, and more.',
+                documentation: {
+                    label: 'Documentation',
+                    href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                },
                 firmware: [
                     {
                         format: 'Modem',
