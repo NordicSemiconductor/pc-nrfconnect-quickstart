@@ -4,11 +4,6 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import {
-    deviceInfo,
-    usageData,
-} from '@nordicsemiconductor/pc-nrfconnect-shared';
-
 import { type AppThunk } from '../../../app/store';
 import { program } from '../../device/deviceLib';
 import {
