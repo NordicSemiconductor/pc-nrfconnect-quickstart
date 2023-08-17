@@ -42,9 +42,10 @@ export const getFirmwareFolder = () =>
 const shared: { apps: string[]; links: Link[] } = {
     apps: ['pc-nrfconnect-toolchain-manager'],
     links: [
-        { label: 'Nordic Academy - Cellular IoT Fundamentals', href: '' },
-        { label: 'Nordic Academy - nRF Connect SDK Fundamentals', href: '' },
-        { label: 'Infocenter - \\\\Device// Hardware Details', href: '' },
+        {
+            label: 'Nordic Academy - nRF Connect SDK Fundamentals',
+            href: 'https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/',
+        },
     ],
 };
 
@@ -58,7 +59,12 @@ const deviceGuides: DeviceGuide[] = [
         ],
         description:
             'The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications. It includes a SEGGER J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all Io pins, and relevant module interfaces.',
-        links: [],
+        links: [
+            {
+                label: 'Nordic Academy - Cellular IoT Fundamentals',
+                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+            },
+        ],
         choices: [
             {
                 name: 'Serial LTE Monitor',
@@ -74,6 +80,20 @@ const deviceGuides: DeviceGuide[] = [
                         format: 'Application',
                         file: 'slm-with-trace.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                    },
+                ],
+                links: [
+                    {
+                        label: 'AT Commands Documentation',
+                        href: 'https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html',
+                    },
+                    {
+                        label: 'IP AT Commands Documentation',
+                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/doc/AT_commands_intro.html',
+                    },
+                    {
+                        label: 'Application documentation',
+                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -94,6 +114,12 @@ const deviceGuides: DeviceGuide[] = [
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                     },
                 ],
+                links: [
+                    {
+                        label: 'Application documentation',
+                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                    },
+                ],
                 app: 'pc-nrfconnect-cellularmonitor',
             },
             {
@@ -110,6 +136,12 @@ const deviceGuides: DeviceGuide[] = [
                         format: 'Application',
                         file: 'nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex',
                         link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                    },
+                ],
+                links: [
+                    {
+                        label: 'Application documentation',
+                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                     },
                 ],
                 app: 'pc-nrfconnect-cellularmonitor',
