@@ -184,7 +184,7 @@ export const deviceApps = (device: Device, choice?: Choice) =>
         ...(choice?.app ? [choice.app] : []),
         ...shared.apps,
     ].reduce<string[]>(
-        (acc, app) => (acc.includes(app) ? acc : [...acc, app]),
+        (apps, app) => (apps.includes(app) ? apps : [...apps, app]),
         []
     );
 
@@ -195,7 +195,7 @@ export const deviceLinks = (device: Device, choice?: Choice) =>
         ...(choice?.links ?? []),
         ...shared.links,
     ].reduce<Link[]>(
-        (acc, link) => (acc.includes(link) ? acc : [...acc, link]),
+        (links, link) => (links.includes(link) ? links : [...links, link]),
         []
     );
 
