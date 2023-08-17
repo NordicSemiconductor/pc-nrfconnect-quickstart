@@ -192,8 +192,8 @@ export const deviceApps = (device: Device, choice?: Choice) =>
 export const deviceLinks = (device: Device, choice?: Choice) =>
     [
         ...(getDeviceGuide(device)?.links ?? []),
-        ...shared.links,
         ...(choice?.links ?? []),
+        ...shared.links,
     ].reduce<Link[]>(
         (acc, link) => (acc.includes(link) ? acc : [...acc, link]),
         []
