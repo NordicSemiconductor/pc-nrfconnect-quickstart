@@ -14,7 +14,9 @@
         "nrfconnect": ">=4.0.0"
     },
     "main": "dist/bundle.js",
-    "html": "dist/index.html",
+    "nrfConnectForDesktop": {
+        "html": "dist/index.html"
+    },
     "files": [
         "dist/",
         "LICENSE",
