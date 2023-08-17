@@ -147,7 +147,7 @@ export default () => {
                 {recommendedApps.some(app => !apps.isInstalled(app)) ? (
                     <p>You can always add and remove apps later.</p>
                 ) : (
-                    <p>All recommended apps already installed</p>
+                    <p>All recommended apps are installed</p>
                 )}
                 <div className="tw-flex tw-flex-col tw-items-start tw-gap-1">
                     {recommendedApps.map(app => (

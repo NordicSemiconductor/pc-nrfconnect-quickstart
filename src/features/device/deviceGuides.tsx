@@ -67,9 +67,9 @@ const deviceGuides: DeviceGuide[] = [
         ],
         choices: [
             {
-                name: 'Serial LTE Monitor',
+                name: 'AT commands',
                 description:
-                    'Use this application if you want to evaluate the cellular modem using an external MCU.',
+                    'Use this application if you want to evaluate the cellular modem using AT commands.',
                 firmware: [
                     {
                         format: 'Modem',
@@ -99,9 +99,9 @@ const deviceGuides: DeviceGuide[] = [
                 app: 'pc-nrfconnect-cellularmonitor',
             },
             {
-                name: 'Asset Tracker V2',
+                name: 'Cloud Connectivity',
                 description:
-                    'Use this application if you want to evaluate interactions with the cloud.',
+                    'Use this application if you want to evaluate cloud interaction, location services, GNSS and real-time configurations.',
                 firmware: [
                     {
                         format: 'Modem',
@@ -123,9 +123,9 @@ const deviceGuides: DeviceGuide[] = [
                 app: 'pc-nrfconnect-cellularmonitor',
             },
             {
-                name: 'Modem Shell',
+                name: 'Shell Command Line Interface',
                 description:
-                    'Use this application if you want to evaluate various device connectivity features such as data throughput.',
+                    'Use this application if you want to evaluate throughput, connectivity, and more.',
                 firmware: [
                     {
                         format: 'Modem',
