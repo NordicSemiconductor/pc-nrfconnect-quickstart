@@ -25,7 +25,6 @@ export interface Choice {
     description: string;
     firmware: Firmware[];
     documentation?: Link;
-    app: string;
     links?: Link[];
 }
 
@@ -101,7 +100,6 @@ const deviceGuides: DeviceGuide[] = [
                         href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
                 ],
-                app: 'pc-nrfconnect-cellularmonitor',
             },
             {
                 name: 'Cloud Connectivity',
@@ -129,7 +127,6 @@ const deviceGuides: DeviceGuide[] = [
                         href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                     },
                 ],
-                app: 'pc-nrfconnect-cellularmonitor',
             },
             {
                 name: 'Shell Command Line Interface',
@@ -157,7 +154,6 @@ const deviceGuides: DeviceGuide[] = [
                         href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                     },
                 ],
-                app: 'pc-nrfconnect-cellularmonitor',
             },
         ],
     },
@@ -191,12 +187,8 @@ export const DeviceIcon = ({
     return Icon ? <Icon className={className} /> : null;
 };
 
-export const deviceApps = (device: Device, choice?: Choice) =>
-    [
-        ...(getDeviceGuide(device)?.apps ?? []),
-        ...(choice?.app ? [choice.app] : []),
-        ...shared.apps,
-    ].reduce<string[]>(
+export const deviceApps = (device: Device) =>
+    [...(getDeviceGuide(device)?.apps ?? []), ...shared.apps].reduce<string[]>(
         (apps, app) => (apps.includes(app) ? apps : [...apps, app]),
         []
     );
