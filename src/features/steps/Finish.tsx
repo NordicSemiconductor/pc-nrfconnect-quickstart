@@ -13,7 +13,6 @@ import {
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
-import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
@@ -23,9 +22,8 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content className="tw-max-w-sm">
-                <Heading>Finished Quickstart</Heading>
-                <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
+            <Main.Content heading="Finished Quickstart" className="tw-max-w-sm">
+                <div className="tw-flex tw-flex-col tw-gap-4">
                     <p>You now have finished all the steps</p>
                     <p>
                         Quickstart can be opened at any time from nRF Connect

@@ -8,7 +8,6 @@ import React, { useEffect } from 'react';
 import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import {
     getSelectedDeviceUnsafely,
@@ -29,9 +28,8 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content>
-                <Heading>Device not connected</Heading>
-                <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">
+            <Main.Content heading="Device not connected">
+                <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4">
                     <Spinner size="sm" />
                     <p>
                         Ensure that your device is connected in order to program

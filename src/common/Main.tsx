@@ -12,6 +12,7 @@ import {
 
 import { DeviceIcon, deviceName } from '../features/device/deviceGuides';
 import { DeviceWithRequiredSerialNumber } from '../features/device/deviceSlice';
+import Heading from './Heading';
 
 const Header = ({ device }: { device?: DeviceWithRequiredSerialNumber }) => (
     <div className="tw-flex tw-h-16 tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-text-white">
@@ -38,15 +39,24 @@ const Header = ({ device }: { device?: DeviceWithRequiredSerialNumber }) => (
 
 const Content = ({
     className = '',
+    heading,
     children,
 }: {
     className?: string;
+    heading?: string;
     children: ReactNode;
 }) => (
-    <div
-        className={`tw-flex tw-flex-col tw-items-center tw-justify-center tw-p-8 tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
-    >
-        {children}
+    <div className="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center tw-p-8 tw-text-center tw-text-sm tw-text-gray-700">
+        {heading && (
+            <div className="tw-pb-10">
+                <Heading>{heading}</Heading>
+            </div>
+        )}
+        <div
+            className={`tw-flex tw-flex-col tw-items-center tw-justify-center ${className}`}
+        >
+            {children}
+        </div>
     </div>
 );
 

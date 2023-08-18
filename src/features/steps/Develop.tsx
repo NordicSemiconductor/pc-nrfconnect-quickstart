@@ -12,7 +12,6 @@ import {
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
-import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
@@ -21,9 +20,11 @@ export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     return (
         <Main device={device}>
-            <Main.Content className="tw-max-w-sm">
-                <Heading>Install nRF Connect SDK and Toolchain</Heading>
-                <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
+            <Main.Content
+                heading="Install nRF Connect SDK and Toolchain"
+                className="tw-max-w-sm"
+            >
+                <div className="tw-flex tw-flex-col tw-items-center tw-gap-4">
                     <p>
                         The nRF Connect SDK is where you begin building
                         low-power wireless applications with Nordic

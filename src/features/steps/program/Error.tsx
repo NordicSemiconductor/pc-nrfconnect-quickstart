@@ -14,7 +14,6 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
@@ -27,9 +26,8 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content>
-                <Heading>Failed to program device</Heading>
-                <div className="tw-max-w-sm tw-pt-10">
+            <Main.Content heading="Failed to program device">
+                <div className="tw-max-w-sm">
                     <p>{describeError(error)}</p>
                 </div>
             </Main.Content>

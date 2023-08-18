@@ -14,7 +14,6 @@ import {
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
-import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceApps } from '../device/deviceGuides';
@@ -141,8 +140,10 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content className="tw-gap-6">
-                <Heading>Install recommended apps</Heading>
+            <Main.Content
+                heading="Install recommended apps"
+                className="tw-gap-6"
+            >
                 {recommendedApps.some(app => !apps.isInstalled(app)) ? (
                     <p>You can always add and remove apps later.</p>
                 ) : (

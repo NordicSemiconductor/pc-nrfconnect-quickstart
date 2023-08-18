@@ -8,7 +8,6 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
@@ -19,9 +18,8 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content>
-                <Heading>Success!</Heading>
-                <div className="tw-max-w-sm tw-pt-10">
+            <Main.Content heading="Success!">
+                <div className="tw-max-w-sm">
                     <p>Device was programmed successfully.</p>
                 </div>
             </Main.Content>

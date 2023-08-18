@@ -10,7 +10,6 @@ import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import { getProgrammingProgress } from './programSlice';
@@ -34,9 +33,11 @@ export default () => {
 
     return (
         <Main device={device}>
-            <Main.Content className="tw-w-full tw-max-w-3xl">
-                <Heading>Programming</Heading>
-                <div className="tw-py-4">
+            <Main.Content
+                heading="Programming"
+                className="tw-w-full tw-max-w-3xl"
+            >
+                <div className="tw-pb-4">
                     <Spinner size="sm" />
                 </div>
                 <p>This might take a few minutes. Please wait.</p>
