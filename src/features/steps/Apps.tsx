@@ -18,7 +18,7 @@ import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceApps } from '../device/deviceGuides';
-import { getChoice, getSelectedDeviceUnsafely } from '../device/deviceSlice';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 type App = DownloadableApp & {
     selected: boolean;
@@ -89,7 +89,6 @@ const AppItem = ({
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
-    const choice = useAppSelector(getChoice);
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
 
     useEffect(() => {
@@ -99,7 +98,7 @@ export default () => {
                     .filter(
                         app =>
                             app.source === 'official' &&
-                            deviceApps(device, choice).includes(app.name)
+                            deviceApps(device).includes(app.name)
                     )
                     .map(app => ({
                         ...app,
@@ -108,7 +107,7 @@ export default () => {
                     }))
             );
         });
-    }, [device, choice]);
+    }, [device]);
 
     const setAppSelected = (app: App, selected: boolean) =>
         setRecommendedApps(
