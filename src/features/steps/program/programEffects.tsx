@@ -14,6 +14,7 @@ import {
 import {
     ProgrammingState,
     setProgrammingError,
+    setProgrammingFirmware,
     setProgrammingProgress,
     setProgrammingState,
 } from './programSlice';
@@ -29,54 +30,19 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     }
 
     dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
-    dispatch(setProgrammingProgress(firmware));
+    dispatch(setProgrammingFirmware(firmware));
 
-    try {
-        program(
-            device,
-            firmware,
-            progress => {
-                if (!progress.progressJson.operationId) return;
-
-                const taskId = Number.parseInt(
-                    progress.progressJson.operationId,
-                    10
-                );
-                if (taskId < firmware.length) {
-                    const { firmwareWithProgress } = getState().program;
-
-                    const updatedFirmwareWithProgress =
-                        firmwareWithProgress.map((f, index) =>
-                            index === taskId
-                                ? {
-                                      ...f,
-                                      progressInfo: progress.progressJson,
-                                  }
-                                : f
-                        );
-
-                    dispatch(
-                        setProgrammingProgress(updatedFirmwareWithProgress)
-                    );
-                }
-            },
-            error => {
-                if (error) {
-                    dispatch(setProgrammingError(error));
-                    dispatch(setProgrammingState(ProgrammingState.ERROR));
-                } else {
-                    setTimeout(
-                        () =>
-                            dispatch(
-                                setProgrammingState(ProgrammingState.SUCCESS)
-                            ),
-                        1000
-                    );
-                }
-            }
-        );
-    } catch (error) {
-        dispatch(setProgrammingError(error));
-        dispatch(setProgrammingState(ProgrammingState.ERROR));
-    }
+    program(device, firmware, (index, progress) =>
+        dispatch(setProgrammingProgress({ index, progress }))
+    )
+        .then(() =>
+            setTimeout(
+                () => dispatch(setProgrammingState(ProgrammingState.SUCCESS)),
+                1000
+            )
+        )
+        .catch(error => {
+            dispatch(setProgrammingError(error));
+            dispatch(setProgrammingState(ProgrammingState.ERROR));
+        });
 };

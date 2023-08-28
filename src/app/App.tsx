@@ -29,14 +29,18 @@ usageData.init(packageJson);
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
 
-    useEffect(
-        () =>
-            startWatchingDevices(
-                device => dispatch(addDevice(device)),
-                deviceId => dispatch(removeDevice(deviceId))
-            ),
-        [dispatch]
-    );
+    useEffect(() => {
+        const stopWatchingDevicesPromise = startWatchingDevices(
+            device => dispatch(addDevice(device)),
+            deviceId => dispatch(removeDevice(deviceId))
+        );
+
+        return () => {
+            stopWatchingDevicesPromise.then(stopWatchingDevices =>
+                stopWatchingDevices()
+            );
+        };
+    }, [dispatch]);
 };
 export const App = () => {
     useDevicesInStore();

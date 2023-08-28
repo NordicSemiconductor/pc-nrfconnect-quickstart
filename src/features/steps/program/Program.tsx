@@ -6,7 +6,6 @@
 
 import React from 'react';
 import { shell } from '@electron/remote';
-import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
 import { Button, Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
@@ -24,10 +23,6 @@ const ProgressBar = ({ percentage }: { percentage: number }) => (
     </div>
 );
 
-const getPercentage = (progressInfo: Progress.Operation) =>
-    ((progressInfo.step - 1) / progressInfo.amountOfSteps) * 100 +
-    (1 / progressInfo.amountOfSteps) * progressInfo.progressPercentage;
-
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const firmwareProgress = useAppSelector(getProgrammingProgress);
@@ -42,7 +37,7 @@ export default () => {
                 <p>This might take a few minutes. Please wait.</p>
                 <div className="tw-flex tw-w-full tw-flex-col tw-gap-9 tw-pt-10">
                     {firmwareProgress.map(
-                        ({ file, format, link, progressInfo }) => (
+                        ({ file, format, link, progress }) => (
                             <div
                                 key={file}
                                 className="tw-flex tw-flex-col tw-gap-1"
@@ -61,9 +56,7 @@ export default () => {
                                 </div>
                                 <ProgressBar
                                     percentage={
-                                        progressInfo
-                                            ? getPercentage(progressInfo)
-                                            : 0
+                                        progress?.totalProgressPercentage || 0
                                     }
                                 />
                             </div>

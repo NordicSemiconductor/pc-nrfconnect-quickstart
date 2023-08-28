@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
 import { deviceInfo } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { NrfutilDevice } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import path from 'path';
 
 export interface Firmware {
@@ -159,42 +159,42 @@ const deviceGuides: DeviceGuide[] = [
     },
 ];
 
-export const isSupportedDevice = (device: Device) =>
+export const isSupportedDevice = (device: NrfutilDevice) =>
     deviceGuides
         .map(d => d.boardVersion.toLowerCase())
         .includes(device.jlink?.boardVersion?.toLowerCase() || '');
 
-const getDeviceGuide = (device: Device) =>
+const getDeviceGuide = (device: NrfutilDevice) =>
     deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
             device.jlink?.boardVersion?.toLowerCase()
     );
 
-export const deviceName = (device: Device) => deviceInfo(device).name;
+export const deviceName = (device: NrfutilDevice) => deviceInfo(device).name;
 
-export const deviceDescription = (device: Device) =>
+export const deviceDescription = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.description || '';
 
 export const DeviceIcon = ({
     device,
     className = '',
 }: {
-    device: Device;
+    device: NrfutilDevice;
     className?: string;
 }) => {
     const Icon = deviceInfo(device).icon;
     return Icon ? <Icon className={className} /> : null;
 };
 
-export const deviceApps = (device: Device) =>
+export const deviceApps = (device: NrfutilDevice) =>
     [...(getDeviceGuide(device)?.apps ?? []), ...shared.apps].reduce<string[]>(
         (apps, app) => (apps.includes(app) ? apps : [...apps, app]),
         []
     );
 
 // TODO: concat deviceInfo links?
-export const deviceLinks = (device: Device, choice?: Choice) =>
+export const deviceLinks = (device: NrfutilDevice, choice?: Choice) =>
     [
         ...(getDeviceGuide(device)?.links ?? []),
         ...(choice?.links ?? []),
@@ -204,5 +204,5 @@ export const deviceLinks = (device: Device, choice?: Choice) =>
         []
     );
 
-export const deviceEvaluationChoices = (device: Device) =>
+export const deviceEvaluationChoices = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.choices ?? [];
