@@ -12,14 +12,13 @@ import {
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { Back } from '../../common/Back';
-import Heading from '../../common/Heading';
-import Main from '../../common/Main';
-import { Next } from '../../common/Next';
-import { Choice, deviceEvaluationChoices } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely, setChoice } from '../device/deviceSlice';
-import { startProgramming } from './program/programEffects';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { Back } from '../../../common/Back';
+import Heading from '../../../common/Heading';
+import Main from '../../../common/Main';
+import { Choice, deviceEvaluationChoices } from '../../device/deviceGuides';
+import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
+import { startProgramming } from './programEffects';
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -74,10 +73,11 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next
-                    label="Program"
+                <Button
+                    variant="primary"
+                    large
                     disabled={!selected}
-                    onClick={next => {
+                    onClick={() => {
                         if (!selected) return;
 
                         usageData.sendUsageData(
@@ -87,9 +87,10 @@ export default () => {
 
                         dispatch(setChoice(selected));
                         dispatch(startProgramming());
-                        next();
                     }}
-                />
+                >
+                    Program
+                </Button>
             </Main.Footer>
         </Main>
     );

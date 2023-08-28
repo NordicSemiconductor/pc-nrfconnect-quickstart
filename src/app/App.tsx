@@ -19,8 +19,7 @@ import Introduction from '../features/steps/Introduction';
 import Learn from '../features/steps/Learn';
 import Personalize from '../features/steps/Personalize';
 import Program from '../features/steps/program';
-import SelectFirmware from '../features/steps/SelectFirmware';
-import { getCurrentStep, Step } from '../features/steps/stepsSlice';
+import { getCurrentStep } from '../features/steps/stepsSlice';
 import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
@@ -56,15 +55,14 @@ export const App = () => {
 
     return (
         <>
-            {currentStep === Step.CONNECT && <Connect />}
-            {currentStep === Step.INTRODUCTION && <Introduction />}
-            {currentStep === Step.PERSONALIZE && <Personalize />}
-            {currentStep === Step.SELECT_FIRMWARE && <SelectFirmware />}
-            {currentStep === Step.PROGRAM && <Program />}
-            {currentStep === Step.APPS && <Apps />}
-            {currentStep === Step.LEARN && <Learn />}
-            {currentStep === Step.DEVELOP && <Develop />}
-            {currentStep === Step.FINISH && <Finish />}
+            {currentStep === 'Connect' && <Connect />}
+            {currentStep === 'Introduction' && <Introduction />}
+            {currentStep === 'Personalize' && <Personalize />}
+            {currentStep === 'Program' && <Program />}
+            {currentStep === 'Apps' && <Apps />}
+            {currentStep === 'Learn' && <Learn />}
+            {currentStep === 'Develop' && <Develop />}
+            {currentStep === 'Finish' && <Finish />}
         </>
     );
 };

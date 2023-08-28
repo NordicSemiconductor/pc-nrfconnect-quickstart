@@ -12,6 +12,7 @@ import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
+import { ProgrammingState, setProgrammingState } from './programSlice';
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -27,9 +28,9 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back
-                    onClick={back => {
+                    onClick={() => {
                         dispatch(setChoice(undefined));
-                        back();
+                        setProgrammingState(ProgrammingState.SELECT_FIRMWARE);
                     }}
                 />
                 <Next />

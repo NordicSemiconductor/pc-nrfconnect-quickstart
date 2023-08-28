@@ -15,6 +15,7 @@ type FirmwareWithProgress = Firmware & {
 };
 
 export enum ProgrammingState {
+    SELECT_FIRMWARE,
     NO_DEVICE_CONNECTED,
     PROGRAMMING,
     SUCCESS,
@@ -28,7 +29,7 @@ interface State {
 }
 
 const initialState: State = {
-    programmingState: ProgrammingState.NO_DEVICE_CONNECTED,
+    programmingState: ProgrammingState.SELECT_FIRMWARE,
     firmwareWithProgress: [],
     programmingError: undefined,
 };

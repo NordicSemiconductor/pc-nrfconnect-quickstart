@@ -11,6 +11,7 @@ import Error from './Error';
 import NoDeviceConnected from './NoDeviceConnected';
 import Program from './Program';
 import { getProgrammingState, ProgrammingState } from './programSlice';
+import SelectFirmware from './SelectFirmware';
 import Success from './Success';
 
 export default () => {
@@ -18,6 +19,9 @@ export default () => {
 
     return (
         <>
+            {programmingState === ProgrammingState.SELECT_FIRMWARE && (
+                <SelectFirmware />
+            )}
             {programmingState === ProgrammingState.NO_DEVICE_CONNECTED && (
                 <NoDeviceConnected />
             )}
