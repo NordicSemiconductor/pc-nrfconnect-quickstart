@@ -140,7 +140,7 @@ export default () => {
     const anySelected = recommendedApps.some(app => app.selected);
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content className="tw-gap-6">
                 <Heading>Install recommended apps</Heading>
                 {recommendedApps.some(app => !apps.isInstalled(app)) ? (

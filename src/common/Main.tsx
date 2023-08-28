@@ -44,7 +44,7 @@ const Content = ({
     children: ReactNode;
 }) => (
     <div
-        className={`tw-flex tw-flex-col tw-items-center tw-justify-center tw-p-8 tw-text-center tw-text-sm tw-text-gray-700 ${className}`}
+        className={`tw-justify-begin tw-flex tw-flex-col tw-items-center tw-p-8 tw-text-start tw-text-sm tw-text-gray-700 ${className}`}
     >
         {children}
     </div>
@@ -58,7 +58,7 @@ const Footer = ({
     children?: ReactNode;
 }) => (
     <div
-        className={`tw-flex tw-flex-row tw-gap-2 tw-px-8 tw-pb-8 ${className}`}
+        className={`tw-flex tw-flex-row tw-justify-end tw-gap-2 tw-px-8 tw-pb-8 ${className}`}
     >
         {children}
     </div>
@@ -67,16 +67,14 @@ const Footer = ({
 const Main = ({
     className = '',
     children,
-    device,
 }: {
     className?: string;
     children: ReactNode;
     device?: NrfutilDeviceWithSerialnumber;
 }) => (
     <div
-        className={`tw tw-flex tw-h-full tw-max-h-full tw-flex-col tw-items-center tw-justify-between ${className}`}
+        className={`tw-flex tw-h-full tw-max-h-full tw-flex-col tw-justify-between ${className}`}
     >
-        <Header device={device} />
         {children}
     </div>
 );

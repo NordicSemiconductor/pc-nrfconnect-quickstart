@@ -23,7 +23,7 @@ export default () => {
     const dispatch = useAppDispatch();
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content>
                 <div className="tw-pb-10">
                     <DeviceIcon

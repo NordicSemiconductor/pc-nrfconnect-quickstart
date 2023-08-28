@@ -27,7 +27,7 @@ export default () => {
     const [selected, setSelected] = React.useState<Choice>();
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content className="tw-gap-8">
                 <Heading>Select application</Heading>
                 <p>

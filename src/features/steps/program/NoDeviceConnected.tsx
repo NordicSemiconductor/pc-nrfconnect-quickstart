@@ -10,15 +10,11 @@ import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
-import {
-    getSelectedDeviceUnsafely,
-    selectedDeviceIsConnected,
-} from '../../device/deviceSlice';
+import { selectedDeviceIsConnected } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 
 export default () => {
     const dispatch = useAppDispatch();
-    const device = useAppSelector(getSelectedDeviceUnsafely);
     const deviceIsConnected = useAppSelector(selectedDeviceIsConnected);
 
     useEffect(() => {
@@ -28,7 +24,7 @@ export default () => {
     }, [deviceIsConnected, dispatch]);
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content>
                 <Heading>Device not connected</Heading>
                 <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">

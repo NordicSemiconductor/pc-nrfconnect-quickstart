@@ -27,7 +27,7 @@ export default () => {
     const maxLength = 20;
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content>
                 <Heading>First, give your kit a custom name</Heading>
                 <div className="tw-flex tw-flex-col tw-items-center tw-gap-12 tw-pt-10">

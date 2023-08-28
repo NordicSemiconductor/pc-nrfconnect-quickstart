@@ -11,7 +11,6 @@ import { Button, Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { useAppSelector } from '../../../app/store';
 import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
-import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import { getProgrammingProgress } from './programSlice';
 
 const ProgressBar = ({ percentage }: { percentage: number }) => (
@@ -24,11 +23,10 @@ const ProgressBar = ({ percentage }: { percentage: number }) => (
 );
 
 export default () => {
-    const device = useAppSelector(getSelectedDeviceUnsafely);
     const firmwareProgress = useAppSelector(getProgrammingProgress);
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content className="tw-w-full tw-max-w-3xl">
                 <Heading>Programming</Heading>
                 <div className="tw-py-4">

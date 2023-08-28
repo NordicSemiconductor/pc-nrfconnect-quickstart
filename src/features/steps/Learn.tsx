@@ -24,7 +24,7 @@ export default () => {
     const choice = useAppSelector(getChoice);
 
     return (
-        <Main device={device}>
+        <Main>
             <Main.Content>
                 <Heading>
                     We recommend these resources for learning more about{' '}

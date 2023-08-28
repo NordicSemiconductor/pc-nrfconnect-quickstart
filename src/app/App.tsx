@@ -20,6 +20,8 @@ import Learn from '../features/steps/Learn';
 import Personalize from '../features/steps/Personalize';
 import Program from '../features/steps/program';
 import { getCurrentStep } from '../features/steps/stepsSlice';
+import Header from './Header';
+import StepStepper from './StepStepper';
 import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
@@ -49,20 +51,26 @@ export const App = () => {
 
     // Telemetry when user changes step
     useEffect(() => {
-        const currentStepName = Step[currentStep];
-        usageData.sendUsageData(`Step ${currentStepName}`);
+        usageData.sendUsageData(`Step: ${currentStep}`);
     }, [currentStep]);
 
     return (
-        <>
-            {currentStep === 'Connect' && <Connect />}
-            {currentStep === 'Introduction' && <Introduction />}
-            {currentStep === 'Personalize' && <Personalize />}
-            {currentStep === 'Program' && <Program />}
-            {currentStep === 'Apps' && <Apps />}
-            {currentStep === 'Learn' && <Learn />}
-            {currentStep === 'Develop' && <Develop />}
-            {currentStep === 'Finish' && <Finish />}
-        </>
+        <div className="tw-flex tw-h-full tw-w-full tw-flex-col">
+            <Header />
+            <div className="tw-flex tw-flex-row">
+                <StepStepper />
+
+                <div className="tw-flex-1">
+                    {currentStep === 'Connect' && <Connect />}
+                    {currentStep === 'Introduction' && <Introduction />}
+                    {currentStep === 'Personalize' && <Personalize />}
+                    {currentStep === 'Program' && <Program />}
+                    {currentStep === 'Apps' && <Apps />}
+                    {currentStep === 'Learn' && <Learn />}
+                    {currentStep === 'Develop' && <Develop />}
+                    {currentStep === 'Finish' && <Finish />}
+                </div>
+            </div>
+        </div>
     );
 };
