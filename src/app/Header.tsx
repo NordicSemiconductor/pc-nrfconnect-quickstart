@@ -18,13 +18,13 @@ export default () => {
     const device = useAppSelector(getSelectedDevice);
 
     return (
-        <div className="tw-flex tw-h-16 tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-gray-700 tw-px-12 tw-py-4 tw-text-base tw-text-white">
+        <div className="tw-flex tw-h-14 tw-max-h-14 tw-min-h-[56px] tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-primary tw-px-8 tw-text-base tw-text-white">
             <p className="tw-flex-1 tw-font-bold tw-uppercase">Quickstart</p>
             {device && (
-                <div className="tw-flex tw-flex-row tw-items-center tw-gap-3">
+                <div className="tw-flex tw-flex-row tw-items-center tw-gap-2">
                     <DeviceIcon
                         device={device}
-                        className="tw-h-5 tw-w-6 tw-fill-white"
+                        className="tw-h-5 tw-w-5 tw-fill-white"
                     />
                     <p>
                         {getPersistedNickname(device.serialNumber) ||

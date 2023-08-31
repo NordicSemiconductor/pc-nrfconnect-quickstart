@@ -57,7 +57,7 @@ export const App = () => {
     return (
         <div className="tw-flex tw-h-full tw-w-full tw-flex-col">
             <Header />
-            <div className="tw-flex tw-flex-row">
+            <div className="tw-flex tw-h-full tw-flex-row tw-overflow-hidden">
                 <StepStepper />
 
                 <div className="tw-flex-1">
