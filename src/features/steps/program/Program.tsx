@@ -9,7 +9,6 @@ import { shell } from '@electron/remote';
 import { Button, Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { getProgrammingProgress } from './programSlice';
 
@@ -27,8 +26,10 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content className="tw-w-full tw-max-w-3xl">
-                <Heading>Programming</Heading>
+            <Main.Content
+                heading="Programming"
+                className="tw-w-full tw-max-w-3xl"
+            >
                 <div className="tw-py-4">
                     <Spinner size="sm" />
                 </div>

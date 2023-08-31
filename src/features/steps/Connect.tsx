@@ -8,7 +8,6 @@ import React, { useEffect, useState } from 'react';
 import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../app/store';
-import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { isSupportedDevice } from '../device/deviceGuides';
 import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
@@ -52,9 +51,11 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content>
-                <Heading>Connect a Nordic kit to your PC</Heading>
                 <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-4 tw-pt-4">
+            <Main.Content
+                heading="Detect"
+                subHeading="Connect a Nordic kit to your PC."
+            >
                     <Spinner size="sm" />
                     <p>Searching for devices</p>
                     {longSearchDuration && (

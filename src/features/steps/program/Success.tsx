@@ -8,7 +8,6 @@ import React from 'react';
 
 import { useAppDispatch } from '../../../app/store';
 import { Back } from '../../../common/Back';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { setChoice } from '../../device/deviceSlice';
@@ -19,8 +18,7 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content>
-                <Heading>Success!</Heading>
+            <Main.Content heading="Success!">
                 <div className="tw-max-w-sm tw-pt-10">
                     <p>Device was programmed successfully.</p>
                 </div>

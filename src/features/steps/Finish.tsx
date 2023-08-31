@@ -12,14 +12,12 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Back } from '../../common/Back';
-import Heading from '../../common/Heading';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 
 export default () => (
     <Main>
-        <Main.Content className="tw-max-w-sm">
-            <Heading>Finished Quickstart</Heading>
+        <Main.Content heading="Finished quickstart" className="tw-max-w-sm">
             <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
                 <p>You now have finished all the steps</p>
                 <p>

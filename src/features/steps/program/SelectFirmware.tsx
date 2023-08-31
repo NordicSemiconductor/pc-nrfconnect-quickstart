@@ -14,7 +14,6 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
-import Heading from '../../../common/Heading';
 import Main from '../../../common/Main';
 import { Choice, deviceEvaluationChoices } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
@@ -28,8 +27,7 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content className="tw-gap-8">
-                <Heading>Select application</Heading>
+            <Main.Content heading="Select application" className="tw-gap-8">
                 <p>
                     This will program the application and the latest modem
                     firmware
