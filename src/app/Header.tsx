@@ -24,7 +24,7 @@ export default () => {
                 <div className="tw-flex tw-flex-row tw-items-center tw-gap-2">
                     <DeviceIcon
                         device={device}
-                        className="tw-h-5 tw-w-5 tw-fill-white"
+                        className="tw-h-5 tw-fill-white"
                     />
                     <p>
                         {getPersistedNickname(device.serialNumber) ||
