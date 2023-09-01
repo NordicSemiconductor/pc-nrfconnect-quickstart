@@ -12,7 +12,7 @@ import packageJson from '../../package.json';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
-import Connect from '../features/steps/Connect';
+import Connect from '../features/steps/connect';
 import Develop from '../features/steps/Develop';
 import Finish from '../features/steps/Finish';
 import Introduction from '../features/steps/Introduction';
