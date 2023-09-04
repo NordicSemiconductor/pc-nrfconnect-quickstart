@@ -15,10 +15,10 @@ import Apps from '../features/steps/Apps';
 import Connect from '../features/steps/connect';
 import Develop from '../features/steps/Develop';
 import Finish from '../features/steps/Finish';
-import Introduction from '../features/steps/Introduction';
 import Learn from '../features/steps/Learn';
-import Personalize from '../features/steps/Personalize';
+import Present from '../features/steps/Present';
 import Program from '../features/steps/program';
+import Rename from '../features/steps/Rename';
 import { getCurrentStep } from '../features/steps/stepsSlice';
 import Header from './Header';
 import StepStepper from './StepStepper';
@@ -62,8 +62,8 @@ export const App = () => {
 
                 <div className="tw-flex-1">
                     {currentStep === 'Connect' && <Connect />}
-                    {currentStep === 'Introduction' && <Introduction />}
-                    {currentStep === 'Personalize' && <Personalize />}
+                    {currentStep === 'Present' && <Present />}
+                    {currentStep === 'Rename' && <Rename />}
                     {currentStep === 'Program' && <Program />}
                     {currentStep === 'Apps' && <Apps />}
                     {currentStep === 'Learn' && <Learn />}

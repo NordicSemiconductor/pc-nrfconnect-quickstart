@@ -10,8 +10,8 @@ import { type RootState } from '../../app/store';
 
 export const steps = [
     'Connect',
-    'Introduction',
-    'Personalize',
+    'Present',
+    'Rename',
     'Program',
     'Apps',
     'Learn',
