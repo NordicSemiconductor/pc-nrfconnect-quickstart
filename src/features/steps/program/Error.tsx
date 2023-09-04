@@ -5,11 +5,9 @@
  */
 
 import React from 'react';
-import { getCurrentWindow } from '@electron/remote';
 import {
     Button,
     describeError,
-    openWindow,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
@@ -19,19 +17,38 @@ import { setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 import {
     getProgrammingError,
+    getProgrammingProgress,
     ProgrammingState,
     setProgrammingState,
 } from './programSlice';
+import ProgressIndicators from './ProgressIndicators';
 
 export default () => {
     const dispatch = useAppDispatch();
     const error = useAppSelector(getProgrammingError);
+    const failedCore = useAppSelector(getProgrammingProgress).find(
+        p => p.progress?.totalProgressPercentage || 0 < 100
+    )?.core;
 
     return (
         <Main>
-            <Main.Content heading="Failed to program a device">
-                <div className="tw-max-w-sm tw-pt-10">
+            <Main.Content heading="Programming failed">
+                <ProgressIndicators />
+                <div className="tw-pt-10">
+                    <p>
+                        Failed to program
+                        {failedCore ? ` core ${failedCore}` : ''}.
+                    </p>
+                    <br />
                     <p>{describeError(error)}</p>
+                    <br />
+                    <p>
+                        Contact support on{' '}
+                        <b>
+                            <u>DevZone</u>
+                        </b>{' '}
+                        if problem persists.
+                    </p>
                 </div>
             </Main.Content>
             <Main.Footer>
@@ -50,17 +67,7 @@ export default () => {
                     size="xl"
                     onClick={() => dispatch(startProgramming())}
                 >
-                    Retry
-                </Button>
-                <Button
-                    variant="link-button"
-                    size="xl"
-                    onClick={() => {
-                        openWindow.openLauncher();
-                        getCurrentWindow().close();
-                    }}
-                >
-                    Quit
+                    Program
                 </Button>
             </Main.Footer>
         </Main>

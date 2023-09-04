@@ -12,22 +12,25 @@ import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { setChoice } from '../../device/deviceSlice';
 import { ProgrammingState, setProgrammingState } from './programSlice';
+import ProgressIndicators from './ProgressIndicators';
 
 export default () => {
     const dispatch = useAppDispatch();
 
     return (
         <Main>
-            <Main.Content heading="Success!">
-                <div className="tw-max-w-sm tw-pt-10">
-                    <p>Device was programmed successfully.</p>
-                </div>
+            <Main.Content heading="Programming successful">
+                <ProgressIndicators />
             </Main.Content>
             <Main.Footer>
                 <Back
                     onClick={() => {
                         dispatch(setChoice(undefined));
-                        setProgrammingState(ProgrammingState.SELECT_FIRMWARE);
+                        dispatch(
+                            setProgrammingState(
+                                ProgrammingState.SELECT_FIRMWARE
+                            )
+                        );
                     }}
                 />
                 <Next />

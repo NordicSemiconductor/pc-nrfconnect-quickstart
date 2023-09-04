@@ -14,6 +14,8 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
+import Link from '../../../common/Link';
+import ListSelect from '../../../common/ListSelect';
 import Main from '../../../common/Main';
 import { Choice, deviceEvaluationChoices } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
@@ -25,49 +27,50 @@ export default () => {
 
     const [selected, setSelected] = React.useState<Choice>();
 
+    const items = deviceEvaluationChoices(device).map(choice => {
+        const isSelected = selected?.name === choice.name;
+        return {
+            id: choice.name,
+            selected: isSelected,
+            content: (
+                <div className="tw-flex tw-flex-row tw-items-start tw-justify-start">
+                    <div className="tw-w-32 tw-flex-shrink-0 tw-grow tw-pr-5">
+                        <b>{choice.name}</b>
+                    </div>
+                    <div className="tw-flex tw-flex-col tw-justify-start">
+                        <div className="tw-text-sm">{choice.description}</div>
+                        {choice.documentation && (
+                            <div className="tw-pt-px tw-text-xs">
+                                <Link
+                                    label={choice.documentation.label}
+                                    href={choice.documentation.href}
+                                    color={
+                                        isSelected
+                                            ? 'hover:tw-text-gray-50'
+                                            : 'hover:tw-text-gray-700'
+                                    }
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
+            ),
+        };
+    });
+
     return (
         <Main>
-            <Main.Content heading="Select application" className="tw-gap-8">
-                <p>
-                    This will program the application and the latest modem
-                    firmware
-                </p>
-                <div className="tw-flex tw-flex-row tw-gap-2">
-                    {deviceEvaluationChoices(device).map(choice => (
-                        <div
-                            key={choice.name}
-                            className={`tw-flex tw-w-44 tw-flex-col tw-gap-2 tw-border tw-border-solid tw-border-gray-500 tw-p-4 tw-text-left tw-text-xs ${
-                                selected?.name === choice.name
-                                    ? 'tw-bg-primary tw-text-white'
-                                    : 'tw-bg-gray-50'
-                            }`}
-                        >
-                            <p className="tw-font-bold">{choice.name}</p>
-                            <p className="tw-flex-1">{choice.description}</p>
-                            {choice.documentation && (
-                                <a
-                                    href={choice.documentation.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="tw-text-nordicBlue"
-                                >
-                                    {choice.documentation.label}
-                                </a>
-                            )}
-                            <Button
-                                variant="secondary"
-                                onClick={() => setSelected(choice)}
-                                className={classNames(
-                                    selected?.name === choice.name &&
-                                        'tw-pointer-events-none tw-cursor-none tw-opacity-0',
-                                    'tw-w-full'
-                                )}
-                            >
-                                Select
-                            </Button>
-                        </div>
-                    ))}
-                </div>
+            <Main.Content heading="Select an application to program">
+                <ListSelect
+                    items={items}
+                    onSelect={item =>
+                        setSelected(
+                            deviceEvaluationChoices(device).find(
+                                choice => choice.name === item.id
+                            )
+                        )
+                    }
+                />
             </Main.Content>
             <Main.Footer>
                 <Back />

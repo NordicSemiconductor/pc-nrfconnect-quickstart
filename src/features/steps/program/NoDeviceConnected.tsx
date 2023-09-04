@@ -5,11 +5,13 @@
  */
 
 import React, { useEffect } from 'react';
-import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
+import { Next } from '../../../common/Next';
 import { selectedDeviceIsConnected } from '../../device/deviceSlice';
+import Searching from '../connect/Searching';
 import { startProgramming } from './programEffects';
 
 export default () => {
@@ -24,16 +26,16 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading="Device not connected">
-                <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">
-                    <Spinner size="sm" />
-                    <p>
-                        Ensure that your device is connected in order to program
-                        it
-                    </p>
-                </div>
+            <Main.Content
+                heading="No development kit detected"
+                subHeading="Make sure you have a development kit connected."
+            >
+                <Searching />
             </Main.Content>
-            <Main.Footer />
+            <Main.Footer>
+                <Back />
+                <Next disabled label="Program" />
+            </Main.Footer>
         </Main>
     );
 };
