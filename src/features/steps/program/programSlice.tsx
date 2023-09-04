@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { Progress } from '@nordicsemiconductor/nrf-device-lib-js';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { type Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../../app/store';
 import { type Firmware } from '../../device/deviceGuides';
 
 type FirmwareWithProgress = Firmware & {
-    progressInfo?: Progress.Operation;
+    progress?: Progress;
 };
 
 export enum ProgrammingState {
@@ -43,11 +43,30 @@ const slice = createSlice({
         ) => {
             state.programmingState = action.payload;
         },
-        setProgrammingProgress: (
+        setProgrammingFirmware: (
             state,
             action: PayloadAction<FirmwareWithProgress[]>
         ) => {
             state.firmwareWithProgress = action.payload;
+        },
+        setProgrammingProgress: (
+            state,
+            action: PayloadAction<{
+                progress: Progress;
+                index: number;
+            }>
+        ) => {
+            const updatedFirmwareWithProgress = state.firmwareWithProgress.map(
+                (f, index) =>
+                    index === action.payload.index
+                        ? {
+                              ...f,
+                              progress: action.payload.progress,
+                          }
+                        : f
+            );
+
+            state.firmwareWithProgress = updatedFirmwareWithProgress;
         },
         setProgrammingError: (state, action: PayloadAction<unknown>) => {
             state.programmingError = action.payload;
@@ -57,6 +76,7 @@ const slice = createSlice({
 
 export const {
     setProgrammingState,
+    setProgrammingFirmware,
     setProgrammingProgress,
     setProgrammingError,
 } = slice.actions;

@@ -5,21 +5,15 @@
  */
 
 import {
-    Device,
-    deviceControlExecuteOperations,
     DeviceTraits,
-    enumerate,
-    Error,
-    JLinkPluginOperationsArguments,
+    NrfutilDevice,
+    NrfutilDeviceLib,
+    NrfutilDeviceWithSerialnumber,
     Progress,
-    startHotplugEvents,
-    stopHotplugEvents,
-} from '@nordicsemiconductor/nrf-device-lib-js';
-import { getDeviceLibContext } from '@nordicsemiconductor/pc-nrfconnect-shared';
+} from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import path from 'path';
 
 import { Firmware, getFirmwareFolder } from './deviceGuides';
-import { DeviceWithRequiredSerialNumber } from './deviceSlice';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,
@@ -28,94 +22,49 @@ const requiredTraits: DeviceTraits = {
 };
 
 const hasSerialNumber = (
-    device: Device
-): device is DeviceWithRequiredSerialNumber =>
+    device: NrfutilDevice
+): device is NrfutilDeviceWithSerialnumber =>
     'serialNumber' in device && device.serialNumber !== undefined;
 
-export const startWatchingDevices = (
-    onAddedDevice: (device: DeviceWithRequiredSerialNumber) => void,
-    onRemovedDevice: (deviceId: number) => void
+export const startWatchingDevices = async (
+    onDeviceArrived: (device: NrfutilDeviceWithSerialnumber) => void,
+    onDeviceLeft: (deviceId: number) => void
 ) => {
-    let hotplugEventsId: bigint | undefined;
-    const context = getDeviceLibContext();
-
-    enumerate(context, requiredTraits).then(initialDevices => {
-        initialDevices.filter(hasSerialNumber).forEach(onAddedDevice);
-
-        hotplugEventsId = startHotplugEvents(
-            context,
-            err => {
-                if (err) console.log(err);
-            },
-            event => {
-                switch (event.event_type) {
-                    case 'NRFDL_DEVICE_EVENT_ARRIVED':
-                        if (event.device && hasSerialNumber(event.device)) {
-                            onAddedDevice(event.device);
-                        }
-                        break;
-                    case 'NRFDL_DEVICE_EVENT_LEFT':
-                        onRemovedDevice(event.device_id);
-                        break;
-                }
-            }
-        );
-    });
+    const stopHotplugEvents = await NrfutilDeviceLib.list(
+        requiredTraits,
+        initialDevices =>
+            initialDevices.filter(hasSerialNumber).forEach(onDeviceArrived),
+        console.log,
+        {
+            onDeviceArrived,
+            onDeviceLeft,
+        }
+    );
 
     return () => {
-        if (hotplugEventsId) {
-            stopHotplugEvents(hotplugEventsId);
+        if (stopHotplugEvents.isRunning()) {
+            stopHotplugEvents.stop();
         }
     };
 };
 
-const labelToFormat = (label: Firmware['format']) => {
-    switch (label) {
-        case 'Modem':
-            return 'NRFDL_FW_NRF91_MODEM';
-        case 'Application':
-            return 'NRFDL_FW_INTEL_HEX';
-        default:
-            throw new Error(`Unknown label: ${label}`);
-    }
-};
-
 export const program = (
-    device: Device,
+    device: NrfutilDeviceWithSerialnumber,
     firmware: Firmware[],
-    progressCb: (progress: Progress.CallbackParameters) => void,
-    completeCb: (error?: Error) => void
+    onProgress: (index: number, progress: Progress) => void
 ) => {
-    const operations: JLinkPluginOperationsArguments[] = [];
-    operations.push(
-        ...firmware.map(({ format, file }, index) => ({
-            operationId: index.toString(),
-            operation: {
-                type: 'program' as const,
-                firmware: {
-                    format: labelToFormat(format),
-                    file: path.join(getFirmwareFolder(), file),
-                },
-            },
-        }))
-    );
-
-    operations.push({
-        operationId: operations.length.toString(),
-        operation: {
-            type: 'reset',
-            option: 'RESET_SYSTEM',
-        },
+    const batch = NrfutilDeviceLib.batch();
+    batch.recover('Application');
+    firmware.forEach(({ file }, index) => {
+        batch.program(
+            path.join(getFirmwareFolder(), file),
+            'Application',
+            undefined,
+            { onProgress: progress => onProgress(index, progress) }
+        );
     });
 
-    deviceControlExecuteOperations(
-        getDeviceLibContext(),
-        device.id,
-        completeCb,
-        () => {},
-        progressCb,
-        {
-            operations,
-        }
-    );
+    batch.reset('Application', 'RESET_SYSTEM');
+
+    return batch.run(device);
 };

@@ -4,20 +4,16 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { Device } from '@nordicsemiconductor/nrf-device-lib-js';
+import { NrfutilDeviceWithSerialnumber } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
 import { type Choice } from './deviceGuides';
 
-export interface DeviceWithRequiredSerialNumber extends Device {
-    serialNumber: string;
-}
-
 interface State {
     choice?: Choice;
-    connectedDevices: Map<string, DeviceWithRequiredSerialNumber>;
-    selectedDevice?: DeviceWithRequiredSerialNumber;
+    connectedDevices: Map<string, NrfutilDeviceWithSerialnumber>;
+    selectedDevice?: NrfutilDeviceWithSerialnumber;
 }
 
 const initialState: State = {
@@ -30,7 +26,7 @@ const slice = createSlice({
     reducers: {
         addDevice: (
             state,
-            { payload: device }: PayloadAction<DeviceWithRequiredSerialNumber>
+            { payload: device }: PayloadAction<NrfutilDeviceWithSerialnumber>
         ) => {
             if (state.selectedDevice?.serialNumber === device.serialNumber) {
                 state.selectedDevice = device;
@@ -50,7 +46,7 @@ const slice = createSlice({
             state,
             {
                 payload: device,
-            }: PayloadAction<DeviceWithRequiredSerialNumber | undefined>
+            }: PayloadAction<NrfutilDeviceWithSerialnumber | undefined>
         ) => {
             state.selectedDevice = device;
         },

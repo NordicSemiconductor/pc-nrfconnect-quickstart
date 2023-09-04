@@ -6,6 +6,7 @@
 
 import React, { useEffect } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { PackageJson } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/MetaFiles';
 
 import packageJson from '../../package.json';
 import { startWatchingDevices } from '../features/device/deviceLib';
@@ -24,19 +25,23 @@ import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
 
-usageData.init(packageJson);
+usageData.init(packageJson as unknown as PackageJson);
 
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
 
-    useEffect(
-        () =>
-            startWatchingDevices(
-                device => dispatch(addDevice(device)),
-                deviceId => dispatch(removeDevice(deviceId))
-            ),
-        [dispatch]
-    );
+    useEffect(() => {
+        const stopWatchingDevicesPromise = startWatchingDevices(
+            device => dispatch(addDevice(device)),
+            deviceId => dispatch(removeDevice(deviceId))
+        );
+
+        return () => {
+            stopWatchingDevicesPromise.then(stopWatchingDevices =>
+                stopWatchingDevices()
+            );
+        };
+    }, [dispatch]);
 };
 export const App = () => {
     useDevicesInStore();
