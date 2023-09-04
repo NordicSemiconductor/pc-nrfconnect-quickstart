@@ -10,7 +10,7 @@ import {
     getPersistedNickname,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { useAppSelector } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
 import ListSelect, {
     type DisabledListItem,
     type SelectableListItem,
@@ -22,10 +22,11 @@ import {
     deviceName,
     isSupportedDevice,
 } from '../../device/deviceGuides';
-import { getConnectedDevices } from '../../device/deviceSlice';
+import { getConnectedDevices, selectDevice } from '../../device/deviceSlice';
 import Searching from './Searching';
 
 export default () => {
+    const dispatch = useAppDispatch();
     const connectedDevices = useAppSelector(getConnectedDevices);
     const [selectedItem, setSelectedItem] = useState<
         SelectableListItem | DisabledListItem
@@ -81,7 +82,16 @@ export default () => {
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Next disabled={!selectedItem} />
+                <Next
+                    disabled={!selectedItem}
+                    onClick={next => {
+                        const selectedDevice = connectedDevices.find(
+                            device => device.serialNumber === selectedItem?.id
+                        );
+                        dispatch(selectDevice(selectedDevice));
+                        next();
+                    }}
+                />
             </Main.Footer>
         </Main>
     );
