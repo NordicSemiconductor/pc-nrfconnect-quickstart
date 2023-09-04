@@ -9,15 +9,15 @@ import { deviceInfo } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDevice } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import path from 'path';
 
-export interface Firmware {
-    format: 'Modem' | 'Application';
-    file: string;
-    link: string;
-}
-
 export interface Link {
     label: string;
     href: string;
+}
+
+export interface Firmware {
+    core: 'Modem' | 'Application';
+    file: string;
+    link: Link;
 }
 
 export interface Choice {
@@ -67,23 +67,28 @@ const deviceGuides: DeviceGuide[] = [
         ],
         choices: [
             {
-                name: 'AT commands',
-                description:
-                    'Use this application if you want to evaluate the cellular modem using AT commands.',
+                name: 'AT Commands',
+                description: 'Evaluate the cellular modem using At commands.',
                 documentation: {
-                    label: 'Documentation',
+                    label: 'Serial LTE Modem',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                 },
                 firmware: [
                     {
-                        format: 'Modem',
+                        core: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
-                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
+                        link: {
+                            label: 'Firmware 1.3.5',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt',
+                        },
                     },
                     {
-                        format: 'Application',
+                        core: 'Application',
                         file: 'slm-with-trace.hex',
-                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                        link: {
+                            label: 'Serial LTE Modem',
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                        },
                     },
                 ],
                 links: [
@@ -104,21 +109,27 @@ const deviceGuides: DeviceGuide[] = [
             {
                 name: 'Cloud Connectivity',
                 description:
-                    'Use this application if you want to evaluate cloud interaction, location services, GNSS and real-time configurations.',
+                    'Evaluate cloud interaction, location services, GNSS and real-time configurations.',
                 documentation: {
-                    label: 'Documentation',
+                    label: 'Asset Tracker V2',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                 },
                 firmware: [
                     {
-                        format: 'Modem',
+                        core: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
-                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
+                        link: {
+                            label: 'Firmware 1.3.5',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt',
+                        },
                     },
                     {
-                        format: 'Application',
+                        core: 'Application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
-                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                        link: {
+                            label: 'Asset Tracker V2',
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                        },
                     },
                 ],
                 links: [
@@ -130,22 +141,27 @@ const deviceGuides: DeviceGuide[] = [
             },
             {
                 name: 'Shell Command Line Interface',
-                description:
-                    'Use this application if you want to evaluate throughput, connectivity, and more.',
+                description: 'Evaluate throughput, connectivity and more.',
                 documentation: {
-                    label: 'Documentation',
+                    label: 'Modem Shell',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                 },
                 firmware: [
                     {
-                        format: 'Modem',
+                        core: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
-                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
+                        link: {
+                            label: 'Firmware 1.3.5',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt',
+                        },
                     },
                     {
-                        format: 'Application',
+                        core: 'Application',
                         file: 'nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex',
-                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                        link: {
+                            label: 'Modem Shell',
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                        },
                     },
                 ],
                 links: [
