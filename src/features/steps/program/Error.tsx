@@ -53,7 +53,7 @@ export default () => {
                     Retry
                 </Button>
                 <Button
-                    variant="secondary"
+                    variant="link-button"
                     size="xl"
                     onClick={() => {
                         openWindow.openLauncher();

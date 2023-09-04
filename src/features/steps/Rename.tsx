@@ -46,7 +46,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next label="Skip" variant="secondary" />
+                <Next label="Skip" variant="link-button" />
                 <Next
                     onClick={next => {
                         if (nickname.trim().length > 0) {

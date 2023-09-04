@@ -22,7 +22,7 @@ export const Back = ({
 
     return (
         <Button
-            variant="secondary"
+            variant="link-button"
             size="xl"
             onClick={() => {
                 if (onClick != null) {
