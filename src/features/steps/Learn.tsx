@@ -38,7 +38,7 @@ export default () => {
                                 usageData.sendUsageData('Opening url', href);
                                 openUrl(href);
                             }}
-                            large
+                            size="xl"
                             className="tw-w-96 tw-text-left"
                         >
                             {label}

@@ -45,7 +45,7 @@ export default () => {
                                     <p>{format}</p>
                                     <Button
                                         variant="link"
-                                        large
+                                        size="xl"
                                         onClick={() => {
                                             shell.openExternal(link);
                                         }}

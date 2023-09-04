@@ -47,14 +47,14 @@ export default () => {
                 />
                 <Button
                     variant="primary"
-                    large
+                    size="xl"
                     onClick={() => dispatch(startProgramming())}
                 >
                     Retry
                 </Button>
                 <Button
                     variant="secondary"
-                    large
+                    size="xl"
                     onClick={() => {
                         openWindow.openLauncher();
                         getCurrentWindow().close();

@@ -73,7 +73,7 @@ export default () => {
                 <Back />
                 <Button
                     variant="primary"
-                    large
+                    size="xl"
                     disabled={!selected}
                     onClick={() => {
                         if (!selected) return;
