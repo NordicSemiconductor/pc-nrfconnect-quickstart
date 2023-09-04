@@ -75,7 +75,7 @@ const blurAndInvoke =
 
 interface ListItem {
     id: string;
-    content: JSX.Element;
+    content: React.ReactNode;
 }
 
 export interface SelectableListItem extends ListItem {
