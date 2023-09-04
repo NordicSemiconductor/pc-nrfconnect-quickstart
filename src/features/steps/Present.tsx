@@ -36,7 +36,7 @@ export default () => {
                     <p>{deviceDescription(device)}</p>
                 </div>
             </Main.Content>
-            <Main.Footer className="tw-gap-20">
+            <Main.Footer>
                 <Back
                     onClick={back => {
                         dispatch(selectDevice(undefined));
