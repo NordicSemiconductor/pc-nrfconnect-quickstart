@@ -48,6 +48,7 @@ export default () => {
                 <Back />
                 <Next label="Skip" variant="link-button" />
                 <Next
+                    disabled={nickname.trim().length === 0}
                     onClick={next => {
                         if (nickname.trim().length > 0) {
                             persistNickname(device.serialNumber, nickname);
