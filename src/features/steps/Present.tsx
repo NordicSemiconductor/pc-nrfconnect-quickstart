@@ -24,9 +24,7 @@ export default () => {
     return (
         <Main>
             <Main.Content
-                heading={`Let&apos;s get started with the ${deviceName(
-                    device
-                )}`}
+                heading={`Let's get started with the ${deviceName(device)}`}
             >
                 <div className="tw-pb-10">
                     <DeviceIcon
