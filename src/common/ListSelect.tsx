@@ -16,7 +16,7 @@ const DisabledListItemContainer = ({
 }) => (
     <div className="tw-flex tw-w-full tw-flex-row tw-items-center tw-justify-between tw-gap-px tw-p-4 tw-opacity-40">
         {/* This is wrapped in a div so the flex styles are not applied */}
-        <div>{children}</div>
+        <div className="tw-pr-12">{children}</div>
         {!!disabledRadioButton && disabledRadioButton}
     </div>
 );
@@ -37,18 +37,18 @@ const SelectableListItemContainer = ({
         onKeyUp={invokeIfSpaceOrEnterPressed(onSelect)}
         className={classNames(
             'tw-flex tw-w-full tw-cursor-pointer tw-flex-row tw-items-center tw-justify-between tw-gap-px tw-p-4',
-            selected && 'tw-bg-primary',
-            !selected && 'tw-bg-gray-50 hover:tw-bg-gray-100'
+            selected && 'tw-bg-primary tw-text-gray-50',
+            !selected && 'tw-bg-gray-50 tw-text-gray-700 hover:tw-bg-gray-100'
         )}
     >
         {/* This is wrapped in a div so the flex styles are not applied */}
-        <div>{children}</div>
+        <div className="tw-pr-10">{children}</div>
         <span
             className={classNames(
                 selected
                     ? 'mdi-radiobox-marked tw-text-gray-50'
                     : 'mdi-radiobox-blank tw-text-primary',
-                `mdi tw-self-end tw-text-xl tw-leading-none`
+                `mdi tw-text-xl tw-leading-none`
             )}
         />
     </div>
