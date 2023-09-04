@@ -42,12 +42,7 @@ export default () => {
                 <p className="tw-text-xs">Not supported yet</p>
             ),
             content: (
-                <div
-                    className={classNames(
-                        'tw-flex tw-flex-row tw-items-center tw-justify-start',
-                        isSelected ? 'tw-text-gray-50' : 'tw-text-gray-700'
-                    )}
-                >
+                <div className="tw-flex tw-flex-row tw-items-center tw-justify-start">
                     <div className="tw-w-28">
                         <DeviceIcon
                             device={device}
