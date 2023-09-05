@@ -12,9 +12,11 @@ import { goToPreviousStep } from '../features/steps/stepsSlice';
 
 export const Back = ({
     label,
+    disabled,
     onClick,
 }: {
     label?: string;
+    disabled?: boolean;
     onClick?: (back: () => void) => void;
 }) => {
     const dispatch = useAppDispatch();
@@ -22,8 +24,9 @@ export const Back = ({
 
     return (
         <Button
-            variant="secondary"
-            large
+            variant="link-button"
+            size="xl"
+            disabled={disabled ?? false}
             onClick={() => {
                 if (onClick != null) {
                     onClick(back);

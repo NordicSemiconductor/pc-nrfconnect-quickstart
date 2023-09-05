@@ -12,15 +12,17 @@ import packageJson from '../../package.json';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
-import Connect from '../features/steps/Connect';
+import Connect from '../features/steps/connect';
 import Develop from '../features/steps/Develop';
+import Evaluate from '../features/steps/Evaluate';
 import Finish from '../features/steps/Finish';
-import Introduction from '../features/steps/Introduction';
 import Learn from '../features/steps/Learn';
-import Personalize from '../features/steps/Personalize';
+import Present from '../features/steps/Present';
 import Program from '../features/steps/program';
-import SelectFirmware from '../features/steps/SelectFirmware';
-import { getCurrentStep, Step } from '../features/steps/stepsSlice';
+import Rename from '../features/steps/Rename';
+import { getCurrentStep } from '../features/steps/stepsSlice';
+import Header from './Header';
+import StepStepper from './StepStepper';
 import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
@@ -50,21 +52,27 @@ export const App = () => {
 
     // Telemetry when user changes step
     useEffect(() => {
-        const currentStepName = Step[currentStep];
-        usageData.sendUsageData(`Step ${currentStepName}`);
+        usageData.sendUsageData(`Step: ${currentStep}`);
     }, [currentStep]);
 
     return (
-        <>
-            {currentStep === Step.CONNECT && <Connect />}
-            {currentStep === Step.INTRODUCTION && <Introduction />}
-            {currentStep === Step.PERSONALIZE && <Personalize />}
-            {currentStep === Step.SELECT_FIRMWARE && <SelectFirmware />}
-            {currentStep === Step.PROGRAM && <Program />}
-            {currentStep === Step.APPS && <Apps />}
-            {currentStep === Step.LEARN && <Learn />}
-            {currentStep === Step.DEVELOP && <Develop />}
-            {currentStep === Step.FINISH && <Finish />}
-        </>
+        <div className="tw-flex tw-h-full tw-w-full tw-flex-col">
+            <Header />
+            <div className="tw-flex tw-h-full tw-flex-row tw-overflow-hidden">
+                <StepStepper />
+
+                <div className="tw-flex-1">
+                    {currentStep === 'Connect' && <Connect />}
+                    {currentStep === 'Present' && <Present />}
+                    {currentStep === 'Rename' && <Rename />}
+                    {currentStep === 'Program' && <Program />}
+                    {currentStep === 'Evaluate' && <Evaluate />}
+                    {currentStep === 'Develop' && <Develop />}
+                    {currentStep === 'Learn' && <Learn />}
+                    {currentStep === 'Apps' && <Apps />}
+                    {currentStep === 'Finish' && <Finish />}
+                </div>
+            </div>
+        </div>
     );
 };

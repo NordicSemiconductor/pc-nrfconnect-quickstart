@@ -31,7 +31,7 @@ export const Next = ({
         <Button
             disabled={disabled ?? false}
             variant={variant ?? 'primary'}
-            large
+            size="xl"
             onClick={() => {
                 if (onClick != null) {
                     onClick(next);
@@ -40,7 +40,7 @@ export const Next = ({
                 }
             }}
         >
-            {label ?? 'Next'}
+            {label ?? 'Continue'}
         </Button>
     );
 };

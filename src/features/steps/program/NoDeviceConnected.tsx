@@ -5,20 +5,17 @@
  */
 
 import React, { useEffect } from 'react';
-import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import Heading from '../../../common/Heading';
+import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
-import {
-    getSelectedDeviceUnsafely,
-    selectedDeviceIsConnected,
-} from '../../device/deviceSlice';
+import { Next } from '../../../common/Next';
+import { selectedDeviceIsConnected } from '../../device/deviceSlice';
+import Searching from '../connect/Searching';
 import { startProgramming } from './programEffects';
 
 export default () => {
     const dispatch = useAppDispatch();
-    const device = useAppSelector(getSelectedDeviceUnsafely);
     const deviceIsConnected = useAppSelector(selectedDeviceIsConnected);
 
     useEffect(() => {
@@ -28,18 +25,17 @@ export default () => {
     }, [deviceIsConnected, dispatch]);
 
     return (
-        <Main device={device}>
-            <Main.Content>
-                <Heading>Device not connected</Heading>
-                <div className="tw-flex tw-max-w-sm tw-flex-col tw-items-center tw-gap-4 tw-pt-4">
-                    <Spinner size="sm" />
-                    <p>
-                        Ensure that your device is connected in order to program
-                        it
-                    </p>
-                </div>
+        <Main>
+            <Main.Content
+                heading="No development kit detected"
+                subHeading="Make sure you have a development kit connected."
+            >
+                <Searching />
             </Main.Content>
-            <Main.Footer />
+            <Main.Footer>
+                <Back />
+                <Next disabled label="Program" />
+            </Main.Footer>
         </Main>
     );
 };

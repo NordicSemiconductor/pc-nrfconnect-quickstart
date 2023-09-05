@@ -9,45 +9,57 @@ import { deviceInfo } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDevice } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import path from 'path';
 
-export interface Firmware {
-    format: 'Modem' | 'Application';
-    file: string;
-    link: string;
-}
-
 export interface Link {
     label: string;
     href: string;
 }
+
+export interface Firmware {
+    core: 'Modem' | 'Application';
+    file: string;
+    link: Link;
+}
+
+interface EvaluationContent {
+    links?: Link[];
+    description: string;
+}
+
+export interface AppEvaluationResource extends EvaluationContent {
+    app: string;
+}
+
+export interface ExternalLinkEvaluationResource extends EvaluationContent {
+    title: string;
+    link: Link;
+}
+
+export type EvaluationResource =
+    | AppEvaluationResource
+    | ExternalLinkEvaluationResource;
 
 export interface Choice {
     name: string;
     description: string;
     firmware: Firmware[];
     documentation?: Link;
-    links?: Link[];
+    evaluationResources: EvaluationResource[];
 }
 
 export interface DeviceGuide {
     boardVersion: string;
     description: string;
     apps: string[];
-    links: Link[];
     choices: Choice[];
+    learningResources: {
+        label: string;
+        description: string;
+        link: Link;
+    }[];
 }
 
 export const getFirmwareFolder = () =>
     path.resolve(__dirname, '..', 'resources', 'firmware');
-
-const shared: { apps: string[]; links: Link[] } = {
-    apps: ['pc-nrfconnect-toolchain-manager'],
-    links: [
-        {
-            label: 'Nordic Academy - nRF Connect SDK Fundamentals',
-            href: 'https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/',
-        },
-    ],
-};
 
 const deviceGuides: DeviceGuide[] = [
     {
@@ -56,102 +68,188 @@ const deviceGuides: DeviceGuide[] = [
             'pc-nrfconnect-cellularmonitor',
             'pc-nrfconnect-serial-terminal',
             'pc-nrfconnect-programmer',
+            'pc-nrfconnect-ppk',
         ],
         description:
             'The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications. It includes a SEGGER J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all Io pins, and relevant module interfaces.',
-        links: [
+        learningResources: [
             {
-                label: 'Nordic Academy - Cellular IoT Fundamentals',
-                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+                label: 'Developer Academy',
+                description:
+                    'Interactive online learning platform for Nordic devices.',
+                link: {
+                    label: 'Nordic Developer Academy',
+                    href: 'https://academy.nordicsemi.com/',
+                },
+            },
+            {
+                label: 'Best practices',
+                description:
+                    'The main aspects and decisions you need to consider before and during your development phase of a low-power cellular Internet of Things product.',
+                link: {
+                    label: 'nWP044 - Best practices for IoT development',
+                    href: 'https://docs.nordicsemi.com/bundle/nwp_044/page/WP/nwp_044/intro.html',
+                },
             },
         ],
         choices: [
             {
-                name: 'AT commands',
-                description:
-                    'Use this application if you want to evaluate the cellular modem using AT commands.',
+                name: 'AT Commands',
+                description: 'Evaluate the cellular modem using At commands.',
                 documentation: {
-                    label: 'Documentation',
+                    label: 'Serial LTE Modem',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                 },
                 firmware: [
                     {
-                        format: 'Modem',
+                        core: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
-                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
+                        link: {
+                            label: 'Firmware 1.3.5',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt',
+                        },
                     },
                     {
-                        format: 'Application',
+                        core: 'Application',
                         file: 'slm-with-trace.hex',
-                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                        link: {
+                            label: 'Serial LTE Modem',
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                        },
                     },
                 ],
-                links: [
+                evaluationResources: [
                     {
-                        label: 'AT Commands Documentation',
-                        href: 'https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html',
+                        title: 'Activate SIM card',
+                        description:
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                        link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
-                        label: 'IP AT Commands Documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/doc/AT_commands_intro.html',
+                        app: 'pc-nrfconnect-serial-terminal',
+                        description:
+                            'Use the Serial Terminal PC application as a serial interface to send AT commands to the device',
+                        links: [
+                            {
+                                label: 'AT Commands reference manual',
+                                href: 'https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html',
+                            },
+                            {
+                                label: 'IP AT Commands Documentation',
+                                href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/doc/AT_commands_intro.html',
+                            },
+                        ],
                     },
                     {
-                        label: 'Application documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
+                        app: 'pc-nrfconnect-cellularmonitor',
+                        description:
+                            'Automatically connect and evaluate parameters',
+                        links: [
+                            {
+                                label: 'Cellular Fundamentals',
+                                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+                            },
+                        ],
                     },
                 ],
             },
             {
                 name: 'Cloud Connectivity',
                 description:
-                    'Use this application if you want to evaluate cloud interaction, location services, GNSS and real-time configurations.',
+                    'Evaluate cloud interaction, location services, GNSS and real-time configurations.',
                 documentation: {
-                    label: 'Documentation',
+                    label: 'Asset Tracker V2',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
                 },
                 firmware: [
                     {
-                        format: 'Modem',
+                        core: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
-                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
+                        link: {
+                            label: 'Firmware 1.3.5',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt',
+                        },
                     },
                     {
-                        format: 'Application',
+                        core: 'Application',
                         file: 'nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex',
-                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                        link: {
+                            label: 'Asset Tracker V2',
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                        },
                     },
                 ],
-                links: [
+                evaluationResources: [
                     {
-                        label: 'Application documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
+                        title: 'Activate SIM card',
+                        description:
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                        link: { label: 'Actvate SIM card', href: '' },
+                    },
+                    {
+                        title: 'Cellular IoT Fundamentals',
+                        link: {
+                            label: 'Open course',
+                            href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
+                        },
+                        description:
+                            'Follow Exersice 1 in the Cellular IoT Fundamentals couse to evaluate cloud connectivity.',
                     },
                 ],
             },
             {
                 name: 'Shell Command Line Interface',
-                description:
-                    'Use this application if you want to evaluate throughput, connectivity, and more.',
+                description: 'Evaluate throughput, connectivity and more.',
                 documentation: {
-                    label: 'Documentation',
+                    label: 'Modem Shell',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                 },
                 firmware: [
                     {
-                        format: 'Modem',
+                        core: 'Modem',
                         file: 'mfw_nrf9160_1.3.5.zip',
-                        link: 'https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download?lang=en#infotabs',
+                        link: {
+                            label: 'Firmware 1.3.5',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt',
+                        },
                     },
                     {
-                        format: 'Application',
+                        core: 'Application',
                         file: 'nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex',
-                        link: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                        link: {
+                            label: 'Modem Shell',
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                        },
                     },
                 ],
-                links: [
+                evaluationResources: [
                     {
-                        label: 'Application documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                        title: 'Activate SIM card',
+                        description:
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                        link: { label: 'Actvate SIM card', href: '' },
+                    },
+                    {
+                        app: 'pc-nrfconnect-serial-terminal',
+                        description:
+                            'Serial interface to send commands to the device.',
+                        links: [
+                            {
+                                label: 'Modem Shell documentation',
+                                href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                            },
+                        ],
+                    },
+                    {
+                        app: 'pc-nrfconnect-cellularmonitor',
+                        description:
+                            'Automatically connect and evaluate parameters',
+                        links: [
+                            {
+                                label: 'Cellular Fundamentals',
+                                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+                            },
+                        ],
                     },
                 ],
             },
@@ -188,21 +286,10 @@ export const DeviceIcon = ({
 };
 
 export const deviceApps = (device: NrfutilDevice) =>
-    [...(getDeviceGuide(device)?.apps ?? []), ...shared.apps].reduce<string[]>(
-        (apps, app) => (apps.includes(app) ? apps : [...apps, app]),
-        []
-    );
+    getDeviceGuide(device)?.apps ?? [];
 
-// TODO: concat deviceInfo links?
-export const deviceLinks = (device: NrfutilDevice, choice?: Choice) =>
-    [
-        ...(getDeviceGuide(device)?.links ?? []),
-        ...(choice?.links ?? []),
-        ...shared.links,
-    ].reduce<Link[]>(
-        (links, link) => (links.includes(link) ? links : [...links, link]),
-        []
-    );
-
-export const deviceEvaluationChoices = (device: NrfutilDevice) =>
+export const deviceChoices = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.choices ?? [];
+
+export const deviceLearningResources = (device: NrfutilDevice) =>
+    getDeviceGuide(device)?.learningResources ?? [];

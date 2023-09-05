@@ -8,29 +8,24 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
 
-export enum Step {
-    WELCOME,
-    CONNECT,
-    INTRODUCTION,
-    PERSONALIZE,
-    SELECT_FIRMWARE,
-    PROGRAM,
-    APPS,
-    LEARN,
-    DEVELOP,
-    FINISH,
-}
+export const steps = [
+    'Connect',
+    'Present',
+    'Rename',
+    'Program',
+    'Evaluate',
+    'Develop',
+    'Learn',
+    'Apps',
+    'Finish',
+] as const;
 
 interface State {
-    currentStep: Step;
+    currentStepIndex: number;
 }
 
-const initialMainStep = process.argv.includes('--first-launch')
-    ? Step.WELCOME
-    : Step.CONNECT;
-
 const initialState: State = {
-    currentStep: initialMainStep,
+    currentStepIndex: 8,
 };
 
 const slice = createSlice({
@@ -38,21 +33,20 @@ const slice = createSlice({
     initialState,
     reducers: {
         goToNextStep: state => {
-            state.currentStep += 1;
+            state.currentStepIndex = Math.min(
+                (state.currentStepIndex += 1),
+                steps.length - 1
+            );
         },
         goToPreviousStep: state => {
-            state.currentStep -= 1;
-
-            if (state.currentStep === Step.PROGRAM) {
-                // Jump over program step when going back
-                state.currentStep -= 1;
-            }
+            state.currentStepIndex = Math.max((state.currentStepIndex -= 1), 0);
         },
     },
 });
 
 export const { goToNextStep, goToPreviousStep } = slice.actions;
 
-export const getCurrentStep = (state: RootState) => state.steps.currentStep;
+export const getCurrentStep = (state: RootState) =>
+    steps[state.steps.currentStepIndex];
 
 export default slice.reducer;

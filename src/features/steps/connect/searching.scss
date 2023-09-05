@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2023 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
+ */
+
+@import '~@nordicsemiconductor/pc-nrfconnect-shared/styles';
+
+.searching {
+  font-size: 14px;
+}
+
+.searching:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 1500ms infinite;
+  animation: ellipsis steps(4,end)1500ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 0.875em;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 0.875em;
+  }
+}
