@@ -37,7 +37,7 @@ export default () => {
                 <div className="tw-pt-10">
                     <p>
                         Failed to program
-                        {failedCore ? ` core ${failedCore}` : ''}.
+                        {failedCore ? ` ${failedCore} core` : ''}.
                     </p>
                     <br />
                     <p>{describeError(error)}</p>
