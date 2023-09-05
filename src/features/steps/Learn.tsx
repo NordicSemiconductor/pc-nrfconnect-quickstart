@@ -5,45 +5,37 @@
  */
 
 import React from 'react';
-import {
-    Button,
-    openUrl,
-    usageData,
-} from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { ExternalLink } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import { deviceLinks, deviceName } from '../device/deviceGuides';
-import { getChoice, getSelectedDeviceUnsafely } from '../device/deviceSlice';
+import { deviceLearningResources } from '../device/deviceGuides';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
-    const choice = useAppSelector(getChoice);
 
     return (
         <Main>
-            <Main.Content
-                heading={`We recommend these resources for learning more about ${deviceName(
-                    device
-                )}`}
-            >
-                <div className="tw-flex tw-flex-col tw-items-center tw-gap-4 tw-pt-10">
-                    {deviceLinks(device, choice).map(({ label, href }) => (
-                        <Button
-                            key={label}
-                            variant="link-button"
-                            onClick={() => {
-                                usageData.sendUsageData('Opening url', href);
-                                openUrl(href);
-                            }}
-                            size="xl"
-                            className="tw-w-96 tw-text-left"
-                        >
-                            {label}
-                        </Button>
-                    ))}
+            <Main.Content heading="Recommended learning resources">
+                <div className="tw-flex tw-flex-col tw-items-start tw-justify-start tw-gap-4">
+                    {deviceLearningResources(device).map(
+                        ({ label, description, link }) => (
+                            <div key={label}>
+                                <b>{label}</b>
+                                <br />
+                                {description}
+                                <div className="tw-pt-0.5 tw-text-xs">
+                                    <ExternalLink
+                                        label={link.label}
+                                        href={link.href}
+                                    />
+                                </div>
+                            </div>
+                        )
+                    )}
                 </div>
             </Main.Content>
             <Main.Footer>

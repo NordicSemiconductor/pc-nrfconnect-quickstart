@@ -26,15 +26,18 @@ export interface Choice {
     firmware: Firmware[];
     documentation?: Link;
     evaluationResources: { links: Link[]; app: string; description: string }[];
-    links?: Link[];
 }
 
 export interface DeviceGuide {
     boardVersion: string;
     description: string;
     apps: string[];
-    links: Link[];
     choices: Choice[];
+    learningResources: {
+        label: string;
+        description: string;
+        link: Link;
+    }[];
 }
 
 export const getFirmwareFolder = () =>
@@ -51,10 +54,24 @@ const deviceGuides: DeviceGuide[] = [
         ],
         description:
             'The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications. It includes a SEGGER J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all Io pins, and relevant module interfaces.',
-        links: [
+        learningResources: [
             {
-                label: 'Nordic Academy - Cellular IoT Fundamentals',
-                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+                label: 'Developer Academy',
+                description:
+                    'Interactive online learning platform for Nordic devices.',
+                link: {
+                    label: 'Nordic Developer Academy',
+                    href: 'https://academy.nordicsemi.com/',
+                },
+            },
+            {
+                label: 'Best practices',
+                description:
+                    'The main aspects and decisions you need to consider before and during your development phase of a low-power cellular Internet of Things product.',
+                link: {
+                    label: 'nWP044 - Best practices for IoT development',
+                    href: 'https://docs.nordicsemi.com/bundle/nwp_044/page/WP/nwp_044/intro.html',
+                },
             },
         ],
         choices: [
@@ -139,12 +156,6 @@ const deviceGuides: DeviceGuide[] = [
                     },
                 ],
                 evaluationResources: [],
-                links: [
-                    {
-                        label: 'Application documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html',
-                    },
-                ],
             },
             {
                 name: 'Shell Command Line Interface',
@@ -195,12 +206,6 @@ const deviceGuides: DeviceGuide[] = [
                         ],
                     },
                 ],
-                links: [
-                    {
-                        label: 'Application documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
-                    },
-                ],
             },
         ],
     },
@@ -237,11 +242,8 @@ export const DeviceIcon = ({
 export const deviceApps = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.apps ?? [];
 
-// TODO: concat deviceInfo links?
-export const deviceLinks = (device: NrfutilDevice, choice?: Choice) =>
-    [...(getDeviceGuide(device)?.links ?? []), ...(choice?.links ?? [])].reduce<
-        Link[]
-    >((links, link) => (links.includes(link) ? links : [...links, link]), []);
-
 export const deviceChoices = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.choices ?? [];
+
+export const deviceLearningResources = (device: NrfutilDevice) =>
+    getDeviceGuide(device)?.learningResources ?? [];
