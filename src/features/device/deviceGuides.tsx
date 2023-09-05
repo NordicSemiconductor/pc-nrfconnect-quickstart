@@ -47,6 +47,7 @@ const deviceGuides: DeviceGuide[] = [
             'pc-nrfconnect-cellularmonitor',
             'pc-nrfconnect-serial-terminal',
             'pc-nrfconnect-programmer',
+            'pc-nrfconnect-ppk',
         ],
         description:
             'The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications. It includes a SEGGER J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all Io pins, and relevant module interfaces.',
