@@ -46,7 +46,7 @@ export default () => {
                             <p>This is taking longer than expected.</p>
                             <br />
                             <p>
-                                Context support on
+                                Contact support on
                                 <b>
                                     {' '}
                                     <u>DevZone</u>{' '}
