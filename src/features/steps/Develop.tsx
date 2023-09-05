@@ -13,17 +13,13 @@ import vscodeIcon from '../../../resources/vscode.svg';
 import vscodeAltIcon from '../../../resources/vscode-alt.svg';
 import { Back } from '../../common/Back';
 import Italic from '../../common/Italic';
-import ListSelect, {
-    DisabledListItem,
-    SelectableListItem,
-} from '../../common/ListSelect';
+import { ListItemVariant } from '../../common/listSelect/ListSelectItem';
+import { RadioSelect } from '../../common/listSelect/RadioSelect';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 
 export default () => {
-    const [selected, setSelected] = useState<
-        SelectableListItem | DisabledListItem
-    >();
+    const [selected, setSelected] = useState<ListItemVariant>();
 
     const items = [
         {
@@ -77,7 +73,7 @@ export default () => {
     return (
         <Main>
             <Main.Content heading="How would you like to start developing">
-                <ListSelect items={items} onSelect={setSelected} />
+                <RadioSelect items={items} onSelect={setSelected} />
             </Main.Content>
             <Main.Footer>
                 <Back />

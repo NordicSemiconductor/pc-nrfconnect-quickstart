@@ -11,10 +11,8 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import ListSelect, {
-    type DisabledListItem,
-    type SelectableListItem,
-} from '../../../common/ListSelect';
+import { ListItemVariant } from '../../../common/listSelect/ListSelectItem';
+import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import {
@@ -28,9 +26,7 @@ import Searching from './Searching';
 export default () => {
     const dispatch = useAppDispatch();
     const connectedDevices = useAppSelector(getConnectedDevices);
-    const [selectedItem, setSelectedItem] = useState<
-        SelectableListItem | DisabledListItem
-    >();
+    const [selectedItem, setSelectedItem] = useState<ListItemVariant>();
 
     const items = connectedDevices.map(device => {
         const isSelected = selectedItem?.id === device.serialNumber;
@@ -71,7 +67,7 @@ export default () => {
     return (
         <Main>
             <Main.Content heading="Select a kit">
-                <ListSelect items={items} onSelect={setSelectedItem} />
+                <RadioSelect items={items} onSelect={setSelectedItem} />
                 <div className="tw-pt-5">
                     <Searching />
                 </div>

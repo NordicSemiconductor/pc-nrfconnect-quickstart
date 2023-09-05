@@ -7,7 +7,6 @@
 import React from 'react';
 import {
     Button,
-    classNames,
     deviceInfo,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
@@ -15,7 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Link from '../../../common/Link';
-import ListSelect from '../../../common/ListSelect';
+import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
 import { Choice, deviceEvaluationChoices } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
@@ -34,7 +33,7 @@ export default () => {
             selected: isSelected,
             content: (
                 <div className="tw-flex tw-flex-row tw-items-start tw-justify-start">
-                    <div className="tw-w-32 tw-flex-shrink-0 tw-grow tw-pr-5">
+                    <div className="tw-w-32 tw-flex-shrink-0 tw-pr-5">
                         <b>{choice.name}</b>
                     </div>
                     <div className="tw-flex tw-flex-col tw-justify-start">
@@ -61,7 +60,7 @@ export default () => {
     return (
         <Main>
             <Main.Content heading="Select an application to program">
-                <ListSelect
+                <RadioSelect
                     items={items}
                     onSelect={item =>
                         setSelected(

@@ -7,43 +7,56 @@
 import React from 'react';
 import { getCurrentWindow } from '@electron/remote';
 import {
+    deviceInfo,
     openWindow,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
+import Italic from '../../common/Italic';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
-export default () => (
-    <Main>
-        <Main.Content heading="Finished quickstart" className="tw-max-w-sm">
-            <div className="tw-flex tw-flex-col tw-gap-4 tw-pt-10">
-                <p>You now have finished all the steps</p>
-                <p>
-                    Quickstart can be opened at any time from nRF Connect for
-                    Desktop
-                </p>
-                <p>
-                    Please leave{' '}
-                    <u>
-                        <strong>feedback</strong>
-                    </u>{' '}
-                    if you have suggestions for how we can make the getting
-                    started experience better
-                </p>
-            </div>
-        </Main.Content>
-        <Main.Footer>
-            <Back />
-            <Next
-                label="Exit"
-                onClick={() => {
-                    usageData.sendUsageData('Exit quickstart');
-                    openWindow.openLauncher();
-                    getCurrentWindow().close();
-                }}
-            />
-        </Main.Footer>
-    </Main>
-);
+export default () => {
+    const deviceName = deviceInfo(
+        useAppSelector(getSelectedDeviceUnsafely)
+    ).name;
+
+    return (
+        <Main>
+            <Main.Content
+                heading="Finish"
+                subHeading={`You completed all steps for the ${deviceName}`}
+            >
+                <div>
+                    Finish flag icon
+                    <br />
+                    <Italic>Did you find the information you expected?</Italic>
+                    <br />
+                    <Italic>Was something unclear?</Italic>
+                    <br />
+                    <Italic>Is there something we missed?</Italic>
+                    <br />
+                    <br />
+                    <b>
+                        <u>Give feedback</u>
+                    </b>{' '}
+                    now and help us improve the user experience.
+                </div>
+            </Main.Content>
+            <Main.Footer>
+                <Back />
+                <Next
+                    label="Close"
+                    onClick={() => {
+                        usageData.sendUsageData('Exit quickstart');
+                        openWindow.openLauncher();
+                        getCurrentWindow().close();
+                    }}
+                />
+            </Main.Footer>
+        </Main>
+    );
+};
