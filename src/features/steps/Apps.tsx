@@ -33,6 +33,8 @@ export default () => {
     const items = recommendedApps.map(app => ({
         id: app.name,
         selected: app.selected,
+        disabled: apps.isInstalled(app),
+        disabledSelector: <p className="tw-text-sm">INSTALLED</p>,
         content: (
             <div className="tw-flex tw-flex-row tw-items-start tw-justify-start">
                 <div className="tw-w-32 tw-flex-shrink-0 tw-pr-5">
