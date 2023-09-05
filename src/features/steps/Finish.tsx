@@ -30,21 +30,20 @@ export default () => {
                 heading="Finish"
                 subHeading={`You completed all steps for the ${deviceName}`}
             >
-                <div>
-                    Finish flag icon
-                    <br />
-                    <Italic>Did you find the information you expected?</Italic>
-                    <br />
-                    <Italic>Was something unclear?</Italic>
-                    <br />
-                    <Italic>Is there something we missed?</Italic>
-                    <br />
-                    <br />
-                    <b>
-                        <u>Give feedback</u>
-                    </b>{' '}
-                    now and help us improve the user experience.
+                <div className="tw-pb-10">
+                    <span className="mdi mdi-flag-checkered tw-text-8xl tw-leading-none tw-text-gray-700" />
                 </div>
+                <Italic>Did you find the information you expected?</Italic>
+                <br />
+                <Italic>Was something unclear?</Italic>
+                <br />
+                <Italic>Is there something we missed?</Italic>
+                <br />
+                <br />
+                <b>
+                    <u>Give feedback</u>
+                </b>{' '}
+                now and help us improve the user experience.
             </Main.Content>
             <Main.Footer>
                 <Back />
