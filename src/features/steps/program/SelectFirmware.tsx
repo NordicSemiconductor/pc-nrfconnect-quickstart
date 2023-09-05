@@ -16,7 +16,7 @@ import { Back } from '../../../common/Back';
 import Link from '../../../common/Link';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
-import { Choice, deviceEvaluationChoices } from '../../device/deviceGuides';
+import { Choice, deviceChoices } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 
@@ -26,7 +26,7 @@ export default () => {
 
     const [selected, setSelected] = React.useState<Choice>();
 
-    const items = deviceEvaluationChoices(device).map(choice => {
+    const items = deviceChoices(device).map(choice => {
         const isSelected = selected?.name === choice.name;
         return {
             id: choice.name,
@@ -64,7 +64,7 @@ export default () => {
                     items={items}
                     onSelect={item =>
                         setSelected(
-                            deviceEvaluationChoices(device).find(
+                            deviceChoices(device).find(
                                 choice => choice.name === item.id
                             )
                         )

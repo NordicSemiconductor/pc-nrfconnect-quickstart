@@ -243,5 +243,5 @@ export const deviceLinks = (device: NrfutilDevice, choice?: Choice) =>
         Link[]
     >((links, link) => (links.includes(link) ? links : [...links, link]), []);
 
-export const deviceEvaluationChoices = (device: NrfutilDevice) =>
+export const deviceChoices = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.choices ?? [];
