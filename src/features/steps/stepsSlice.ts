@@ -25,7 +25,7 @@ interface State {
 }
 
 const initialState: State = {
-    currentStepIndex: 8,
+    currentStepIndex: 0,
 };
 
 const slice = createSlice({
