@@ -26,8 +26,9 @@ const ProgressBar = ({
         <div
             className={classNames(
                 'tw-h-full',
-                failed && 'tw-bg-red',
-                percentage >= 100 && !failed ? 'tw-bg-green' : 'tw-bg-primary'
+                percentage < 100 && failed && 'tw-bg-red',
+                percentage < 100 && !failed && 'tw-bg-primary',
+                percentage >= 100 && 'tw-bg-green'
             )}
             style={{ width: `${failed ? 100 : percentage}%` }}
         />
