@@ -18,7 +18,7 @@ export interface SelectableListItem extends ListItem {
 
 export interface DisabledListItem extends ListItem {
     disabled: true;
-    disabledRadioButton: React.ReactNode;
+    disabledSelector: React.ReactNode;
 }
 
 export type ListItemVariant = SelectableListItem | DisabledListItem;

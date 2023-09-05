@@ -55,7 +55,7 @@ export const RadioSelect = ({
                 <DisabledListItemContainer
                     key={item.id}
                     disabledSelector={
-                        (item as DisabledListItem).disabledRadioButton
+                        (item as DisabledListItem).disabledSelector
                     }
                 >
                     {item.content}
