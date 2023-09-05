@@ -67,9 +67,9 @@ export const App = () => {
                     {currentStep === 'Rename' && <Rename />}
                     {currentStep === 'Program' && <Program />}
                     {currentStep === 'Evaluate' && <Evaluate />}
-                    {currentStep === 'Apps' && <Apps />}
                     {currentStep === 'Develop' && <Develop />}
                     {currentStep === 'Learn' && <Learn />}
+                    {currentStep === 'Apps' && <Apps />}
                     {currentStep === 'Finish' && <Finish />}
                 </div>
             </div>

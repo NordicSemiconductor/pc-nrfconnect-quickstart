@@ -14,9 +14,9 @@ export const steps = [
     'Rename',
     'Program',
     'Evaluate',
-    'Apps',
     'Develop',
     'Learn',
+    'Apps',
     'Finish',
 ] as const;
 
@@ -25,7 +25,7 @@ interface State {
 }
 
 const initialState: State = {
-    currentStepIndex: 0,
+    currentStepIndex: 8,
 };
 
 const slice = createSlice({
