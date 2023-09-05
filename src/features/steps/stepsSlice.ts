@@ -13,6 +13,7 @@ export const steps = [
     'Present',
     'Rename',
     'Program',
+    'Evaluate',
     'Apps',
     'Develop',
     'Learn',

@@ -25,6 +25,7 @@ export interface Choice {
     description: string;
     firmware: Firmware[];
     documentation?: Link;
+    evaluationResources: { links: Link[]; app: string; description: string }[];
     links?: Link[];
 }
 
@@ -81,9 +82,32 @@ const deviceGuides: DeviceGuide[] = [
                         },
                     },
                 ],
+                evaluationResources: [
                     {
+                        app: 'pc-nrfconnect-serial-terminal',
+                        description:
+                            'Use the Serial Terminal PC application as a serial interface to send AT commands to the device',
+                        links: [
+                            {
+                                label: 'AT Commands reference manual',
+                                href: 'https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html',
+                            },
+                            {
+                                label: 'IP AT Commands Documentation',
+                                href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/doc/AT_commands_intro.html',
+                            },
+                        ],
                     },
                     {
+                        app: 'pc-nrfconnect-cellularmonitor',
+                        description:
+                            'Automatically connect and evaluate parameters',
+                        links: [
+                            {
+                                label: 'Cellular Fundamentals',
+                                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+                            },
+                        ],
                     },
                 ],
             },
@@ -113,6 +137,7 @@ const deviceGuides: DeviceGuide[] = [
                         },
                     },
                 ],
+                evaluationResources: [],
                 links: [
                     {
                         label: 'Application documentation',
@@ -143,6 +168,30 @@ const deviceGuides: DeviceGuide[] = [
                             label: 'Modem Shell',
                             href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
                         },
+                    },
+                ],
+                evaluationResources: [
+                    {
+                        app: 'pc-nrfconnect-serial-terminal',
+                        description:
+                            'Serial interface to send commands to the device.',
+                        links: [
+                            {
+                                label: 'Modem Shell documentation',
+                                href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html',
+                            },
+                        ],
+                    },
+                    {
+                        app: 'pc-nrfconnect-cellularmonitor',
+                        description:
+                            'Automatically connect and evaluate parameters',
+                        links: [
+                            {
+                                label: 'Cellular Fundamentals',
+                                href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/',
+                            },
+                        ],
                     },
                 ],
                 links: [

@@ -14,6 +14,7 @@ import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
 import Connect from '../features/steps/connect';
 import Develop from '../features/steps/Develop';
+import Evaluate from '../features/steps/Evaluate';
 import Finish from '../features/steps/Finish';
 import Learn from '../features/steps/Learn';
 import Present from '../features/steps/Present';
@@ -65,6 +66,7 @@ export const App = () => {
                     {currentStep === 'Present' && <Present />}
                     {currentStep === 'Rename' && <Rename />}
                     {currentStep === 'Program' && <Program />}
+                    {currentStep === 'Evaluate' && <Evaluate />}
                     {currentStep === 'Apps' && <Apps />}
                     {currentStep === 'Develop' && <Develop />}
                     {currentStep === 'Learn' && <Learn />}
