@@ -14,8 +14,8 @@ export const steps = [
     'Rename',
     'Program',
     'Apps',
-    'Learn',
     'Develop',
+    'Learn',
     'Finish',
 ] as const;
 
