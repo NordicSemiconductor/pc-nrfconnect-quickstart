@@ -20,12 +20,30 @@ export interface Firmware {
     link: Link;
 }
 
+interface EvaluationContent {
+    links?: Link[];
+    description: string;
+}
+
+export interface AppEvaluationResource extends EvaluationContent {
+    app: string;
+}
+
+export interface ExternalLinkEvaluationResource extends EvaluationContent {
+    title: string;
+    link: Link;
+}
+
+export type EvaluationResource =
+    | AppEvaluationResource
+    | ExternalLinkEvaluationResource;
+
 export interface Choice {
     name: string;
     description: string;
     firmware: Firmware[];
     documentation?: Link;
-    evaluationResources: { links: Link[]; app: string; description: string }[];
+    evaluationResources: EvaluationResource[];
 }
 
 export interface DeviceGuide {
@@ -102,6 +120,12 @@ const deviceGuides: DeviceGuide[] = [
                 ],
                 evaluationResources: [
                     {
+                        title: 'Activate SIM card',
+                        description:
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                        link: { label: 'Actvate SIM card', href: '' },
+                    },
+                    {
                         app: 'pc-nrfconnect-serial-terminal',
                         description:
                             'Use the Serial Terminal PC application as a serial interface to send AT commands to the device',
@@ -155,7 +179,23 @@ const deviceGuides: DeviceGuide[] = [
                         },
                     },
                 ],
-                evaluationResources: [],
+                evaluationResources: [
+                    {
+                        title: 'Activate SIM card',
+                        description:
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                        link: { label: 'Actvate SIM card', href: '' },
+                    },
+                    {
+                        title: 'Cellular IoT Fundamentals',
+                        link: {
+                            label: 'Open course',
+                            href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
+                        },
+                        description:
+                            'Follow Exersice 1 in the Cellular IoT Fundamentals couse to evaluate cloud connectivity.',
+                    },
+                ],
             },
             {
                 name: 'Shell Command Line Interface',
@@ -183,6 +223,12 @@ const deviceGuides: DeviceGuide[] = [
                     },
                 ],
                 evaluationResources: [
+                    {
+                        title: 'Activate SIM card',
+                        description:
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                        link: { label: 'Actvate SIM card', href: '' },
+                    },
                     {
                         app: 'pc-nrfconnect-serial-terminal',
                         description:

@@ -9,14 +9,18 @@ import {
     apps,
     Button,
     DownloadableApp,
-    ExternalLink,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
+import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
+import {
+    EvaluationResource,
+    ExternalLinkEvaluationResource,
+} from '../device/deviceGuides';
 import { getChoiceUnsafely } from '../device/deviceSlice';
 
 export default () => {
@@ -24,6 +28,11 @@ export default () => {
     const [downloadableApps, setDownloadableApps] = useState<DownloadableApp[]>(
         []
     );
+
+    const isExternalLinkResource = (
+        resource: EvaluationResource
+    ): resource is ExternalLinkEvaluationResource => 'link' in resource;
+
     const getAppName = (app: string) =>
         downloadableApps.find(a => a.name === app)?.displayName || app;
 
@@ -37,44 +46,55 @@ export default () => {
         <Main>
             <Main.Content heading={`Evaluate ${choice.name}`}>
                 <div className="tw-flex tw-flex-col tw-gap-6">
-                    {choice.evaluationResources.map(
-                        ({ links, app, description }) => (
-                            <div
-                                key={app}
-                                className="tw-flex tw-flex-row tw-justify-between"
-                            >
-                                <div className="tw-w-80">
-                                    <div>
-                                        <b>{getAppName(app)}</b>
-                                    </div>
-                                    {description}
-                                    {links.map(({ label, href }) => (
-                                        <div
-                                            key={label}
-                                            className="tw-pt-0.5 tw-text-xs"
-                                        >
-                                            <ExternalLink
-                                                label={label}
-                                                href={href}
-                                            />
-                                        </div>
-                                    ))}
+                    {choice.evaluationResources.map(resource => (
+                        <div
+                            key={
+                                isExternalLinkResource(resource)
+                                    ? resource.title
+                                    : resource.app
+                            }
+                            className="tw-flex tw-flex-row tw-justify-between"
+                        >
+                            <div className="tw-w-80">
+                                <div>
+                                    <b>
+                                        {isExternalLinkResource(resource)
+                                            ? resource.title
+                                            : getAppName(resource.app)}
+                                    </b>
                                 </div>
-                                <Button
-                                    variant="link-button"
-                                    size="xl"
-                                    onClick={() => {
-                                        usageData.sendUsageData(
-                                            `Opened app ${app}`
-                                        );
-                                        // install and open or something
-                                    }}
-                                >
-                                    Open {getAppName(app)}
-                                </Button>
+                                {resource.description}
+                                {resource.links?.map(({ label, href }) => (
+                                    <div
+                                        key={label}
+                                        className="tw-pt-0.5 tw-text-xs"
+                                    >
+                                        <Link
+                                            label={label}
+                                            href={href}
+                                            color="tw-text-primary"
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        )
-                    )}
+                            <Button
+                                variant="link-button"
+                                size="xl"
+                                onClick={() => {
+                                    usageData.sendUsageData(
+                                        isExternalLinkResource(resource)
+                                            ? `Opened link ${resource.link.href}`
+                                            : `Opened app ${resource.app}`
+                                    );
+                                    // install and open or something
+                                }}
+                            >
+                                {isExternalLinkResource(resource)
+                                    ? resource.link.label
+                                    : `Open ${getAppName(resource.app)}`}
+                            </Button>
+                        </div>
+                    ))}
                 </div>
             </Main.Content>
             <Main.Footer>
