@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import {
     DisabledListItem,
@@ -25,7 +26,16 @@ const MultipleSelectListItem = ({
     <SelectableItem
         onSelect={() => onSelect(!selected)}
         selected={selected}
-        selector={<div />}
+        selector={
+            <span
+                className={classNames(
+                    selected
+                        ? 'mdi-square-circle tw-text-gray-50'
+                        : 'mdi-square-outline tw-text-primary',
+                    `mdi tw-text-xl tw-leading-none`
+                )}
+            />
+        }
     >
         {/* This is wrapped in a div so the flex styles are not applied */}
         <div className="tw-pr-10">{children}</div>
