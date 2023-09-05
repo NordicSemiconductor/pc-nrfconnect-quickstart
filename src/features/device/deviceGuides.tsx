@@ -39,16 +39,6 @@ export interface DeviceGuide {
 export const getFirmwareFolder = () =>
     path.resolve(__dirname, '..', 'resources', 'firmware');
 
-const shared: { apps: string[]; links: Link[] } = {
-    apps: ['pc-nrfconnect-toolchain-manager'],
-    links: [
-        {
-            label: 'Nordic Academy - nRF Connect SDK Fundamentals',
-            href: 'https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/',
-        },
-    ],
-};
-
 const deviceGuides: DeviceGuide[] = [
     {
         boardVersion: 'pca10090',
@@ -91,18 +81,9 @@ const deviceGuides: DeviceGuide[] = [
                         },
                     },
                 ],
-                links: [
                     {
-                        label: 'AT Commands Documentation',
-                        href: 'https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html',
                     },
                     {
-                        label: 'IP AT Commands Documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/doc/AT_commands_intro.html',
-                    },
-                    {
-                        label: 'Application documentation',
-                        href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
                     },
                 ],
             },
@@ -204,21 +185,16 @@ export const DeviceIcon = ({
 };
 
 export const deviceApps = (device: NrfutilDevice) =>
-    [...(getDeviceGuide(device)?.apps ?? []), ...shared.apps].reduce<string[]>(
+    (getDeviceGuide(device)?.apps ?? []).reduce<string[]>(
         (apps, app) => (apps.includes(app) ? apps : [...apps, app]),
         []
     );
 
 // TODO: concat deviceInfo links?
 export const deviceLinks = (device: NrfutilDevice, choice?: Choice) =>
-    [
-        ...(getDeviceGuide(device)?.links ?? []),
-        ...(choice?.links ?? []),
-        ...shared.links,
-    ].reduce<Link[]>(
-        (links, link) => (links.includes(link) ? links : [...links, link]),
-        []
-    );
+    [...(getDeviceGuide(device)?.links ?? []), ...(choice?.links ?? [])].reduce<
+        Link[]
+    >((links, link) => (links.includes(link) ? links : [...links, link]), []);
 
 export const deviceEvaluationChoices = (device: NrfutilDevice) =>
     getDeviceGuide(device)?.choices ?? [];
