@@ -235,10 +235,7 @@ export const DeviceIcon = ({
 };
 
 export const deviceApps = (device: NrfutilDevice) =>
-    (getDeviceGuide(device)?.apps ?? []).reduce<string[]>(
-        (apps, app) => (apps.includes(app) ? apps : [...apps, app]),
-        []
-    );
+    getDeviceGuide(device)?.apps ?? [];
 
 // TODO: concat deviceInfo links?
 export const deviceLinks = (device: NrfutilDevice, choice?: Choice) =>
