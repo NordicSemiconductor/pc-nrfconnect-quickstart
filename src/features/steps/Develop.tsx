@@ -77,7 +77,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next label="Skip" />
+                <Next variant="link-button" label="Skip" />
                 <Next
                     label="Continue"
                     disabled={!selected}
