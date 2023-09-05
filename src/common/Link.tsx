@@ -5,7 +5,10 @@
  */
 
 import React from 'react';
-import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    classNames,
+    usageData,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 export default ({
     label,
@@ -20,7 +23,10 @@ export default ({
         target="_blank"
         rel="noreferrer noopener"
         href={href}
-        onClick={event => event.stopPropagation()}
+        onClick={event => {
+            usageData.sendUsageData('Visiting link', href);
+            event.stopPropagation();
+        }}
         className={classNames('tw-underline', color, `hover:${color}`)}
     >
         {label}
