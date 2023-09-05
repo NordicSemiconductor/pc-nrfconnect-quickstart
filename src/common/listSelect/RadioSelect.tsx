@@ -23,17 +23,22 @@ const RadioSelectListItem = ({
     children: React.ReactNode;
     selected: boolean;
 }) => (
-    <SelectableItem onSelect={onSelect} selected={selected}>
+    <SelectableItem
+        onSelect={onSelect}
+        selected={selected}
+        selector={
+            <span
+                className={classNames(
+                    selected
+                        ? 'mdi-radiobox-marked tw-text-gray-50'
+                        : 'mdi-radiobox-blank tw-text-primary',
+                    `mdi tw-text-xl tw-leading-none`
+                )}
+            />
+        }
+    >
         {/* This is wrapped in a div so the flex styles are not applied */}
         <div className="tw-pr-10">{children}</div>
-        <span
-            className={classNames(
-                selected
-                    ? 'mdi-radiobox-marked tw-text-gray-50'
-                    : 'mdi-radiobox-blank tw-text-primary',
-                `mdi tw-text-xl tw-leading-none`
-            )}
-        />
     </SelectableItem>
 );
 
