@@ -7,13 +7,15 @@
 import React, { useEffect, useState } from 'react';
 import {
     apps,
+    deviceInfo,
     DownloadableApp,
-    Spinner,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
+import { SelectableListItem } from '../../common/listSelect/ListSelectItem';
+import MultipleSelect from '../../common/listSelect/MultipleSelect';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceApps } from '../device/deviceGuides';
@@ -24,71 +26,22 @@ type App = DownloadableApp & {
     installing: boolean;
 };
 
-const InstalledCheckBox = () => (
-    <input
-        type="checkbox"
-        checked
-        disabled
-        onChange={() => {}}
-        className="tw-h-4 tw-w-4 tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-green tw-opacity-100 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-green after:tw-content-['']"
-    />
-);
-
-const AppCheckBox = ({
-    id,
-    checked,
-    onClick,
-}: {
-    id: string;
-    checked: boolean;
-    onClick: (selected: boolean) => void;
-}) => (
-    <input
-        type="checkbox"
-        id={id}
-        checked={checked}
-        onClick={event => onClick(event.currentTarget.checked)}
-        className="tw-h-4 tw-w-4 tw-cursor-pointer tw-appearance-none tw-rounded-sm tw-border-2 tw-border-solid tw-border-gray-500 before:tw-absolute before:tw--top-[0.0625rem] before:tw-left-3 before:tw-h-2 before:tw-w-2 before:tw-bg-white after:tw-absolute after:tw--top-0 after:tw-left-[0.45rem] after:tw-h-[0.8rem] after:tw-w-[0.4rem] after:tw-rotate-45 after:tw-border-b-2 after:tw-border-l-0 after:tw-border-r-2 after:tw-border-t-0 after:tw-border-solid after:tw-border-gray-500 after:tw-content-[''] [&:not(:checked:after)]:tw-hidden [&:not(:checked:before)]:tw-hidden"
-    />
-);
-
-const selectableStyle = (app: App) =>
-    apps.isInstalled(app) ? '' : 'tw-cursor-pointer';
-
-const AppItem = ({
-    app,
-    onClick,
-}: {
-    app: App;
-    onClick: (selected: boolean) => void;
-}) => (
-    <div
-        key={app.displayName}
-        className="tw-relative tw-flex tw-flex-row tw-gap-4"
-    >
-        <div className="tw-pt-0.5">
-            {!apps.isInstalled(app) && !app.installing && (
-                <AppCheckBox
-                    id={app.name}
-                    checked={apps.isInstalled(app) || app.selected}
-                    onClick={onClick}
-                />
-            )}
-            {app.installing && <Spinner size="sm" />}
-            {apps.isInstalled(app) && <InstalledCheckBox />}
-        </div>
-        <label htmlFor={app.name} className="tw-flex tw-flex-col tw-text-left">
-            <p className={selectableStyle(app)}>
-                <strong>{app.displayName}</strong>
-            </p>
-            <p className={selectableStyle(app)}>{app.description}</p>
-        </label>
-    </div>
-);
-
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [recommendedApps, setRecommendedApps] = useState<App[]>([]);
+
+    const items = recommendedApps.map(app => ({
+        id: app.name,
+        selected: app.selected,
+        content: (
+            <div className="tw-flex tw-flex-row tw-items-start tw-justify-start">
+                <div className="tw-w-32 tw-flex-shrink-0 tw-pr-5">
+                    <b>{app.displayName}</b>
+                </div>
+                <div>{app.description}</div>
+            </div>
+        ),
+    }));
 
     useEffect(() => {
         apps.getDownloadableApps().then(({ apps: downloadableApps }) => {
@@ -108,10 +61,10 @@ export default () => {
         });
     }, [device]);
 
-    const setAppSelected = (app: App, selected: boolean) =>
+    const setAppSelected = (app: SelectableListItem, selected: boolean) =>
         setRecommendedApps(
             recommendedApps.map(a => {
-                if (a.name === app.name) {
+                if (a.name === app.id) {
                     a.selected = selected;
                 }
                 return a;
@@ -141,23 +94,17 @@ export default () => {
     return (
         <Main>
             <Main.Content
-                className="tw-gap-6"
-                heading="Install recommended apps"
+                heading="Select apps to install"
+                subHeading={`We recommend these nRF Connect for Desktop applications for ${
+                    deviceInfo(device).name
+                }`}
             >
-                {recommendedApps.some(app => !apps.isInstalled(app)) ? (
-                    <p>You can always add and remove apps later.</p>
-                ) : (
-                    <p>All recommended apps are installed</p>
-                )}
-                <div className="tw-flex tw-flex-col tw-items-start tw-gap-1">
-                    {recommendedApps.map(app => (
-                        <AppItem
-                            key={app.name}
-                            app={app}
-                            onClick={selected => setAppSelected(app, selected)}
-                        />
-                    ))}
-                </div>
+                <MultipleSelect
+                    items={items}
+                    onSelect={(item, selected) =>
+                        setAppSelected(item, selected)
+                    }
+                />
             </Main.Content>
             <Main.Footer>
                 <Back />
