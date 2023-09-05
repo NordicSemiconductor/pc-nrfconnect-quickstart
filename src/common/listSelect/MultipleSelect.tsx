@@ -6,7 +6,12 @@
 
 import React from 'react';
 
-import { SelectableItem, SelectableListItem } from './ListSelectItem';
+import {
+    DisabledListItem,
+    DisabledListItemContainer,
+    SelectableItem,
+    SelectableListItem,
+} from './ListSelectItem';
 
 const MultipleSelectListItem = ({
     selected,
@@ -31,20 +36,31 @@ export default ({
     items,
     onSelect,
 }: {
-    items: SelectableListItem[];
+    items: (SelectableListItem | DisabledListItem)[];
     onSelect: (item: SelectableListItem, selected: boolean) => void;
 }) => (
     <div className="tw-flex tw-flex-col tw-gap-px">
-        {items.map(item => (
-            <MultipleSelectListItem
-                key={item.id}
-                onSelect={selected =>
-                    onSelect(item as SelectableListItem, selected)
-                }
-                selected={(item as SelectableListItem).selected}
-            >
-                {item.content}
-            </MultipleSelectListItem>
-        ))}
+        {items.map(item =>
+            (item as DisabledListItem).disabled ? (
+                <DisabledListItemContainer
+                    key={item.id}
+                    disabledSelector={
+                        (item as DisabledListItem).disabledRadioButton
+                    }
+                >
+                    {item.content}
+                </DisabledListItemContainer>
+            ) : (
+                <MultipleSelectListItem
+                    key={item.id}
+                    onSelect={selected =>
+                        onSelect(item as SelectableListItem, selected)
+                    }
+                    selected={(item as SelectableListItem).selected}
+                >
+                    {item.content}
+                </MultipleSelectListItem>
+            )
+        )}
     </div>
 );
