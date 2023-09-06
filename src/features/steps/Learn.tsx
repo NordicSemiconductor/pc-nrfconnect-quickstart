@@ -5,10 +5,10 @@
  */
 
 import React from 'react';
-import { ExternalLink } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
+import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceLearningResources } from '../device/deviceGuides';
@@ -28,9 +28,10 @@ export default () => {
                                 <br />
                                 {description}
                                 <div className="tw-pt-0.5 tw-text-xs">
-                                    <ExternalLink
+                                    <Link
                                         label={link.label}
                                         href={link.href}
+                                        color="tw-text-primary"
                                     />
                                 </div>
                             </div>
