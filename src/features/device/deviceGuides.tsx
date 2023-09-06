@@ -95,7 +95,7 @@ const deviceGuides: DeviceGuide[] = [
         choices: [
             {
                 name: 'AT Commands',
-                description: 'Evaluate the cellular modem using At commands.',
+                description: 'Evaluate the cellular modem using AT commands.',
                 documentation: {
                     label: 'Serial LTE Modem',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
@@ -122,7 +122,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                            'iBasis SIM cards must be activated before use in the nRF Cloud.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
@@ -183,7 +183,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                            'iBasis SIM cards must be activated before use in the nRF Cloud.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
@@ -226,7 +226,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                            'iBasis SIM cards must be activated before use in the nRF Cloud.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
