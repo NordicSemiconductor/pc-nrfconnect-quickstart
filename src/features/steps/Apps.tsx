@@ -9,6 +9,7 @@ import {
     apps,
     deviceInfo,
     DownloadableApp,
+    Spinner,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
@@ -33,8 +34,12 @@ export default () => {
     const items = recommendedApps.map(app => ({
         id: app.name,
         selected: app.selected,
-        disabled: apps.isInstalled(app),
-        disabledSelector: <p className="tw-text-sm">INSTALLED</p>,
+        disabled: apps.isInstalled(app) || app.installing,
+        disabledSelector: apps.isInstalled(app) ? (
+            <p className="tw-text-sm">INSTALLED</p>
+        ) : (
+            <Spinner size="sm" />
+        ),
         content: (
             <div className="tw-flex tw-flex-row tw-items-start tw-justify-start">
                 <div className="tw-w-32 tw-flex-shrink-0 tw-pr-5">
