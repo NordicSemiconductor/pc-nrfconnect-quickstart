@@ -14,6 +14,7 @@ import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceDescription } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
+import { getLastMoveDirection } from './stepsSlice';
 
 const overWriteA = ({
     href,
@@ -26,8 +27,11 @@ const overWriteA = ({
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const dispatch = useAppDispatch();
+    const lastMoveDirection = useAppSelector(getLastMoveDirection);
     const [currentSubStepIndex, setCurrentSubStepIndex] = useState(
+        lastMoveDirection === 'forward'
             ? 0
+            : deviceDescription(device).length - 1
     );
 
     return (
