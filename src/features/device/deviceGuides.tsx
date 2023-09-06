@@ -48,7 +48,7 @@ export interface Choice {
 
 export interface DeviceGuide {
     boardVersion: string;
-    description: string;
+    description: { title: string; markdownContent: string }[];
     apps: string[];
     choices: Choice[];
     learningResources: {
@@ -70,8 +70,19 @@ const deviceGuides: DeviceGuide[] = [
             'pc-nrfconnect-programmer',
             'pc-nrfconnect-ppk',
         ],
-        description:
-            'The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications. It includes a SEGGER J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all Io pins, and relevant module interfaces.',
+        description: [
+            {
+                title: 'Cellular Powerhouse',
+                markdownContent: `The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.${'  \n&nbsp;  '}
+It includes a Segger J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.${'  \n&nbsp;  '}
+[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf91_dk/page/UG/nrf91_DK/intro.html)`,
+            },
+            {
+                title: 'Two cores. Best friends.',
+                markdownContent: `Use the modem as a companion chip with your existing code, or use the application core and eliminate the need for an external MCU.${'  \n&nbsp;  '}
+The choice is yours.`,
+            },
+        ],
         learningResources: [
             {
                 label: 'Developer Academy',
@@ -272,7 +283,7 @@ const getDeviceGuide = (device: NrfutilDevice) =>
 export const deviceName = (device: NrfutilDevice) => deviceInfo(device).name;
 
 export const deviceDescription = (device: NrfutilDevice) =>
-    getDeviceGuide(device)?.description || '';
+    getDeviceGuide(device)?.description || [];
 
 export const DeviceIcon = ({
     device,

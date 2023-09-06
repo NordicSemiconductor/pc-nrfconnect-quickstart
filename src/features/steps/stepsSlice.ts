@@ -22,10 +22,12 @@ export const steps = [
 
 interface State {
     currentStepIndex: number;
+    lastMoveDirection: 'back' | 'forward';
 }
 
 const initialState: State = {
     currentStepIndex: 0,
+    lastMoveDirection: 'forward',
 };
 
 const slice = createSlice({
@@ -37,9 +39,11 @@ const slice = createSlice({
                 (state.currentStepIndex += 1),
                 steps.length - 1
             );
+            state.lastMoveDirection = 'forward';
         },
         goToPreviousStep: state => {
             state.currentStepIndex = Math.max((state.currentStepIndex -= 1), 0);
+            state.lastMoveDirection = 'back';
         },
     },
 });
@@ -48,5 +52,7 @@ export const { goToNextStep, goToPreviousStep } = slice.actions;
 
 export const getCurrentStep = (state: RootState) =>
     steps[state.steps.currentStepIndex];
+export const getLastMoveDirection = (state: RootState) =>
+    state.steps.lastMoveDirection;
 
 export default slice.reducer;
