@@ -7,16 +7,14 @@
 import React, { useState } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-// @ts-expect-error svg imports work
-import vscodeIcon from '../../../resources/vscode.svg';
-// @ts-expect-error svg imports work
-import vscodeAltIcon from '../../../resources/vscode-alt.svg';
-import { Back } from '../../common/Back';
-import Italic from '../../common/Italic';
-import { ListItemVariant } from '../../common/listSelect/ListSelectItem';
-import { RadioSelect } from '../../common/listSelect/RadioSelect';
-import Main from '../../common/Main';
-import { Next } from '../../common/Next';
+import vscodeIcon from '../../../../resources/vscode.svg';
+import vscodeAltIcon from '../../../../resources/vscode-alt.svg';
+import { Back } from '../../../common/Back';
+import Italic from '../../../common/Italic';
+import { ListItemVariant } from '../../../common/listSelect/ListSelectItem';
+import { RadioSelect } from '../../../common/listSelect/RadioSelect';
+import Main from '../../../common/Main';
+import { Next } from '../../../common/Next';
 
 export default () => {
     const [selected, setSelected] = useState<ListItemVariant>();
@@ -45,7 +43,7 @@ export default () => {
                         The <Italic>nRF Connect for Visual Studio Code</Italic>{' '}
                         extension is the recommended development environment for
                         building and debugging applications based on the{' '}
-                        <Italic>nRF Conenct SDK</Italic>.
+                        <Italic>nRF Connect SDK</Italic>.
                     </div>
                 </div>
             ),
@@ -63,7 +61,7 @@ export default () => {
                     <div>
                         The <Italic>nRF Util</Italic> and <Italic>west</Italic>{' '}
                         command line tools can be used to manually configure
-                        your custom environment
+                        your custom environment.
                     </div>
                 </div>
             ),
