@@ -114,10 +114,11 @@ export default () => {
                 />
             </Main.Content>
             <Main.Footer>
-                <Back />
+                <Back disabled={recommendedApps.some(app => app.installing)} />
                 <Next
                     label={anySelected ? 'Install' : 'Continue'}
                     variant="primary"
+                    disabled={recommendedApps.some(app => app.installing)}
                     onClick={next => {
                         if (!anySelected) {
                             next();
