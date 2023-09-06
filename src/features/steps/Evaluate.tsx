@@ -53,7 +53,7 @@ export default () => {
                                     ? resource.title
                                     : resource.app
                             }
-                            className="tw-flex tw-flex-row tw-justify-between"
+                            className="tw-flex tw-flex-row tw-justify-between tw-gap-12"
                         >
                             <div className="tw-w-80">
                                 <div>
@@ -88,6 +88,7 @@ export default () => {
                                     );
                                     // install and open or something
                                 }}
+                                className="tw-flex-1"
                             >
                                 {isExternalLinkResource(resource)
                                     ? resource.link.label

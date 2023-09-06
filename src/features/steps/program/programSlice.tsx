@@ -26,12 +26,14 @@ interface State {
     programmingState: ProgrammingState;
     firmwareWithProgress: FirmwareWithProgress[];
     programmingError: unknown;
+    hasBeenProgrammed: boolean;
 }
 
 const initialState: State = {
     programmingState: ProgrammingState.SELECT_FIRMWARE,
     firmwareWithProgress: [],
     programmingError: undefined,
+    hasBeenProgrammed: false,
 };
 
 const slice = createSlice({
@@ -72,6 +74,9 @@ const slice = createSlice({
         setProgrammingError: (state, action: PayloadAction<unknown>) => {
             state.programmingError = action.payload;
         },
+        setHasBeenProgrammed: state => {
+            state.hasBeenProgrammed = true;
+        },
     },
 });
 
@@ -80,6 +85,7 @@ export const {
     setProgrammingFirmware,
     setProgrammingProgress,
     setProgrammingError,
+    setHasBeenProgrammed,
 } = slice.actions;
 
 export const getProgrammingState = (state: RootState) =>
@@ -88,5 +94,7 @@ export const getProgrammingProgress = (state: RootState) =>
     state.program.firmwareWithProgress;
 export const getProgrammingError = (state: RootState) =>
     state.program.programmingError;
+export const getHasBeenProgrammed = (state: RootState) =>
+    state.program.hasBeenProgrammed;
 
 export default slice.reducer;

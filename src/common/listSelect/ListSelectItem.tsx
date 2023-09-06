@@ -77,7 +77,7 @@ export const DisabledListItemContainer = ({
     children: React.ReactNode;
     disabledSelector?: React.ReactNode;
 }) => (
-    <div className="tw-flex tw-w-full tw-flex-row tw-items-center tw-justify-between tw-gap-px tw-p-4 tw-opacity-40">
+    <div className="tw-flex tw-w-full tw-flex-row tw-items-center tw-justify-between tw-gap-px tw-bg-gray-50 tw-p-4 tw-opacity-40">
         {/* This is wrapped in a div so the flex styles are not applied */}
         <div className="tw-pr-12">{children}</div>
         {!!disabledSelector && disabledSelector}
