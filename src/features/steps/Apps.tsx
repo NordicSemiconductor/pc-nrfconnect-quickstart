@@ -116,7 +116,7 @@ export default () => {
             <Main.Footer>
                 <Back />
                 <Next
-                    label={anySelected ? 'Install' : 'Next'}
+                    label={anySelected ? 'Install' : 'Continue'}
                     variant="primary"
                     onClick={next => {
                         if (!anySelected) {
