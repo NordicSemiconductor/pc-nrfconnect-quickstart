@@ -5,6 +5,7 @@
  */
 
 import React, { useState } from 'react';
+import { sendFeedback } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
@@ -45,7 +46,12 @@ export default ({
                 <Next
                     label="Give feedback"
                     onClick={() => {
-                        // sendFeedback (requires new shared)
+                        try {
+                            sendFeedback(feedback);
+                        } catch (e) {
+                            console.error(e);
+                        }
+
                         onGiveFeedback();
                     }}
                 />
