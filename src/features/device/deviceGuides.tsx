@@ -122,7 +122,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in the nRF Cloud before use.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
@@ -183,7 +183,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in the nRF Cloud before use.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
@@ -226,7 +226,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in teh nRF Cloud before use.',
+                            'The nRF9160 can be used with your own SIM card of the provided card from Ibasis. The iBasis card has to be activated in the nRF Cloud before use.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
