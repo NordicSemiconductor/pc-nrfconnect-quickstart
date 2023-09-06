@@ -122,7 +122,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'iBasis SIM cards must be activated before use in the nRF Cloud.',
+                            'iBasis SIM cards must be activated in the nRF Cloud before use.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
@@ -183,7 +183,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'iBasis SIM cards must be activated before use in the nRF Cloud.',
+                            'iBasis SIM cards must be activated in the nRF Cloud before use.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
@@ -226,7 +226,7 @@ const deviceGuides: DeviceGuide[] = [
                     {
                         title: 'Activate SIM card',
                         description:
-                            'iBasis SIM cards must be activated before use in the nRF Cloud.',
+                            'iBasis SIM cards must be activated in the nRF Cloud before use.',
                         link: { label: 'Actvate SIM card', href: '' },
                     },
                     {
