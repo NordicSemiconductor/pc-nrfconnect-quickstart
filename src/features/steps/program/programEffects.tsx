@@ -13,6 +13,7 @@ import {
 } from '../../device/deviceSlice';
 import {
     ProgrammingState,
+    setHasBeenProgrammed,
     setProgrammingError,
     setProgrammingFirmware,
     setProgrammingProgress,
@@ -44,5 +45,6 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
         .catch(error => {
             dispatch(setProgrammingError(error));
             dispatch(setProgrammingState(ProgrammingState.ERROR));
-        });
+        })
+        .finally(() => dispatch(setHasBeenProgrammed()));
 };
