@@ -15,7 +15,7 @@ import Apps from '../features/steps/Apps';
 import Connect from '../features/steps/connect';
 import Develop from '../features/steps/Develop';
 import Evaluate from '../features/steps/Evaluate';
-import Finish from '../features/steps/Finish';
+import Finish from '../features/steps/finish';
 import Learn from '../features/steps/Learn';
 import Present from '../features/steps/Present';
 import Program from '../features/steps/program';
