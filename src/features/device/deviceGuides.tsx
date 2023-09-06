@@ -95,7 +95,7 @@ const deviceGuides: DeviceGuide[] = [
         choices: [
             {
                 name: 'AT Commands',
-                description: 'Evaluate the cellular modem using At commands.',
+                description: 'Evaluate the cellular modem using AT commands.',
                 documentation: {
                     label: 'Serial LTE Modem',
                     href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html',
