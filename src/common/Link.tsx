@@ -15,7 +15,7 @@ export default ({
     href,
     color = 'tw-text-gray-700',
 }: {
-    label: string;
+    label: string | React.ReactNode;
     href: string;
     color?: string;
 }) => (
