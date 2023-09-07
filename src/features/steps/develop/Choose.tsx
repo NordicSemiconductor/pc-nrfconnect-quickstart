@@ -14,7 +14,7 @@ import Italic from '../../../common/Italic';
 import { ListItemVariant } from '../../../common/listSelect/ListSelectItem';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
-import { Next } from '../../../common/Next';
+import { Next, Skip } from '../../../common/Next';
 
 export default () => {
     const [selected, setSelected] = useState<ListItemVariant>();
@@ -75,7 +75,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next variant="link-button" label="Skip" />
+                <Skip />
                 <Next
                     label="Continue"
                     disabled={!selected}

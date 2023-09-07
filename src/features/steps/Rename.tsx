@@ -14,7 +14,7 @@ import {
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Main from '../../common/Main';
-import { Next } from '../../common/Next';
+import { Next, Skip } from '../../common/Next';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 export default () => {
@@ -46,7 +46,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next label="Skip" variant="link-button" />
+                <Skip />
                 <Next
                     disabled={nickname.trim().length === 0}
                     onClick={next => {

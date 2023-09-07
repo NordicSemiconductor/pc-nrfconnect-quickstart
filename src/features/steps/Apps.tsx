@@ -18,7 +18,7 @@ import { Back } from '../../common/Back';
 import { SelectableListItem } from '../../common/listSelect/ListSelectItem';
 import MultipleSelect from '../../common/listSelect/MultipleSelect';
 import Main from '../../common/Main';
-import { Next } from '../../common/Next';
+import { Next, Skip } from '../../common/Next';
 import { deviceApps } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
@@ -116,11 +116,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back disabled={anyInstalling} />
-                <Next
-                    disabled={anyInstalling}
-                    variant="link-button"
-                    label="Skip"
-                />
+                <Skip disabled={anyInstalling} />
                 <Next
                     label="Install"
                     variant="primary"
