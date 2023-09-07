@@ -36,22 +36,24 @@ export default ({
                 heading="Finish"
                 subHeading={`You completed all steps for the ${deviceName}`}
             >
-                <span className="mdi mdi-flag-checkered tw-text-8xl tw-leading-none tw-text-gray-700" />
-                {withFeedbackOption && (
-                    <div className="tw-pt-10">
-                        <Italic>
-                            Did you find the information you expected?
-                        </Italic>
-                        <br />
-                        <Italic>Was something unclear?</Italic>
-                        <br />
-                        <Italic>Is there something we missed?</Italic>
-                        <br />
-                        <br />
-                        Give feedback now and help us improve the user
-                        experience.
-                    </div>
-                )}
+                <div className="tw-flex tw-flex-col">
+                    <span className="mdi mdi-flag-checkered tw-text-8xl tw-leading-none tw-text-gray-700" />
+                    {withFeedbackOption && (
+                        <div className="tw-pt-10">
+                            <Italic>
+                                Did you find the information you expected?
+                            </Italic>
+                            <br />
+                            <Italic>Was something unclear?</Italic>
+                            <br />
+                            <Italic>Is there something we missed?</Italic>
+                            <br />
+                            <br />
+                            Give feedback now and help us improve the user
+                            experience.
+                        </div>
+                    )}
+                </div>
             </Main.Content>
             <Main.Footer>
                 <Back />
