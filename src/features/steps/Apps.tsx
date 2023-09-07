@@ -97,6 +97,7 @@ export default () => {
     };
 
     const anySelected = recommendedApps.some(app => app.selected);
+    const anyInstalling = recommendedApps.some(app => app.installing);
 
     return (
         <Main>
@@ -114,32 +115,33 @@ export default () => {
                 />
             </Main.Content>
             <Main.Footer>
-                <Back disabled={recommendedApps.some(app => app.installing)} />
+                <Back disabled={anyInstalling} />
                 <Next
-                    label={anySelected ? 'Install' : 'Continue'}
+                    disabled={anyInstalling}
+                    variant="link-button"
+                    label="Skip"
+                />
+                <Next
+                    label="Install"
                     variant="primary"
-                    disabled={recommendedApps.some(app => app.installing)}
-                    onClick={next => {
-                        if (!anySelected) {
-                            next();
-                        } else {
-                            recommendedApps.forEach(app => {
-                                if (!apps.isInstalled(app) && app.selected) {
-                                    setRecommendedApps(
-                                        recommendedApps.map(a =>
-                                            a === app
-                                                ? { ...app, installing: true }
-                                                : a
-                                        )
-                                    );
-                                    usageData.sendUsageData(
-                                        `Installing app ${app}`
-                                    );
-                                    installApp(app);
-                                }
-                            });
-                        }
-                    }}
+                    disabled={!anySelected || anyInstalling}
+                    onClick={() =>
+                        recommendedApps.forEach(app => {
+                            if (!apps.isInstalled(app) && app.selected) {
+                                setRecommendedApps(
+                                    recommendedApps.map(a =>
+                                        a === app
+                                            ? { ...app, installing: true }
+                                            : a
+                                    )
+                                );
+                                usageData.sendUsageData(
+                                    `Installing app ${app}`
+                                );
+                                installApp(app);
+                            }
+                        })
+                    }
                 />
             </Main.Footer>
         </Main>
