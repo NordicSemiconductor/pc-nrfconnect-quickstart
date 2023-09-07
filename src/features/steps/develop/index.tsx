@@ -10,7 +10,8 @@ import { useAppSelector } from '../../../app/store';
 import Choose from './Choose';
 import CLI from './CLI';
 import { DevelopState, getDevelopState } from './developSlice';
-import VsCode from './VsCode';
+import OpenVsCode from './OpenVsCode';
+import VsCodeOpened from './VsCodeOpened';
 
 export default () => {
     const developState = useAppSelector(getDevelopState);
@@ -18,7 +19,8 @@ export default () => {
     return (
         <>
             {developState === DevelopState.CHOOSE && <Choose />}
-            {developState === DevelopState.VS_CODE && <VsCode />}
+            {developState === DevelopState.OPEN_VS_CODE && <OpenVsCode />}
+            {developState === DevelopState.VS_CODE_OPENED && <VsCodeOpened />}
             {developState === DevelopState.CLI && <CLI />}
         </>
     );

@@ -6,4 +6,4 @@
 
 import React from 'react';
 
-export default () => <div>TODO</div>;
+export default () => <div>TODO</div>; // FIXME
