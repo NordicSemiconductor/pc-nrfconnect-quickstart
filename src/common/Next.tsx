@@ -44,3 +44,7 @@ export const Next = ({
         </Button>
     );
 };
+
+export const Skip = (props: Parameters<typeof Next>[0]) => (
+    <Next label="Skip" variant="link-button" {...props} />
+);

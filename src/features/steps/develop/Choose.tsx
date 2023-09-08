@@ -4,26 +4,37 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-// @ts-expect-error svg imports work
-import vscodeIcon from '../../../resources/vscode.svg';
-// @ts-expect-error svg imports work
-import vscodeAltIcon from '../../../resources/vscode-alt.svg';
-import { Back } from '../../common/Back';
-import Italic from '../../common/Italic';
-import { ListItemVariant } from '../../common/listSelect/ListSelectItem';
-import { RadioSelect } from '../../common/listSelect/RadioSelect';
-import Main from '../../common/Main';
-import { Next } from '../../common/Next';
+import vscodeIcon from '../../../../resources/vscode.svg';
+import vscodeAltIcon from '../../../../resources/vscode-alt.svg';
+import { useAppDispatch } from '../../../app/store';
+import { Back } from '../../../common/Back';
+import Italic from '../../../common/Italic';
+import { ListItemVariant } from '../../../common/listSelect/ListSelectItem';
+import { RadioSelect } from '../../../common/listSelect/RadioSelect';
+import Main from '../../../common/Main';
+import { Next, Skip } from '../../../common/Next';
+import { DevelopState, setDevelopState } from './developSlice';
+import { detectVsCode } from './vsCodeEffects';
+
+type Item = ListItemVariant & {
+    state: DevelopState;
+};
 
 export default () => {
-    const [selected, setSelected] = useState<ListItemVariant>();
+    const dispatch = useAppDispatch();
+    const [selected, setSelected] = useState<Item>();
+
+    useEffect(() => {
+        detectVsCode(dispatch);
+    }, [dispatch]);
 
     const items = [
         {
             id: 'vscode',
+            state: DevelopState.OPEN_VS_CODE,
             selected: selected?.id === 'vscode',
             content: (
                 <div className="tw-flex tw-flex-row tw-items-start tw-justify-start tw-text-sm">
@@ -45,13 +56,14 @@ export default () => {
                         The <Italic>nRF Connect for Visual Studio Code</Italic>{' '}
                         extension is the recommended development environment for
                         building and debugging applications based on the{' '}
-                        <Italic>nRF Conenct SDK</Italic>.
+                        <Italic>nRF Connect SDK</Italic>.
                     </div>
                 </div>
             ),
         },
         {
             id: 'cli',
+            state: DevelopState.CLI,
             selected: selected?.id === 'cli',
             content: (
                 <div className="tw-flex tw-flex-row tw-items-start tw-justify-start tw-text-sm">
@@ -63,7 +75,7 @@ export default () => {
                     <div>
                         The <Italic>nRF Util</Italic> and <Italic>west</Italic>{' '}
                         command line tools can be used to manually configure
-                        your custom environment
+                        your custom environment.
                     </div>
                 </div>
             ),
@@ -77,16 +89,19 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next variant="link-button" label="Skip" />
+                <Skip />
                 <Next
-                    label="Continue"
                     disabled={!selected}
-                    onClick={next => {
+                    onClick={() => {
+                        if (selected == null) {
+                            return;
+                        }
+
                         usageData.sendUsageData(
-                            `Selected developing option: ${selected?.id}`
+                            `Selected developing option: ${selected.id}`
                         );
 
-                        next();
+                        dispatch(setDevelopState(selected.state));
                     }}
                 />
             </Main.Footer>

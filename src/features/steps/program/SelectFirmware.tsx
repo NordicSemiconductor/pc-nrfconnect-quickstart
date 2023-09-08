@@ -16,7 +16,7 @@ import { Back } from '../../../common/Back';
 import Link from '../../../common/Link';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
-import { Next } from '../../../common/Next';
+import { Skip } from '../../../common/Next';
 import { Choice, deviceChoices } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
@@ -76,9 +76,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                {hasBeenProgrammed && (
-                    <Next label="Skip" variant="link-button" />
-                )}
+                {hasBeenProgrammed && <Skip />}
                 <Button
                     variant="primary"
                     size="xl"

@@ -13,7 +13,7 @@ import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Apps from '../features/steps/Apps';
 import Connect from '../features/steps/connect';
-import Develop from '../features/steps/Develop';
+import Develop from '../features/steps/develop';
 import Evaluate from '../features/steps/Evaluate';
 import Finish from '../features/steps/finish';
 import Learn from '../features/steps/Learn';

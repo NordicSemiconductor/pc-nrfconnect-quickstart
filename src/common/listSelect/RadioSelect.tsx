@@ -42,12 +42,12 @@ const RadioSelectListItem = ({
     </SelectableItem>
 );
 
-export const RadioSelect = ({
+export const RadioSelect = <T extends SelectableListItem>({
     items,
     onSelect,
 }: {
-    items: (SelectableListItem | DisabledListItem)[];
-    onSelect: (item: SelectableListItem) => void;
+    items: (T | DisabledListItem)[];
+    onSelect: (item: T) => void;
 }) => (
     <div className="tw-flex tw-flex-col tw-gap-px">
         {items.map(item =>
@@ -63,7 +63,7 @@ export const RadioSelect = ({
             ) : (
                 <RadioSelectListItem
                     key={item.id}
-                    onSelect={() => onSelect(item as SelectableListItem)}
+                    onSelect={() => onSelect(item as T)}
                     selected={(item as SelectableListItem).selected}
                 >
                     {item.content}
