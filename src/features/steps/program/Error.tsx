@@ -26,7 +26,7 @@ export default () => {
     const dispatch = useAppDispatch();
     const error = useAppSelector(getProgrammingError);
     const failedCore = useAppSelector(getProgrammingProgress).find(
-        p => p.progress?.totalProgressPercentage || 0 < 100
+        p => (p.progress?.totalProgressPercentage || 0) < 100
     )?.core;
 
     return (
