@@ -22,6 +22,8 @@ const installLink = {
     linux: 'https://code.visualstudio.com/docs/setup/linux',
 }[process.platform as SupportedPlatform];
 
+const onWindows = process.platform === 'win32';
+
 export default () => {
     const dispatch = useAppDispatch();
 
@@ -30,9 +32,23 @@ export default () => {
     return (
         <Main>
             <Main.Content heading="Install VS Code">
-                You first need to{' '}
-                <Link href={installLink} label="download and install VS Code" />
-                .
+                <div className="tw-flex tw-flex-col tw-gap-6">
+                    <p>
+                        You first need to{' '}
+                        <Link
+                            href={installLink}
+                            label="download and install VS Code"
+                            color="tw-text-primary"
+                        />
+                        .
+                    </p>
+                    {onWindows && (
+                        <p>
+                            If you already installed VS code, it may be corrupt
+                            and you may need to reinstall it.
+                        </p>
+                    )}
+                </div>
             </Main.Content>
             <Main.Footer>
                 <Back
