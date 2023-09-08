@@ -17,14 +17,14 @@ import {
     getIsVsCodeInstalled,
     setDevelopState,
 } from './developSlice';
+import VsCodeNotInstalled from './VsCodeNotInstalled';
 
 export default () => {
     const dispatch = useAppDispatch();
     const isVsCodeInstalled = useAppSelector(getIsVsCodeInstalled);
 
     if (!isVsCodeInstalled) {
-        // FIXME
-        return null;
+        return <VsCodeNotInstalled />;
     }
 
     return (

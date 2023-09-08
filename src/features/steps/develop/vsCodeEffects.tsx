@@ -9,10 +9,20 @@ import { app } from '@electron/remote';
 import { AppDispatch } from '../../../app/store';
 import { setIsVsCodeInstalled } from './developSlice';
 
+const isVsCodeInstalled = () =>
+    app.getApplicationNameForProtocol('vscode://') !== '';
+
 export const detectVsCode = (dispatch: AppDispatch) => {
-    dispatch(
-        setIsVsCodeInstalled(
-            app.getApplicationNameForProtocol('vscode://') !== ''
-        )
-    );
+    dispatch(setIsVsCodeInstalled(isVsCodeInstalled()));
+};
+
+export const detectVsCodeRepeatedly = (dispatch: AppDispatch) => {
+    const id = setInterval(() => {
+        if (isVsCodeInstalled()) {
+            dispatch(setIsVsCodeInstalled(true));
+            clearInterval(id);
+        }
+    }, 100);
+
+    return () => clearInterval(id);
 };
