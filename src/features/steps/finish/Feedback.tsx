@@ -11,13 +11,7 @@ import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 
-export default ({
-    back,
-    onGiveFeedback,
-}: {
-    back: () => void;
-    onGiveFeedback: () => void;
-}) => {
+export default ({ back, next }: { back: () => void; next: () => void }) => {
     const [feedback, setFeedback] = useState('');
 
     return (
@@ -52,7 +46,7 @@ export default ({
                             console.error(e);
                         }
 
-                        onGiveFeedback();
+                        next();
                     }}
                 />
             </Main.Footer>

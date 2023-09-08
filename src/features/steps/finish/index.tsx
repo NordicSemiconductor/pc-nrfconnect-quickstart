@@ -6,25 +6,44 @@
 
 import React, { useState } from 'react';
 
+import { useAppDispatch } from '../../../app/store';
+import { setFinishedLastStep } from '../stepsSlice';
 import Feedback from './Feedback';
 import Finish from './Finish';
+import RealFinish from './RealFinish';
+
+enum SubSteps {
+    FINISH,
+    FEEDBACK,
+    REAL_FINISH,
+}
 
 export default () => {
-    const [hasGivenFeedback, setHasGivenFeedback] = useState(false);
-    const [giveFeedback, setGiveFeedback] = useState(false);
+    const dispatch = useAppDispatch();
+    const [currentSubStep, setCurrentSubStep] = useState(SubSteps.FINISH);
 
-    return giveFeedback ? (
-        <Feedback
-            back={() => setGiveFeedback(false)}
-            onGiveFeedback={() => {
-                setHasGivenFeedback(true);
-                setGiveFeedback(false);
-            }}
-        />
-    ) : (
-        <Finish
-            withFeedbackOption={!hasGivenFeedback}
-            giveFeedback={() => setGiveFeedback(true)}
-        />
+    return (
+        <>
+            {currentSubStep === SubSteps.FINISH && (
+                <Finish next={() => setCurrentSubStep(SubSteps.FEEDBACK)} />
+            )}
+            {currentSubStep === SubSteps.FEEDBACK && (
+                <Feedback
+                    back={() => setCurrentSubStep(SubSteps.FINISH)}
+                    next={() => {
+                        dispatch(setFinishedLastStep(true));
+                        setCurrentSubStep(SubSteps.REAL_FINISH);
+                    }}
+                />
+            )}
+            {currentSubStep === SubSteps.REAL_FINISH && (
+                <RealFinish
+                    back={() => {
+                        dispatch(setFinishedLastStep(false));
+                        setCurrentSubStep(SubSteps.FINISH);
+                    }}
+                />
+            )}
+        </>
     );
 };
