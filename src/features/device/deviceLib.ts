@@ -60,6 +60,7 @@ export const program = (
             path.join(getFirmwareFolder(), file),
             'Application',
             undefined,
+            undefined,
             { onProgress: progress => onProgress(index, progress) }
         );
     });
