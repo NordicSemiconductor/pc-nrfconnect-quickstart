@@ -9,6 +9,9 @@ import {
     apps,
     Button,
     DownloadableApp,
+    openUrl,
+    openWindow,
+    Spinner,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
@@ -21,10 +24,15 @@ import {
     EvaluationResource,
     ExternalLinkEvaluationResource,
 } from '../device/deviceGuides';
-import { getChoiceUnsafely } from '../device/deviceSlice';
+import {
+    getChoiceUnsafely,
+    getSelectedDeviceUnsafely,
+} from '../device/deviceSlice';
 
 export default () => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
     const choice = useAppSelector(getChoiceUnsafely);
+    const [installingApps, setInstallingApps] = useState<DownloadableApp[]>([]);
     const [downloadableApps, setDownloadableApps] = useState<DownloadableApp[]>(
         []
     );
@@ -80,27 +88,83 @@ export default () => {
                             <Button
                                 variant="link-button"
                                 size="xl"
-                                onClick={() => {
-                                    usageData.sendUsageData(
-                                        isExternalLinkResource(resource)
-                                            ? `Opened link ${resource.link.href}`
-                                            : `Opened app ${resource.app}`
-                                    );
-                                    // install and open or something
+                                disabled={
+                                    !isExternalLinkResource(resource) &&
+                                    !!installingApps.find(
+                                        a => a.name === resource.app
+                                    )
+                                }
+                                onClick={async () => {
+                                    if (isExternalLinkResource(resource)) {
+                                        usageData.sendUsageData(
+                                            `Opened link ${resource.link.href}`
+                                        );
+                                        openUrl(resource.link.href);
+                                    } else {
+                                        const app = downloadableApps.find(
+                                            a =>
+                                                a.name === resource.app &&
+                                                a.source === 'official'
+                                        );
+
+                                        usageData.sendUsageData(
+                                            `Opened app ${resource.app}`
+                                        );
+                                        if (app && !apps.isInstalled(app)) {
+                                            setInstallingApps([
+                                                ...installingApps,
+                                                app,
+                                            ]);
+                                            await apps.installDownloadableApp(
+                                                app
+                                            );
+                                            setInstallingApps(
+                                                installingApps.filter(
+                                                    a => a.name !== app.name
+                                                )
+                                            );
+                                        }
+
+                                        openWindow.openApp(
+                                            {
+                                                name: resource.app,
+                                                source: 'official',
+                                            },
+                                            {
+                                                device: {
+                                                    serialNumber:
+                                                        device.serialNumber,
+                                                },
+                                            }
+                                        );
+                                    }
                                 }}
                                 className="tw-flex-1"
                             >
                                 {isExternalLinkResource(resource)
                                     ? resource.link.label
-                                    : `Open ${getAppName(resource.app)}`}
+                                    : `${
+                                          installingApps.find(
+                                              a => a.name === resource.app
+                                          )
+                                              ? 'Installing...'
+                                              : `Open ${getAppName(
+                                                    resource.app
+                                                )}`
+                                      }`}
                             </Button>
                         </div>
                     ))}
                 </div>
             </Main.Content>
             <Main.Footer>
-                <Back />
-                <Next />
+                {installingApps.length > 0 && (
+                    <div className="tw-flex tw-flex-row tw-items-center tw-pr-4 tw-text-primary">
+                        <Spinner size="lg" />
+                    </div>
+                )}
+                <Back disabled={installingApps.length > 0} />
+                <Next disabled={installingApps.length > 0} />
             </Main.Footer>
         </Main>
     );
