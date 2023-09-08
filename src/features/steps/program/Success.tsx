@@ -10,7 +10,6 @@ import { useAppDispatch } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
-import { setChoice } from '../../device/deviceSlice';
 import { ProgrammingState, setProgrammingState } from './programSlice';
 import ProgressIndicators from './ProgressIndicators';
 
@@ -25,7 +24,6 @@ export default () => {
             <Main.Footer>
                 <Back
                     onClick={() => {
-                        dispatch(setChoice(undefined));
                         dispatch(
                             setProgrammingState(
                                 ProgrammingState.SELECT_FIRMWARE

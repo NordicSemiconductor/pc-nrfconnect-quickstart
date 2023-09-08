@@ -13,7 +13,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
-import { setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 import {
     getProgrammingError,
@@ -54,7 +53,6 @@ export default () => {
             <Main.Footer>
                 <Back
                     onClick={() => {
-                        dispatch(setChoice(undefined));
                         dispatch(
                             setProgrammingState(
                                 ProgrammingState.SELECT_FIRMWARE
