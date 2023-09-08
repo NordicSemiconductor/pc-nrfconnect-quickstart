@@ -5,24 +5,59 @@
  */
 
 import { app } from '@electron/remote';
+import { existsSync } from 'fs';
+import { dirname, join } from 'path';
 
 import { AppDispatch } from '../../../app/store';
 import { setIsVsCodeInstalled } from './developSlice';
 
-const isVsCodeInstalled = () =>
+const isVsCodeInstalledOnLinux = () =>
     app.getApplicationNameForProtocol('vscode://') !== '';
 
-export const detectVsCode = (dispatch: AppDispatch) => {
-    dispatch(setIsVsCodeInstalled(isVsCodeInstalled()));
+const isVsCodeInstalledOnMacOS = async () => {
+    try {
+        const { path } = await app.getApplicationInfoForProtocol('vscode://');
+
+        return existsSync(path);
+    } catch (error) {
+        return false;
+    }
+};
+
+const isVsCodeInstalledOnWindows = async () => {
+    try {
+        const { path } = await app.getApplicationInfoForProtocol('vscode://');
+
+        return existsSync(join(dirname(path), 'bin', 'code'));
+    } catch (error) {
+        return false;
+    }
+};
+
+const isVsCodeInstalled = () => {
+    switch (process.platform) {
+        case 'linux':
+            return isVsCodeInstalledOnLinux();
+        case 'darwin':
+            return isVsCodeInstalledOnMacOS();
+        case 'win32':
+            return isVsCodeInstalledOnWindows();
+        default:
+            throw new Error(`Unsupported platform ${process.platform}`);
+    }
+};
+
+export const detectVsCode = async (dispatch: AppDispatch) => {
+    dispatch(setIsVsCodeInstalled(await isVsCodeInstalled()));
 };
 
 export const detectVsCodeRepeatedly = (dispatch: AppDispatch) => {
-    const id = setInterval(() => {
-        if (isVsCodeInstalled()) {
+    const id = setInterval(async () => {
+        if (await isVsCodeInstalled()) {
             dispatch(setIsVsCodeInstalled(true));
             clearInterval(id);
         }
-    }, 100);
+    }, 200);
 
     return () => clearInterval(id);
 };
