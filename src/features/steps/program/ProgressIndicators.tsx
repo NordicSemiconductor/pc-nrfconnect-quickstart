@@ -45,7 +45,11 @@ export default () => {
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-items-center tw-justify-between tw-text-sm">
                         <p>{core} core</p>
-                        <Link label={link.label} href={link.href} />
+                        <Link
+                            label={link.label}
+                            color="tw-text-primary"
+                            href={link.href}
+                        />
                     </div>
                     <ProgressBar
                         percentage={progress?.totalProgressPercentage || 0}

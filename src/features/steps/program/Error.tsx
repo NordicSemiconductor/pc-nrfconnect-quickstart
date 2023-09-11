@@ -12,6 +12,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
+import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { startProgramming } from './programEffects';
 import {
@@ -42,11 +43,7 @@ export default () => {
                     <p>{describeError(error)}</p>
                     <br />
                     <p>
-                        Contact support on{' '}
-                        <b>
-                            <u>DevZone</u>
-                        </b>{' '}
-                        if problem persists.
+                        Contact support on <DevZoneLink /> if problem persists.
                     </p>
                 </div>
             </Main.Content>

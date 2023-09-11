@@ -10,7 +10,15 @@ import {
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-export default ({
+export const DevZoneLink = () => (
+    <Link
+        label="DevZone"
+        color="tw-text-primary"
+        href="https://devzone.nordicsemi.com/support/add"
+    />
+);
+
+const Link = ({
     label,
     href,
     color = 'tw-text-gray-700',
@@ -32,3 +40,5 @@ export default ({
         {label}
     </a>
 );
+
+export default Link;
