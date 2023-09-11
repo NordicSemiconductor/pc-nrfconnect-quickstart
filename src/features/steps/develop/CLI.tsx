@@ -18,7 +18,7 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading="Install VS Code">
+            <Main.Content heading="Command Line">
                 <div className="tw-flex tw-flex-col tw-gap-6">
                     <div>
                         <b>Install nRF Connect SDK and toolchain manually</b>
