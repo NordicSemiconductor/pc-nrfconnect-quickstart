@@ -53,15 +53,6 @@ export default () => {
                                 </b>
                                 if problem persists.
                             </p>
-                            <br />
-                            <p>
-                                Don&apos;t have a development kit? Do a
-                                <b>
-                                    {' '}
-                                    <u>paper evaluation</u>{' '}
-                                </b>
-                                .
-                            </p>
                         </div>
                     )}
                 </>
