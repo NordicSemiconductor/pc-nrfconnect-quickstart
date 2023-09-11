@@ -43,7 +43,7 @@ export default () => {
                     </p>
                     {onWindows && (
                         <p>
-                            If you already installed VS code, it may be corrupt
+                            If you already installed VS Code, it may be corrupt
                             and you may need to reinstall it.
                         </p>
                     )}
