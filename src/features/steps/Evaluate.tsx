@@ -101,15 +101,21 @@ export default () => {
                                         );
                                         openUrl(resource.link.href);
                                     } else {
-                                        const app = downloadableApps.find(
-                                            a =>
-                                                a.name === resource.app &&
-                                                a.source === 'official'
-                                        );
+                                        const app = await apps
+                                            .getDownloadableApps()
+                                            .then(({ apps: receivedApps }) =>
+                                                receivedApps.find(
+                                                    a =>
+                                                        a.name ===
+                                                            resource.app &&
+                                                        a.source === 'official'
+                                                )
+                                            );
 
                                         usageData.sendUsageData(
                                             `Opened app ${resource.app}`
                                         );
+
                                         if (app && !apps.isInstalled(app)) {
                                             setInstallingApps([
                                                 ...installingApps,
