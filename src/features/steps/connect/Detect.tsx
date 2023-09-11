@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../../app/store';
+import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { getConnectedDevices } from '../../device/deviceSlice';
 import Searching from './Searching';
@@ -46,12 +47,8 @@ export default () => {
                             <p>This is taking longer than expected.</p>
                             <br />
                             <p>
-                                Contact support on
-                                <b>
-                                    {' '}
-                                    <u>DevZone</u>{' '}
-                                </b>
-                                if problem persists.
+                                Contact support on <DevZoneLink /> if problem
+                                persists.
                             </p>
                         </div>
                     )}

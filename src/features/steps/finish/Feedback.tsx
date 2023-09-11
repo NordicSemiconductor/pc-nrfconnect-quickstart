@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { sendFeedback } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Back } from '../../../common/Back';
+import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 
@@ -29,10 +30,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                 <div className="tw-pt-7">
                     Submissions will not receive a response.
                     <br />
-                    For general help and support visit{' '}
-                    <u>
-                        <b>Nordic DevZone</b>
-                    </u>
+                    For general help and support visit <DevZoneLink />
                 </div>
             </Main.Content>
             <Main.Footer>
