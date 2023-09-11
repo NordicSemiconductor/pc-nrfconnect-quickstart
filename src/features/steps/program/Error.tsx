@@ -13,7 +13,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
-import { setChoice } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
 import {
     getProgrammingError,
@@ -27,7 +26,7 @@ export default () => {
     const dispatch = useAppDispatch();
     const error = useAppSelector(getProgrammingError);
     const failedCore = useAppSelector(getProgrammingProgress).find(
-        p => p.progress?.totalProgressPercentage || 0 < 100
+        p => (p.progress?.totalProgressPercentage || 0) < 100
     )?.core;
 
     return (
@@ -54,7 +53,6 @@ export default () => {
             <Main.Footer>
                 <Back
                     onClick={() => {
-                        dispatch(setChoice(undefined));
                         dispatch(
                             setProgrammingState(
                                 ProgrammingState.SELECT_FIRMWARE

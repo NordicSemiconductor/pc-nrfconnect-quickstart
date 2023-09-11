@@ -18,7 +18,7 @@ export default () => (
             <ProgressIndicators />
         </Main.Content>
         <Main.Footer>
-            <div className="tw-pr-4 tw-text-primary">
+            <div className="tw-flex tw-flex-row tw-items-center tw-pr-4 tw-text-primary">
                 <Spinner size="lg" />
             </div>
             <Back disabled />

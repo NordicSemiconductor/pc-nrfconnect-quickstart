@@ -18,16 +18,21 @@ import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
 import { Skip } from '../../../common/Next';
 import { Choice, deviceChoices } from '../../device/deviceGuides';
-import { getSelectedDeviceUnsafely, setChoice } from '../../device/deviceSlice';
+import {
+    getChoiceUnsafely,
+    getSelectedDeviceUnsafely,
+    setChoice,
+} from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
-import { getHasBeenProgrammed } from './programSlice';
 
 export default () => {
     const dispatch = useAppDispatch();
     const device = useAppSelector(getSelectedDeviceUnsafely);
-    const hasBeenProgrammed = useAppSelector(getHasBeenProgrammed);
+    const previouslySelectedChoice = useAppSelector(getChoiceUnsafely);
 
-    const [selected, setSelected] = React.useState<Choice>();
+    const [selected, setSelected] = React.useState<Choice | undefined>(
+        previouslySelectedChoice
+    );
 
     const items = deviceChoices(device).map(choice => {
         const isSelected = selected?.name === choice.name;
@@ -76,7 +81,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                {hasBeenProgrammed && <Skip />}
+                {!!previouslySelectedChoice && <Skip />}
                 <Button
                     variant="primary"
                     size="xl"

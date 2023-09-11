@@ -33,7 +33,7 @@ export default () => {
                 </div>
             )}
             <div className="tw-flex tw-flex-1 tw-flex-row tw-justify-end">
-                <div className="tw-h-10 tw-w-10">
+                <div className="tw-w-10">
                     <Logo />
                 </div>
             </div>
