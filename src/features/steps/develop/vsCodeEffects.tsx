@@ -51,11 +51,14 @@ export const detectVsCode = async (dispatch: AppDispatch) => {
     dispatch(setIsVsCodeInstalled(await isVsCodeInstalled()));
 };
 
-export const detectVsCodeRepeatedly = (dispatch: AppDispatch) => {
+export const detectVsCodeRepeatedly = (
+    dispatch: AppDispatch,
+    wasVsCodeInstalled: boolean
+) => {
     const id = setInterval(async () => {
-        if (await isVsCodeInstalled()) {
-            dispatch(setIsVsCodeInstalled(true));
-            clearInterval(id);
+        const isVsCodeInstalledNow = await isVsCodeInstalled();
+        if (isVsCodeInstalledNow !== wasVsCodeInstalled) {
+            dispatch(setIsVsCodeInstalled(isVsCodeInstalledNow));
         }
     }, 200);
 
