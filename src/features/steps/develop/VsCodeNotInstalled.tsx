@@ -4,15 +4,14 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useAppDispatch } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Link from '../../../common/Link';
 import Main from '../../../common/Main';
-import { Skip } from '../../../common/Next';
+import { Next, Skip } from '../../../common/Next';
 import { DevelopState, setDevelopState } from './developSlice';
-import { detectVsCodeRepeatedly } from './vsCodeEffects';
 
 type SupportedPlatform = 'win32' | 'darwin' | 'linux';
 
@@ -27,8 +26,6 @@ const onWindows = process.platform === 'win32';
 export default () => {
     const dispatch = useAppDispatch();
 
-    useEffect(() => detectVsCodeRepeatedly(dispatch), [dispatch]);
-
     return (
         <Main>
             <Main.Content heading="Install VS Code">
@@ -40,7 +37,9 @@ export default () => {
                             label="download and install VS Code"
                             color="tw-text-primary"
                         />
-                        .
+                        . As soon as you did that, this app will guide you how
+                        to open Nordic Semiconductor’s nRF Connect for VS Code
+                        extension.
                     </p>
                     {onWindows && (
                         <p>
@@ -57,6 +56,7 @@ export default () => {
                     }}
                 />
                 <Skip />
+                <Next disabled />
             </Main.Footer>
         </Main>
     );

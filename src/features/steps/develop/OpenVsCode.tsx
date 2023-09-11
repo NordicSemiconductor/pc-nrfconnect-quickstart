@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { openUrl, usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import logo from '../../../../resources/nrf_connect_for_vs_code.svg';
@@ -17,11 +17,17 @@ import {
     getIsVsCodeInstalled,
     setDevelopState,
 } from './developSlice';
+import { detectVsCodeRepeatedly } from './vsCodeEffects';
 import VsCodeNotInstalled from './VsCodeNotInstalled';
 
 export default () => {
     const dispatch = useAppDispatch();
     const isVsCodeInstalled = useAppSelector(getIsVsCodeInstalled);
+
+    useEffect(
+        () => detectVsCodeRepeatedly(dispatch, isVsCodeInstalled),
+        [dispatch, isVsCodeInstalled]
+    );
 
     if (!isVsCodeInstalled) {
         return <VsCodeNotInstalled />;
