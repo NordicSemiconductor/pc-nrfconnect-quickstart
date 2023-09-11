@@ -20,7 +20,7 @@ export default () => {
         <Main>
             <Main.Content
                 heading="nRF Connect for VS Code extension"
-                subHeading="nRF Connect for VS Code extension"
+                subHeading="The extension is located in the VS Code activity bar"
             >
                 <div className="tw-flex">
                     <img
