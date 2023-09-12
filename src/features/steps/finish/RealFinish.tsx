@@ -30,7 +30,7 @@ export default ({ back }: { back: () => void }) => {
                 subHeading={`You completed all steps for the ${deviceName}`}
             >
                 <div className="tw-flex tw-flex-col">
-                    <span className="mdi mdi-flag-checkered tw-text-8xl tw-leading-none tw-text-gray-700" />
+                    <span className="mdi mdi-hand-wave tw-text-6xl tw-leading-none tw-text-gray-700" />
                 </div>
             </Main.Content>
             <Main.Footer>
