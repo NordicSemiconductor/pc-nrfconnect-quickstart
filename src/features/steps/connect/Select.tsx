@@ -37,7 +37,7 @@ export default () => {
             disabledSelector: <p className="tw-text-xs">Not supported yet</p>,
             content: (
                 <div className="tw-flex tw-flex-row tw-items-center tw-justify-start">
-                    <div className="tw-w-28">
+                    <div className="tw-w-28 tw-flex-shrink-0">
                         <DeviceIcon
                             device={device}
                             className={classNames(
@@ -48,7 +48,7 @@ export default () => {
                             )}
                         />
                     </div>
-                    <p className="tw-w-44 tw-overflow-ellipsis tw-text-sm">
+                    <p className="tw-w-44 tw-flex-shrink-0 tw-overflow-ellipsis tw-text-sm">
                         <b>
                             {getPersistedNickname(device.serialNumber) ||
                                 deviceName(device)}
