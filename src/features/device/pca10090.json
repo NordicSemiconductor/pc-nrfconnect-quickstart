@@ -100,7 +100,7 @@
             ]
         },
         {
-            "name": "Cloud Connectivity",
+            "name": "Asset Tracking",
             "description": "Evaluate cloud interaction, location services, GNSS and real-time configurations.",
             "documentation": {
                 "label": "Asset Tracker V2",
