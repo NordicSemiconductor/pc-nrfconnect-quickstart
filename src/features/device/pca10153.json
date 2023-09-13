@@ -9,11 +9,11 @@
     "description": [
         {
             "title": "Cellular Powerhouse",
-            "markdownContent": "The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.  \n&nbsp;  \nIt includes a Segger J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf91_dk/page/UG/nrf91_DK/intro.html)"
+            "markdownContent": "The nRF9161 Development Kit is Perfect for evaluating the nRF9161 SIP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \n It includes a Segger J-Link OB dDebugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and relevant module interfaces."
         },
         {
             "title": "Two cores. Best friends.",
-            "markdownContent": "Use the modem as a companion chip with your existing code, or use the application core and eliminate the need for an external MCU.  \n&nbsp;  \nThe choice is yours."
+            "markdownContent": "You have two options for levegaring the nRF1961 SIP:  \n&nbsp;  \n1. Integrate it as a \"cellular/NR+ modem only\" alongisde your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9161 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capiyalizing on the advantages offered by the nRF9161.  \n&nbsp;  \nThe choice is entirely yours to make!"
         }
     ],
     "learningResources": [
@@ -42,13 +42,17 @@
                 "label": "Serial LTE Modem",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html"
             },
+            "verification": {
+                "command": "AT+CGMR",
+                "response": "mfw_nrf91x1_2.0.0-77.beta"
+            },
             "firmware": [
                 {
                     "core": "Modem",
                     "file": "mfw_nrf91x1_2.0.0-77.beta.zip",
                     "link": {
-                        "label": "Firmware 1.3.5",
-                        "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt"
+                        "label": "Firmware 2.0.0-77 beta",
+                        "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0-77.beta_release_notes.txt"
                     }
                 },
                 {
@@ -102,13 +106,17 @@
                 "label": "Asset Tracker V2",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
             },
+            "verification": {
+                "command": "AT+CGMR",
+                "response": "mfw_nrf91x1_2.0.0-77.beta"
+            },
             "firmware": [
                 {
                     "core": "Modem",
                     "file": "mfw_nrf91x1_2.0.0-77.beta.zip",
                     "link": {
-                        "label": "Firmware 1.3.5",
-                        "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt"
+                        "label": "Firmware 2.0.0-77 beta",
+                        "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0-77.beta_release_notes.txt"
                     }
                 },
                 {
@@ -146,13 +154,17 @@
                 "label": "Modem Shell",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
             },
+            "verification": {
+                "command": "AT+CGMR",
+                "response": "mfw_nrf91x1_2.0.0-77.beta"
+            },
             "firmware": [
                 {
                     "core": "Modem",
                     "file": "mfw_nrf91x1_2.0.0-77.beta.zip",
                     "link": {
-                        "label": "Firmware 1.3.5",
-                        "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.5_release_notes.txt"
+                        "label": "Firmware 2.0.0-77 beta",
+                        "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0-77.beta_release_notes.txt"
                     }
                 },
                 {

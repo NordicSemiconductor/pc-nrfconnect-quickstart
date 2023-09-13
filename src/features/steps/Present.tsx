@@ -24,6 +24,10 @@ const overWriteA = ({
     children?: React.ReactNode;
 }) => <Link color="tw-text-primary" label={children} href={href || ''} />;
 
+const overwriteOl = ({ children }: { children: React.ReactNode }) => (
+    <ol className="tw-list-inside tw-list-decimal">{children}</ol>
+);
+
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const dispatch = useAppDispatch();
@@ -42,6 +46,7 @@ export default () => {
                 <ReactMarkdown
                     components={{
                         a: overWriteA,
+                        ol: overwriteOl,
                     }}
                 >
                     {

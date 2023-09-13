@@ -21,6 +21,7 @@ import Present from '../features/steps/Present';
 import Program from '../features/steps/program';
 import Rename from '../features/steps/Rename';
 import { getCurrentStep } from '../features/steps/stepsSlice';
+import Verify from '../features/steps/verify';
 import Header from './Header';
 import StepStepper from './StepStepper';
 import { useAppDispatch, useAppSelector } from './store';
@@ -66,6 +67,7 @@ export const App = () => {
                     {currentStep === 'Present' && <Present />}
                     {currentStep === 'Rename' && <Rename />}
                     {currentStep === 'Program' && <Program />}
+                    {currentStep === 'Verify' && <Verify />}
                     {currentStep === 'Evaluate' && <Evaluate />}
                     {currentStep === 'Develop' && <Develop />}
                     {currentStep === 'Learn' && <Learn />}

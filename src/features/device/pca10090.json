@@ -13,7 +13,7 @@
         },
         {
             "title": "Two cores. Best friends.",
-            "markdownContent": "Use the modem as a companion chip with your existing code, or use the application core and eliminate the need for an external MCU.  \n&nbsp;  \nThe choice is yours."
+            "markdownContent": "You have two options for leveraging the nRF9160 SIP:  \n1. Integrate it as a \"modem only\" alongside your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9160 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9160.  \n&nbsp;  \nThe choice is entirely yours to make!"
         }
     ],
     "learningResources": [
@@ -41,6 +41,10 @@
             "documentation": {
                 "label": "Serial LTE Modem",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html"
+            },
+            "verification": {
+                "command": "AT+CGMR",
+                "response": "mfw_nrf9160_1.3.5"
             },
             "firmware": [
                 {
@@ -102,6 +106,10 @@
                 "label": "Asset Tracker V2",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
             },
+            "verification": {
+                "command": "AT+CGMR",
+                "response": "mfw_nrf9160_1.3.5"
+            },
             "firmware": [
                 {
                     "core": "Modem",
@@ -145,6 +153,10 @@
             "documentation": {
                 "label": "Modem Shell",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
+            },
+            "verification": {
+                "command": "AT+CGMR",
+                "response": "mfw_nrf9160_1.3.5"
             },
             "firmware": [
                 {
