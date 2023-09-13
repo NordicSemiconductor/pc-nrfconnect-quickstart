@@ -9,11 +9,11 @@
     "description": [
         {
             "title": "Cellular Powerhouse",
-            "markdownContent": "The nRF9161 Development Kit is Perfect for evaluating the nRF9161 SIP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \n It includes a Segger J-Link OB dDebugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and relevant module interfaces."
+            "markdownContent": "The nRF9161 Development Kit is perfect for evaluating the nRF9161 SIP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \n It includes a Segger J-Link OB dDebugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and relevant module interfaces."
         },
         {
             "title": "Two cores. Best friends.",
-            "markdownContent": "You have two options for levegaring the nRF1961 SIP:  \n&nbsp;  \n1. Integrate it as a \"cellular/NR+ modem only\" alongisde your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9161 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capiyalizing on the advantages offered by the nRF9161.  \n&nbsp;  \nThe choice is entirely yours to make!"
+            "markdownContent": "You have two options for leveraging the nRF9161 SIP:  \n&nbsp;  \n1. Integrate it as a \"cellular/NR+ modem only\" alongside your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9161 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9161.  \n&nbsp;  \nThe choice is entirely yours to make!"
         }
     ],
     "learningResources": [
@@ -65,14 +65,6 @@
                 }
             ],
             "evaluationResources": [
-                {
-                    "title": "Activate SIM card",
-                    "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                    "link": {
-                        "label": "Actvate SIM card",
-                        "href": ""
-                    }
-                },
                 {
                     "app": "pc-nrfconnect-serial-terminal",
                     "description": "Use the Serial Terminal PC application as a serial interface to send AT commands to the device",
@@ -130,14 +122,6 @@
             ],
             "evaluationResources": [
                 {
-                    "title": "Activate SIM card",
-                    "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                    "link": {
-                        "label": "Actvate SIM card",
-                        "href": ""
-                    }
-                },
-                {
                     "title": "Cellular IoT Fundamentals",
                     "link": {
                         "label": "Open course",
@@ -177,14 +161,6 @@
                 }
             ],
             "evaluationResources": [
-                {
-                    "title": "Activate SIM card",
-                    "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                    "link": {
-                        "label": "Actvate SIM card",
-                        "href": ""
-                    }
-                },
                 {
                     "app": "pc-nrfconnect-serial-terminal",
                     "description": "Serial interface to send commands to the device.",
