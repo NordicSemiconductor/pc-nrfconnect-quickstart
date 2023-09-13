@@ -66,14 +66,6 @@
             ],
             "evaluationResources": [
                 {
-                    "title": "Activate SIM card",
-                    "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                    "link": {
-                        "label": "Actvate SIM card",
-                        "href": ""
-                    }
-                },
-                {
                     "app": "pc-nrfconnect-serial-terminal",
                     "description": "Use the Serial Terminal PC application as a serial interface to send AT commands to the device",
                     "links": [
@@ -130,14 +122,6 @@
             ],
             "evaluationResources": [
                 {
-                    "title": "Activate SIM card",
-                    "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                    "link": {
-                        "label": "Actvate SIM card",
-                        "href": ""
-                    }
-                },
-                {
                     "title": "Cellular IoT Fundamentals",
                     "link": {
                         "label": "Open course",
@@ -177,14 +161,6 @@
                 }
             ],
             "evaluationResources": [
-                {
-                    "title": "Activate SIM card",
-                    "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                    "link": {
-                        "label": "Actvate SIM card",
-                        "href": ""
-                    }
-                },
                 {
                     "app": "pc-nrfconnect-serial-terminal",
                     "description": "Serial interface to send commands to the device.",
