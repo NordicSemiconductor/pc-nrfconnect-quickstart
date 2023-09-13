@@ -35,7 +35,7 @@ export default () => {
 
     useEffect(() => {
         const serialportPaths = device?.serialPorts
-            ?.map(port => port.path)
+            ?.map(port => port.comName)
             .filter(path => path !== null) as string[];
         if (deviceIsConnected && verification) {
             verifyDevice(
