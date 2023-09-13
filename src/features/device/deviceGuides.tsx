@@ -44,6 +44,7 @@ export type EvaluationResource =
 export interface Choice {
     name: string;
     description: string;
+    verification?: { command: string; response: string };
     firmware: Firmware[];
     documentation?: Link;
     evaluationResources: EvaluationResource[];

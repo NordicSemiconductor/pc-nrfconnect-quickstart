@@ -6,6 +6,4 @@
 
 import React from 'react';
 
-import './searching.scss';
-
-export default () => <p className="searching">Searching</p>;
+export default () => <p className="ellipsis">Searching</p>;
