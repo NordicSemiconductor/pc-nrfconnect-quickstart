@@ -13,7 +13,7 @@
         },
         {
             "title": "Two cores. Best friends.",
-            "markdownContent": "Use the modem as a companion chip with your existing code, or use the application core and eliminate the need for an external MCU.  \n&nbsp;  \nThe choice is yours."
+            "markdownContent": "You have two options for leveraging the nRF9160 SIP:  \n1. Integrate it as a \"modem only\" alongside your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9160 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9160.  \n&nbsp;  \nThe choice is entirely yours to make!"
         }
     ],
     "learningResources": [

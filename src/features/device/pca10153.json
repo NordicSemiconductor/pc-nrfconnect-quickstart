@@ -9,11 +9,11 @@
     "description": [
         {
             "title": "Cellular Powerhouse",
-            "markdownContent": "The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.  \n&nbsp;  \nIt includes a Segger J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf91_dk/page/UG/nrf91_DK/intro.html)"
+            "markdownContent": "The nRF9161 Development Kit is Perfect for evaluating the nRF9161 SIP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \n It includes a Segger J-Link OB dDebugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and relevant module interfaces."
         },
         {
             "title": "Two cores. Best friends.",
-            "markdownContent": "Use the modem as a companion chip with your existing code, or use the application core and eliminate the need for an external MCU.  \n&nbsp;  \nThe choice is yours."
+            "markdownContent": "You have two options for levegaring the nRF1961 SIP:  \n&nbsp;  \n1. Integrate it as a \"cellular/NR+ modem only\" alongisde your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9161 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capiyalizing on the advantages offered by the nRF9161.  \n&nbsp;  \nThe choice is entirely yours to make!"
         }
     ],
     "learningResources": [
