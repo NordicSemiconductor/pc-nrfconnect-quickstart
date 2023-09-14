@@ -37,8 +37,7 @@ const RadioSelectListItem = ({
             />
         }
     >
-        {/* This is wrapped in a div so the flex styles are not applied */}
-        <div className="tw-pr-10">{children}</div>
+        {children}
     </SelectableItem>
 );
 

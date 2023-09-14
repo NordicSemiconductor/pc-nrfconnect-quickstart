@@ -65,7 +65,7 @@ export const SelectableItem = ({
         )}
     >
         {/* This is wrapped in a div so the flex styles are not applied */}
-        <div className="tw-pr-10">{children}</div>
+        <div>{children}</div>
         {selector}
     </div>
 );
@@ -79,7 +79,7 @@ export const DisabledListItemContainer = ({
 }) => (
     <div className="tw-flex tw-w-full tw-flex-row tw-items-center tw-justify-between tw-gap-px tw-bg-gray-50 tw-p-4 tw-opacity-40">
         {/* This is wrapped in a div so the flex styles are not applied */}
-        <div className="tw-pr-12">{children}</div>
+        <div>{children}</div>
         {!!disabledSelector && disabledSelector}
     </div>
 );
