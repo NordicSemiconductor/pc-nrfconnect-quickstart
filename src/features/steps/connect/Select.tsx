@@ -52,12 +52,14 @@ export default () => {
                             )}
                         />
                     </div>
-                    <p className="tw-w-44 tw-flex-shrink-0 tw-overflow-ellipsis tw-text-sm">
+                    <p
+                        className="tw-w-44 tw-flex-shrink-0 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-pr-6 tw-text-sm"
                         title={name}
                     >
                         <b>{name}</b>
                     </p>
-                    <p className="tw-overflow-ellipsis tw-text-xs">
+                    <p
+                        className="tw-w-32 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-text-xs"
                         title={device.serialNumber}
                     >
                         {device.serialNumber}

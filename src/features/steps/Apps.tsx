@@ -45,7 +45,7 @@ export default () => {
                 <div className="tw-w-32 tw-flex-shrink-0 tw-pr-5">
                     <b>{app.displayName}</b>
                 </div>
-                <div>{app.description}</div>
+                <div className="tw-w-80">{app.description}</div>
             </div>
         ),
     }));
