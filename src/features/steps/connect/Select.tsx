@@ -30,6 +30,10 @@ export default () => {
 
     const items = connectedDevices.map(device => {
         const isSelected = selectedItem?.id === device.serialNumber;
+        const name =
+            getPersistedNickname(device.serialNumber) ||
+            deviceName(device) ||
+            '';
         return {
             id: device.serialNumber,
             selected: isSelected,
@@ -49,12 +53,13 @@ export default () => {
                         />
                     </div>
                     <p className="tw-w-44 tw-flex-shrink-0 tw-overflow-ellipsis tw-text-sm">
-                        <b>
-                            {getPersistedNickname(device.serialNumber) ||
-                                deviceName(device)}
-                        </b>
+                        title={name}
+                    >
+                        <b>{name}</b>
                     </p>
                     <p className="tw-overflow-ellipsis tw-text-xs">
+                        title={device.serialNumber}
+                    >
                         {device.serialNumber}
                     </p>
                 </div>
