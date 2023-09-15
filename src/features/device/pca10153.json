@@ -9,7 +9,7 @@
     "description": [
         {
             "title": "Cellular Powerhouse",
-            "markdownContent": "The nRF9161 Development Kit is perfect for evaluating the nRF9161 SIP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \n It includes a Segger J-Link OB dDebugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and relevant module interfaces."
+            "markdownContent": "The nRF9161 Development Kit is perfect for evaluating the nRF9161 SIP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \nIt includes a Segger J-Link OB dDebugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and relevant module interfaces."
         },
         {
             "title": "Two cores. Best friends.",
@@ -41,10 +41,6 @@
             "documentation": {
                 "label": "Serial LTE Modem",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html"
-            },
-            "verification": {
-                "command": "AT+CGMR",
-                "response": "mfw_nrf91x1_2.0.0-77.beta"
             },
             "firmware": [
                 {
@@ -98,10 +94,6 @@
                 "label": "Asset Tracker V2",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
             },
-            "verification": {
-                "command": "AT+CGMR",
-                "response": "mfw_nrf91x1_2.0.0-77.beta"
-            },
             "firmware": [
                 {
                     "core": "Modem",
@@ -137,10 +129,6 @@
             "documentation": {
                 "label": "Modem Shell",
                 "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
-            },
-            "verification": {
-                "command": "AT+CGMR",
-                "response": "mfw_nrf91x1_2.0.0-77.beta"
             },
             "firmware": [
                 {
