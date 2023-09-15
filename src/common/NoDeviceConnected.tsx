@@ -6,23 +6,21 @@
 
 import React, { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { Back } from '../../../common/Back';
-import Main from '../../../common/Main';
-import { Next } from '../../../common/Next';
-import { selectedDeviceIsConnected } from '../../device/deviceSlice';
-import Searching from '../connect/Searching';
-import { startProgramming } from './programEffects';
+import { useAppSelector } from '../app/store';
+import { selectedDeviceIsConnected } from '../features/device/deviceSlice';
+import Searching from '../features/steps/connect/Searching';
+import { Back } from './Back';
+import Main from './Main';
+import { Next } from './Next';
 
-export default () => {
-    const dispatch = useAppDispatch();
+export default ({ onDeviceConnected }: { onDeviceConnected?: () => void }) => {
     const deviceIsConnected = useAppSelector(selectedDeviceIsConnected);
 
     useEffect(() => {
-        if (deviceIsConnected) {
-            dispatch(startProgramming());
+        if (deviceIsConnected && onDeviceConnected) {
+            onDeviceConnected();
         }
-    }, [deviceIsConnected, dispatch]);
+    }, [deviceIsConnected, onDeviceConnected]);
 
     return (
         <Main>
@@ -34,7 +32,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Next disabled label="Program" />
+                <Next disabled />
             </Main.Footer>
         </Main>
     );
