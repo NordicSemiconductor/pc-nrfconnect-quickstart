@@ -16,8 +16,8 @@ import Connect from '../features/steps/connect';
 import Develop from '../features/steps/develop';
 import Evaluate from '../features/steps/Evaluate';
 import Finish from '../features/steps/finish';
+import Info from '../features/steps/Info';
 import Learn from '../features/steps/Learn';
-import Present from '../features/steps/Present';
 import Program from '../features/steps/program';
 import Rename from '../features/steps/Rename';
 import { getCurrentStep } from '../features/steps/stepsSlice';
@@ -64,7 +64,7 @@ export const App = () => {
 
                 <div className="tw-flex-1">
                     {currentStep === 'Connect' && <Connect />}
-                    {currentStep === 'Present' && <Present />}
+                    {currentStep === 'Info' && <Info />}
                     {currentStep === 'Rename' && <Rename />}
                     {currentStep === 'Program' && <Program />}
                     {currentStep === 'Verify' && <Verify />}
