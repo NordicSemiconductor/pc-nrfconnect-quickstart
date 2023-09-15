@@ -44,7 +44,7 @@ export default () => {
                             <br />
                             <br />
                             <br />
-                            <p>This is taking longer than expected.</p>
+                            <p>Kit detection is taking longer than expected.</p>
                             <br />
                             <p>
                                 Contact support on <DevZoneLink /> if problem
