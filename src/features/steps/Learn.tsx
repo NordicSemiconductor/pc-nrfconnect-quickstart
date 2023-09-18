@@ -20,7 +20,7 @@ export default () => {
     return (
         <Main>
             <Main.Content heading="Recommended learning resources">
-                <div className="tw-flex tw-flex-col tw-items-start tw-justify-start tw-gap-4">
+                <div className="tw-flex tw-flex-col tw-items-start tw-justify-start tw-gap-6">
                     {deviceLearningResources(device).map(
                         ({ label, description, link }) => (
                             <div key={label}>
