@@ -69,8 +69,8 @@ export default () => {
     }, [device]);
 
     const setAppSelected = (app: SelectableListItem, selected: boolean) =>
-        setRecommendedApps(
-            recommendedApps.map(a => {
+        setRecommendedApps(oldRecommendedApps =>
+            oldRecommendedApps.map(a => {
                 if (a.name === app.id) {
                     a.selected = selected;
                 }
@@ -81,8 +81,8 @@ export default () => {
     const installApp = (appToBeInstalled: App) => {
         apps.installDownloadableApp(appToBeInstalled)
             .then(installedApp =>
-                setRecommendedApps(
-                    recommendedApps.map(app =>
+                setRecommendedApps(oldRecommendedApps =>
+                    oldRecommendedApps.map(app =>
                         app.name === installedApp.name
                             ? {
                                   ...installedApp,
@@ -132,8 +132,8 @@ export default () => {
                                         !apps.isInstalled(app) &&
                                         app.selected
                                     ) {
-                                        setRecommendedApps(
-                                            recommendedApps.map(a =>
+                                        setRecommendedApps(oldRecommendedApps =>
+                                            oldRecommendedApps.map(a =>
                                                 a === app
                                                     ? {
                                                           ...app,
