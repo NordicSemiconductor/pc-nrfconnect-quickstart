@@ -58,23 +58,14 @@ const testIfShellMode = async (serialPort: SerialPort) => {
     }
 };
 
-const checkSendATCommand = async (
-    path: string,
-    cmd: string,
-    expectedReply: string
-) => {
-    let createdSerialPort: SerialPort;
-    try {
-        createdSerialPort = await createSerialPort(
-            {
-                path,
-                baudRate: 115200,
-            },
-            { overwrite: true, settingsLocked: true }
-        );
-    } catch (e) {
-        return false;
-    }
+const connectToDevice = async (path: string, overwrite = true) => {
+    const createdSerialPort = await createSerialPort(
+        {
+            path,
+            baudRate: 115200,
+        },
+        { overwrite, settingsLocked: true }
+    );
 
     /*
          Some applications that run Line Mode have an issue, where if you power-cycle the device,
@@ -94,7 +85,6 @@ const checkSendATCommand = async (
     // If race times out, then we assume AT Host is not detected on device.
     const detectedAtHostLibrary = isShellMode !== undefined;
 
-    let reply;
     if (detectedAtHostLibrary) {
         if (isShellMode) {
             const sp = await shellParser(
@@ -114,41 +104,42 @@ const checkSendATCommand = async (
                 }
             );
 
-            try {
-                reply = await sendCommandShellMode(sp, cmd);
-            } catch (e) {
-                sp.unregister();
-                createdSerialPort.close();
-                return false;
-            }
-            sp.unregister();
-        } else {
-            try {
-                reply = await sendCommandLineMode(createdSerialPort, cmd);
-            } catch (e) {
-                return false;
-            }
+            return {
+                sendCommand: (cmd: string) => sendCommandShellMode(sp, cmd),
+                unregister: () => {
+                    sp.unregister();
+                    createdSerialPort.close();
+                },
+            };
         }
-        createdSerialPort.close();
 
-        return reply.includes(expectedReply);
+        return {
+            sendCommand: (cmd: string) =>
+                sendCommandLineMode(createdSerialPort, cmd),
+            unregister: () => {
+                createdSerialPort.close();
+            },
+        };
     }
 
-    return false;
+    createdSerialPort.close();
+    throw new Error(
+        'Could not detect AT Host library. Make sure you have an AT client programmed on the device'
+    );
 };
 
-export const verifyDevice = async (
-    paths: string[],
-    command: string,
-    expectedReply: string
-) => {
+export const autoFindUartSerialPort = async (paths: string[]) => {
     let path = paths.pop();
     while (path) {
-        // eslint-disable-next-line no-await-in-loop
-        const result = await checkSendATCommand(path, command, expectedReply);
-        if (result) return result;
+        try {
+            // eslint-disable-next-line no-await-in-loop
+            const result = await connectToDevice(path);
+            return result;
+        } catch (e) {
+            // Not relevant
+        }
         path = paths.pop();
     }
 
-    return false;
+    throw new Error('Unable to find AT client');
 };

@@ -6,16 +6,18 @@
 
 import React from 'react';
 
-import { useAppSelector } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import NoDeviceConnected from '../../../common/NoDeviceConnected';
 import Error from './Error';
-import NoDeviceConnected from './NoDeviceConnected';
 import Program from './Program';
+import { startProgramming } from './programEffects';
 import { getProgrammingState, ProgrammingState } from './programSlice';
 import SelectFirmware from './SelectFirmware';
 import Success from './Success';
 
 export default () => {
     const programmingState = useAppSelector(getProgrammingState);
+    const dispatch = useAppDispatch();
 
     return (
         <>
@@ -23,7 +25,9 @@ export default () => {
                 <SelectFirmware />
             )}
             {programmingState === ProgrammingState.NO_DEVICE_CONNECTED && (
-                <NoDeviceConnected />
+                <NoDeviceConnected
+                    onDeviceConnected={() => dispatch(startProgramming())}
+                />
             )}
             {programmingState === ProgrammingState.PROGRAMMING && <Program />}
             {programmingState === ProgrammingState.SUCCESS && <Success />}
