@@ -23,11 +23,13 @@ export default () => {
                     <div>
                         <b>Install nRF Connect SDK and toolchain manually</b>
                         <p>Install manually using the command line</p>
-                        <Link
-                            color="tw-text-primary"
-                            href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/installation/installing.html"
-                            label="Manual installation instructions"
-                        />
+                        <div className="tw-pt-0.5 tw-text-xs">
+                            <Link
+                                color="tw-text-primary"
+                                href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/installation/installing.html"
+                                label="Manual installation instructions"
+                            />
+                        </div>
                     </div>
 
                     <div>
@@ -37,25 +39,28 @@ export default () => {
                             manage Nordic Semiconductor devices and support
                             automation.
                         </p>
-                        <Link
-                            color="tw-text-primary"
-                            href="https://www.nordicsemi.com/Products/Development-tools/nrf-util"
-                            label="nRF Util documentation"
-                        />
+                        <div className="tw-pt-0.5 tw-text-xs">
+                            <Link
+                                color="tw-text-primary"
+                                href="https://www.nordicsemi.com/Products/Development-tools/nrf-util"
+                                label="nRF Util documentation"
+                            />
+                        </div>
                     </div>
 
                     <div>
                         <b>West</b>
                         <p>
                             A tool for managing multiple Git repositories and
-                            versions. It is extendable with custom commands and
-                            features.
+                            versions.
                         </p>
-                        <Link
-                            color="tw-text-primary"
-                            href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/develop/west"
-                            label="West overview"
-                        />
+                        <div className="tw-pt-0.5 tw-text-xs">
+                            <Link
+                                color="tw-text-primary"
+                                href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/develop/west"
+                                label="West overview"
+                            />
+                        </div>
                     </div>
                 </div>
             </Main.Content>
