@@ -47,15 +47,13 @@ export default () => {
     );
 
     const formatResponse = (response: string, responseRegex: RegExp) => {
-        console.log(response);
         const filteredResponse = response
             .split('\n')
             .filter(line => !!line && line.trim() !== 'OK')
-            .join('');
+            .join('')
+            .trim();
 
-        const [temp, match] = filteredResponse.match(responseRegex) || [];
-
-        console.log(temp, match);
+        const [, match] = filteredResponse.match(responseRegex) ?? [];
 
         return match;
     };
