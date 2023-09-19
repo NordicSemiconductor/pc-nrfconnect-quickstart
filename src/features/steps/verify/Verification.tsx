@@ -87,6 +87,7 @@ export default () => {
                 await reducedPromise;
 
                 setVerfication(newVerification);
+                result.unregister();
             })
             .catch(() => setFailed(true));
     };
