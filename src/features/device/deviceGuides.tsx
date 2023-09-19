@@ -51,7 +51,7 @@ export interface Choice {
 
 export interface DeviceGuide {
     boardVersion: string;
-    description: { title: string; markdownContent: string }[];
+    description: { title: string; markdownContent: string };
     apps: string[];
     choices: Choice[];
     learningResources: {
@@ -84,7 +84,7 @@ const getDeviceGuide = (device: NrfutilDevice) =>
 export const deviceName = (device: NrfutilDevice) => deviceInfo(device).name;
 
 export const deviceDescription = (device: NrfutilDevice) =>
-    getDeviceGuide(device)?.description || [];
+    getDeviceGuide(device)?.description || { title: '', markdownContent: '' };
 
 export const DeviceIcon = ({
     device,

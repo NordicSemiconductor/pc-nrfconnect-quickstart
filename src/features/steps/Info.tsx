@@ -4,8 +4,9 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import path from 'path';
 
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
@@ -14,7 +15,6 @@ import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { deviceDescription } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
-import { getLastMoveDirection } from './stepsSlice';
 
 const overWriteA = ({
     href,
@@ -24,60 +24,47 @@ const overWriteA = ({
     children?: React.ReactNode;
 }) => <Link color="tw-text-primary" label={children} href={href || ''} />;
 
-const overwriteOl = ({ children }: { children: React.ReactNode }) => (
-    <ol className="tw-list-inside tw-list-decimal">{children}</ol>
+const overwriteEm = ({ children }: { children: React.ReactNode }) => (
+    <em className="tw-font-light">{children}</em>
+);
+
+const overWriteImg = ({ src, alt }: { src?: string; alt?: string }) => (
+    <img src={src} alt={alt} />
 );
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const dispatch = useAppDispatch();
-    const lastMoveDirection = useAppSelector(getLastMoveDirection);
-    const [currentSubStepIndex, setCurrentSubStepIndex] = useState(
-        lastMoveDirection === 'forward'
-            ? 0
-            : deviceDescription(device).length - 1
-    );
 
     return (
         <Main>
-            <Main.Content
-                heading={deviceDescription(device)[currentSubStepIndex].title}
-            >
+            <Main.Content heading={deviceDescription(device).title}>
                 <ReactMarkdown
                     components={{
                         a: overWriteA,
-                        ol: overwriteOl,
+                        em: overwriteEm,
+                        img: overWriteImg,
                     }}
-                >
-                    {
-                        deviceDescription(device)[currentSubStepIndex]
-                            .markdownContent
+                    transformImageUri={src =>
+                        src.startsWith('http')
+                            ? src
+                            : path.join(
+                                  path.resolve(__dirname, '..', 'resources'),
+                                  src
+                              )
                     }
+                >
+                    {deviceDescription(device).markdownContent}
                 </ReactMarkdown>
             </Main.Content>
             <Main.Footer>
                 <Back
                     onClick={back => {
-                        if (currentSubStepIndex > 0) {
-                            setCurrentSubStepIndex(currentSubStepIndex - 1);
-                        } else {
-                            dispatch(selectDevice(undefined));
-                            back();
-                        }
+                        dispatch(selectDevice(undefined));
+                        back();
                     }}
                 />
-                <Next
-                    onClick={next => {
-                        if (
-                            currentSubStepIndex <
-                            deviceDescription(device).length - 1
-                        ) {
-                            setCurrentSubStepIndex(currentSubStepIndex + 1);
-                        } else {
-                            next();
-                        }
-                    }}
-                />
+                <Next />
             </Main.Footer>
         </Main>
     );
