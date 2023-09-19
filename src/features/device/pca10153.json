@@ -154,8 +154,12 @@
                     "description": "Serial interface to send commands to the device.",
                     "links": [
                         {
-                            "label": "Modem Shell documentation",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
+                            "label": "Modem shell commands",
+                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html#overview"
+                        },
+                        {
+                            "label": "AT Commands reference manual",
+                            "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html"
                         }
                     ]
                 },
