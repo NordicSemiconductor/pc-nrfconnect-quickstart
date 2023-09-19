@@ -13,7 +13,7 @@ import { Back } from '../../common/Back';
 import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import { deviceDescription } from '../device/deviceGuides';
+import { deviceDescription, getImageFolder } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
 
 const overWriteA = ({
@@ -48,10 +48,7 @@ export default () => {
                     transformImageUri={src =>
                         src.startsWith('http')
                             ? src
-                            : path.join(
-                                  path.resolve(__dirname, '..', 'resources'),
-                                  src
-                              )
+                            : path.join(getImageFolder(), src)
                     }
                 >
                     {deviceDescription(device).markdownContent}

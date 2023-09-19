@@ -62,7 +62,10 @@ export interface DeviceGuide {
 }
 
 export const getFirmwareFolder = () =>
-    path.resolve(__dirname, '..', 'resources', 'firmware');
+    path.resolve(__dirname, '..', 'resources', 'devices', 'firmware');
+
+export const getImageFolder = () =>
+    path.resolve(__dirname, '..', 'resources', 'devices', 'images');
 
 const deviceGuides: DeviceGuide[] = [
     pca10090 as DeviceGuide,
