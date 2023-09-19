@@ -6,16 +6,10 @@
         "pc-nrfconnect-programmer",
         "pc-nrfconnect-ppk"
     ],
-    "description": [
-        {
-            "title": "Cellular Powerhouse",
-            "markdownContent": "The nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.  \n&nbsp;  \nIt includes a Segger J-Link OB Debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf91_dk/page/UG/nrf91_DK/intro.html)"
-        },
-        {
-            "title": "Two cores. Best friends.",
-            "markdownContent": "You have two options for leveraging the nRF9160 SIP:  \n1. Integrate it as a \"modem only\" alongside your existing design running a serial AT command set on the application core.\n2. Harness the full potential of the nRF9160 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9160.  \n&nbsp;  \nThe choice is entirely yours to make!"
-        }
-    ],
+    "description": {
+        "title": "Cellular Powerhouse",
+        "markdownContent": "![nRF9160 DK](9160DK.png)  \n&nbsp;  \nThe nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.  \n&nbsp;  \nIt includes a Segger J-Link OB debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf91_dk/page/UG/nrf91_DK/intro.html)  \n&nbsp;  \n![nRF9160 SIP Cores](9160Cores.png)  \nYou have two options for leveraging the nRF9160 SIP:  \n&nbsp;  \n**Option 1**  \nIntegrate it as a *modem only* alongside your existing design running a serial AT command set on the application core.  \n&nbsp;  \n**Option 2**  \nHarness the full potential of the nRF9160 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9160.  \n&nbsp;  \nThe choice is yours to make!"
+    },
     "learningResources": [
         {
             "label": "Developer Academy",
@@ -29,7 +23,7 @@
             "label": "Best practices",
             "description": "The main aspects and decisions you need to consider before and during your development phase of a low-power cellular Internet of Things product.",
             "link": {
-                "label": "nWP044 - Best practices for IoT development",
+                "label": "nWP044 - Best practices for cellular IoT development",
                 "href": "https://docs.nordicsemi.com/bundle/nwp_044/page/WP/nwp_044/intro.html"
             }
         }
