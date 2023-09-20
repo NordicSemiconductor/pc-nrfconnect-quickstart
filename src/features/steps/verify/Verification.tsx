@@ -5,6 +5,7 @@
  */
 
 import React, { useState } from 'react';
+import { clipboard } from 'electron';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
@@ -14,24 +15,46 @@ import { Next, Skip } from '../../../common/Next';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import { autoFindUartSerialPort } from './sendAndReceiveATCommand';
 
+const invokeIfSpaceOrEnterPressed =
+    (onClick: React.KeyboardEventHandler<Element>) =>
+    (event: React.KeyboardEvent) => {
+        event.stopPropagation();
+        if (event.key === ' ' || event.key === 'Enter') {
+            onClick(event);
+        }
+    };
+
+const blurAndInvoke =
+    (
+        onClick: React.MouseEventHandler<HTMLElement>
+    ): React.MouseEventHandler<HTMLElement> =>
+    (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        event.currentTarget.blur();
+        onClick(event);
+    };
+
 const verificationValues = [
     {
         title: 'Manufacturer',
         command: 'AT+CGMI',
         responseRegex: /(.*)/,
         response: '',
+        copiable: false,
     },
     {
         title: 'Hardware Version',
         command: 'AT%HWVERSION',
         responseRegex: /%HWVERSION: (.*)/,
         response: '',
+        copiable: false,
     },
     {
         title: 'International Mobile Equipment Identity',
         command: 'AT+CGSN=1',
         responseRegex: /\+CGSN: "(.*)"/,
         response: '',
+        copiable: true,
     },
 ];
 
@@ -116,26 +139,49 @@ export default () => {
                 }
             >
                 <div className="tw-flex tw-flex-col tw-items-start tw-justify-start tw-gap-4">
-                    {verification.map(({ title, response }) => (
+                    {verification.map(({ title, response, copiable }) => (
                         <div key={title}>
                             <p>
                                 <i className="tw-font-light">{title}</i>
                             </p>
-                            <p
-                                className={
+                            <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
+                                <p
+                                    className={
+                                        allowVerification &&
+                                        !failed &&
+                                        response === ''
+                                            ? 'ellipsis'
+                                            : ''
+                                    }
+                                >
+                                    {!allowVerification && '...'}
+                                    <b>
+                                        {allowVerification &&
+                                            !failed &&
+                                            response}
+                                        {allowVerification && failed && 'ERROR'}
+                                    </b>
+                                </p>
+                                {copiable &&
                                     allowVerification &&
                                     !failed &&
-                                    response === ''
-                                        ? 'ellipsis'
-                                        : ''
-                                }
-                            >
-                                {!allowVerification && '...'}
-                                <b>
-                                    {allowVerification && !failed && response}
-                                    {allowVerification && failed && 'ERROR'}
-                                </b>
-                            </p>
+                                    response !== '' && (
+                                        <span
+                                            role="button"
+                                            className="mdi mdi-content-copy tw-leading-none active:tw-text-primary"
+                                            tabIndex={0}
+                                            onClick={blurAndInvoke(() =>
+                                                clipboard.writeText(response)
+                                            )}
+                                            onKeyUp={invokeIfSpaceOrEnterPressed(
+                                                () =>
+                                                    clipboard.writeText(
+                                                        response
+                                                    )
+                                            )}
+                                        />
+                                    )}
+                            </div>
                         </div>
                     ))}
                 </div>
