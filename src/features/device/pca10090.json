@@ -60,7 +60,7 @@
                     "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
                     "link": {
                         "label": "Activate SIM card",
-                        "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/"
+                        "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
                     }
                 },
                 {
@@ -120,7 +120,7 @@
                     "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
                     "link": {
                         "label": "Activate SIM card",
-                        "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/"
+                        "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
                     }
                 },
                 {
@@ -164,7 +164,7 @@
                     "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
                     "link": {
                         "label": "Activate SIM card",
-                        "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/"
+                        "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
                     }
                 },
                 {
