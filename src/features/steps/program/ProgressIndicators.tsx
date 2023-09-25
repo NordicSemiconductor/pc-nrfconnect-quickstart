@@ -40,7 +40,7 @@ export default () => {
     const firmwareProgress = useAppSelector(getProgrammingProgress);
 
     return (
-        <div className="tw-flex tw-w-full tw-flex-col tw-gap-9">
+        <div className="tw-flex tw-w-full tw-flex-col tw-gap-8">
             {firmwareProgress.map(({ file, core, link, progress }) => (
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-items-center tw-justify-between tw-text-sm">

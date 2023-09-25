@@ -34,7 +34,7 @@ export default () => {
         <Main>
             <Main.Content heading="Programming failed">
                 <ProgressIndicators />
-                <div className="tw-pt-10">
+                <div className="tw-pt-8">
                     <p>
                         Failed to program
                         {failedCore ? ` ${failedCore} core` : ''}.
