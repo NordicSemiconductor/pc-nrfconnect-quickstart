@@ -35,12 +35,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     program(device, firmware, (index, progress) =>
         dispatch(setProgrammingProgress({ index, progress }))
     )
-        .then(() =>
-            setTimeout(
-                () => dispatch(setProgrammingState(ProgrammingState.SUCCESS)),
-                1000
-            )
-        )
+        .then(() => dispatch(setProgrammingState(ProgrammingState.SUCCESS)))
         .catch(error => {
             dispatch(setProgrammingError(error));
             dispatch(setProgrammingState(ProgrammingState.ERROR));
