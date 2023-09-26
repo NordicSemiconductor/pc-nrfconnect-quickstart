@@ -14,7 +14,8 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
-import { startProgramming } from './programEffects';
+import { Skip } from '../../../common/Next';
+import { resetDevice, startProgramming } from './programEffects';
 import {
     getProgrammingError,
     getProgrammingProgress,
@@ -29,22 +30,21 @@ export default () => {
     const failedCore = useAppSelector(getProgrammingProgress).find(
         p => (p.progress?.totalProgressPercentage || 0) < 100
     )?.core;
+    const resetFailed = !failedCore;
 
     return (
         <Main>
             <Main.Content heading="Programming failed">
                 <ProgressIndicators />
-                <div className="tw-pt-10">
+                <div className="tw-pt-8">
                     <p>
-                        Failed to program
-                        {failedCore ? ` ${failedCore} core` : ''}.
+                        {resetFailed
+                            ? 'Failed to reset device. '
+                            : `Failed to program ${failedCore} core. `}
+                        Contact support on <DevZoneLink /> if problem persists.
                     </p>
                     <br />
                     <p>{describeError(error)}</p>
-                    <br />
-                    <p>
-                        Contact support on <DevZoneLink /> if problem persists.
-                    </p>
                 </div>
             </Main.Content>
             <Main.Footer>
@@ -57,12 +57,19 @@ export default () => {
                         );
                     }}
                 />
+                <Skip />
                 <Button
                     variant="primary"
                     size="xl"
-                    onClick={() => dispatch(startProgramming())}
+                    onClick={() => {
+                        if (resetFailed) {
+                            dispatch(resetDevice());
+                        } else {
+                            dispatch(startProgramming());
+                        }
+                    }}
                 >
-                    Program
+                    {resetFailed ? 'Reset' : 'Retry'}
                 </Button>
             </Main.Footer>
         </Main>

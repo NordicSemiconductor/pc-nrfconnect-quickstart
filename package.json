@@ -18,7 +18,7 @@
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
-                "1.4.2"
+                "1.4.4"
             ]
         }
     },
@@ -48,6 +48,6 @@
     },
     "prettier": "@nordicsemiconductor/pc-nrfconnect-shared/config/prettier.config.js",
     "devDependencies": {
-        "@nordicsemiconductor/pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v106"
+        "@nordicsemiconductor/pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v109"
     }
 }

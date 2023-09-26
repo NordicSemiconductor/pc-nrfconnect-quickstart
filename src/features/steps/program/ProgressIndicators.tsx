@@ -12,7 +12,9 @@ import Link from '../../../common/Link';
 import {
     getProgrammingProgress,
     getProgrammingState,
+    getResetProgress,
     ProgrammingState,
+    ResetProgress,
 } from './programSlice';
 
 const ProgressBar = ({
@@ -35,12 +37,24 @@ const ProgressBar = ({
     </div>
 );
 
+const getResetProgressPercentage = (resetProgress: ResetProgress) => {
+    switch (resetProgress) {
+        case ResetProgress.NOT_STARTED:
+            return 0;
+        case ResetProgress.STARTED:
+            return 50;
+        case ResetProgress.FINISHED:
+            return 100;
+    }
+};
+
 export default () => {
     const programmingState = useAppSelector(getProgrammingState);
     const firmwareProgress = useAppSelector(getProgrammingProgress);
+    const resetProgress = useAppSelector(getResetProgress);
 
     return (
-        <div className="tw-flex tw-w-full tw-flex-col tw-gap-9">
+        <div className="tw-flex tw-w-full tw-flex-col tw-gap-8">
             {firmwareProgress.map(({ file, core, link, progress }) => (
                 <div key={file} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-items-center tw-justify-between tw-text-sm">
@@ -53,6 +67,15 @@ export default () => {
                     />
                 </div>
             ))}
+            <div className="tw-flex tw-flex-col tw-gap-1">
+                <div className="tw-flex tw-flex-row tw-items-center tw-justify-start tw-text-sm">
+                    <p>Reset device</p>
+                </div>
+                <ProgressBar
+                    percentage={getResetProgressPercentage(resetProgress)}
+                    failed={programmingState === ProgrammingState.ERROR}
+                />
+            </div>
         </div>
     );
 };

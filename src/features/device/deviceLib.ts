@@ -13,6 +13,7 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import path from 'path';
 
+import { ResetProgress } from '../steps/program/programSlice';
 import { Firmware, getFirmwareFolder } from './deviceGuides';
 
 const requiredTraits: DeviceTraits = {
@@ -48,10 +49,14 @@ export const startWatchingDevices = async (
     };
 };
 
+export const reset = (device: NrfutilDeviceWithSerialnumber) =>
+    NrfutilDeviceLib.reset(device, 'Application', 'RESET_SYSTEM');
+
 export const program = (
     device: NrfutilDeviceWithSerialnumber,
     firmware: Firmware[],
-    onProgress: (index: number, progress: Progress) => void
+    onProgress: (index: number, progress: Progress) => void,
+    onResetProgress: (resetProgress: ResetProgress) => void
 ) => {
     const batch = NrfutilDeviceLib.batch();
     batch.recover('Application');
@@ -65,7 +70,16 @@ export const program = (
         );
     });
 
-    batch.reset('Application', 'RESET_SYSTEM');
+    batch.reset('Application', 'RESET_SYSTEM', {
+        onTaskBegin: () => {
+            onResetProgress(ResetProgress.STARTED);
+        },
+        onTaskEnd: end => {
+            if (end.result === 'success') {
+                onResetProgress(ResetProgress.FINISHED);
+            }
+        },
+    });
 
     return batch.run(device);
 };

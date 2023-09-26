@@ -5,42 +5,64 @@
  */
 
 import { type AppThunk } from '../../../app/store';
-import { program } from '../../device/deviceLib';
+import { program, reset } from '../../device/deviceLib';
 import {
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
     selectedDeviceIsConnected,
 } from '../../device/deviceSlice';
 import {
+    prepareProgramming,
     ProgrammingState,
+    ResetProgress,
     setProgrammingError,
-    setProgrammingFirmware,
     setProgrammingProgress,
     setProgrammingState,
+    setResetProgress,
 } from './programSlice';
 
-export const startProgramming = (): AppThunk => (dispatch, getState) => {
+const checkDeviceConnected = (): AppThunk => (dispatch, getState) => {
     const deviceConnected = selectedDeviceIsConnected(getState());
+    if (!deviceConnected) {
+        dispatch(setProgrammingState(ProgrammingState.NO_DEVICE_CONNECTED));
+    }
+    return deviceConnected;
+};
+
+export const startProgramming = (): AppThunk => (dispatch, getState) => {
+    if (!checkDeviceConnected()) return;
+
     const device = getSelectedDeviceUnsafely(getState());
     const firmware = getChoiceUnsafely(getState()).firmware;
 
-    if (!deviceConnected) {
-        dispatch(setProgrammingState(ProgrammingState.NO_DEVICE_CONNECTED));
-        return;
-    }
+    dispatch(prepareProgramming(firmware));
 
-    dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
-    dispatch(setProgrammingFirmware(firmware));
-
-    program(device, firmware, (index, progress) =>
-        dispatch(setProgrammingProgress({ index, progress }))
+    program(
+        device,
+        firmware,
+        (index, progress) =>
+            dispatch(setProgrammingProgress({ index, progress })),
+        resetProgress => dispatch(setResetProgress(resetProgress))
     )
-        .then(() =>
-            setTimeout(
-                () => dispatch(setProgrammingState(ProgrammingState.SUCCESS)),
-                1000
-            )
-        )
+        .then(() => dispatch(setProgrammingState(ProgrammingState.SUCCESS)))
+        .catch(error => {
+            dispatch(setProgrammingError(error));
+            dispatch(setProgrammingState(ProgrammingState.ERROR));
+        });
+};
+
+export const resetDevice = (): AppThunk => (dispatch, getState) => {
+    if (!checkDeviceConnected()) return;
+
+    const device = getSelectedDeviceUnsafely(getState());
+    dispatch(setResetProgress(ResetProgress.STARTED));
+    dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
+
+    reset(device)
+        .then(() => {
+            dispatch(setResetProgress(ResetProgress.FINISHED));
+            dispatch(setProgrammingState(ProgrammingState.SUCCESS));
+        })
         .catch(error => {
             dispatch(setProgrammingError(error));
             dispatch(setProgrammingState(ProgrammingState.ERROR));
