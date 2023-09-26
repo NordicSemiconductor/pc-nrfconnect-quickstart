@@ -10,6 +10,12 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RootState } from '../../../app/store';
 import { type Firmware } from '../../device/deviceGuides';
 
+export enum ResetProgress {
+    NOT_STARTED,
+    STARTED,
+    FINISHED,
+}
+
 type FirmwareWithProgress = Firmware & {
     progress?: Progress;
 };
@@ -25,12 +31,14 @@ export enum ProgrammingState {
 interface State {
     programmingState: ProgrammingState;
     firmwareWithProgress: FirmwareWithProgress[];
+    resetProgress: ResetProgress;
     programmingError: unknown;
 }
 
 const initialState: State = {
     programmingState: ProgrammingState.SELECT_FIRMWARE,
     firmwareWithProgress: [],
+    resetProgress: ResetProgress.NOT_STARTED,
     programmingError: undefined,
 };
 
@@ -44,11 +52,19 @@ const slice = createSlice({
         ) => {
             state.programmingState = action.payload;
         },
-        setProgrammingFirmware: (
+        prepareProgramming: (
             state,
             action: PayloadAction<FirmwareWithProgress[]>
         ) => {
             state.firmwareWithProgress = action.payload;
+            state.resetProgress = ResetProgress.NOT_STARTED;
+            state.programmingState = ProgrammingState.PROGRAMMING;
+        },
+        setResetProgress: (
+            state,
+            { payload: resetProgress }: PayloadAction<ResetProgress>
+        ) => {
+            state.resetProgress = resetProgress;
         },
         setProgrammingProgress: (
             state,
@@ -77,7 +93,8 @@ const slice = createSlice({
 
 export const {
     setProgrammingState,
-    setProgrammingFirmware,
+    setResetProgress,
+    prepareProgramming,
     setProgrammingProgress,
     setProgrammingError,
 } = slice.actions;
@@ -88,5 +105,7 @@ export const getProgrammingProgress = (state: RootState) =>
     state.program.firmwareWithProgress;
 export const getProgrammingError = (state: RootState) =>
     state.program.programmingError;
+export const getResetProgress = (state: RootState) =>
+    state.program.resetProgress;
 
 export default slice.reducer;
