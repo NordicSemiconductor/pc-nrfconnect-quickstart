@@ -54,7 +54,7 @@ export default ({ next }: { next: () => void }) => {
                 <Next
                     label="Close"
                     onClick={() => {
-                        usageData.sendUsageData('Exit quickstart');
+                        usageData.sendUsageData('Exit quick start');
                         openWindow.openLauncher();
                         getCurrentWindow().close();
                     }}

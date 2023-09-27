@@ -19,7 +19,7 @@ export default () => {
 
     return (
         <div className="tw-flex tw-h-14 tw-max-h-14 tw-min-h-[56px] tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-primary tw-px-8 tw-text-base tw-text-white">
-            <p className="tw-flex-1 tw-font-bold tw-uppercase">Quickstart</p>
+            <p className="tw-flex-1 tw-font-bold tw-uppercase">Quick Start</p>
             {device && (
                 <div className="tw-flex tw-flex-row tw-items-center tw-gap-2">
                     <DeviceIcon
