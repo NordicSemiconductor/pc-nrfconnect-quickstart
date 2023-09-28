@@ -1,7 +1,7 @@
 {
     "name": "pc-nrfconnect-quickstart",
     "version": "0.1.0",
-    "description": "Get started with a new NordicSemiconductor device",
+    "description": "Get started with a new Nordic Semiconductor device",
     "displayName": "Quick Start",
     "homepage": "https://github.com/NordicPlayground/pc-nrfconnect-quickstart",
     "repository": {
