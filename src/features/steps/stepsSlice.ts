@@ -7,26 +7,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
+import { OptionalStepKey } from '../device/deviceGuides';
 
-export const steps = [
-    'Connect',
-    'Info',
-    'Rename',
-    'Program',
-    'Verify',
-    'Evaluate',
-    'Develop',
-    'Learn',
-    'Apps',
-    'Finish',
-] as const;
+export type StepKey = OptionalStepKey | 'finish';
 
 interface State {
+    steps: StepKey[];
     currentStepIndex: number;
     finishedLastStep: boolean;
 }
 
 const initialState: State = {
+    steps: [],
     currentStepIndex: 0,
     finishedLastStep: false,
 };
@@ -35,10 +27,13 @@ const slice = createSlice({
     name: 'steps',
     initialState,
     reducers: {
+        setSteps: (state, action: PayloadAction<StepKey[]>) => {
+            state.steps = [...action.payload, 'finish'];
+        },
         goToNextStep: state => {
             state.currentStepIndex = Math.min(
                 (state.currentStepIndex += 1),
-                steps.length - 1
+                state.steps.length - 1
             );
         },
         goToPreviousStep: state => {
@@ -50,12 +45,15 @@ const slice = createSlice({
     },
 });
 
-export const { goToNextStep, goToPreviousStep, setFinishedLastStep } =
+export const { setSteps, goToNextStep, goToPreviousStep, setFinishedLastStep } =
     slice.actions;
 
+export const getSteps = (state: RootState) => state.steps.steps;
 export const getCurrentStep = (state: RootState) =>
-    steps[state.steps.currentStepIndex];
+    state.steps.steps[state.steps.currentStepIndex];
 export const getFinishedLastStep = (state: RootState) =>
     state.steps.finishedLastStep;
+export const isFirstStep = (state: RootState) =>
+    state.steps.currentStepIndex === 0;
 
 export default slice.reducer;

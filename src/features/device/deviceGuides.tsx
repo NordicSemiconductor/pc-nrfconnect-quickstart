@@ -87,8 +87,20 @@ export interface AppsStep {
     apps: string[];
 }
 
+export type OptionalStepKey =
+    | 'Info'
+    | 'Rename'
+    | 'Program'
+    | 'Verify'
+    | 'Evaluate'
+    | 'Develop'
+    | 'Learn'
+    | 'Apps'
+    | 'Finish';
+
 export interface DeviceGuide {
     boardVersion: string;
+    stepOrder: OptionalStepKey[];
     info: InfoStep;
     program: ProgramStep;
     verify: VerifyStep;
@@ -120,6 +132,8 @@ const getDeviceGuideUnsafely = (device: NrfutilDevice) =>
             device.jlink?.boardVersion?.toLowerCase()
     ) as DeviceGuide;
 
+export const getStepOrder = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).stepOrder;
 export const getInfoStep = (device: NrfutilDevice) =>
     getDeviceGuideUnsafely(device).info;
 export const getLearnStep = (device: NrfutilDevice) =>
