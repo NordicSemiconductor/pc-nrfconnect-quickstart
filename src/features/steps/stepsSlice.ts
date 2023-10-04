@@ -23,13 +23,11 @@ export const steps = [
 
 interface State {
     currentStepIndex: number;
-    lastMoveDirection: 'back' | 'forward';
     finishedLastStep: boolean;
 }
 
 const initialState: State = {
     currentStepIndex: 0,
-    lastMoveDirection: 'forward',
     finishedLastStep: false,
 };
 
@@ -42,11 +40,9 @@ const slice = createSlice({
                 (state.currentStepIndex += 1),
                 steps.length - 1
             );
-            state.lastMoveDirection = 'forward';
         },
         goToPreviousStep: state => {
             state.currentStepIndex = Math.max((state.currentStepIndex -= 1), 0);
-            state.lastMoveDirection = 'back';
         },
         setFinishedLastStep: (state, action: PayloadAction<boolean>) => {
             state.finishedLastStep = action.payload;
@@ -59,8 +55,6 @@ export const { goToNextStep, goToPreviousStep, setFinishedLastStep } =
 
 export const getCurrentStep = (state: RootState) =>
     steps[state.steps.currentStepIndex];
-export const getLastMoveDirection = (state: RootState) =>
-    state.steps.lastMoveDirection;
 export const getFinishedLastStep = (state: RootState) =>
     state.steps.finishedLastStep;
 
