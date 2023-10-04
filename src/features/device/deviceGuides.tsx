@@ -17,48 +17,84 @@ export interface Link {
     href: string;
 }
 
+interface ResourceContent {
+    links?: Link[];
+    description: string;
+}
+
+export interface AppResource extends ResourceContent {
+    app: string;
+}
+
+export interface ExternalLinkResource extends ResourceContent {
+    title: string;
+    link: Link;
+}
+
+export type Resource = AppResource | ExternalLinkResource;
+
+export interface InfoStep {
+    title: string;
+    markdownContent: string;
+}
+
 export interface Firmware {
     core: 'Modem' | 'Application';
     file: string;
     link: Link;
 }
 
-interface EvaluationContent {
-    links?: Link[];
-    description: string;
-}
-
-export interface AppEvaluationResource extends EvaluationContent {
-    app: string;
-}
-
-export interface ExternalLinkEvaluationResource extends EvaluationContent {
-    title: string;
-    link: Link;
-}
-
-export type EvaluationResource =
-    | AppEvaluationResource
-    | ExternalLinkEvaluationResource;
-
 export interface Choice {
     name: string;
+    type: 'jlink';
     description: string;
     firmware: Firmware[];
     documentation?: Link;
-    evaluationResources: EvaluationResource[];
 }
 
-export interface DeviceGuide {
-    boardVersion: string;
-    description: { title: string; markdownContent: string };
-    apps: string[];
+export interface ProgramStep {
     choices: Choice[];
-    learningResources: {
+}
+
+export interface ATCommand {
+    title: string;
+    command: string;
+    responseRegex: string;
+    copiable: boolean;
+}
+
+export interface VerifyStep {
+    type: 'AT';
+    commands: ATCommand[];
+}
+
+export interface EvaluateStep {
+    resourcesPerChoice: {
+        ref: string;
+        resources: Resource[];
+    }[];
+}
+
+export interface LearnStep {
+    resources: {
         label: string;
         description: string;
         link: Link;
     }[];
+}
+
+export interface AppsStep {
+    apps: string[];
+}
+
+export interface DeviceGuide {
+    boardVersion: string;
+    info: InfoStep;
+    program: ProgramStep;
+    verify: VerifyStep;
+    evaluate: EvaluateStep;
+    learn: LearnStep;
+    apps: AppsStep;
 }
 
 export const getFirmwareFolder = () =>
@@ -77,17 +113,27 @@ export const isSupportedDevice = (device: NrfutilDevice) =>
         .map(d => d.boardVersion.toLowerCase())
         .includes(device.jlink?.boardVersion?.toLowerCase() || '');
 
-const getDeviceGuide = (device: NrfutilDevice) =>
+const getDeviceGuideUnsafely = (device: NrfutilDevice) =>
     deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
             device.jlink?.boardVersion?.toLowerCase()
-    );
+    ) as DeviceGuide;
+
+export const getInfoStep = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).info;
+export const getLearnStep = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).learn;
+export const getAppsStep = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).apps;
+export const getProgramStep = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).program;
+export const getVerifyStep = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).verify;
+export const getEvaluateStep = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).evaluate;
 
 export const deviceName = (device: NrfutilDevice) => deviceInfo(device).name;
-
-export const deviceDescription = (device: NrfutilDevice) =>
-    getDeviceGuide(device)?.description || { title: '', markdownContent: '' };
 
 export const DeviceIcon = ({
     device,
@@ -99,12 +145,3 @@ export const DeviceIcon = ({
     const Icon = deviceInfo(device).icon;
     return Icon ? <Icon className={className} /> : null;
 };
-
-export const deviceApps = (device: NrfutilDevice) =>
-    getDeviceGuide(device)?.apps ?? [];
-
-export const deviceChoices = (device: NrfutilDevice) =>
-    getDeviceGuide(device)?.choices ?? [];
-
-export const deviceLearningResources = (device: NrfutilDevice) =>
-    getDeviceGuide(device)?.learningResources ?? [];
