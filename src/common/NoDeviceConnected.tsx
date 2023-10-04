@@ -8,10 +8,10 @@ import React, { useEffect } from 'react';
 
 import { useAppSelector } from '../app/store';
 import { selectedDeviceIsConnected } from '../features/device/deviceSlice';
-import Searching from '../features/steps/connect/Searching';
 import { Back } from './Back';
 import Main from './Main';
 import { Next } from './Next';
+import Searching from './Searching';
 
 export default ({ onDeviceConnected }: { onDeviceConnected?: () => void }) => {
     const deviceIsConnected = useAppSelector(selectedDeviceIsConnected);
