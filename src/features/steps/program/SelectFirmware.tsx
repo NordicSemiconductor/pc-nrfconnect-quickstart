@@ -17,7 +17,7 @@ import Link from '../../../common/Link';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
 import { Skip } from '../../../common/Next';
-import { Choice, deviceChoices } from '../../device/deviceGuides';
+import { Choice, getProgramStep } from '../../device/deviceGuides';
 import {
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
@@ -34,7 +34,7 @@ export default () => {
         previouslySelectedChoice
     );
 
-    const items = deviceChoices(device).map(choice => {
+    const items = getProgramStep(device).choices.map(choice => {
         const isSelected = selected?.name === choice.name;
         return {
             id: choice.name,
@@ -72,7 +72,7 @@ export default () => {
                     items={items}
                     onSelect={item =>
                         setSelected(
-                            deviceChoices(device).find(
+                            getProgramStep(device).choices.find(
                                 choice => choice.name === item.id
                             )
                         )

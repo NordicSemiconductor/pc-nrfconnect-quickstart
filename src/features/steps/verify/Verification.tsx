@@ -12,6 +12,7 @@ import { Back } from '../../../common/Back';
 import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
+import { getVerifyStep } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import { autoFindUartSerialPort } from './sendAndReceiveATCommand';
 
@@ -34,36 +35,17 @@ const blurAndInvoke =
         onClick(event);
     };
 
-const verificationValues = [
-    {
-        title: 'Manufacturer',
-        command: 'AT+CGMI',
-        responseRegex: /(.*)/,
-        response: '',
-        copiable: false,
-    },
-    {
-        title: 'Hardware Version',
-        command: 'AT%HWVERSION',
-        responseRegex: /%HWVERSION: (.*)/,
-        response: '',
-        copiable: false,
-    },
-    {
-        title: 'International Mobile Equipment Identity',
-        command: 'AT+CGSN=1',
-        responseRegex: /\+CGSN: "(.*)"/,
-        response: '',
-        copiable: true,
-    },
-];
-
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [allowVerification, setAllowVerification] = useState(false);
     const [failed, setFailed] = useState(false);
 
-    const [verification, setVerfication] = useState([...verificationValues]);
+    const [verification, setVerfication] = useState([
+        ...getVerifyStep(device).commands.map(command => ({
+            ...command,
+            response: '',
+        })),
+    ]);
 
     const gotAllResponses = verification.every(
         ({ response }) => response !== ''
@@ -89,7 +71,7 @@ export default () => {
         autoFindUartSerialPort(serialportPaths)
             .then(async result => {
                 const newVerification: typeof verification = [];
-                const reducedPromise = verificationValues.reduce(
+                const reducedPromise = getVerifyStep(device).commands.reduce(
                     (acc, next) =>
                         acc.then(() =>
                             result.sendCommand(next.command).then(value => {
@@ -97,7 +79,7 @@ export default () => {
                                     ...next,
                                     response: formatResponse(
                                         value,
-                                        next.responseRegex
+                                        new RegExp(next.responseRegex)
                                     ),
                                 });
 

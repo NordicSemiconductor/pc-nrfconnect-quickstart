@@ -21,8 +21,9 @@ import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import {
-    EvaluationResource,
-    ExternalLinkEvaluationResource,
+    ExternalLinkResource,
+    getEvaluateStep,
+    Resource,
 } from '../device/deviceGuides';
 import {
     getChoiceUnsafely,
@@ -37,9 +38,14 @@ export default () => {
         []
     );
 
+    const resources =
+        getEvaluateStep(device).resourcesPerChoice.find(
+            resource => resource.ref === choice.name
+        )?.resources || [];
+
     const isExternalLinkResource = (
-        resource: EvaluationResource
-    ): resource is ExternalLinkEvaluationResource => 'link' in resource;
+        resource: Resource
+    ): resource is ExternalLinkResource => 'link' in resource;
 
     const getAppName = (app: string) =>
         downloadableApps.find(a => a.name === app)?.displayName || app;
@@ -48,13 +54,13 @@ export default () => {
         apps.getDownloadableApps().then(({ apps: receivedApps }) =>
             setDownloadableApps(receivedApps)
         );
-    }, [choice.evaluationResources]);
+    }, []);
 
     return (
         <Main>
             <Main.Content heading={`Evaluate ${choice.name}`}>
                 <div className="tw-flex tw-flex-col tw-gap-6">
-                    {choice.evaluationResources.map(resource => (
+                    {resources.map(resource => (
                         <div
                             key={
                                 isExternalLinkResource(resource)
