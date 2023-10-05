@@ -44,7 +44,7 @@ export default () => {
                         Contact support on <DevZoneLink /> if problem persists.
                     </p>
                     <br />
-                    <p>{describeError(error)}</p>
+                    <p className="tw-select-text">{describeError(error)}</p>
                 </div>
             </Main.Content>
             <Main.Footer>
