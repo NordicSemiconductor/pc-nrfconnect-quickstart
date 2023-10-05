@@ -11,13 +11,19 @@ import { getConnectedDevices } from '../device/deviceSlice';
 import Detect from './Detect';
 import Select from './Select';
 
+let isFirstEnumeration = true;
 export default () => {
     const connectedDevices = useAppSelector(getConnectedDevices);
-    const [hasWaitedMinDuration, setHasWaitedMinDuration] = useState(false);
+    const [hasWaitedMinDuration, setHasWaitedMinDuration] = useState(
+        !isFirstEnumeration
+    );
 
     useEffect(() => {
-        setTimeout(() => setHasWaitedMinDuration(true), 3000);
-    }, []);
+        if (!hasWaitedMinDuration) {
+            setTimeout(() => setHasWaitedMinDuration(true), 3000);
+        }
+        isFirstEnumeration = false;
+    }, [hasWaitedMinDuration]);
 
     if (!connectedDevices.length || !hasWaitedMinDuration) {
         return <Detect />;
