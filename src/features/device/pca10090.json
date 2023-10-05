@@ -117,7 +117,7 @@
             {
                 "title": "International Mobile Equipment Identity",
                 "command": "AT+CGSN=1",
-                "responseRegex": "+CGSN: \"(.*)\"",
+                "responseRegex": "\\+CGSN: \"(.*)\"",
                 "copiable": true
             }
         ]
