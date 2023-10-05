@@ -11,6 +11,7 @@ import { Back } from '../../../common/Back';
 import Link from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
+import { Resource } from '../../../common/Resource';
 import { DevelopState, setDevelopState } from './developSlice';
 
 export default () => {
@@ -20,48 +21,30 @@ export default () => {
         <Main>
             <Main.Content heading="Command Line">
                 <div className="tw-flex tw-flex-col tw-gap-6">
-                    <div>
-                        <b>Install nRF Connect SDK and toolchain manually</b>
-                        <p>Install manually using the command line</p>
-                        <div className="tw-pt-0.5 tw-text-xs">
-                            <Link
-                                color="tw-text-primary"
-                                href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/installation/installing.html"
-                                label="Manual installation instructions"
-                            />
-                        </div>
-                    </div>
-
-                    <div>
-                        <b>nRF Util</b>
-                        <p>
-                            A modular command line tool, enabling power users to
-                            manage Nordic Semiconductor devices and support
-                            automation.
-                        </p>
-                        <div className="tw-pt-0.5 tw-text-xs">
-                            <Link
-                                color="tw-text-primary"
-                                href="https://www.nordicsemi.com/Products/Development-tools/nrf-util"
-                                label="nRF Util documentation"
-                            />
-                        </div>
-                    </div>
-
-                    <div>
-                        <b>West</b>
-                        <p>
-                            A tool for managing multiple Git repositories and
-                            versions.
-                        </p>
-                        <div className="tw-pt-0.5 tw-text-xs">
-                            <Link
-                                color="tw-text-primary"
-                                href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/develop/west"
-                                label="West overview"
-                            />
-                        </div>
-                    </div>
+                    <Resource
+                        label="Install nRF Connect SDK and toolchain manually"
+                        description="Install manually using the command line"
+                        link={{
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/installation/installing.html',
+                            label: 'Manual installation instructions',
+                        }}
+                    />
+                    <Resource
+                        label="nRF Util"
+                        description="A modular command line tool, enabling power users to manage Nordic Semiconductor devices and support automation."
+                        link={{
+                            href: 'https://www.nordicsemi.com/Products/Development-tools/nrf-util',
+                            label: 'nRF Util documentation',
+                        }}
+                    />
+                    <Resource
+                        label="West"
+                        description="A tool for managing multiple Git repositories and versions."
+                        link={{
+                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/develop/west',
+                            label: 'West overview',
+                        }}
+                    />
                 </div>
             </Main.Content>
             <Main.Footer>
