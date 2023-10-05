@@ -151,13 +151,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters",
-                        "links": [
-                            {
-                                "label": "Cellular Fundamentals",
-                                "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/"
-                            }
-                        ]
+                        "description": "Automatically connect and evaluate parameters"
                     }
                 ]
             },
@@ -209,13 +203,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters",
-                        "links": [
-                            {
-                                "label": "Cellular Fundamentals",
-                                "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/"
-                            }
-                        ]
+                        "description": "Automatically connect and evaluate parameters"
                     }
                 ]
             }
