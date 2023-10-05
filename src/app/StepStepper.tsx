@@ -10,7 +10,8 @@ import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import {
     getCurrentStep,
     getFinishedLastStep,
-    steps,
+    getSteps,
+    StepKey,
 } from '../features/steps/stepsSlice';
 import { useAppSelector } from './store';
 
@@ -30,7 +31,7 @@ const Step = ({
     relativeToCurrent,
     isLast = false,
 }: {
-    label: (typeof steps)[number];
+    label: StepKey;
     relativeToCurrent: number;
     isLast?: boolean;
 }) => {
@@ -83,6 +84,7 @@ const Step = ({
 
 export default () => {
     const currentStep = useAppSelector(getCurrentStep);
+    const steps = useAppSelector(getSteps);
     const currentStepIndex = steps.indexOf(currentStep);
 
     return (

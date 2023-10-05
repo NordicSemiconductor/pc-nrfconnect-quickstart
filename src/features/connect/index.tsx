@@ -6,8 +6,8 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../../../app/store';
-import { getConnectedDevices } from '../../device/deviceSlice';
+import { useAppSelector } from '../../app/store';
+import { getConnectedDevices } from '../device/deviceSlice';
 import Detect from './Detect';
 import Select from './Select';
 

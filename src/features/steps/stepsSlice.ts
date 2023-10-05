@@ -7,29 +7,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
+import { OptionalStepKey } from '../device/deviceGuides';
 
-export const steps = [
-    'Connect',
-    'Info',
-    'Rename',
-    'Program',
-    'Verify',
-    'Evaluate',
-    'Develop',
-    'Learn',
-    'Apps',
-    'Finish',
-] as const;
+export type StepKey = OptionalStepKey | 'Finish';
 
 interface State {
+    steps: StepKey[];
     currentStepIndex: number;
-    lastMoveDirection: 'back' | 'forward';
     finishedLastStep: boolean;
 }
 
 const initialState: State = {
+    steps: [],
     currentStepIndex: 0,
-    lastMoveDirection: 'forward',
     finishedLastStep: false,
 };
 
@@ -37,16 +27,17 @@ const slice = createSlice({
     name: 'steps',
     initialState,
     reducers: {
+        setSteps: (state, action: PayloadAction<StepKey[]>) => {
+            state.steps = [...action.payload, 'Finish'];
+        },
         goToNextStep: state => {
             state.currentStepIndex = Math.min(
                 (state.currentStepIndex += 1),
-                steps.length - 1
+                state.steps.length - 1
             );
-            state.lastMoveDirection = 'forward';
         },
         goToPreviousStep: state => {
             state.currentStepIndex = Math.max((state.currentStepIndex -= 1), 0);
-            state.lastMoveDirection = 'back';
         },
         setFinishedLastStep: (state, action: PayloadAction<boolean>) => {
             state.finishedLastStep = action.payload;
@@ -54,14 +45,15 @@ const slice = createSlice({
     },
 });
 
-export const { goToNextStep, goToPreviousStep, setFinishedLastStep } =
+export const { setSteps, goToNextStep, goToPreviousStep, setFinishedLastStep } =
     slice.actions;
 
+export const getSteps = (state: RootState) => state.steps.steps;
 export const getCurrentStep = (state: RootState) =>
-    steps[state.steps.currentStepIndex];
-export const getLastMoveDirection = (state: RootState) =>
-    state.steps.lastMoveDirection;
+    state.steps.steps[state.steps.currentStepIndex];
 export const getFinishedLastStep = (state: RootState) =>
     state.steps.finishedLastStep;
+export const isFirstStep = (state: RootState) =>
+    state.steps.currentStepIndex === 0;
 
 export default slice.reducer;

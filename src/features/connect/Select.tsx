@@ -10,18 +10,20 @@ import {
     getPersistedNickname,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { ListItemVariant } from '../../../common/listSelect/ListSelectItem';
-import { RadioSelect } from '../../../common/listSelect/RadioSelect';
-import Main from '../../../common/Main';
-import { Next } from '../../../common/Next';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import { ListItemVariant } from '../../common/listSelect/ListSelectItem';
+import { RadioSelect } from '../../common/listSelect/RadioSelect';
+import Main from '../../common/Main';
+import { Next } from '../../common/Next';
+import Searching from '../../common/Searching';
 import {
     DeviceIcon,
     deviceName,
+    getStepOrder,
     isSupportedDevice,
-} from '../../device/deviceGuides';
-import { getConnectedDevices, selectDevice } from '../../device/deviceSlice';
-import Searching from './Searching';
+} from '../device/deviceGuides';
+import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
+import { setSteps } from '../steps/stepsSlice';
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -80,12 +82,14 @@ export default () => {
             <Main.Footer>
                 <Next
                     disabled={!selectedItem}
-                    onClick={next => {
+                    onClick={() => {
                         const selectedDevice = connectedDevices.find(
                             device => device.serialNumber === selectedItem?.id
                         );
-                        dispatch(selectDevice(selectedDevice));
-                        next();
+                        if (selectedDevice) {
+                            dispatch(setSteps(getStepOrder(selectedDevice)));
+                            dispatch(selectDevice(selectedDevice));
+                        }
                     }}
                 />
             </Main.Footer>

@@ -7,8 +7,9 @@
 import React from 'react';
 import { Button } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { useAppDispatch } from '../app/store';
-import { goToPreviousStep } from '../features/steps/stepsSlice';
+import { useAppDispatch, useAppSelector } from '../app/store';
+import { selectDevice } from '../features/device/deviceSlice';
+import { goToPreviousStep, isFirstStep } from '../features/steps/stepsSlice';
 
 export const Back = ({
     label,
@@ -20,7 +21,14 @@ export const Back = ({
     onClick?: (back: () => void) => void;
 }) => {
     const dispatch = useAppDispatch();
-    const back = () => dispatch(goToPreviousStep());
+    const resetDeviceWhenBack = useAppSelector(isFirstStep);
+    const back = () => {
+        if (resetDeviceWhenBack) {
+            dispatch(selectDevice(undefined));
+        } else {
+            dispatch(goToPreviousStep());
+        }
+    };
 
     return (
         <Button

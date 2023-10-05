@@ -6,11 +6,11 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../../../app/store';
-import { DevZoneLink } from '../../../common/Link';
-import Main from '../../../common/Main';
-import { getConnectedDevices } from '../../device/deviceSlice';
-import Searching from './Searching';
+import { useAppSelector } from '../../app/store';
+import { DevZoneLink } from '../../common/Link';
+import Main from '../../common/Main';
+import Searching from '../../common/Searching';
+import { getConnectedDevices } from '../device/deviceSlice';
 
 export default () => {
     const connectedDevices = useAppSelector(getConnectedDevices);
