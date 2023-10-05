@@ -151,13 +151,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters",
-                        "links": [
-                            {
-                                "label": "Cellular Fundamentals",
-                                "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/"
-                            }
-                        ]
+                        "description": "Automatically connect and evaluate parameters"
                     }
                 ]
             },
@@ -179,6 +173,10 @@
                             "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/"
                         },
                         "description": "Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity."
+                    },
+                    {
+                        "app": "pc-nrfconnect-cellularmonitor",
+                        "description": "Automatically connect and evaluate parameters"
                     }
                 ]
             },
@@ -209,13 +207,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters",
-                        "links": [
-                            {
-                                "label": "Cellular Fundamentals",
-                                "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/"
-                            }
-                        ]
+                        "description": "Automatically connect and evaluate parameters"
                     }
                 ]
             }
