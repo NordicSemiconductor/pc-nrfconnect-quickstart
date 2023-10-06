@@ -7,6 +7,7 @@
 import React from 'react';
 import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import { getSelectedDevice } from '../features/device/deviceSlice';
 import {
     getCurrentStep,
     getFinishedLastStep,
@@ -83,12 +84,20 @@ const Step = ({
 };
 
 export default () => {
+    const showStepper = !!useAppSelector(getSelectedDevice);
     const currentStep = useAppSelector(getCurrentStep);
     const steps = useAppSelector(getSteps);
     const currentStepIndex = steps.indexOf(currentStep);
 
     return (
-        <div className="tw-flex tw-flex-col tw-items-start tw-bg-gray-900 tw-p-10">
+        <div
+            className={classNames(
+                'tw-relative tw-flex tw-flex-col tw-items-start tw-bg-gray-900 tw-py-10 tw-transition-all',
+                showStepper
+                    ? 'tw-translate-x-0 tw-px-10'
+                    : 'tw-w-0 tw-translate-x-[-100%] tw-overflow-hidden tw-px-0'
+            )}
+        >
             {steps.map((step, index) => (
                 <Step
                     key={step}
