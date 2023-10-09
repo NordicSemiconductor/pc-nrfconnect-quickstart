@@ -128,7 +128,7 @@ const connectToDevice = async (path: string, overwrite = true) => {
     );
 };
 
-export const autoFindUartSerialPort = async (paths: string[]) => {
+export default async (paths: string[]) => {
     let path = paths.pop();
     while (path) {
         try {

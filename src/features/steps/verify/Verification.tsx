@@ -5,7 +5,6 @@
  */
 
 import React, { useState } from 'react';
-import { clipboard } from 'electron';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
@@ -15,7 +14,7 @@ import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
 import { getVerifyStep } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
-import { autoFindUartSerialPort } from './sendAndReceiveATCommand';
+import getUARTSerialPort from '../../device/getUARTSerialPort';
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
@@ -50,7 +49,7 @@ export default () => {
             ?.map(port => port.comName)
             .filter(path => path !== null) as string[];
 
-        autoFindUartSerialPort(serialportPaths)
+        getUARTSerialPort(serialportPaths)
             .then(async result => {
                 const newVerification: typeof verification = [];
                 const reducedPromise = getVerifyStep(device).commands.reduce(
