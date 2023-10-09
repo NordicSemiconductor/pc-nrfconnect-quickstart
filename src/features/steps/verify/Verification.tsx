@@ -9,31 +9,13 @@ import { clipboard } from 'electron';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
+import Copy from '../../../common/Copy';
 import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
 import { getVerifyStep } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import { autoFindUartSerialPort } from './sendAndReceiveATCommand';
-
-const invokeIfSpaceOrEnterPressed =
-    (onClick: React.KeyboardEventHandler<Element>) =>
-    (event: React.KeyboardEvent) => {
-        event.stopPropagation();
-        if (event.key === ' ' || event.key === 'Enter') {
-            onClick(event);
-        }
-    };
-
-const blurAndInvoke =
-    (
-        onClick: React.MouseEventHandler<HTMLElement>
-    ): React.MouseEventHandler<HTMLElement> =>
-    (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        event.currentTarget.blur();
-        onClick(event);
-    };
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
@@ -148,20 +130,7 @@ export default () => {
                                     allowVerification &&
                                     !failed &&
                                     response !== '' && (
-                                        <span
-                                            role="button"
-                                            className="mdi mdi-content-copy tw-leading-none active:tw-text-primary"
-                                            tabIndex={0}
-                                            onClick={blurAndInvoke(() =>
-                                                clipboard.writeText(response)
-                                            )}
-                                            onKeyUp={invokeIfSpaceOrEnterPressed(
-                                                () =>
-                                                    clipboard.writeText(
-                                                        response
-                                                    )
-                                            )}
-                                        />
+                                        <Copy copyText={response} />
                                     )}
                             </div>
                         </div>
