@@ -45,11 +45,7 @@ export default () => {
     };
 
     const runVerification = () => {
-        const serialportPaths = device?.serialPorts
-            ?.map(port => port.comName)
-            .filter(path => path !== null) as string[];
-
-        getUARTSerialPort(serialportPaths)
+        getUARTSerialPort(device)
             .then(async result => {
                 const newVerification: typeof verification = [];
                 const reducedPromise = getVerifyStep(device).commands.reduce(
