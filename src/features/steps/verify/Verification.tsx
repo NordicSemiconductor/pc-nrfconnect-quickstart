@@ -150,17 +150,19 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                {!allowVerification && <Skip />}
                 {allowVerification ? (
                     <Next disabled={!failed && !gotAllResponses} />
                 ) : (
-                    <Next
-                        label="Verify"
-                        onClick={() => {
-                            setAllowVerification(true);
-                            runVerification();
-                        }}
-                    />
+                    <>
+                        <Skip />
+                        <Next
+                            label="Verify"
+                            onClick={() => {
+                                setAllowVerification(true);
+                                runVerification();
+                            }}
+                        />
+                    </>
                 )}
             </Main.Footer>
         </Main>
