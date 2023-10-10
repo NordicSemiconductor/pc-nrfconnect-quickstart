@@ -16,6 +16,7 @@ import Info from './Info';
 import Learn from './Learn';
 import Program from './program';
 import Rename from './Rename';
+import SimCardActivation from './simCardActivation';
 import { getCurrentStep } from './stepsSlice';
 import Verify from './verify';
 
@@ -33,6 +34,7 @@ export default () => {
             {currentStep === 'Rename' && <Rename />}
             {currentStep === 'Program' && <Program />}
             {currentStep === 'Verify' && <Verify />}
+            {currentStep === 'SIM Card' && <SimCardActivation />}
             {currentStep === 'Evaluate' && <Evaluate />}
             {currentStep === 'Develop' && <Develop />}
             {currentStep === 'Learn' && <Learn />}

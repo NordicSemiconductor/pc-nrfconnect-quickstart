@@ -5,47 +5,30 @@
  */
 
 import React, { useState } from 'react';
-import { clipboard } from 'electron';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
+import Copy from '../../../common/Copy';
 import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
 import { getVerifyStep } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
-import { autoFindUartSerialPort } from './sendAndReceiveATCommand';
-
-const invokeIfSpaceOrEnterPressed =
-    (onClick: React.KeyboardEventHandler<Element>) =>
-    (event: React.KeyboardEvent) => {
-        event.stopPropagation();
-        if (event.key === ' ' || event.key === 'Enter') {
-            onClick(event);
-        }
-    };
-
-const blurAndInvoke =
-    (
-        onClick: React.MouseEventHandler<HTMLElement>
-    ): React.MouseEventHandler<HTMLElement> =>
-    (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        event.currentTarget.blur();
-        onClick(event);
-    };
+import getUARTSerialPort from '../../device/getUARTSerialPort';
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [allowVerification, setAllowVerification] = useState(false);
     const [failed, setFailed] = useState(false);
 
-    const [verification, setVerfication] = useState([
+    const initialVerification = [
         ...getVerifyStep(device).commands.map(command => ({
             ...command,
             response: '',
         })),
-    ]);
+    ];
+
+    const [verification, setVerification] = useState(initialVerification);
 
     const gotAllResponses = verification.every(
         ({ response }) => response !== ''
@@ -64,11 +47,7 @@ export default () => {
     };
 
     const runVerification = () => {
-        const serialportPaths = device?.serialPorts
-            ?.map(port => port.comName)
-            .filter(path => path !== null) as string[];
-
-        autoFindUartSerialPort(serialportPaths)
+        getUARTSerialPort(device)
             .then(async result => {
                 const newVerification: typeof verification = [];
                 const reducedPromise = getVerifyStep(device).commands.reduce(
@@ -91,7 +70,7 @@ export default () => {
 
                 await reducedPromise;
 
-                setVerfication(newVerification);
+                setVerification(newVerification);
                 result.unregister();
             })
             .catch(() => setFailed(true));
@@ -148,20 +127,7 @@ export default () => {
                                     allowVerification &&
                                     !failed &&
                                     response !== '' && (
-                                        <span
-                                            role="button"
-                                            className="mdi mdi-content-copy tw-leading-none active:tw-text-primary"
-                                            tabIndex={0}
-                                            onClick={blurAndInvoke(() =>
-                                                clipboard.writeText(response)
-                                            )}
-                                            onKeyUp={invokeIfSpaceOrEnterPressed(
-                                                () =>
-                                                    clipboard.writeText(
-                                                        response
-                                                    )
-                                            )}
-                                        />
+                                        <Copy copyText={response} />
                                     )}
                             </div>
                         </div>
@@ -182,13 +148,16 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                {!allowVerification && <Skip />}
-                {allowVerification ? (
-                    <Next disabled={!failed && !gotAllResponses} />
-                ) : (
+                <Skip />
+                {allowVerification && !failed && (
+                    <Next disabled={!gotAllResponses} />
+                )}
+                {(!allowVerification || failed) && (
                     <Next
-                        label="Verify"
+                        label={failed ? 'Retry' : 'Verify'}
                         onClick={() => {
+                            setVerification(initialVerification);
+                            setFailed(false);
                             setAllowVerification(true);
                             runVerification();
                         }}
