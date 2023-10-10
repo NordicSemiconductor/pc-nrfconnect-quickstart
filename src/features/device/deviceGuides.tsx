@@ -96,7 +96,8 @@ export type OptionalStepKey =
     | 'Develop'
     | 'Learn'
     | 'Apps'
-    | 'Finish';
+    | 'Finish'
+    | 'SIM Card';
 
 export interface DeviceGuide {
     boardVersion: string;
