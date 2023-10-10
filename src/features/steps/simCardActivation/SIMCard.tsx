@@ -31,7 +31,7 @@ export default () => {
             .join('')
             .trim();
 
-        const [, match] = filteredResponse.match(/%XICCID: (.*)/) ?? [];
+        const [, match] = filteredResponse.match(/%XICCID: (.{18}).*/) ?? [];
 
         return match;
     };
