@@ -73,8 +73,9 @@ export default () => {
         <Main>
             <Main.Content heading="Activate SIM Card">
                 <p>
-                    If you have yet to activate your SIM Card, follow these
-                    steps to complete the activation (iBasis only):
+                    Do you need to activate your SIM Card?
+                    <br />
+                    Follow these steps to complete the activation (iBasis only):
                 </p>
                 <br />
                 <ul className="tw-list-inside tw-list-decimal">
