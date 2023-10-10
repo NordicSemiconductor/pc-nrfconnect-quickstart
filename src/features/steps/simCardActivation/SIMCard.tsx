@@ -5,7 +5,6 @@
  */
 
 import React, { useState } from 'react';
-import { SerialPort } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 
 import { useAppSelector } from '../../../app/store';
