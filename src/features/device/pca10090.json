@@ -129,14 +129,6 @@
                 "ref": "AT Commands",
                 "resources": [
                     {
-                        "title": "Activate SIM card",
-                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                        "link": {
-                            "label": "Activate SIM card",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
-                        }
-                    },
-                    {
                         "app": "pc-nrfconnect-serial-terminal",
                         "description": "Use the Serial Terminal PC application as a serial interface to send AT commands to the device.",
                         "links": [
@@ -160,14 +152,6 @@
                 "ref": "Asset Tracking",
                 "resources": [
                     {
-                        "title": "Activate SIM card",
-                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                        "link": {
-                            "label": "Activate SIM card",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
-                        }
-                    },
-                    {
                         "title": "Cellular IoT Fundamentals",
                         "link": {
                             "label": "Open course",
@@ -184,14 +168,6 @@
             {
                 "ref": "Shell Command Line Interface",
                 "resources": [
-                    {
-                        "title": "Activate SIM card",
-                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
-                        "link": {
-                            "label": "Activate SIM card",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
-                        }
-                    },
                     {
                         "app": "pc-nrfconnect-serial-terminal",
                         "description": "Serial interface to send commands to the device.",
