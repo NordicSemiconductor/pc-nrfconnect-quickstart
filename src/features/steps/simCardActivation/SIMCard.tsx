@@ -73,9 +73,11 @@ export default () => {
         <Main>
             <Main.Content heading="Activate SIM Card">
                 <p>
-                    If your SIM Card is not yet activated, follow these steps:
+                    If you have yet to activate your SIM Card, follow these
+                    steps to complete the activation (iBasis only):
                 </p>
-                <ul className="tw-list-inside tw-list-decimal tw-p-4">
+                <br />
+                <ul className="tw-list-inside tw-list-decimal">
                     <li>
                         Get the ICCID value by pressing <b>Read ICCID</b>
                         <br />
@@ -96,6 +98,7 @@ export default () => {
                             {iccid !== '' && <Copy copyText={iccid} />}
                         </div>
                     </li>
+                    <br />
                     <li>Use the ICCID to activate the SIM Card at "LINK"</li>
                 </ul>
                 {failedRead && (
