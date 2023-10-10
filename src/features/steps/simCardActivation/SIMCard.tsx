@@ -99,7 +99,12 @@ export default () => {
                         </div>
                     </li>
                     <br />
-                    <li>Use the ICCID to activate the SIM Card at "LINK"</li>
+                    <li>
+                        Use the ICCID to activate the SIM Card at{' '}
+                        <b>
+                            <u>LINK</u>
+                        </b>
+                    </li>
                 </ul>
                 {failedRead && (
                     <>

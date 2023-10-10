@@ -7,7 +7,6 @@
 import React, { useEffect, useState } from 'react';
 import {
     apps,
-    Button,
     DownloadableApp,
     openUrl,
     openWindow,
@@ -17,7 +16,6 @@ import {
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
-import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { ResourceWithButton } from '../../common/Resource';
