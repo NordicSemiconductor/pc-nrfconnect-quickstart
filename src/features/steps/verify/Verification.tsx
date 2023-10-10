@@ -21,12 +21,14 @@ export default () => {
     const [allowVerification, setAllowVerification] = useState(false);
     const [failed, setFailed] = useState(false);
 
-    const [verification, setVerfication] = useState([
+    const initialVerification = [
         ...getVerifyStep(device).commands.map(command => ({
             ...command,
             response: '',
         })),
-    ]);
+    ];
+
+    const [verification, setVerification] = useState(initialVerification);
 
     const gotAllResponses = verification.every(
         ({ response }) => response !== ''
@@ -68,7 +70,7 @@ export default () => {
 
                 await reducedPromise;
 
-                setVerfication(newVerification);
+                setVerification(newVerification);
                 result.unregister();
             })
             .catch(() => setFailed(true));
@@ -146,19 +148,20 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                {allowVerification ? (
-                    <Next disabled={!failed && !gotAllResponses} />
-                ) : (
-                    <>
-                        <Skip />
-                        <Next
-                            label="Verify"
-                            onClick={() => {
-                                setAllowVerification(true);
-                                runVerification();
-                            }}
-                        />
-                    </>
+                <Skip />
+                {allowVerification && !failed && (
+                    <Next disabled={!gotAllResponses} />
+                )}
+                {(!allowVerification || failed) && (
+                    <Next
+                        label={failed ? 'Retry' : 'Verify'}
+                        onClick={() => {
+                            setVerification(initialVerification);
+                            setFailed(false);
+                            setAllowVerification(true);
+                            runVerification();
+                        }}
+                    />
                 )}
             </Main.Footer>
         </Main>
