@@ -126,7 +126,7 @@
     "evaluate": {
         "resourcesPerChoice": [
             {
-                "ref": "AT commands",
+                "ref": "AT Commands",
                 "resources": [
                     {
                         "title": "Activate SIM card",
