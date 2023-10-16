@@ -10,7 +10,7 @@ import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfu
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
-import { DevZoneLink } from '../../../common/Link';
+import Link, { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
@@ -71,16 +71,29 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading="Activate SIM Card">
+            <Main.Content heading="Set up iBasis micro-SIM Card">
                 <p>
-                    Do you need to activate your SIM Card?
-                    <br />
-                    Follow these steps to complete the activation (iBasis only):
+                    If you are planning to{' '}
+                    <Link
+                        label="connect to nRF Cloud"
+                        href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-connect-to-cloud"
+                        color="tw-text-primary"
+                    />{' '}
+                    with an iBasis micro-SIM card, complete the following steps:
                 </p>
                 <br />
                 <ul className="tw-list-inside tw-list-decimal">
                     <li>
-                        Get the ICCID value by pressing <b>Read ICCID</b>
+                        Write down the <b>Personal Unblocking Key (PUK)</b> from
+                        the micro-SIM card.
+                    </li>
+                    <li>
+                        Insert the micro-SIM into the SIM card holder and turn
+                        the device off and on again.
+                    </li>
+                    <li>
+                        Click the Read ICCID button below. The full ICCID has 20
+                        digits, but you only need the first 18 digits.
                         <br />
                         <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
                             <p
@@ -99,12 +112,29 @@ export default () => {
                             {iccid !== '' && <Copy copyText={iccid} />}
                         </div>
                     </li>
-                    <br />
                     <li>
-                        Use the ICCID to activate the SIM Card at{' '}
-                        <b>
-                            <u>LINK</u>
-                        </b>
+                        <Link
+                            label="Log in or register to nRF Cloud"
+                            href="https://nrfcloud.com/#/"
+                            color="tw-text-primary"
+                        />
+                    </li>
+                    <li>
+                        On the main nRF Cloud dashboard, click the + button to
+                        add a new <b>LTE Device</b>.
+                    </li>
+                    <li>
+                        In the <b>Verify SIM Info</b> section, enter the
+                        18-digit ICCID and the PUK.
+                    </li>
+                    <li>
+                        Click <b>Activate SIM</b>. The device searches for the
+                        cellular network and connects to the nRF Cloud server,
+                        which can take a while.
+                    </li>
+                    <li>
+                        In <b>Add LTE Device</b>, provide the required
+                        information and click <b>Add Device</b>.
                     </li>
                 </ul>
                 {failedRead && (
