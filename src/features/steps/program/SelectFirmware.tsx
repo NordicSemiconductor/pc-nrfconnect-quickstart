@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {
-    Button,
     deviceInfo,
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
