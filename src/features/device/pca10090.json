@@ -1,15 +1,15 @@
 {
     "boardVersion": "pca10090",
     "stepOrder": [
-        "Info",
-        "Rename",
-        "Program",
-        "Verify",
-        "SIM Card",
-        "Evaluate",
-        "Develop",
-        "Learn",
-        "Apps"
+        "info",
+        "rename",
+        "program",
+        "verify",
+        "sim",
+        "evaluate",
+        "develop",
+        "learn",
+        "apps"
     ],
     "info": {
         "title": "Cellular Powerhouse",

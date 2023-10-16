@@ -1,14 +1,14 @@
 {
     "boardVersion": "pca10153",
     "stepOrder": [
-        "Info",
-        "Rename",
-        "Program",
-        "Verify",
-        "Evaluate",
-        "Develop",
-        "Learn",
-        "Apps"
+        "info",
+        "rename",
+        "program",
+        "verify",
+        "evaluate",
+        "develop",
+        "learn",
+        "apps"
     ],
     "info": {
         "title": "Massive IoT Powerhouse",
