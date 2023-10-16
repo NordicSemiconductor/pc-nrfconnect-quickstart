@@ -82,7 +82,7 @@ export default () => {
                     with an iBasis micro-SIM card, complete the following steps:
                 </p>
                 <br />
-                <ul className="tw-list-inside tw-list-decimal">
+                <ol className="tw-list-inside tw-list-decimal">
                     <li>
                         Write down the <b>Personal Unblocking Key (PUK)</b> from
                         the micro-SIM card.
@@ -92,7 +92,7 @@ export default () => {
                         the device off and on again.
                     </li>
                     <li>
-                        Click the Read ICCID button below. The full ICCID has 20
+                        Click the <b>Read ICCID</b> button below. The ICCID has 20
                         digits, but you only need the first 18 digits.
                         <br />
                         <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
@@ -120,23 +120,22 @@ export default () => {
                         />
                     </li>
                     <li>
-                        On the main nRF Cloud dashboard, click the + button to
+                        On the nRF Cloud dashboard, click <b>+</b> to
                         add a new <b>LTE Device</b>.
                     </li>
                     <li>
-                        In the <b>Verify SIM Info</b> section, enter the
+                        In <b>Verify SIM Info</b>, enter the
                         18-digit ICCID and the PUK.
                     </li>
                     <li>
-                        Click <b>Activate SIM</b>. The device searches for the
-                        cellular network and connects to the nRF Cloud server,
+                        Click <b>Activate SIM</b>. The device connects to the nRF Cloud server,
                         which can take a while.
                     </li>
                     <li>
                         In <b>Add LTE Device</b>, provide the required
                         information and click <b>Add Device</b>.
                     </li>
-                </ul>
+                </ol>
                 {failedRead && (
                     <>
                         <br />
