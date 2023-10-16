@@ -19,7 +19,7 @@ interface State {
 
 const initialState: State = {
     steps: [],
-    currentStepIndex: 4,
+    currentStepIndex: 0,
     finishedLastStep: false,
 };
 
