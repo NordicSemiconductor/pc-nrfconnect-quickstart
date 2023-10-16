@@ -5,10 +5,7 @@
  */
 
 import React from 'react';
-import {
-    Button,
-    describeError,
-} from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { describeError } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
