@@ -94,9 +94,8 @@ export default () => {
                         }}
                     />
                 )}
-                <Button
-                    variant="primary"
-                    size="xl"
+                <Next
+                    label="Program"
                     disabled={!selected}
                     onClick={() => {
                         if (!selected) return;
@@ -109,9 +108,7 @@ export default () => {
                         dispatch(setChoice(selected));
                         dispatch(startProgramming());
                     }}
-                >
-                    Program
-                </Button>
+                />
             </Main.Footer>
         </Main>
     );

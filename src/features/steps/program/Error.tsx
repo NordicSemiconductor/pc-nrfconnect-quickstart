@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
-import { Skip } from '../../../common/Next';
+import { Next, Skip } from '../../../common/Next';
 import { resetDevice, startProgramming } from './programEffects';
 import {
     getProgrammingError,
@@ -58,9 +58,8 @@ export default () => {
                     }}
                 />
                 <Skip />
-                <Button
-                    variant="primary"
-                    size="xl"
+                <Next
+                    label={resetFailed ? 'Retry' : 'Reset'}
                     onClick={() => {
                         if (resetFailed) {
                             dispatch(resetDevice());
@@ -68,9 +67,7 @@ export default () => {
                             dispatch(startProgramming());
                         }
                     }}
-                >
-                    {resetFailed ? 'Reset' : 'Retry'}
-                </Button>
+                />
             </Main.Footer>
         </Main>
     );
