@@ -30,16 +30,16 @@ export default () => {
 
     return (
         <>
-            {currentStep === 'Info' && <Info />}
-            {currentStep === 'Rename' && <Rename />}
-            {currentStep === 'Program' && <Program />}
-            {currentStep === 'Verify' && <Verify />}
-            {currentStep === 'SIM Card' && <SimCardActivation />}
-            {currentStep === 'Evaluate' && <Evaluate />}
-            {currentStep === 'Develop' && <Develop />}
-            {currentStep === 'Learn' && <Learn />}
-            {currentStep === 'Apps' && <Apps />}
-            {currentStep === 'Finish' && <Finish />}
+            {currentStep === 'info' && <Info />}
+            {currentStep === 'rename' && <Rename />}
+            {currentStep === 'program' && <Program />}
+            {currentStep === 'verify' && <Verify />}
+            {currentStep === 'sim' && <SimCardActivation />}
+            {currentStep === 'evaluate' && <Evaluate />}
+            {currentStep === 'develop' && <Develop />}
+            {currentStep === 'learn' && <Learn />}
+            {currentStep === 'apps' && <Apps />}
+            {currentStep === 'finish' && <Finish />}
         </>
     );
 };

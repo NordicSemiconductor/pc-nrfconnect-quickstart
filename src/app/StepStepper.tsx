@@ -16,6 +16,31 @@ import {
 } from '../features/steps/stepsSlice';
 import { useAppSelector } from './store';
 
+const stepToLabel = (step: StepKey) => {
+    switch (step) {
+        case 'info':
+            return 'Info';
+        case 'rename':
+            return 'Rename';
+        case 'program':
+            return 'Program';
+        case 'verify':
+            return 'Verify';
+        case 'sim':
+            return 'Set up SIM';
+        case 'evaluate':
+            return 'Evaluate';
+        case 'develop':
+            return 'Develop';
+        case 'learn':
+            return 'Learn';
+        case 'apps':
+            return 'Apps';
+        default:
+            return '';
+    }
+};
+
 const Line = ({ dark = true }: { dark?: boolean }) => (
     <div
         className={classNames(
@@ -32,7 +57,7 @@ const Step = ({
     relativeToCurrent,
     isLast = false,
 }: {
-    label: StepKey;
+    label: string;
     relativeToCurrent: number;
     isLast?: boolean;
 }) => {
@@ -101,7 +126,7 @@ export default () => {
             {steps.map((step, index) => (
                 <Step
                     key={step}
-                    label={step}
+                    label={stepToLabel(step)}
                     relativeToCurrent={index - currentStepIndex}
                     isLast={index === steps.length - 1}
                 />

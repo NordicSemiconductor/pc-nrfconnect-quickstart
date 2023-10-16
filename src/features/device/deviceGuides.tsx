@@ -88,16 +88,16 @@ export interface AppsStep {
 }
 
 export type OptionalStepKey =
-    | 'Info'
-    | 'Rename'
-    | 'Program'
-    | 'Verify'
-    | 'Evaluate'
-    | 'Develop'
-    | 'Learn'
-    | 'Apps'
-    | 'Finish'
-    | 'SIM Card';
+    | 'info'
+    | 'rename'
+    | 'program'
+    | 'verify'
+    | 'evaluate'
+    | 'develop'
+    | 'learn'
+    | 'apps'
+    | 'finish'
+    | 'sim';
 
 export interface DeviceGuide {
     boardVersion: string;
