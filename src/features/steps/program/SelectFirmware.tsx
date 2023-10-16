@@ -85,6 +85,7 @@ export default () => {
                 {!!previouslySelectedChoice && <Skip />}
                 {selectFirmwareWithoutProgrammingOption && (
                     <Next
+                        label="Select (Don't program)"
                         disabled={!selected}
                         onClick={next => {
                             if (!selected) return;
