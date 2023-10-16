@@ -11,12 +11,13 @@ import {
     usageData,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import { selectFirmwareWithoutProgrammingOption } from '../../../app/devOptions';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Link from '../../../common/Link';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
-import { Skip } from '../../../common/Next';
+import { Next, Skip } from '../../../common/Next';
 import { Choice, getProgramStep } from '../../device/deviceGuides';
 import {
     getChoiceUnsafely,
@@ -82,6 +83,17 @@ export default () => {
             <Main.Footer>
                 <Back />
                 {!!previouslySelectedChoice && <Skip />}
+                {selectFirmwareWithoutProgrammingOption && (
+                    <Next
+                        disabled={!selected}
+                        onClick={next => {
+                            if (!selected) return;
+
+                            dispatch(setChoice(selected));
+                            next();
+                        }}
+                    />
+                )}
                 <Button
                     variant="primary"
                     size="xl"
