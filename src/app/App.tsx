@@ -6,7 +6,6 @@
 
 import React, { useEffect } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { PackageJson } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/MetaFiles';
 
 import packageJson from '../../package.json';
 import Connect from '../features/connect';
@@ -23,7 +22,7 @@ import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
 
-usageData.init(packageJson as unknown as PackageJson);
+usageData.init(packageJson);
 
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();
