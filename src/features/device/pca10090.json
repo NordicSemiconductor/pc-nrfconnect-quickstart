@@ -1,5 +1,6 @@
 {
     "boardVersion": "pca10090",
+    "timeEstimate": "5 minutes",
     "stepOrder": [
         "info",
         "rename",

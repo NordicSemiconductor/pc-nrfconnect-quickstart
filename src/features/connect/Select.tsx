@@ -20,6 +20,7 @@ import {
     DeviceIcon,
     deviceName,
     getStepOrder,
+    getTimeEstimate,
     isSupportedDevice,
 } from '../device/deviceGuides';
 import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
@@ -61,11 +62,12 @@ export default () => {
                         <b>{name}</b>
                     </p>
                     <p
-                        className="tw-w-32 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-text-xs"
+                        className="tw-w-44 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-pr-6 tw-text-xs"
                         title={device.serialNumber}
                     >
                         {device.serialNumber}
                     </p>
+                    <p>~ {getTimeEstimate(device)}</p>
                 </div>
             ),
         };

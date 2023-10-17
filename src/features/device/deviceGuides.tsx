@@ -101,6 +101,7 @@ export type OptionalStepKey =
 
 export interface DeviceGuide {
     boardVersion: string;
+    timeEstimate: string;
     stepOrder: OptionalStepKey[];
     info: InfoStep;
     program: ProgramStep;
@@ -133,6 +134,8 @@ const getDeviceGuideUnsafely = (device: NrfutilDevice) =>
             device.jlink?.boardVersion?.toLowerCase()
     ) as DeviceGuide;
 
+export const getTimeEstimate = (device: NrfutilDevice) =>
+    getDeviceGuideUnsafely(device).timeEstimate;
 export const getStepOrder = (device: NrfutilDevice) =>
     getDeviceGuideUnsafely(device).stepOrder;
 export const getInfoStep = (device: NrfutilDevice) =>
