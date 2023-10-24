@@ -44,7 +44,7 @@ export const ResourceWithButton = ({
     disabled,
     onClick,
 }: ResourceWithButtonProps) => (
-    <div className="tw-flex tw-flex-row tw-justify-between tw-gap-12">
+    <div className="tw-flex tw-flex-row tw-justify-between tw-gap-10">
         <div className="tw-w-80">
             <div>
                 <b>{title}</b>
