@@ -32,6 +32,7 @@ export default () => {
                     <div className="tw-self-end tw-text-xs">{`${nickname.length}/${maxLength}`}</div>
                     <input
                         placeholder="Name your device"
+                        type="text"
                         onChange={event => setNickname(event.target.value)}
                         value={nickname}
                         maxLength={maxLength}
