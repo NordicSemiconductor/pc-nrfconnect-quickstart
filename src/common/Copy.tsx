@@ -29,7 +29,7 @@ const blurAndInvoke =
 export default ({ copyText }: { copyText: string }) => (
     <span
         role="button"
-        className="mdi mdi-content-copy tw-leading-none active:tw-text-primary"
+        className="mdi mdi-content-copy tw-inline tw-leading-none active:tw-text-primary"
         tabIndex={0}
         onClick={blurAndInvoke(() => clipboard.writeText(copyText))}
         onKeyUp={invokeIfSpaceOrEnterPressed(() =>

@@ -5,6 +5,7 @@
  */
 
 import React, { useState } from 'react';
+import { Button, classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 
 import { useAppSelector } from '../../../app/store';
@@ -92,26 +93,40 @@ export default () => {
                         the device off and on again.
                     </li>
                     <li>
-                        Click the <b>Read ICCID</b> button below. The ICCID has
-                        20 digits, but you only need the first 18 digits.
-                        <br />
-                        <b>ICCID:</b>{' '}
-                        <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
-                            <p
-                                className={
-                                    startRead && !failedRead && iccid === ''
-                                        ? 'ellipsis'
-                                        : ''
-                                }
+                        {!startRead || failedRead ? (
+                            <Button
+                                size="sm"
+                                variant="primary"
+                                className="tw-inline"
+                                onClick={() => {
+                                    setIccid('');
+                                    setFailedRead(false);
+                                    setStartRead(true);
+                                    readICCID();
+                                }}
                             >
-                                {!startRead && '...'}
-                                <b>
-                                    {startRead && !failedRead && iccid}
-                                    {startRead && failedRead && 'ERROR'}
-                                </b>
-                            </p>
-                            {iccid !== '' && <Copy copyText={iccid} />}
-                        </div>
+                                Read ICCID
+                            </Button>
+                        ) : (
+                            <>
+                                ICCID:{' '}
+                                <p
+                                    className={classNames(
+                                        'tw-inline',
+                                        'tw-pr-4',
+                                        !failedRead && iccid === ''
+                                            ? 'ellipsis'
+                                            : ''
+                                    )}
+                                >
+                                    <b>{failedRead ? 'ERROR' : iccid}</b>
+                                </p>
+                                {iccid !== '' && <Copy copyText={iccid} />}
+                            </>
+                        )}
+                        <br />
+                        The ICCID has 20 digits, but you only need the first 18
+                        digits.
                     </li>
                     <li>
                         <Link
@@ -159,19 +174,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Skip />
-                {(!startRead || failedRead) && (
-                    <Next
-                        label={failedRead ? 'Retry' : 'Read ICCID'}
-                        onClick={() => {
-                            setIccid('');
-                            setFailedRead(false);
-                            setStartRead(true);
-                            readICCID();
-                        }}
-                    />
-                )}
-                {startRead && !failedRead && <Next disabled={iccid === ''} />}
+                <Next />
             </Main.Footer>
         </Main>
     );
