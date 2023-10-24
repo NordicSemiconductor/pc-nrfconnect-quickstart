@@ -36,6 +36,8 @@ const stepToLabel = (step: StepKey) => {
             return 'Learn';
         case 'apps':
             return 'Apps';
+        case 'finish':
+            return 'Finish';
         default:
             return '';
     }
