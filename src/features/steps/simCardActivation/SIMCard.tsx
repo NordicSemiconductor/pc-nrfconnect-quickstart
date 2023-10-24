@@ -73,13 +73,13 @@ export default () => {
         <Main>
             <Main.Content heading="Set up iBasis micro-SIM Card">
                 <p>
-                    If you are planning to{' '}
+                    If you want to{' '}
                     <Link
                         label="connect to nRF Cloud"
                         href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-connect-to-cloud"
                         color="tw-text-primary"
                     />{' '}
-                    with an iBasis micro-SIM card, complete the following steps:
+                    with an iBasis micro-SIM card, complete these steps:
                 </p>
                 <br />
                 <ol className="tw-list-inside tw-list-decimal">
@@ -92,9 +92,10 @@ export default () => {
                         the device off and on again.
                     </li>
                     <li>
-                        Click the <b>Read ICCID</b> button below. The ICCID has 20
-                        digits, but you only need the first 18 digits.
+                        Click the <b>Read ICCID</b> button below. The ICCID has
+                        20 digits, but you only need the first 18 digits.
                         <br />
+                        <b>ICCID:</b>{' '}
                         <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
                             <p
                                 className={
@@ -118,18 +119,19 @@ export default () => {
                             href="https://nrfcloud.com/#/"
                             color="tw-text-primary"
                         />
+                        .
                     </li>
                     <li>
-                        On the nRF Cloud dashboard, click <b>+</b> to
-                        add a new <b>LTE Device</b>.
+                        On the nRF Cloud dashboard, click <b>+</b> to add a new{' '}
+                        <b>LTE Device</b>.
                     </li>
                     <li>
-                        In <b>Verify SIM Info</b>, enter the
-                        18-digit ICCID and the PUK.
+                        In <b>Verify SIM Info</b>, enter the 18-digit ICCID and
+                        the PUK.
                     </li>
                     <li>
-                        Click <b>Activate SIM</b>. The device connects to the nRF Cloud server,
-                        which can take a while.
+                        Click <b>Activate SIM</b>. After a while, the device
+                        connects to the nRF Cloud server.
                     </li>
                     <li>
                         In <b>Add LTE Device</b>, provide the required
