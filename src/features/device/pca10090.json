@@ -184,7 +184,7 @@
             },
             {
                 "ref": "Shell Command Line Interface",
-                "evaluationResources": [
+                "resources": [
                     {
                         "title": "Activate SIM card",
                         "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
