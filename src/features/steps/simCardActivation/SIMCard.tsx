@@ -74,23 +74,18 @@ export default () => {
         <Main>
             <Main.Content heading="Set up iBasis micro-SIM Card">
                 <p>
-                    If you want to{' '}
-                    <Link
-                        label="connect to nRF Cloud"
-                        href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-connect-to-cloud"
-                        color="tw-text-primary"
-                    />{' '}
-                    with an iBasis micro-SIM card, complete these steps:
+                    If you have an iBasis micro-SIM card, you can connect to nRF
+                    Cloud.
+                </p>
+                <p>
+                    Prepare the following information that you will need when
+                    connecting:
                 </p>
                 <br />
                 <ol className="tw-list-inside tw-list-decimal">
                     <li>
-                        Write down the <b>Personal Unblocking Key (PUK)</b> from
-                        the micro-SIM card.
-                    </li>
-                    <li>
-                        Insert the micro-SIM into the SIM card holder and turn
-                        the device off and on again.
+                        The <b>Personal Unblocking Key (PUK)</b> from the
+                        micro-SIM card.
                     </li>
                     <li>
                         {!startRead || failedRead ? (
@@ -130,29 +125,23 @@ export default () => {
                     </li>
                     <li>
                         <Link
-                            label="Log in or register to nRF Cloud"
+                            label="nRF Cloud account"
                             href="https://nrfcloud.com/#/"
                             color="tw-text-primary"
                         />
                         .
                     </li>
-                    <li>
-                        On the nRF Cloud dashboard, click <b>+</b> to add a new{' '}
-                        <b>LTE Device</b>.
-                    </li>
-                    <li>
-                        In <b>Verify SIM Info</b>, enter the 18-digit ICCID and
-                        the PUK.
-                    </li>
-                    <li>
-                        Click <b>Activate SIM</b>. After a while, the device
-                        connects to the nRF Cloud server.
-                    </li>
-                    <li>
-                        In <b>Add LTE Device</b>, provide the required
-                        information and click <b>Add Device</b>.
-                    </li>
                 </ol>
+                <br />
+                <p>
+                    With this information ready, follow the steps for{' '}
+                    <Link
+                        label="connecting the nRF9160 DK to nRF Cloud"
+                        href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-connect-to-cloud"
+                        color="tw-text-primary"
+                    />{' '}
+                    in the nRF Connect SDK documentation.
+                </p>
                 {failedRead && (
                     <>
                         <br />
