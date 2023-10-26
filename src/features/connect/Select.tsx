@@ -41,7 +41,7 @@ export default () => {
             id: device.serialNumber,
             selected: isSelected,
             disabled: !isSupportedDevice(device),
-            disabledSelector: <p className="tw-text-xs">Not supported yet</p>,
+            disabledSelector: <p className="tw-text-xs">Not supported yet.</p>,
             content: (
                 <div className="tw-flex tw-flex-row tw-items-center tw-justify-start">
                     <div className="tw-w-28 tw-flex-shrink-0">

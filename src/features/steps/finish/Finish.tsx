@@ -39,7 +39,7 @@ export default ({ next }: { next: () => void }) => {
                         <br />
                         <Italic>Was something unclear?</Italic>
                         <br />
-                        <Italic>Is there something we missed?</Italic>
+                        <Italic>Is there something missing?</Italic>
                         <br />
                         <br />
                         Give feedback now and help us improve the user

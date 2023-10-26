@@ -125,7 +125,7 @@ const connectToDevice = async (path: string, overwrite = true) => {
 
     createdSerialPort.close();
     throw new Error(
-        'Could not detect AT Host library. Make sure you have an AT client programmed on the device'
+        'Could not detect the AT Host library. Make sure you have an AT client programmed on the device.'
     );
 };
 
@@ -145,5 +145,5 @@ export default async (device: NrfutilDeviceWithSerialnumber) => {
         path = paths.pop();
     }
 
-    throw new Error('Unable to find AT client');
+    throw new Error('Unable to find the AT client.');
 };

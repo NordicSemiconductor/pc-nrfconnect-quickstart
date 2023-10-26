@@ -14,7 +14,7 @@
     ],
     "info": {
         "title": "Cellular Powerhouse",
-        "markdownContent": "![nRF9160 DK](9160DK.png)  \n&nbsp;  \nThe nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.  \n&nbsp;  \nIt includes a Segger J-Link OB debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.  \n&nbsp;  \n[Hardware documentation](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fug_nrf91_dk%2FUG%2Fnrf91_DK%2Fintro.html&cp=2_0_4)  \n&nbsp;  \n![nRF9160 SIP Cores](9160Cores.png)  \nYou have two options for leveraging the nRF9160 SIP:  \n&nbsp;  \n**Option 1** *Recommended*  \nHarness the full potential of the nRF9160 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9160.  \n&nbsp;  \n**Option 2**  \nIntegrate it as a *modem only* alongside your existing design running a serial AT command set on the application core."
+        "markdownContent": "![nRF9160 DK](9160DK.png)  \n&nbsp;  \nThe nRF9160 Development Kit is perfect for evaluating the nRF9160 SiP and developing cellular IoT applications.  \n&nbsp;  \nIt includes a SEGGER J-Link OB debugger and all the necessary external circuitry like (e)SIM interface, antenna, access to all IO pins, and relevant module interfaces.  \n&nbsp;  \n[Hardware documentation](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fug_nrf91_dk%2FUG%2Fnrf91_DK%2Fintro.html&cp=2_0_4)  \n&nbsp;  \n![nRF9160 SiP Cores](9160Cores.png)  \nYou have two options for leveraging the nRF9160 SiP:  \n&nbsp;  \n**Option 1** *Recommended*  \nHarness the full potential of nRF9160 by using the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by nRF9160.  \n&nbsp;  \n**Option 2**  \nIntegrate nRF9160 as a *modem only* alongside your existing design running a serial AT command set on the application core."
     },
     "program": {
         "choices": [
@@ -48,7 +48,7 @@
             {
                 "name": "Asset Tracking",
                 "type": "jlink",
-                "description": "Evaluate cloud interaction, location services, GNSS and real-time configurations.",
+                "description": "Evaluate cloud interaction, location services, GNSS, and real-time configurations.",
                 "documentation": {
                     "label": "Asset Tracker V2",
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
@@ -75,7 +75,7 @@
             {
                 "name": "Shell Command Line Interface",
                 "type": "jlink",
-                "description": "Evaluate throughput, connectivity and more.",
+                "description": "Evaluate throughput, connectivity, and more.",
                 "documentation": {
                     "label": "Modem Shell",
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
@@ -111,7 +111,7 @@
                 "copiable": false
             },
             {
-                "title": "Hardware Version",
+                "title": "Hardware version",
                 "command": "AT%HWVERSION",
                 "responseRegex": "%HWVERSION: (.*)",
                 "copiable": false
@@ -130,16 +130,16 @@
                 "ref": "AT Commands",
                 "resources": [
                     {
-                        "title": "Activate SIM card",
-                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
+                        "title": "Set up SIM card",
+                        "description": "You must set up an iBasis SIM card in the nRF Cloud before use.",
                         "link": {
-                            "label": "Activate SIM card",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
+                            "label": "Set up SIM card",
+                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html"
                         }
                     },
                     {
                         "app": "pc-nrfconnect-serial-terminal",
-                        "description": "Use the Serial Terminal PC application as a serial interface to send AT commands to the device",
+                        "description": "Use the Serial Terminal PC application as a serial interface to send AT commands to the device.",
                         "links": [
                             {
                                 "label": "AT Commands reference manual",
@@ -153,7 +153,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters"
+                        "description": "Automatically connect and evaluate parameters."
                     }
                 ]
             },
@@ -161,11 +161,11 @@
                 "ref": "Asset Tracking",
                 "resources": [
                     {
-                        "title": "Activate SIM card",
-                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
+                        "title": "Set up SIM card",
+                        "description": "You must set up an iBasis SIM card in the nRF Cloud before use.",
                         "link": {
-                            "label": "Activate SIM card",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
+                            "label": "Set up SIM card",
+                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html"
                         }
                     },
                     {
@@ -178,7 +178,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters"
+                        "description": "Automatically connect and evaluate parameters."
                     }
                 ]
             },
@@ -186,11 +186,11 @@
                 "ref": "Shell Command Line Interface",
                 "resources": [
                     {
-                        "title": "Activate SIM card",
-                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
+                        "title": "Set up SIM card",
+                        "description": "You must set up an iBasis SIM card in the nRF Cloud before use.",
                         "link": {
-                            "label": "Activate SIM card",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#id10"
+                            "label": "Set up SIM card",
+                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html"
                         }
                     },
                     {
@@ -209,7 +209,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters"
+                        "description": "Automatically connect and evaluate parameters."
                     }
                 ]
             }
@@ -227,7 +227,7 @@
             },
             {
                 "label": "Best practices",
-                "description": "The main aspects and decisions you need to consider before and during your development phase of a low-power cellular Internet of Things product.",
+                "description": "The main aspects and decisions you need to consider before and during the development of a low-power cellular Internet of Things product.",
                 "link": {
                     "label": "nWP044 - Best practices for cellular IoT development",
                     "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fnwp_044%2FWP%2Fnwp_044%2Fintro.html"

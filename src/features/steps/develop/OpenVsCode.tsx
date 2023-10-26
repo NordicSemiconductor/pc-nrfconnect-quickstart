@@ -39,14 +39,15 @@ export default () => {
                 <div className="tw-flex tw-flex-col tw-items-start tw-gap-6">
                     <img src={logo} alt="" className="tw-h-12" />
                     <p>
-                        Nordic Semiconductor’s nRF Connect for VS Code extension
-                        enhances the development experience for all aspects of
-                        the nRF Connect SDK application development in VS Code.
+                        Nordic Semiconductor&apos;s nRF Connect for VS Code
+                        extension enhances the development experience for all
+                        aspects of the nRF Connect SDK application development
+                        in VS Code.
                     </p>
                     <p>
-                        Automatically open VS Code and install the nRF Connect
-                        for VS Code extension. Follow the instructions in the
-                        extension to installl SDK, toolchain and start
+                        Click to open VS Code and install the nRF Connect for VS
+                        Code extension. Follow the instructions in the extension
+                        to install the toolchain and the SDK, and start
                         developing.
                     </p>
                 </div>

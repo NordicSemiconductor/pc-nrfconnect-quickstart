@@ -30,7 +30,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                 <div className="tw-pt-7">
                     Submissions will not receive a response.
                     <br />
-                    For general help and support visit <DevZoneLink />
+                    Visit <DevZoneLink /> for general help and support.
                 </div>
             </Main.Content>
             <Main.Footer>
