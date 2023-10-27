@@ -15,7 +15,7 @@
         "",
         "Device exclusive steps that can be used:",
         "pca10090:",
-        "Set up SIM Card",
+        "SIM Card",
         "",
         "Restrictions:",
         "Evaluate MUST be after program (not directly)",

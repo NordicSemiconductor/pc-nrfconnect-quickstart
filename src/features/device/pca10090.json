@@ -130,10 +130,10 @@
                 "ref": "AT Commands",
                 "resources": [
                     {
-                        "title": "Set up SIM card",
-                        "description": "You must set up an iBasis SIM card in the nRF Cloud before use.",
+                        "title": "Activate SIM card",
+                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
                         "link": {
-                            "label": "Set up SIM card",
+                            "label": "Activate SIM card",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html"
                         }
                     },
@@ -161,10 +161,10 @@
                 "ref": "Asset Tracking",
                 "resources": [
                     {
-                        "title": "Set up SIM card",
-                        "description": "You must set up an iBasis SIM card in the nRF Cloud before use.",
+                        "title": "Activate SIM card",
+                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
                         "link": {
-                            "label": "Set up SIM card",
+                            "label": "Activate SIM card",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html"
                         }
                     },
@@ -186,10 +186,10 @@
                 "ref": "Shell Command Line Interface",
                 "resources": [
                     {
-                        "title": "Set up SIM card",
-                        "description": "You must set up an iBasis SIM card in the nRF Cloud before use.",
+                        "title": "Activate SIM card",
+                        "description": "iBasis SIM cards must be activated in the nRF Cloud before use.",
                         "link": {
-                            "label": "Set up SIM card",
+                            "label": "Activate SIM card",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html"
                         }
                     },
