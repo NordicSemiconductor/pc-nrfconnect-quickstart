@@ -72,17 +72,14 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading="Set up iBasis micro-SIM Card">
+            <Main.Content heading="Set up iBasis micro-SIM card">
                 <p>
                     If you have an iBasis micro-SIM card, you can connect to nRF
                     Cloud.
                 </p>
-                <p>
-                    Prepare the following information that you will need when
-                    connecting:
-                </p>
+                <p>Prepare the following information:</p>
                 <br />
-                <ol className="tw-list-inside tw-list-decimal">
+                <ul className="tw-list-inside tw-list-disc">
                     <li>
                         The <b>Personal Unblocking Key (PUK)</b> from the
                         micro-SIM card.
@@ -131,7 +128,7 @@ export default () => {
                         />
                         .
                     </li>
-                </ol>
+                </ul>
                 <br />
                 <p>
                     With this information ready, follow the steps for{' '}
