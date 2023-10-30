@@ -53,10 +53,9 @@ export default () => {
                         </div>
                     </div>
                     <div>
-                        The <Italic>nRF Connect for Visual Studio Code</Italic>{' '}
-                        extension is the recommended development environment for
-                        building and debugging applications based on the{' '}
-                        <Italic>nRF Connect SDK</Italic>.
+                        Use the recommended nRF Connect Extension Pack for
+                        building and debugging applications based on the nRF
+                        Connect SDK in Visual Studio Code.
                     </div>
                 </div>
             ),
@@ -73,9 +72,9 @@ export default () => {
                         </div>
                     </div>
                     <div>
-                        The <Italic>nRF Util</Italic> and <Italic>west</Italic>{' '}
-                        command line tools can be used to manually configure
-                        your custom environment.
+                        Use the nRF Util and west tools to configure and build
+                        applications based on the nRF Connect SDK in a command
+                        line environment.
                     </div>
                 </div>
             ),

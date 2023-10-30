@@ -95,7 +95,7 @@ export default () => {
                 heading={getHeading()}
                 subHeading={
                     !allowVerification
-                        ? 'Automatically verify kit communication with AT commands'
+                        ? 'Automatically verify kit communication with AT commands.'
                         : ''
                 }
             >
@@ -137,10 +137,10 @@ export default () => {
                     <>
                         <br />
                         <br />
-                        <p>Could not communicate with kit</p>
+                        <p>Could not communicate with the kit.</p>
                         <br />
                         <p>
-                            Contact support on <DevZoneLink /> if problem
+                            Contact support on <DevZoneLink /> if the problem
                             persist.
                         </p>
                     </>

@@ -36,9 +36,10 @@ export default () => {
                 <div className="tw-pt-8">
                     <p>
                         {resetFailed
-                            ? 'Failed to reset device. '
-                            : `Failed to program ${failedCore} core. `}
-                        Contact support on <DevZoneLink /> if problem persists.
+                            ? 'Failed to reset the device. '
+                            : `Failed to program the ${failedCore} core. `}
+                        Contact support on <DevZoneLink /> if the problem
+                        persists.
                     </p>
                     <br />
                     <p className="tw-select-text">{describeError(error)}</p>

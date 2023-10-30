@@ -13,7 +13,7 @@
     ],
     "info": {
         "title": "Massive IoT Powerhouse",
-        "markdownContent": "![nRF9161 DK](9161DK.png)  \n&nbsp;  \nThe nRF9161 Development Kit is perfect for evaluating the nRF9161 SiP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \nIt includes a Segger J-Link OB debugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons and module interfaces.  \n&nbsp;  \n[Hardware documentation](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/boards/arm/nrf9161dk_nrf9161/doc/index.html)  \n&nbsp;  \n![nRF9161 SIP Cores](9161Cores.png)  \nYou have two options for leveraging the nRF9161 SiP:  \n&nbsp;  \n**Option 1** *Recommended*  \nHarness the full potential of the nRF9161 by utilizing the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by the nRF9161.  \n&nbsp;  \n**Option 2**  \nIntegrate it as a [cellular](https://www.nordicsemi.com/Products/Low-power-cellular-IoT/What-is-cellular-IoT#infotabs) or [NR+](https://www.nordicsemi.com/Products/DECT-NR) modem alongside your existing design running a serial AT command set on the application core."
+        "markdownContent": "![nRF9161 DK](9161DK.png)  \n&nbsp;  \nThe nRF9161 Development Kit is perfect for evaluating the nRF9161 SiP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \nIt includes a SEGGER J-Link OB debugger and all the necessary external circuirty like (e)SIM interface, antennas, access to all IO pins, programmable buttons, and module interfaces.  \n&nbsp;  \n[Hardware documentation](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/boards/arm/nrf9161dk_nrf9161/doc/index.html)  \n&nbsp;  \n![nRF9161 SiP Cores](9161Cores.png)  \nYou have two options for leveraging the nRF9161 SiP:  \n&nbsp;  \n**Option 1** *Recommended*  \nHarness the full potential of nRF9161 by using the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by nRF9161.  \n&nbsp;  \n**Option 2**  \nIntegrate nRF9161 as a [cellular](https://www.nordicsemi.com/Products/Low-power-cellular-IoT/What-is-cellular-IoT#infotabs) or [NR+](https://www.nordicsemi.com/Products/DECT-NR) modem alongside your existing design running a serial AT command set on the application core."
     },
     "program": {
         "choices": [
@@ -47,7 +47,7 @@
             {
                 "name": "Asset Tracking",
                 "type": "jlink",
-                "description": "Evaluate cloud interaction, location services, GNSS and real-time configurations.",
+                "description": "Evaluate cloud interaction, location services, GNSS, and real-time configurations.",
                 "documentation": {
                     "label": "Asset Tracker V2",
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
@@ -74,7 +74,7 @@
             {
                 "name": "Shell Command Line Interface",
                 "type": "jlink",
-                "description": "Evaluate throughput, connectivity and more.",
+                "description": "Evaluate throughput, connectivity, and more.",
                 "documentation": {
                     "label": "Modem Shell",
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
@@ -110,7 +110,7 @@
                 "copiable": false
             },
             {
-                "title": "Hardware Version",
+                "title": "Hardware version",
                 "command": "AT%HWVERSION",
                 "responseRegex": "/%HWVERSION: (.*)/",
                 "copiable": false
@@ -144,7 +144,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters"
+                        "description": "Automatically connect and evaluate parameters."
                     }
                 ]
             },
@@ -180,7 +180,7 @@
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
-                        "description": "Automatically connect and evaluate parameters"
+                        "description": "Automatically connect and evaluate parameters."
                     }
                 ]
             }
@@ -198,7 +198,7 @@
             },
             {
                 "label": "Best practices",
-                "description": "The main aspects and decisions you need to consider before and during your development phase of a low-power cellular Internet of Things product.",
+                "description": "The main aspects and decisions you need to consider before and during the development phase of a low-power cellular Internet of Things product.",
                 "link": {
                     "label": "nWP044 - Best practices for cellular IoT development",
                     "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fnwp_044%2FWP%2Fnwp_044%2Fintro.html"

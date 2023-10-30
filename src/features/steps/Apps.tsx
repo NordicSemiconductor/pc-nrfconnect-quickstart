@@ -104,9 +104,9 @@ export default () => {
         <Main>
             <Main.Content
                 heading="Select apps to install"
-                subHeading={`We recommend these nRF Connect for Desktop applications for ${
+                subHeading={`Check out these nRF Connect for Desktop applications for ${
                     deviceInfo(device).name
-                }`}
+                }:`}
             >
                 <MultipleSelect
                     items={items}

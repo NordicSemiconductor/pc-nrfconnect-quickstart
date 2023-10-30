@@ -38,8 +38,8 @@ export default () => {
                             color="tw-text-primary"
                         />
                         . As soon as you did that, this app will guide you how
-                        to open Nordic Semiconductor’s nRF Connect for VS Code
-                        extension.
+                        to open Nordic Semiconductor&apos;s nRF Connect for VS
+                        Code extension.
                     </p>
                     {onWindows && (
                         <p>

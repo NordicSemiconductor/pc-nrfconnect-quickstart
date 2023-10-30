@@ -40,9 +40,10 @@ export default () => {
                     />
                 </div>
                 <p className="tw-pt-12">
-                    We&apos;ll remember and display the custom name when you use
-                    our apps. You can always change the name later. Click skip
-                    if you prefer to keep the default name.
+                    The application will remember and display the custom name
+                    when you use other apps. You can always change the name
+                    later. Click <b>Skip</b> if you prefer to keep the default
+                    name.
                 </p>
             </Main.Content>
             <Main.Footer>

@@ -35,7 +35,7 @@ export default () => {
         <Main>
             <Main.Content
                 heading="Detect"
-                subHeading="Connect a Nordic kit to your PC."
+                subHeading="Connect Nordic development kit to your PC."
             >
                 <>
                     <Searching />
@@ -44,11 +44,11 @@ export default () => {
                             <br />
                             <br />
                             <br />
-                            <p>Kit detection is taking longer than expected.</p>
+                            <p>Detection is taking longer than expected.</p>
                             <br />
                             <p>
-                                Contact support on <DevZoneLink /> if problem
-                                persists.
+                                Contact support on <DevZoneLink /> if the
+                                problem persists.
                             </p>
                         </div>
                     )}
