@@ -85,23 +85,23 @@ export default () => {
                         micro-SIM card.
                     </li>
                     <li>
-                        {!startRead || failedRead ? (
-                            <Button
-                                size="sm"
-                                variant="primary"
-                                className="tw-inline"
-                                onClick={() => {
-                                    setIccid('');
-                                    setFailedRead(false);
-                                    setStartRead(true);
-                                    readICCID();
-                                }}
-                            >
-                                Read ICCID
-                            </Button>
-                        ) : (
-                            <>
-                                ICCID:{' '}
+                        <p className="tw-inline">
+                            ICCID:{' '}
+                            {!startRead || failedRead ? (
+                                <Button
+                                    size="sm"
+                                    variant="primary"
+                                    className="tw-inline"
+                                    onClick={() => {
+                                        setIccid('');
+                                        setFailedRead(false);
+                                        setStartRead(true);
+                                        readICCID();
+                                    }}
+                                >
+                                    Read ICCID
+                                </Button>
+                            ) : (
                                 <p
                                     className={classNames(
                                         'tw-inline',
@@ -112,13 +112,13 @@ export default () => {
                                     )}
                                 >
                                     <b>{failedRead ? 'ERROR' : iccid}</b>
+                                    {iccid !== '' && <Copy copyText={iccid} />}
                                 </p>
-                                {iccid !== '' && <Copy copyText={iccid} />}
-                            </>
-                        )}
-                        <br />
-                        The ICCID has 20 digits, but you only need the first 18
-                        digits.
+                            )}
+                            <br />
+                            The ICCID has 20 digits, but you only need the first
+                            18 digits.
+                        </p>
                     </li>
                     <li>
                         <Link
