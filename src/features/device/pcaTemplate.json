@@ -1,6 +1,5 @@
 {
     "boardVersion": "PCA number of kit",
-    "timeEstimate": "Whatever is written in here will be displayed in the select device step. Prepended by a '~ '",
     "stepOrder": [
         "steps in order of appearance",
         "valid steps:",
