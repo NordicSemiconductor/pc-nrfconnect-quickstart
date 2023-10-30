@@ -5,16 +5,36 @@
  */
 
 import React, { useState } from 'react';
+import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
-import { DevZoneLink } from '../../../common/Link';
+import Link, { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
-import { Next, Skip } from '../../../common/Next';
+import { Next } from '../../../common/Next';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import getUARTSerialPort from '../../device/getUARTSerialPort';
+
+const invokeIfSpaceOrEnterPressed =
+    (onClick: React.KeyboardEventHandler<Element>) =>
+    (event: React.KeyboardEvent) => {
+        event.stopPropagation();
+        if (event.key === ' ' || event.key === 'Enter') {
+            onClick(event);
+        }
+    };
+
+const blurAndInvoke =
+    (
+        onClick: React.MouseEventHandler<HTMLElement>
+    ): React.MouseEventHandler<HTMLElement> =>
+    (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        event.currentTarget.blur();
+        onClick(event);
+    };
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
@@ -71,50 +91,94 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading="Activate SIM Card">
+            <Main.Content heading="Set up iBasis micro-SIM card">
                 <p>
-                    Do you need to activate your SIM Card?
-                    <br />
-                    Follow these steps to complete the activation (iBasis only):
+                    If you have an iBasis micro-SIM card, you can connect to nRF
+                    Cloud.
                 </p>
+                <p>Prepare the following information:</p>
                 <br />
-                <ul className="tw-list-inside tw-list-decimal">
+                <ul className="tw-list-outside tw-list-disc tw-pl-4">
                     <li>
-                        Get the ICCID value by pressing <b>Read ICCID</b>
-                        <br />
-                        <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
-                            <p
-                                className={
-                                    startRead && !failedRead && iccid === ''
-                                        ? 'ellipsis'
-                                        : ''
-                                }
-                            >
-                                {!startRead && '...'}
-                                <b>
-                                    {startRead && !failedRead && iccid}
-                                    {startRead && failedRead && 'ERROR'}
-                                </b>
-                            </p>
-                            {iccid !== '' && <Copy copyText={iccid} />}
-                        </div>
+                        The <b>Personal Unblocking Key (PUK)</b> from the
+                        micro-SIM card.
                     </li>
-                    <br />
                     <li>
-                        Use the ICCID to activate the SIM Card at{' '}
-                        <b>
-                            <u>LINK</u>
-                        </b>
+                        <p className="tw-inline">
+                            <b>ICCID: </b>
+                            {!startRead && (
+                                <div className="tw-inline tw-pr-4">...</div>
+                            )}
+                            {startRead && (
+                                <div
+                                    className={classNames(
+                                        'tw-inline',
+                                        'tw-pr-4',
+                                        !failedRead && iccid === ''
+                                            ? 'ellipsis'
+                                            : ''
+                                    )}
+                                >
+                                    {failedRead ? 'ERROR' : iccid}
+                                </div>
+                            )}
+                            {(!startRead || failedRead) && (
+                                <span
+                                    role="button"
+                                    className="mdi mdi-refresh tw-inline tw-leading-none active:tw-text-primary"
+                                    tabIndex={0}
+                                    onClick={blurAndInvoke(() => {
+                                        setIccid('');
+                                        setFailedRead(false);
+                                        setStartRead(true);
+                                        readICCID();
+                                    })}
+                                    onKeyUp={invokeIfSpaceOrEnterPressed(() => {
+                                        setIccid('');
+                                        setFailedRead(false);
+                                        setStartRead(true);
+                                        readICCID();
+                                    })}
+                                />
+                            )}
+                            {iccid !== '' && !failedRead && startRead && (
+                                <>
+                                    <Copy copyText={iccid} />
+                                    <br />
+                                    These are the first 18 digits of the ICCID
+                                    that are required for SIM activation.
+                                </>
+                            )}
+                        </p>
+                    </li>
+                    <li>
+                        <Link
+                            label="nRF Cloud account"
+                            href="https://nrfcloud.com/#/"
+                            color="tw-text-primary"
+                        />
+                        .
                     </li>
                 </ul>
+                <br />
+                <p>
+                    With this information ready, follow the steps for{' '}
+                    <Link
+                        label="connecting the nRF9160 DK to nRF Cloud"
+                        href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-connect-to-cloud"
+                        color="tw-text-primary"
+                    />{' '}
+                    in the nRF Connect SDK documentation.
+                </p>
                 {failedRead && (
                     <>
                         <br />
-                        <br />
-                        <p>Could not communicate with kit</p>
-                        <br />
                         <p>
-                            Contact support on <DevZoneLink /> if problem
+                            Could not communicate with kit. Retry reading the
+                            ICCID.
+                        </p>
+                        <p>
+                            Contact support on <DevZoneLink /> if the problem
                             persist.
                         </p>
                     </>
@@ -128,19 +192,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Skip />
-                {(!startRead || failedRead) && (
-                    <Next
-                        label={failedRead ? 'Retry' : 'Read ICCID'}
-                        onClick={() => {
-                            setIccid('');
-                            setFailedRead(false);
-                            setStartRead(true);
-                            readICCID();
-                        }}
-                    />
-                )}
-                {startRead && !failedRead && <Next disabled={iccid === ''} />}
+                <Next />
             </Main.Footer>
         </Main>
     );
