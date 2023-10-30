@@ -20,7 +20,6 @@ import {
     DeviceIcon,
     deviceName,
     getStepOrder,
-    getTimeEstimate,
     isSupportedDevice,
 } from '../device/deviceGuides';
 import { getConnectedDevices, selectDevice } from '../device/deviceSlice';
@@ -33,10 +32,7 @@ export default () => {
 
     const items = connectedDevices.map(device => {
         const isSelected = selectedItem?.id === device.serialNumber;
-        const name =
-            getPersistedNickname(device.serialNumber) ||
-            deviceName(device) ||
-            '';
+
         return {
             id: device.serialNumber,
             selected: isSelected,
@@ -57,9 +53,9 @@ export default () => {
                     </div>
                     <p
                         className="tw-w-44 tw-flex-shrink-0 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-pr-6 tw-text-sm"
-                        title={name}
+                        title={deviceName(device) || ''}
                     >
-                        <b>{name}</b>
+                        <b>{deviceName(device) || ''}</b>
                     </p>
                     <p
                         className="tw-w-44 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-pr-6 tw-text-xs"
@@ -67,7 +63,7 @@ export default () => {
                     >
                         {device.serialNumber}
                     </p>
-                    <p>~ {getTimeEstimate(device)}</p>
+                    <p>{getPersistedNickname(device.serialNumber) || ''}</p>
                 </div>
             ),
         };
@@ -80,7 +76,7 @@ export default () => {
                     <b className="tw-w-28">Family</b>
                     <b className="tw-w-44">Device</b>
                     <b className="tw-w-44">Serial number</b>
-                    <b>Estimated time</b>
+                    <b>Custom name</b>
                 </div>
                 <RadioSelect items={items} onSelect={setSelectedItem} />
                 <div className="tw-pt-5">
