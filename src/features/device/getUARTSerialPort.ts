@@ -11,8 +11,9 @@ import {
     shellParser,
     xTerminalShellParserWrapper,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { NrfutilDeviceWithSerialnumber } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import { Terminal } from 'xterm-headless';
+
+import { DeviceWithSerialnumber } from './deviceLib';
 
 const sendCommandShellMode = (parser: ShellParser, command: string) =>
     new Promise<string>((resolve, reject) => {
@@ -129,7 +130,7 @@ const connectToDevice = async (path: string, overwrite = true) => {
     );
 };
 
-export default async (device: NrfutilDeviceWithSerialnumber) => {
+export default async (device: DeviceWithSerialnumber) => {
     const paths = device.serialPorts
         ?.map(port => port.comName)
         .filter(path => path !== null) as string[];
