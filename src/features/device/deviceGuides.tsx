@@ -124,13 +124,13 @@ const deviceGuides: DeviceGuide[] = [
 export const isSupportedDevice = (device: NrfutilDevice) =>
     deviceGuides
         .map(d => d.boardVersion.toLowerCase())
-        .includes(device.jlink?.boardVersion?.toLowerCase() || '');
+        .includes(device.devkit?.boardVersion?.toLowerCase() || '');
 
 const getDeviceGuideUnsafely = (device: NrfutilDevice) =>
     deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
-            device.jlink?.boardVersion?.toLowerCase()
+            device.devkit?.boardVersion?.toLowerCase()
     ) as DeviceGuide;
 
 export const getStepOrder = (device: NrfutilDevice) =>

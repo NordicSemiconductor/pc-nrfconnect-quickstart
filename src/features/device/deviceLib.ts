@@ -8,7 +8,6 @@ import {
     DeviceTraits,
     NrfutilDevice,
     NrfutilDeviceLib,
-    NrfutilDeviceWithSerialnumber,
     Progress,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import path from 'path';
@@ -22,13 +21,22 @@ const requiredTraits: DeviceTraits = {
     nordicUsb: true,
 };
 
+export type DeviceWithSerialnumber = NrfutilDevice & {
+    serialNumber: string;
+};
+
+export const hasSerialnumber = (
+    device: NrfutilDevice
+): device is DeviceWithSerialnumber =>
+    'serialNumber' in device && device.serialNumber !== undefined;
+
 const hasSerialNumber = (
     device: NrfutilDevice
-): device is NrfutilDeviceWithSerialnumber =>
+): device is DeviceWithSerialnumber =>
     'serialNumber' in device && device.serialNumber !== undefined;
 
 export const startWatchingDevices = async (
-    onDeviceArrived: (device: NrfutilDeviceWithSerialnumber) => void,
+    onDeviceArrived: (device: DeviceWithSerialnumber) => void,
     onDeviceLeft: (deviceId: number) => void
 ) => {
     const stopHotplugEvents = await NrfutilDeviceLib.list(
@@ -37,7 +45,8 @@ export const startWatchingDevices = async (
             initialDevices.filter(hasSerialNumber).forEach(onDeviceArrived),
         console.log,
         {
-            onDeviceArrived,
+            onDeviceArrived: device =>
+                hasSerialnumber(device) && onDeviceArrived(device),
             onDeviceLeft,
         }
     );
@@ -49,11 +58,11 @@ export const startWatchingDevices = async (
     };
 };
 
-export const reset = (device: NrfutilDeviceWithSerialnumber) =>
+export const reset = (device: DeviceWithSerialnumber) =>
     NrfutilDeviceLib.reset(device, 'Application', 'RESET_SYSTEM');
 
 export const program = (
-    device: NrfutilDeviceWithSerialnumber,
+    device: DeviceWithSerialnumber,
     firmware: Firmware[],
     onProgress: (index: number, progress: Progress) => void,
     onResetProgress: (resetProgress: ResetProgress) => void
