@@ -99,7 +99,7 @@ const Step = ({
                         relativeToCurrent <= 0
                             ? 'tw-text-gray-200'
                             : 'tw-text-gray-500',
-                        'tw-col-span tw-pl-3.5 tw-text-xs tw-font-medium tw-tracking-wide'
+                        'tw-col-span tw-whitespace-nowrap tw-pl-3.5 tw-text-xs tw-font-medium tw-tracking-wide'
                     )}
                 >
                     {label}
