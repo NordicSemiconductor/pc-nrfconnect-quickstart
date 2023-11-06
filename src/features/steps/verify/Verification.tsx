@@ -37,7 +37,7 @@ export default () => {
     const formatResponse = (response: string, responseRegex: RegExp) => {
         const filteredResponse = response
             .split('\n')
-            .filter(line => !!line && line.trim() !== 'OK')
+            .filter(line => !!line.trim() && line.trim() !== 'OK')
             .join('')
             .trim();
 
