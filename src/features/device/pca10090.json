@@ -36,7 +36,7 @@
                     },
                     {
                         "core": "Application",
-                        "file": "slm-with-trace.hex",
+                        "file": "nrf9160dk_serial_lte_modem_debug_2023-10-26_1fae141f.hex",
                         "link": {
                             "label": "Serial LTE Modem",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html"
@@ -63,7 +63,7 @@
                     },
                     {
                         "core": "Application",
-                        "file": "nrf9160dk_asset_tracker_v2_debug_2023-03-02_8f26142b.hex",
+                        "file": "nrf9160dk_asset_tracker_v2_debug_2023-10-26_1fae141f.hex",
                         "link": {
                             "label": "Asset Tracker V2",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
@@ -90,7 +90,7 @@
                     },
                     {
                         "core": "Application",
-                        "file": "nrf9160dk_modem_shell_with_trace_ncs_v2_3_0_2023_05_04.hex",
+                        "file": "nrf9160dk_modem_shell_debug_2023-10-26_1fae141f.hex",
                         "link": {
                             "label": "Modem Shell",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
