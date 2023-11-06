@@ -105,19 +105,19 @@
             {
                 "title": "Manufacturer",
                 "command": "AT+CGMI",
-                "responseRegex": "/(.*)/",
+                "responseRegex": "(.*)",
                 "copiable": false
             },
             {
                 "title": "Hardware version",
                 "command": "AT%HWVERSION",
-                "responseRegex": "/%HWVERSION: (.*)/",
+                "responseRegex": "%HWVERSION: (.*)",
                 "copiable": false
             },
             {
                 "title": "International Mobile Equipment Identity",
                 "command": "AT+CGSN=1",
-                "responseRegex": "/+CGSN: \"(.*)\"/",
+                "responseRegex": "\\+CGSN: \"(.*)\"",
                 "copiable": true
             }
         ]
