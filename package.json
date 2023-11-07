@@ -11,14 +11,14 @@
     "author": "Nordic Semiconductor ASA",
     "license": "SEE LICENSE IN LICENSE",
     "engines": {
-        "nrfconnect": ">=4.2.0"
+        "nrfconnect": ">=4.2.2"
     },
     "main": "dist/bundle.js",
     "nrfConnectForDesktop": {
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
-                "2.0.0"
+                "2.0.2"
             ]
         }
     },
