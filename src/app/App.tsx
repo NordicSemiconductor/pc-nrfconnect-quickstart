@@ -7,7 +7,6 @@
 import React, { useEffect } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import packageJson from '../../package.json';
 import Connect from '../features/connect';
 import { startWatchingDevices } from '../features/device/deviceLib';
 import {
@@ -22,7 +21,7 @@ import { useAppDispatch, useAppSelector } from './store';
 
 import './App.scss';
 
-usageData.init(packageJson);
+usageData.enableTelemetry();
 
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();

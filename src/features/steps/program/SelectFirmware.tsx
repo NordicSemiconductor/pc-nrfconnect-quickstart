@@ -100,10 +100,11 @@ export default () => {
                     onClick={() => {
                         if (!selected) return;
 
-                        usageData.sendUsageData(
-                            `Select firmware ${selected.name}`,
-                            deviceInfo(device).name ?? 'Unknown device'
-                        );
+                        usageData.sendUsageData('Select firmware', {
+                            fwName: selected.name,
+                            deviceName:
+                                deviceInfo(device).name ?? 'Unknown device',
+                        });
 
                         dispatch(setChoice(selected));
                         dispatch(startProgramming());

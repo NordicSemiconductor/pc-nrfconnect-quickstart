@@ -143,7 +143,8 @@ export default () => {
                                             )
                                         );
                                         usageData.sendUsageData(
-                                            `Installing app ${app}`
+                                            'Installing app',
+                                            { app }
                                         );
                                         installApp(app);
                                     }

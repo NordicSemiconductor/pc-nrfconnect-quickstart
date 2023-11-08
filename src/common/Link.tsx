@@ -32,7 +32,7 @@ const Link = ({
         rel="noreferrer noopener"
         href={href}
         onClick={event => {
-            usageData.sendUsageData('Visiting link', href);
+            usageData.sendUsageData('Visiting link', { href });
             event.stopPropagation();
         }}
         className={classNames('tw-underline', color, `hover:${color}`)}

@@ -95,9 +95,9 @@ export default () => {
                             return;
                         }
 
-                        usageData.sendUsageData(
-                            `Selected developing option: ${selected.id}`
-                        );
+                        usageData.sendUsageData('Selected developing option', {
+                            option: selected.id,
+                        });
 
                         dispatch(setDevelopState(selected.state));
                     }}
