@@ -21,25 +21,25 @@ import { getCurrentStep } from './stepsSlice';
 import Verify from './verify';
 
 export default () => {
-    const currentStep = useAppSelector(getCurrentStep);
+    const step = useAppSelector(getCurrentStep);
 
     // Telemetry when user changes step
     useEffect(() => {
-        usageData.sendUsageData(`Step: ${currentStep}`);
-    }, [currentStep]);
+        usageData.sendUsageData('Changed step', { step });
+    }, [step]);
 
     return (
         <>
-            {currentStep === 'info' && <Info />}
-            {currentStep === 'rename' && <Rename />}
-            {currentStep === 'program' && <Program />}
-            {currentStep === 'verify' && <Verify />}
-            {currentStep === 'sim' && <SimCardActivation />}
-            {currentStep === 'evaluate' && <Evaluate />}
-            {currentStep === 'develop' && <Develop />}
-            {currentStep === 'learn' && <Learn />}
-            {currentStep === 'apps' && <Apps />}
-            {currentStep === 'finish' && <Finish />}
+            {step === 'info' && <Info />}
+            {step === 'rename' && <Rename />}
+            {step === 'program' && <Program />}
+            {step === 'verify' && <Verify />}
+            {step === 'sim' && <SimCardActivation />}
+            {step === 'evaluate' && <Evaluate />}
+            {step === 'develop' && <Develop />}
+            {step === 'learn' && <Learn />}
+            {step === 'apps' && <Apps />}
+            {step === 'finish' && <Finish />}
         </>
     );
 };

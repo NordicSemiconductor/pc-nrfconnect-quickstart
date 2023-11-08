@@ -82,7 +82,10 @@ export default () => {
                             onClick={async () => {
                                 if (isExternalLinkResource(resource)) {
                                     usageData.sendUsageData(
-                                        `Opened link ${resource.link.href}`
+                                        'Opened evaluation link',
+                                        {
+                                            link: resource.link.href,
+                                        }
                                     );
                                     openUrl(resource.link.href);
                                 } else {
@@ -97,7 +100,10 @@ export default () => {
                                         );
 
                                     usageData.sendUsageData(
-                                        `Opened app ${resource.app}`
+                                        'Opened evaluation app',
+                                        {
+                                            app: resource.app,
+                                        }
                                     );
 
                                     if (app && !apps.isInstalled(app)) {
