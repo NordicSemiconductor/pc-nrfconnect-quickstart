@@ -91,21 +91,33 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading="Set up iBasis micro-SIM card">
+            <Main.Content heading="Set up iBasis SIM card">
                 <p>
-                    If you have an iBasis micro-SIM card, you can connect to nRF
-                    Cloud.
+                    If you are using the included iBasis SIM card, you need to
+                    register and enable it through nRF Cloud.
                 </p>
-                <p>Prepare the following information:</p>
+                <p>Complete the following steps:</p>
                 <br />
-                <ul className="tw-list-outside tw-list-disc tw-pl-4">
+                <ol className="tw-list-outside tw-list-decimal tw-pl-4">
                     <li>
-                        The <b>Personal Unblocking Key (PUK)</b> from the
-                        micro-SIM card.
+                        <Link
+                            label="Log in or create nRF Cloud account"
+                            href="https://nrfcloud.com/#/"
+                            color="tw-text-primary"
+                        />
+                        .
+                    </li>
+                    <li>
+                        In nRF Cloud, click <b>+</b> &gt; <b>Add New</b> &gt;{' '}
+                        <b>SIM Card</b>. The <b>Add SIM</b> page opens.
+                    </li>
+                    <li>
+                        Enter the <b>Personal Unblocking Key (PUK)</b> from the
+                        back of the SIM card.
                     </li>
                     <li>
                         <p className="tw-inline">
-                            <b>ICCID: </b>
+                            Enter the <b>ICCID: </b>
                             {!startRead && (
                                 <div className="tw-inline tw-pr-4">...</div>
                             )}
@@ -152,24 +164,10 @@ export default () => {
                         </p>
                     </li>
                     <li>
-                        <Link
-                            label="nRF Cloud account"
-                            href="https://nrfcloud.com/#/"
-                            color="tw-text-primary"
-                        />
-                        .
+                        Accept the terms and the privacy policy and click{' '}
+                        <b>Activate SIM</b>.
                     </li>
-                </ul>
-                <br />
-                <p>
-                    With this information ready, follow the steps for{' '}
-                    <Link
-                        label="connecting the nRF9160 DK to nRF Cloud"
-                        href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/device_guides/working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-connect-to-cloud"
-                        color="tw-text-primary"
-                    />{' '}
-                    in the nRF Connect SDK documentation.
-                </p>
+                </ol>
                 {failedRead && (
                     <>
                         <br />
