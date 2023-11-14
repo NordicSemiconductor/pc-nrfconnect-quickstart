@@ -81,7 +81,7 @@ const connectToDevice = async (path: string, overwrite = true) => {
         new Promise<void>(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 1000);
+            }, 2000);
         }),
     ]);
     // If race times out, then we assume AT Host is not detected on device.
