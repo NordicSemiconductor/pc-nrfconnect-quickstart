@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     getPersistedNickname,
     Logo,
@@ -12,10 +12,23 @@ import {
 
 import { DeviceIcon, deviceName } from '../features/device/deviceGuides';
 import { getSelectedDevice } from '../features/device/deviceSlice';
+import { getCurrentStep } from '../features/steps/stepsSlice';
 import { useAppSelector } from './store';
 
 export default () => {
     const device = useAppSelector(getSelectedDevice);
+    const step = useAppSelector(getCurrentStep);
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        if (device) {
+            setName(
+                getPersistedNickname(device.serialNumber) ||
+                    deviceName(device) ||
+                    ''
+            );
+        }
+    }, [device, step]);
 
     return (
         <div className="tw-flex tw-h-14 tw-max-h-14 tw-min-h-[56px] tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-primary tw-px-8 tw-text-base tw-text-white">
@@ -26,10 +39,7 @@ export default () => {
                         device={device}
                         className="tw-h-5 tw-fill-white"
                     />
-                    <p>
-                        {getPersistedNickname(device.serialNumber) ||
-                            deviceName(device)}
-                    </p>
+                    <p>{name}</p>
                 </div>
             )}
             <div className="tw-flex tw-flex-1 tw-flex-row tw-justify-end">
