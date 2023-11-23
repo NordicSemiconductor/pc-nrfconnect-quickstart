@@ -20,6 +20,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             <Main.Content heading="Give feedback">
                 <form>
                     <textarea
+                        placeholder="Type your feedback here..."
                         name="feedback-text"
                         className="tw-h-44 tw-w-full tw-resize-none tw-border tw-border-gray-200 tw-p-2 focus:tw-outline-none"
                         required
