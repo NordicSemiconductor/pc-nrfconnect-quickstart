@@ -15,6 +15,10 @@
     },
     "main": "dist/bundle.js",
     "nrfConnectForDesktop": {
+        "supportedDevices": [
+            "PCA10090",
+            "PCA10153"
+        ],
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
