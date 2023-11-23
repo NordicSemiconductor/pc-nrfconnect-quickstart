@@ -32,6 +32,7 @@ export default () => {
 
     const items = connectedDevices.map(device => {
         const isSelected = selectedItem?.id === device.serialNumber;
+        const nickname = getPersistedNickname(device.serialNumber);
 
         return {
             id: device.serialNumber,
@@ -63,7 +64,12 @@ export default () => {
                     >
                         {device.serialNumber}
                     </p>
-                    <p>{getPersistedNickname(device.serialNumber) || ''}</p>
+                    <p
+                        className="tw-max-w-[11rem] tw-truncate"
+                        title={nickname}
+                    >
+                        {nickname}
+                    </p>
                 </div>
             ),
         };
