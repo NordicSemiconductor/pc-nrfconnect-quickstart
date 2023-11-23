@@ -108,8 +108,8 @@ export default () => {
                         .
                     </li>
                     <li>
-                        In nRF Cloud, click <b>+</b> &gt; <b>Add New</b> &gt;{' '}
-                        <b>SIM Card</b>. The <b>Add SIM</b> page opens.
+                        In nRF Cloud, click <b>Device Management</b> &gt;{' '}
+                        <b>SIM Cards</b> &gt; <b>Add SIM</b>.
                     </li>
                     <li>
                         Enter the <b>Personal Unblocking Key (PUK)</b> from the
