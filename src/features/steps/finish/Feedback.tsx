@@ -36,6 +36,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
             <Main.Footer>
                 <Back onClick={back} />
                 <Next
+                    disabled={feedback.trim() === ''}
                     label="Give feedback"
                     onClick={() => {
                         try {
