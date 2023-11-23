@@ -1,7 +1,8 @@
 trigger:
     - main
+    - renovate/*
 pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: ubuntu-latest
 variables:
     - group: wayland
 steps:
@@ -15,14 +16,14 @@ steps:
           npm run test
           npm run build:prod
           npm pack
-      displayName: 'Build and pack'
+      displayName: Build and pack
     - bash: |
           set -o errexit -o pipefail
           cp *.tgz "$(Build.ArtifactStagingDirectory)"
       condition: ne(variables['Build.Reason'], 'PullRequest')
-      displayName: 'Copy artifacts'
+      displayName: Copy artifacts
     - task: PublishPipelineArtifact@1
       inputs:
           targetPath: $(Build.ArtifactStagingDirectory)
-          publishLocation: 'pipeline'
-      displayName: 'Publish artifacts to artifact storage'
+          publishLocation: pipeline
+      displayName: Publish artifacts to artifact storage
