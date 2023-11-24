@@ -50,12 +50,15 @@ export default () => {
                 <Back />
                 <Skip />
                 <Next
-                    disabled={nickname.trim().length === 0}
                     onClick={next => {
-                        if (nickname.trim().length > 0) {
-                            persistNickname(device.serialNumber, nickname);
-                            usageData.sendUsageData('Set device nickname');
-                        }
+                        const newNickname = nickname.trim();
+                        persistNickname(device.serialNumber, newNickname);
+                        usageData.sendUsageData(
+                            newNickname.length > 0
+                                ? 'Set device nickname'
+                                : 'Reset device nickname'
+                        );
+
                         next();
                     }}
                 />
