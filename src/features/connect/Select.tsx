@@ -53,13 +53,13 @@ export default () => {
                         />
                     </div>
                     <p
-                        className="tw-w-44 tw-flex-shrink-0 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-pr-6 tw-text-sm"
+                        className="tw-w-44 tw-flex-shrink-0 tw-truncate tw-pr-6 tw-text-sm"
                         title={deviceName(device) || ''}
                     >
                         <b>{deviceName(device) || ''}</b>
                     </p>
                     <p
-                        className="tw-w-44 tw-overflow-hidden tw-overflow-ellipsis tw-whitespace-nowrap tw-pr-6 tw-text-xs"
+                        className="tw-w-44 tw-truncate tw-pr-6 tw-text-xs"
                         title={device.serialNumber}
                     >
                         {device.serialNumber}
