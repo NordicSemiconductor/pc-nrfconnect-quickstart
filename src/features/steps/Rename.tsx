@@ -19,10 +19,11 @@ import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
+    const previousNickname = device
+        ? getPersistedNickname(device.serialNumber)
+        : '';
 
-    const [nickname, setNickname] = React.useState(
-        device ? getPersistedNickname(device.serialNumber) : ''
-    );
+    const [nickname, setNickname] = React.useState(previousNickname);
     const maxLength = 20;
 
     return (
@@ -52,12 +53,14 @@ export default () => {
                 <Next
                     onClick={next => {
                         const newNickname = nickname.trim();
-                        persistNickname(device.serialNumber, newNickname);
-                        usageData.sendUsageData(
-                            newNickname.length > 0
-                                ? 'Set device nickname'
-                                : 'Reset device nickname'
-                        );
+                        if (newNickname !== previousNickname) {
+                            persistNickname(device.serialNumber, newNickname);
+                            usageData.sendUsageData(
+                                newNickname.length > 0
+                                    ? 'Set device nickname'
+                                    : 'Reset device nickname'
+                            );
+                        }
 
                         next();
                     }}
