@@ -27,10 +27,10 @@
                 "firmware": [
                     {
                         "core": "Modem",
-                        "file": "mfw_nrf91x1_2.0.0-77.beta.zip",
+                        "file": "mfw_nrf91x1_2.0.0.zip",
                         "link": {
-                            "label": "Firmware 2.0.0-77 beta",
-                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0-77.beta_release_notes.txt"
+                            "label": "Firmware 2.0.0",
+                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0_release_notes.txt"
                         }
                     },
                     {
@@ -54,10 +54,10 @@
                 "firmware": [
                     {
                         "core": "Modem",
-                        "file": "mfw_nrf91x1_2.0.0-77.beta.zip",
+                        "file": "mfw_nrf91x1_2.0.0.zip",
                         "link": {
-                            "label": "Firmware 2.0.0-77 beta",
-                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0-77.beta_release_notes.txt"
+                            "label": "Firmware 2.0.0",
+                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0_release_notes.txt"
                         }
                     },
                     {
@@ -81,10 +81,10 @@
                 "firmware": [
                     {
                         "core": "Modem",
-                        "file": "mfw_nrf91x1_2.0.0-77.beta.zip",
+                        "file": "mfw_nrf91x1_2.0.0.zip",
                         "link": {
-                            "label": "Firmware 2.0.0-77 beta",
-                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0-77.beta_release_notes.txt"
+                            "label": "Firmware 2.0.0",
+                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.0_release_notes.txt"
                         }
                     },
                     {
