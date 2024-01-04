@@ -100,38 +100,42 @@ export default () => {
                 }
             >
                 <div className="tw-flex tw-flex-col tw-items-start tw-justify-start tw-gap-4">
-                    {verification.map(({ title, response, copiable }) => (
-                        <div key={title}>
-                            <p>
-                                <i className="tw-font-light">{title}</i>
-                            </p>
-                            <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
-                                <p
-                                    className={
+                    {verification.map(
+                        ({ title, response, copiable = false }) => (
+                            <div key={title}>
+                                <p>
+                                    <i className="tw-font-light">{title}</i>
+                                </p>
+                                <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
+                                    <p
+                                        className={
+                                            allowVerification &&
+                                            !failed &&
+                                            response === ''
+                                                ? 'ellipsis'
+                                                : ''
+                                        }
+                                    >
+                                        {!allowVerification && '...'}
+                                        <b>
+                                            {allowVerification &&
+                                                !failed &&
+                                                response}
+                                            {allowVerification &&
+                                                failed &&
+                                                'ERROR'}
+                                        </b>
+                                    </p>
+                                    {copiable &&
                                         allowVerification &&
                                         !failed &&
-                                        response === ''
-                                            ? 'ellipsis'
-                                            : ''
-                                    }
-                                >
-                                    {!allowVerification && '...'}
-                                    <b>
-                                        {allowVerification &&
-                                            !failed &&
-                                            response}
-                                        {allowVerification && failed && 'ERROR'}
-                                    </b>
-                                </p>
-                                {copiable &&
-                                    allowVerification &&
-                                    !failed &&
-                                    response !== '' && (
-                                        <Copy copyText={response} />
-                                    )}
+                                        response !== '' && (
+                                            <Copy copyText={response} />
+                                        )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    )}
                 </div>
                 {failed && (
                     <>
