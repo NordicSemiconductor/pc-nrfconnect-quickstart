@@ -12,11 +12,11 @@ import {
     getCurrentStep,
     getFinishedLastStep,
     getSteps,
-    StepKey,
+    Step,
 } from '../features/steps/stepsSlice';
 import { useAppSelector } from './store';
 
-const stepToLabel = (step: StepKey) => {
+const stepToLabel = (step: Step) => {
     switch (step) {
         case 'info':
             return 'Info';

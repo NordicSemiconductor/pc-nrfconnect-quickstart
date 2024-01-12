@@ -7,12 +7,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
-import { OptionalStepKey } from '../device/deviceGuides';
+import { type Step as StepsExceptFinish } from '../device/deviceGuides';
 
-export type StepKey = OptionalStepKey | 'finish';
+export type Step = StepsExceptFinish | 'finish';
 
 interface State {
-    steps: StepKey[];
+    steps: Step[];
     currentStepIndex: number;
     finishedLastStep: boolean;
 }
@@ -27,7 +27,7 @@ const slice = createSlice({
     name: 'steps',
     initialState,
     reducers: {
-        setSteps: (state, action: PayloadAction<StepKey[]>) => {
+        setSteps: (state, action: PayloadAction<Step[]>) => {
             state.steps = [...action.payload, 'finish'];
         },
         goToNextStep: state => {
