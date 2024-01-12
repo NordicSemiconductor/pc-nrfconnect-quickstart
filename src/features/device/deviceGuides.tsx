@@ -205,27 +205,44 @@ export const isSupportedDevice = (device: NrfutilDevice) =>
         .map(d => d.boardVersion.toLowerCase())
         .includes(device.devkit?.boardVersion?.toLowerCase() || '');
 
-const getDeviceGuideUnsafely = (device: NrfutilDevice) =>
-    deviceGuides.find(
+const getDeviceGuide = (device: NrfutilDevice) => {
+    const deviceGuide = deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
             device.devkit?.boardVersion?.toLowerCase()
-    ) as DeviceGuide;
+    );
+    if (deviceGuide === undefined) {
+        throw new Error(
+            `Could not find device guide for device: ${device.devkit?.boardVersion}`
+        );
+    }
+    return deviceGuide;
+};
 
 export const getStepOrder = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).stepOrder;
+    getDeviceGuide(device).stepOrder;
+const getStepConfiguration = (
+    device: NrfutilDevice,
+    step: z.infer<typeof configurableSteps>
+) => {
+    const stepConfig = getDeviceGuide(device)[step];
+    if (stepConfig === undefined) {
+        throw new Error(`Could not find configuration for step: ${step}`);
+    }
+    return stepConfig;
+};
 export const getInfoStep = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).info;
+    getStepConfiguration(device, 'info') as z.infer<typeof info>;
 export const getLearnStep = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).learn;
+    getStepConfiguration(device, 'learn') as z.infer<typeof learn>;
 export const getAppsStep = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).apps;
+    getStepConfiguration(device, 'apps') as z.infer<typeof apps>;
 export const getProgramStep = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).program;
+    getStepConfiguration(device, 'program') as z.infer<typeof program>;
 export const getVerifyStep = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).verify;
+    getStepConfiguration(device, 'verify') as z.infer<typeof verify>;
 export const getEvaluateStep = (device: NrfutilDevice) =>
-    getDeviceGuideUnsafely(device).evaluate;
+    getStepConfiguration(device, 'evaluate') as z.infer<typeof evaluate>;
 
 export const deviceName = (device: NrfutilDevice) => deviceInfo(device).name;
 
