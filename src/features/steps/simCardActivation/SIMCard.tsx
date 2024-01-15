@@ -116,13 +116,13 @@ export default () => {
                         back of the SIM card.
                     </li>
                     <li>
-                        <p className="tw-inline">
+                        <div className="tw-inline">
                             Enter the <b>ICCID: </b>
                             {!startRead && (
-                                <div className="tw-inline tw-pr-4">...</div>
+                                <p className="tw-inline tw-pr-4">...</p>
                             )}
                             {startRead && (
-                                <div
+                                <p
                                     className={classNames(
                                         'tw-inline',
                                         'tw-pr-4',
@@ -132,7 +132,7 @@ export default () => {
                                     )}
                                 >
                                     {failedRead ? 'ERROR' : iccid}
-                                </div>
+                                </p>
                             )}
                             {(!startRead || failedRead) && (
                                 <span
@@ -161,7 +161,7 @@ export default () => {
                                     that are required for SIM activation.
                                 </>
                             )}
-                        </p>
+                        </div>
                     </li>
                     <li>
                         Accept the terms and the privacy policy and click{' '}
