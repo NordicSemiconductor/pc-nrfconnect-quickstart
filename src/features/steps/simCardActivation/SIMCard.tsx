@@ -61,11 +61,15 @@ export default () => {
     const delayedIccidRead = (
         sp: Awaited<ReturnType<typeof getUARTSerialPort>>
     ) =>
-        new Promise<void>(resolve => {
+        new Promise<void>((resolve, reject) => {
             setTimeout(async () => {
-                const res = await sp.sendCommand('AT%XICCID');
-                setIccid(formatIccid(res));
-                resolve();
+                try {
+                    const res = await sp.sendCommand('AT%XICCID');
+                    setIccid(formatIccid(res));
+                    resolve();
+                } catch (e) {
+                    reject();
+                }
             }, 1000);
         });
 
