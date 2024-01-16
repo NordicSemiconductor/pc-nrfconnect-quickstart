@@ -53,7 +53,5 @@ export const getCurrentStep = (state: RootState) =>
     state.steps.steps[state.steps.currentStepIndex];
 export const getFinishedLastStep = (state: RootState) =>
     state.steps.finishedLastStep;
-export const isFirstStep = (state: RootState) =>
-    state.steps.currentStepIndex === 0;
 
 export default slice.reducer;
