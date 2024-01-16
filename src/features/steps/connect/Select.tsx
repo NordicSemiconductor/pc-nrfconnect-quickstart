@@ -11,7 +11,6 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { ListItemVariant } from '../../../common/listSelect/ListSelectItem';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
@@ -22,16 +21,23 @@ import {
     getStepOrder,
     isSupportedDevice,
 } from '../../device/deviceGuides';
-import { getConnectedDevices, selectDevice } from '../../device/deviceSlice';
+import {
+    getConnectedDevices,
+    getSelectedDevice,
+    selectDevice,
+} from '../../device/deviceSlice';
 import { setSteps } from '../stepsSlice';
 
 export default () => {
     const dispatch = useAppDispatch();
     const connectedDevices = useAppSelector(getConnectedDevices);
-    const [selectedItem, setSelectedItem] = useState<ListItemVariant>();
+    const previouslySelectedDevice = useAppSelector(getSelectedDevice);
+    const [selectedSerialNumber, setSelectedSerialNumber] = useState<
+        string | undefined
+    >(previouslySelectedDevice?.serialNumber);
 
     const items = connectedDevices.map(device => {
-        const isSelected = selectedItem?.id === device.serialNumber;
+        const isSelected = selectedSerialNumber === device.serialNumber;
         const nickname = getPersistedNickname(device.serialNumber);
 
         return {
@@ -84,17 +90,21 @@ export default () => {
                     <b className="tw-w-44">Serial number</b>
                     <b>Custom name</b>
                 </div>
-                <RadioSelect items={items} onSelect={setSelectedItem} />
+                <RadioSelect
+                    items={items}
+                    onSelect={item => setSelectedSerialNumber(item.id)}
+                />
                 <div className="tw-pt-5">
                     <Searching />
                 </div>
             </Main.Content>
             <Main.Footer>
                 <Next
-                    disabled={!selectedItem}
+                    disabled={!selectedSerialNumber}
                     onClick={next => {
                         const selectedDevice = connectedDevices.find(
-                            device => device.serialNumber === selectedItem?.id
+                            device =>
+                                device.serialNumber === selectedSerialNumber
                         );
                         if (selectedDevice) {
                             dispatch(setSteps(getStepOrder(selectedDevice)));
