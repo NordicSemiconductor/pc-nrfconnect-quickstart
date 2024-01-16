@@ -7,17 +7,12 @@
 import React, { useEffect } from 'react';
 import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import Connect from '../features/connect';
 import { startWatchingDevices } from '../features/device/deviceLib';
-import {
-    addDevice,
-    getSelectedDevice,
-    removeDevice,
-} from '../features/device/deviceSlice';
+import { addDevice, removeDevice } from '../features/device/deviceSlice';
 import Steps from '../features/steps';
 import Header from './Header';
 import StepStepper from './StepStepper';
-import { useAppDispatch, useAppSelector } from './store';
+import { useAppDispatch } from './store';
 
 import './App.scss';
 
@@ -42,15 +37,13 @@ const useDevicesInStore = () => {
 export const App = () => {
     useDevicesInStore();
 
-    const selectedDevice = useAppSelector(getSelectedDevice);
-
     return (
         <div className="tw-flex tw-h-full tw-w-full tw-flex-col">
             <Header />
             <div className="tw-flex tw-h-full tw-flex-row tw-overflow-hidden">
                 <StepStepper />
                 <div className="tw-flex-1">
-                    {selectedDevice ? <Steps /> : <Connect />}
+                    <Steps />
                 </div>
             </div>
         </div>

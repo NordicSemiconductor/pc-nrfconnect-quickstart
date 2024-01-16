@@ -7,9 +7,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
-import { type Step as StepsExceptFinish } from '../device/deviceGuides';
+import { type Step as ConfigSteps } from '../device/deviceGuides';
 
-export type Step = StepsExceptFinish | 'finish';
+export type Step = 'connect' | ConfigSteps | 'finish';
 
 interface State {
     steps: Step[];
@@ -18,7 +18,7 @@ interface State {
 }
 
 const initialState: State = {
-    steps: [],
+    steps: ['connect'],
     currentStepIndex: 0,
     finishedLastStep: false,
 };
@@ -28,7 +28,7 @@ const slice = createSlice({
     initialState,
     reducers: {
         setSteps: (state, action: PayloadAction<Step[]>) => {
-            state.steps = [...action.payload, 'finish'];
+            state.steps = ['connect', ...action.payload, 'finish'];
         },
         goToNextStep: state => {
             state.currentStepIndex = Math.min(
@@ -53,7 +53,5 @@ export const getCurrentStep = (state: RootState) =>
     state.steps.steps[state.steps.currentStepIndex];
 export const getFinishedLastStep = (state: RootState) =>
     state.steps.finishedLastStep;
-export const isFirstStep = (state: RootState) =>
-    state.steps.currentStepIndex === 0;
 
 export default slice.reducer;

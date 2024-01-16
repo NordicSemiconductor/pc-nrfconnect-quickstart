@@ -8,13 +8,13 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import path from 'path';
 
-import { useAppDispatch, useAppSelector } from '../../app/store';
+import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
 import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { getImageFolder, getInfoStep } from '../device/deviceGuides';
-import { getSelectedDeviceUnsafely, selectDevice } from '../device/deviceSlice';
+import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 const overWriteA = ({
     href,
@@ -34,7 +34,6 @@ const overWriteImg = ({ src, alt }: { src?: string; alt?: string }) => (
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
-    const dispatch = useAppDispatch();
 
     return (
         <Main>
@@ -55,12 +54,7 @@ export default () => {
                 </ReactMarkdown>
             </Main.Content>
             <Main.Footer>
-                <Back
-                    onClick={back => {
-                        dispatch(selectDevice(undefined));
-                        back();
-                    }}
-                />
+                <Back />
                 <Next />
             </Main.Footer>
         </Main>

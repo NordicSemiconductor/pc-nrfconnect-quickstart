@@ -18,6 +18,8 @@ import { useAppSelector } from './store';
 
 const stepToLabel = (step: Step) => {
     switch (step) {
+        case 'connect':
+            return 'Connect';
         case 'info':
             return 'Info';
         case 'rename':
@@ -111,9 +113,10 @@ const Step = ({
 };
 
 export default () => {
-    const showStepper = !!useAppSelector(getSelectedDevice);
     const currentStep = useAppSelector(getCurrentStep);
-    const steps = useAppSelector(getSteps);
+    const showStepper = currentStep !== 'connect';
+    // `connect` step should not be shown in the stepper UI
+    const steps = useAppSelector(getSteps).filter(step => step !== 'connect');
     const currentStepIndex = steps.indexOf(currentStep);
 
     return (
