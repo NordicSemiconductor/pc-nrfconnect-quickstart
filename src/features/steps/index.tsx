@@ -9,6 +9,7 @@ import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import Apps from './Apps';
+import Connect from './connect';
 import Develop from './develop';
 import Evaluate from './Evaluate';
 import Finish from './finish';
@@ -30,6 +31,7 @@ export default () => {
 
     return (
         <>
+            {step === 'connect' && <Connect />}
             {step === 'info' && <Info />}
             {step === 'rename' && <Rename />}
             {step === 'program' && <Program />}
