@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { deviceInfo } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { NrfutilDevice } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
+import { NrfutilDevice } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 import fs from 'fs';
 import path from 'path';
 import { z } from 'zod';

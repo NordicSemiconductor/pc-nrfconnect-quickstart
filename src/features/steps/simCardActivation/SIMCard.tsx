@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
+import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
