@@ -5,7 +5,8 @@
  */
 
 import React, { useEffect } from 'react';
-import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { logger, usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { setNrfutilLogger } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
@@ -34,7 +35,12 @@ const useDevicesInStore = () => {
         };
     }, [dispatch]);
 };
+
 export const App = () => {
+    useEffect(() => {
+        logger.initialise();
+        setNrfutilLogger(logger);
+    }, []);
     useDevicesInStore();
 
     return (
