@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import {
     classNames,
     getPersistedNickname,
+    logger,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
@@ -107,8 +108,17 @@ export default () => {
                                 device.serialNumber === selectedSerialNumber
                         );
                         if (selectedDevice) {
-                            dispatch(setSteps(getStepOrder(selectedDevice)));
+                            try {
+                                dispatch(
+                                    setSteps(getStepOrder(selectedDevice))
+                                );
+                            } catch (e) {
+                                logger.error(e);
+                            }
                             dispatch(selectDevice(selectedDevice));
+                            logger.debug(
+                                `Selected device: ${deviceName(selectedDevice)}`
+                            );
                             next();
                         }
                     }}

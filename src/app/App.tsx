@@ -27,6 +27,7 @@ const useDevicesInStore = () => {
             device => dispatch(addDevice(device)),
             deviceId => dispatch(removeDevice(deviceId))
         );
+        logger.debug('Started watching devices');
 
         return () => {
             stopWatchingDevicesPromise.then(stopWatchingDevices =>
