@@ -8,6 +8,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
 import device from '../features/device/deviceSlice';
+import issue from '../features/issue/issueSlice';
 import develop from '../features/steps/develop/developSlice';
 import program from '../features/steps/program/programSlice';
 import stepsReducer from '../features/steps/stepsSlice';
@@ -16,7 +17,7 @@ const ifBuiltForDevelopment = <X>(value: X) =>
     process.env.NODE_ENV === 'development' ? value : undefined;
 
 export const store = configureStore({
-    reducer: { device, steps: stepsReducer, program, develop },
+    reducer: { device, steps: stepsReducer, program, develop, issue },
     devTools: {
         maxAge: ifBuiltForDevelopment(100),
         serialize: ifBuiltForDevelopment(true),

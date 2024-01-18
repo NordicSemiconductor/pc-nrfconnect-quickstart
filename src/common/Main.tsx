@@ -6,6 +6,8 @@
 
 import React, { ReactNode } from 'react';
 
+import Issue from '../features/issue';
+
 const Content = ({
     heading,
     subHeading,
@@ -35,10 +37,16 @@ const Footer = ({
     className?: string;
     children?: ReactNode;
 }) => (
-    <div
-        className={`tw-flex tw-flex-row tw-justify-end tw-gap-2 tw-pr-10 ${className}`}
-    >
-        {children}
+    <div className="tw-flex tw-w-full tw-flex-row tw-justify-between">
+        <div>
+            {/* This can be null which would left-align the rest of the footer if not wrapped in another div */}
+            <Issue />
+        </div>
+        <div
+            className={`tw-flex tw-flex-row tw-justify-end tw-gap-2 tw-pr-10 ${className}`}
+        >
+            {children}
+        </div>
     </div>
 );
 
