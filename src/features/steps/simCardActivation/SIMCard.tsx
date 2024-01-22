@@ -5,43 +5,28 @@
  */
 
 import React, { useState } from 'react';
-import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    classNames,
+    describeError,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 
-import { useAppSelector } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
-import Link, { DevZoneLink } from '../../../common/Link';
+import Link from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import getUARTSerialPort from '../../device/getUARTSerialPort';
-
-const invokeIfSpaceOrEnterPressed =
-    (onClick: React.KeyboardEventHandler<Element>) =>
-    (event: React.KeyboardEvent) => {
-        event.stopPropagation();
-        if (event.key === ' ' || event.key === 'Enter') {
-            onClick(event);
-        }
-    };
-
-const blurAndInvoke =
-    (
-        onClick: React.MouseEventHandler<HTMLElement>
-    ): React.MouseEventHandler<HTMLElement> =>
-    (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        event.currentTarget.blur();
-        onClick(event);
-    };
+import { clearIssue, setIssue } from '../../issue/issueSlice';
 
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [startRead, setStartRead] = useState(false);
     const [failedRead, setFailedRead] = useState(false);
-    const [failedReset, setFailedReset] = useState(false);
     const [iccid, setIccid] = useState('');
+    const dispatch = useAppDispatch();
 
     const formatIccid = (response: string) => {
         const filteredResponse = response
@@ -68,28 +53,97 @@ export default () => {
                     setIccid(formatIccid(res));
                     resolve();
                 } catch (e) {
-                    reject();
+                    reject(new Error('Failed to read ICCID'));
                 }
             }, 1000);
         });
 
     const readICCID = async () => {
+        // Reset state
+        setIccid('');
+        setFailedRead(false);
+        setStartRead(true);
+
         let sp;
         try {
             sp = await getUARTSerialPort(device);
             await sp.sendCommand('AT+CFUN=41');
+        } catch (e) {
+            sp?.unregister();
+            setFailedRead(true);
+            dispatch(
+                setIssue({
+                    level: 'error',
+                    issueContent: describeError(e),
+                    solutionContent: (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                dispatch(clearIssue());
+                                readICCID();
+                            }}
+                            className="tw-flex tw-flex-row tw-items-center tw-text-primary"
+                        >
+                            <span className="mdi mdi-arrow-right-drop-circle-outline tw-mr-1 tw-inline tw-text-base tw-leading-none tw-text-primary" />
+                            Retry reading the ICCID.
+                        </button>
+                    ),
+                })
+            );
+            return;
+        }
+
+        try {
             await delayedIccidRead(sp);
         } catch (e) {
             sp?.unregister();
             setFailedRead(true);
+            dispatch(
+                setIssue({
+                    level: 'error',
+                    issueContent: describeError(e),
+                    solutionContent: (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                dispatch(clearIssue());
+                                readICCID();
+                            }}
+                            className="tw-flex tw-flex-row tw-items-center tw-text-primary"
+                        >
+                            <span className="mdi mdi-arrow-right-drop-circle-outline tw-mr-1 tw-inline tw-text-base tw-leading-none tw-text-primary" />
+                            Retry reading the ICCID.
+                        </button>
+                    ),
+                })
+            );
             return;
         }
 
         try {
             sp.unregister();
-            reset().catch(reset);
+            reset();
         } catch (e) {
-            setFailedReset(true);
+            dispatch(
+                setIssue({
+                    level: 'warning',
+                    issueContent:
+                        'Device may need to be restarted to operate correctly.',
+                    solutionContent: (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                dispatch(clearIssue());
+                                reset().then(() => dispatch(clearIssue()));
+                            }}
+                            className="tw-flex tw-flex-row tw-items-center tw-text-primary"
+                        >
+                            <span className="mdi mdi-refresh tw-mr-1 tw-inline tw-text-base tw-leading-none tw-text-primary" />
+                            Restart the device
+                        </button>
+                    ),
+                })
+            );
         }
     };
 
@@ -139,23 +193,13 @@ export default () => {
                                 </p>
                             )}
                             {(!startRead || failedRead) && (
-                                <span
-                                    role="button"
-                                    className="mdi mdi-refresh tw-inline tw-leading-none active:tw-text-primary"
-                                    tabIndex={0}
-                                    onClick={blurAndInvoke(() => {
-                                        setIccid('');
-                                        setFailedRead(false);
-                                        setStartRead(true);
-                                        readICCID();
-                                    })}
-                                    onKeyUp={invokeIfSpaceOrEnterPressed(() => {
-                                        setIccid('');
-                                        setFailedRead(false);
-                                        setStartRead(true);
-                                        readICCID();
-                                    })}
-                                />
+                                <button
+                                    type="button"
+                                    className="tw-inline"
+                                    onClick={readICCID}
+                                >
+                                    <span className="mdi mdi-refresh tw-leading-none active:tw-text-primary" />
+                                </button>
                             )}
                             {iccid !== '' && !failedRead && startRead && (
                                 <>
@@ -172,25 +216,6 @@ export default () => {
                         <b>Activate SIM</b>.
                     </li>
                 </ol>
-                {failedRead && (
-                    <>
-                        <br />
-                        <p>
-                            Could not communicate with kit. Retry reading the
-                            ICCID.
-                        </p>
-                        <p>
-                            Contact support on <DevZoneLink /> if the problem
-                            persist.
-                        </p>
-                    </>
-                )}
-                {failedReset && (
-                    <>
-                        Warning! Device may need to be restarted to operate
-                        correctly.
-                    </>
-                )}
             </Main.Content>
             <Main.Footer>
                 <Back />
