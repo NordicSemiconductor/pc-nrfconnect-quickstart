@@ -13,6 +13,7 @@ import { z } from 'zod';
 
 import pca10090 from './pca10090.json';
 import pca10153 from './pca10153.json';
+import pca10171 from './pca10171.json';
 
 export const getFirmwareFolder = () =>
     path.resolve(__dirname, '..', 'resources', 'devices', 'firmware');
@@ -203,6 +204,7 @@ export type StepConfig<T extends Step> = T extends ConfigurableStep
 const deviceGuides: DeviceGuide[] = [
     pca10090 as DeviceGuide,
     pca10153 as DeviceGuide,
+    pca10171 as DeviceGuide,
 ];
 
 export const isSupportedDevice = (device: NrfutilDevice) =>
