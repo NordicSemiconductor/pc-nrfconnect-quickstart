@@ -1,3 +1,9 @@
+## 0.2.2 - UNRELEASED
+
+### Fixed
+
+-   Reading the ICCID value sometimes never finished.
+
 ## 0.2.1 - 2023-12-14
 
 ## Added
