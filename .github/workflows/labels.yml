@@ -12,7 +12,7 @@ on:
 
 jobs:
     check_labels:
-        uses: NordicSemiconductor/pc-nrfconnect-shared/.github/workflows/labels.yml@main
+        uses: NordicSemiconductor/pc-nrfconnect-shared/.github/workflows/labels.yml@ci/condition-format
         secrets: inherit
 
 
