@@ -112,14 +112,16 @@ export default () => {
                                 dispatch(
                                     setSteps(getStepOrder(selectedDevice))
                                 );
+                                dispatch(selectDevice(selectedDevice));
+                                logger.debug(
+                                    `Selected device: ${deviceName(
+                                        selectedDevice
+                                    )}`
+                                );
+                                next();
                             } catch (e) {
                                 logger.error(e);
                             }
-                            dispatch(selectDevice(selectedDevice));
-                            logger.debug(
-                                `Selected device: ${deviceName(selectedDevice)}`
-                            );
-                            next();
                         }
                     }}
                 />
