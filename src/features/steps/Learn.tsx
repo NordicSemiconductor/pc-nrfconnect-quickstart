@@ -11,7 +11,7 @@ import { Back } from '../../common/Back';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
 import { Resource } from '../../common/Resource';
-import { getLearnStep } from '../device/deviceGuides';
+import { getStepConfiguration } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 export default () => {
@@ -21,9 +21,11 @@ export default () => {
         <Main>
             <Main.Content heading="Recommended learning resources">
                 <div className="tw-flex tw-flex-col tw-items-start tw-justify-start tw-gap-6">
-                    {getLearnStep(device).resources.map(props => (
-                        <Resource {...props} key={props.label} />
-                    ))}
+                    {getStepConfiguration('learn', device).resources.map(
+                        props => (
+                            <Resource {...props} key={props.label} />
+                        )
+                    )}
                 </div>
             </Main.Content>
             <Main.Footer>

@@ -19,7 +19,7 @@ import { SelectableListItem } from '../../common/listSelect/ListSelectItem';
 import MultipleSelect from '../../common/listSelect/MultipleSelect';
 import Main from '../../common/Main';
 import { Next, Skip } from '../../common/Next';
-import { getAppsStep } from '../device/deviceGuides';
+import { getStepConfiguration } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 type App = DownloadableApp & {
@@ -57,7 +57,9 @@ export default () => {
                     .filter(
                         app =>
                             app.source === 'official' &&
-                            getAppsStep(device).apps.includes(app.name)
+                            getStepConfiguration('apps', device).apps.includes(
+                                app.name
+                            )
                     )
                     .map(app => ({
                         ...app,
