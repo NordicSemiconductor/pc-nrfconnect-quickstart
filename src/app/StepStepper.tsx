@@ -7,7 +7,6 @@
 import React from 'react';
 import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { getSelectedDevice } from '../features/device/deviceSlice';
 import {
     getCurrentStep,
     getFinishedLastStep,
