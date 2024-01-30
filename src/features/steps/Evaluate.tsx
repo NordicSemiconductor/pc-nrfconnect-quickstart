@@ -21,7 +21,7 @@ import { Next } from '../../common/Next';
 import { ResourceWithButton } from '../../common/Resource';
 import {
     ExternalLinkResource,
-    getEvaluateStep,
+    getStepConfiguration,
     Resource,
 } from '../device/deviceGuides';
 import {
@@ -38,7 +38,7 @@ export default () => {
     );
 
     const resources =
-        getEvaluateStep(device).resourcesPerChoice.find(
+        getStepConfiguration('evaluate', device).resourcesPerChoice.find(
             resource => resource.ref === choice.name
         )?.resources || [];
 

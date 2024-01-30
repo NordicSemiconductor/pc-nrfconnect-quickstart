@@ -35,12 +35,14 @@ const configurableSteps = z.union([
     z.literal('learn'),
     z.literal('apps'),
 ]);
+type ConfigurableStep = z.infer<typeof configurableSteps>;
 
 const nonConfigurableSteps = z.union([
     z.literal('rename'),
     z.literal('develop'),
     z.literal('sim'),
 ]);
+
 const steps = z.union([configurableSteps, nonConfigurableSteps]);
 export type Step = z.infer<typeof steps>;
 const stepOrder = z
@@ -194,6 +196,9 @@ const deviceGuideSchema = z
     );
 
 type DeviceGuide = z.infer<typeof deviceGuideSchema>;
+export type StepConfig<T extends Step> = T extends ConfigurableStep
+    ? NonNullable<DeviceGuide[T]>
+    : undefined;
 
 const deviceGuides: DeviceGuide[] = [
     pca10090 as DeviceGuide,
@@ -205,7 +210,7 @@ export const isSupportedDevice = (device: NrfutilDevice) =>
         .map(d => d.boardVersion.toLowerCase())
         .includes(device.devkit?.boardVersion?.toLowerCase() || '');
 
-const getDeviceGuide = (device: NrfutilDevice) => {
+const getDeviceGuide = (device: NrfutilDevice): DeviceGuide => {
     const deviceGuide = deviceGuides.find(
         d =>
             d.boardVersion.toLowerCase() ===
@@ -221,28 +226,22 @@ const getDeviceGuide = (device: NrfutilDevice) => {
 
 export const getStepOrder = (device: NrfutilDevice) =>
     getDeviceGuide(device).stepOrder;
-const getStepConfiguration = (
-    device: NrfutilDevice,
-    step: z.infer<typeof configurableSteps>
-) => {
-    const stepConfig = getDeviceGuide(device)[step];
-    if (stepConfig === undefined) {
-        throw new Error(`Could not find configuration for step: ${step}`);
+export const getStepConfiguration = <T extends ConfigurableStep>(
+    step: T,
+    device: NrfutilDevice
+): T extends ConfigurableStep ? NonNullable<DeviceGuide[T]> : undefined => {
+    const configurableStep = configurableSteps.safeParse(step);
+    if (configurableStep.success) {
+        const config = getDeviceGuide(device)[configurableStep.data];
+        if (config === undefined) {
+            throw new Error(`Could not find configuration for step: ${step}`);
+        }
+        // @ts-expect-error Typescript can't seem to evaluate conditionals explicitly.
+        return config;
     }
-    return stepConfig;
+    // @ts-expect-error Typescript can't seem to evaluate conditionals explicitly.
+    return undefined;
 };
-export const getInfoStep = (device: NrfutilDevice) =>
-    getStepConfiguration(device, 'info') as z.infer<typeof info>;
-export const getLearnStep = (device: NrfutilDevice) =>
-    getStepConfiguration(device, 'learn') as z.infer<typeof learn>;
-export const getAppsStep = (device: NrfutilDevice) =>
-    getStepConfiguration(device, 'apps') as z.infer<typeof apps>;
-export const getProgramStep = (device: NrfutilDevice) =>
-    getStepConfiguration(device, 'program') as z.infer<typeof program>;
-export const getVerifyStep = (device: NrfutilDevice) =>
-    getStepConfiguration(device, 'verify') as z.infer<typeof verify>;
-export const getEvaluateStep = (device: NrfutilDevice) =>
-    getStepConfiguration(device, 'evaluate') as z.infer<typeof evaluate>;
 
 export const deviceName = (device: NrfutilDevice) => deviceInfo(device).name;
 

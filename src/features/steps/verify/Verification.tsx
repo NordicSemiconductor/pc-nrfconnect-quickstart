@@ -12,7 +12,7 @@ import Copy from '../../../common/Copy';
 import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
-import { getVerifyStep } from '../../device/deviceGuides';
+import { getStepConfiguration } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import getUARTSerialPort from '../../device/getUARTSerialPort';
 
@@ -22,7 +22,7 @@ export default () => {
     const [failed, setFailed] = useState(false);
 
     const initialVerification = [
-        ...getVerifyStep(device).commands.map(command => ({
+        ...getStepConfiguration('verify', device).commands.map(command => ({
             ...command,
             response: '',
         })),
@@ -50,7 +50,10 @@ export default () => {
         getUARTSerialPort(device)
             .then(async result => {
                 const newVerification: typeof verification = [];
-                const reducedPromise = getVerifyStep(device).commands.reduce(
+                const reducedPromise = getStepConfiguration(
+                    'verify',
+                    device
+                ).commands.reduce(
                     (acc, next) =>
                         acc.then(() =>
                             result.sendCommand(next.command).then(value => {

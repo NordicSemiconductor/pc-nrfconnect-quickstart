@@ -13,7 +13,7 @@ import { Back } from '../../common/Back';
 import Link from '../../common/Link';
 import Main from '../../common/Main';
 import { Next } from '../../common/Next';
-import { getImageFolder, getInfoStep } from '../device/deviceGuides';
+import { getImageFolder, getStepConfiguration } from '../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../device/deviceSlice';
 
 const overWriteA = ({
@@ -37,7 +37,7 @@ export default () => {
 
     return (
         <Main>
-            <Main.Content heading={getInfoStep(device).title}>
+            <Main.Content heading={getStepConfiguration('info', device).title}>
                 <ReactMarkdown
                     components={{
                         a: overWriteA,
@@ -50,7 +50,7 @@ export default () => {
                             : path.join(getImageFolder(), src)
                     }
                 >
-                    {getInfoStep(device).markdownContent}
+                    {getStepConfiguration('info', device).markdownContent}
                 </ReactMarkdown>
             </Main.Content>
             <Main.Footer>
