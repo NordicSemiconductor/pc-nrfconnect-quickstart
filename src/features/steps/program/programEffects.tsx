@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { type AppThunk } from '../../../app/store';
+import { type AppThunk, RootState } from '../../../app/store';
 import { program, reset } from '../../device/deviceLib';
 import {
     getChoiceUnsafely,
@@ -21,16 +21,17 @@ import {
     setResetProgress,
 } from './programSlice';
 
-const checkDeviceConnected = (): AppThunk => (dispatch, getState) => {
-    const deviceConnected = selectedDeviceIsConnected(getState());
-    if (!deviceConnected) {
-        dispatch(setProgrammingState(ProgrammingState.NO_DEVICE_CONNECTED));
-    }
-    return deviceConnected;
-};
+const checkDeviceConnected =
+    (): AppThunk<RootState, boolean> => (dispatch, getState) => {
+        const deviceConnected = selectedDeviceIsConnected(getState());
+        if (!deviceConnected) {
+            dispatch(setProgrammingState(ProgrammingState.NO_DEVICE_CONNECTED));
+        }
+        return deviceConnected;
+    };
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
-    if (!checkDeviceConnected()) return;
+    if (!dispatch(checkDeviceConnected())) return;
 
     const device = getSelectedDeviceUnsafely(getState());
     const firmware = getChoiceUnsafely(getState()).firmware;
