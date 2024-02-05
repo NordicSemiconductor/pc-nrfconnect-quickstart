@@ -57,7 +57,7 @@ export default () => {
                 />
                 <Skip />
                 <Next
-                    label={resetFailed ? 'Retry' : 'Reset'}
+                    label={resetFailed ? 'Reset' : 'Retry'}
                     onClick={() => {
                         if (resetFailed) {
                             dispatch(resetDevice());

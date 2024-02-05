@@ -1,8 +1,13 @@
 ## 0.2.2 - UNRELEASED
 
+### Added
+
+-   `Program` step now ensures that device is connected before programming.
+
 ### Fixed
 
 -   Reading the ICCID value sometimes never finished.
+-   Incorrect button label when failing to program.
 
 ## 0.2.1 - 2023-12-14
 
