@@ -7,7 +7,7 @@
 import React from 'react';
 import {
     classNames,
-    usageData,
+    telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 export const DevZoneLink = () => (
@@ -32,7 +32,7 @@ const Link = ({
         rel="noreferrer noopener"
         href={href}
         onClick={event => {
-            usageData.sendUsageData('Visiting link', { href });
+            telemetry.sendEvent('Visiting link', { href });
             event.stopPropagation();
         }}
         className={classNames('tw-underline', color, `hover:${color}`)}

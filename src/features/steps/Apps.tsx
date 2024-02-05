@@ -10,7 +10,7 @@ import {
     deviceInfo,
     DownloadableApp,
     Spinner,
-    usageData,
+    telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
@@ -144,10 +144,9 @@ export default () => {
                                                     : a
                                             )
                                         );
-                                        usageData.sendUsageData(
-                                            'Installing app',
-                                            { app }
-                                        );
+                                        telemetry.sendEvent('Installing app', {
+                                            app,
+                                        });
                                         installApp(app);
                                     }
                                 })

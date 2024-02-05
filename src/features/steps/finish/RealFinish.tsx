@@ -9,7 +9,7 @@ import { getCurrentWindow } from '@electron/remote';
 import {
     deviceInfo,
     openWindow,
-    usageData,
+    telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
@@ -38,7 +38,7 @@ export default ({ back }: { back: () => void }) => {
                 <Next
                     label="Close"
                     onClick={() => {
-                        usageData.sendUsageData('Exit quick start');
+                        telemetry.sendEvent('Exit quick start');
                         openWindow.openLauncher();
                         getCurrentWindow().close();
                     }}

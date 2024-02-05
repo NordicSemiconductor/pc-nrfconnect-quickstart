@@ -7,7 +7,7 @@
 import React from 'react';
 import {
     deviceInfo,
-    usageData,
+    telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { selectFirmwareWithoutProgrammingOption } from '../../../app/devOptions';
@@ -105,7 +105,7 @@ export default () => {
                     onClick={() => {
                         if (!selected) return;
 
-                        usageData.sendUsageData('Select firmware', {
+                        telemetry.sendEvent('Select firmware', {
                             fwName: selected.name,
                             deviceName:
                                 deviceInfo(device).name ?? 'Unknown device',
