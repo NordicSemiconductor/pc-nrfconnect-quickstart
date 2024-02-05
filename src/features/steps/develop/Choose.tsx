@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { telemetry } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import vscodeIcon from '../../../../resources/vscode.svg';
 import vscodeAltIcon from '../../../../resources/vscode-alt.svg';
@@ -95,7 +95,7 @@ export default () => {
                             return;
                         }
 
-                        usageData.sendUsageData('Selected developing option', {
+                        telemetry.sendEvent('Selected developing option', {
                             option: selected.id,
                         });
 

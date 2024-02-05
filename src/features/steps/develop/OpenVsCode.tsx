@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { openUrl, usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { openUrl, telemetry } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import logo from '../../../../resources/nrf_connect_for_vs_code.svg';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
@@ -67,7 +67,7 @@ export default () => {
                         );
 
                         dispatch(setDevelopState(DevelopState.VS_CODE_OPENED));
-                        usageData.sendUsageData('Opened VS Code');
+                        telemetry.sendEvent('Opened VS Code');
                     }}
                 />
             </Main.Footer>

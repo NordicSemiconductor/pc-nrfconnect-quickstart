@@ -8,7 +8,7 @@ import React from 'react';
 import {
     getPersistedNickname,
     persistNickname,
-    usageData,
+    telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
@@ -55,7 +55,7 @@ export default () => {
                         const newNickname = nickname.trim();
                         if (newNickname !== previousNickname) {
                             persistNickname(device.serialNumber, newNickname);
-                            usageData.sendUsageData(
+                            telemetry.sendEvent(
                                 newNickname.length > 0
                                     ? 'Set device nickname'
                                     : 'Reset device nickname'

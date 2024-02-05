@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { logger, usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { logger, telemetry } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
 import Apps from './Apps';
@@ -27,7 +27,7 @@ export default () => {
     // Telemetry when user changes step
     useEffect(() => {
         logger.debug(`Changed step: ${step}`);
-        usageData.sendUsageData('Changed step', { step });
+        telemetry.sendEvent('Changed step', { step });
     }, [step]);
 
     return (

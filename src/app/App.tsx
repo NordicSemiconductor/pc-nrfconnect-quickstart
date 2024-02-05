@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { logger, usageData } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { logger, telemetry } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { setNrfutilLogger } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 
 import { startWatchingDevices } from '../features/device/deviceLib';
@@ -17,7 +17,7 @@ import { useAppDispatch } from './store';
 
 import './App.scss';
 
-usageData.enableTelemetry();
+telemetry.enableTelemetry();
 
 const useDevicesInStore = () => {
     const dispatch = useAppDispatch();

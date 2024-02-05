@@ -11,7 +11,7 @@ import {
     openUrl,
     openWindow,
     Spinner,
-    usageData,
+    telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../app/store';
@@ -81,7 +81,7 @@ export default () => {
                             }
                             onClick={async () => {
                                 if (isExternalLinkResource(resource)) {
-                                    usageData.sendUsageData(
+                                    telemetry.sendEvent(
                                         'Opened evaluation link',
                                         {
                                             link: resource.link.href,
@@ -99,7 +99,7 @@ export default () => {
                                             )
                                         );
 
-                                    usageData.sendUsageData(
+                                    telemetry.sendEvent(
                                         'Opened evaluation app',
                                         {
                                             app: resource.app,
