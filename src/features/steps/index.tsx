@@ -17,7 +17,7 @@ import Info from './Info';
 import Learn from './Learn';
 import Program from './program';
 import Rename from './Rename';
-import SimCardActivation from './simCardActivation';
+import SimCardActivation from './SIMCard';
 import { getCurrentStep } from './stepsSlice';
 import Verify from './verify';
 

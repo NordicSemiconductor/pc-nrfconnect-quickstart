@@ -28,7 +28,7 @@ const stepToLabel = (step: Step) => {
         case 'verify':
             return 'Verify';
         case 'sim':
-            return 'SIM Setup';
+            return 'SIM';
         case 'evaluate':
             return 'Evaluate';
         case 'develop':
