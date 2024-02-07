@@ -85,9 +85,6 @@ const slice = createSlice({
 
             state.firmwareWithProgress = updatedFirmwareWithProgress;
         },
-        setProgrammingError: (state, action: PayloadAction<unknown>) => {
-            state.programmingError = action.payload;
-        },
     },
 });
 
@@ -96,15 +93,12 @@ export const {
     setResetProgress,
     prepareProgramming,
     setProgrammingProgress,
-    setProgrammingError,
 } = slice.actions;
 
 export const getProgrammingState = (state: RootState) =>
     state.program.programmingState;
 export const getProgrammingProgress = (state: RootState) =>
     state.program.firmwareWithProgress;
-export const getProgrammingError = (state: RootState) =>
-    state.program.programmingError;
 export const getResetProgress = (state: RootState) =>
     state.program.resetProgress;
 
