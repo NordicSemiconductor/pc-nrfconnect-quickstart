@@ -9,17 +9,31 @@ import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
-import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
+import NoticeBox from '../../../common/NoticeBox';
 import { getStepConfiguration } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import getUARTSerialPort from '../../device/getUARTSerialPort';
 
+const formatResponse = (response: string, responseRegex: RegExp) => {
+    const filteredResponse = response
+        .split('\n')
+        .filter(line => !!line.trim() && line.trim() !== 'OK')
+        .join('')
+        .trim();
+
+    const [, match] = filteredResponse.match(responseRegex) ?? [];
+
+    return match;
+};
+
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
-    const [allowVerification, setAllowVerification] = useState(false);
-    const [failed, setFailed] = useState(false);
+    const [verificationStarted, setVerificationStarted] = useState(false);
+    const [connectFailed, setConnectFailed] = useState(false);
+    const [readFailed, setReadFailed] = useState(false);
+    const failed = connectFailed || readFailed;
 
     const initialVerification = [
         ...getStepConfiguration('verify', device).commands.map(command => ({
@@ -34,56 +48,54 @@ export default () => {
         ({ response }) => response !== ''
     );
 
-    const formatResponse = (response: string, responseRegex: RegExp) => {
-        const filteredResponse = response
-            .split('\n')
-            .filter(line => !!line.trim() && line.trim() !== 'OK')
-            .join('')
-            .trim();
+    const runVerification = async () => {
+        setVerification(initialVerification);
+        setReadFailed(false);
+        setVerificationStarted(true);
+        let serialPort: Awaited<ReturnType<typeof getUARTSerialPort>>;
+        try {
+            serialPort = await getUARTSerialPort(device);
+        } catch (error) {
+            setConnectFailed(true);
+            return;
+        }
 
-        const [, match] = filteredResponse.match(responseRegex) ?? [];
+        const newVerification: typeof verification = [];
+        const reducedPromise = getStepConfiguration(
+            'verify',
+            device
+        ).commands.reduce(
+            (acc, next) =>
+                acc.then(() =>
+                    serialPort.sendCommand(next.command).then(value => {
+                        newVerification.push({
+                            ...next,
+                            response: formatResponse(
+                                value,
+                                new RegExp(next.responseRegex)
+                            ),
+                        });
 
-        return match;
-    };
+                        return Promise.resolve();
+                    })
+                ),
+            Promise.resolve()
+        );
+        try {
+            await reducedPromise;
 
-    const runVerification = () => {
-        getUARTSerialPort(device)
-            .then(async result => {
-                const newVerification: typeof verification = [];
-                const reducedPromise = getStepConfiguration(
-                    'verify',
-                    device
-                ).commands.reduce(
-                    (acc, next) =>
-                        acc.then(() =>
-                            result.sendCommand(next.command).then(value => {
-                                newVerification.push({
-                                    ...next,
-                                    response: formatResponse(
-                                        value,
-                                        new RegExp(next.responseRegex)
-                                    ),
-                                });
-
-                                return Promise.resolve();
-                            })
-                        ),
-                    Promise.resolve()
-                );
-
-                await reducedPromise;
-
-                setVerification(newVerification);
-                result.unregister();
-            })
-            .catch(() => setFailed(true));
+            setVerification(newVerification);
+            serialPort.unregister();
+        } catch (error) {
+            setReadFailed(true);
+        }
     };
 
     const getHeading = () => {
-        if (!allowVerification) {
+        if (!verificationStarted) {
             return 'Verify';
         }
-        if (failed) {
+        if (readFailed || connectFailed) {
             return 'Verification failed';
         }
         if (gotAllResponses) {
@@ -97,7 +109,7 @@ export default () => {
             <Main.Content
                 heading={getHeading()}
                 subHeading={
-                    !allowVerification
+                    !verificationStarted
                         ? 'Automatically verify kit communication with AT commands.'
                         : ''
                 }
@@ -112,25 +124,22 @@ export default () => {
                                 <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
                                     <p
                                         className={
-                                            allowVerification &&
+                                            verificationStarted &&
                                             !failed &&
                                             response === ''
                                                 ? 'ellipsis'
                                                 : ''
                                         }
                                     >
-                                        {!allowVerification && '...'}
-                                        <b>
-                                            {allowVerification &&
-                                                !failed &&
-                                                response}
-                                            {allowVerification &&
-                                                failed &&
-                                                'ERROR'}
-                                        </b>
+                                        {!verificationStarted && '...'}
+                                        {verificationStarted && (
+                                            <b>
+                                                {!failed ? response : 'ERROR'}
+                                            </b>
+                                        )}
                                     </p>
                                     {copiable &&
-                                        allowVerification &&
+                                        verificationStarted &&
                                         !failed &&
                                         response !== '' && (
                                             <Copy copyText={response} />
@@ -141,31 +150,29 @@ export default () => {
                     )}
                 </div>
                 {failed && (
-                    <>
-                        <br />
-                        <br />
-                        <p>Could not communicate with the kit.</p>
-                        <br />
-                        <p>
-                            Contact support on <DevZoneLink /> if the problem
-                            persist.
-                        </p>
-                    </>
+                    <div className="tw-pt-8">
+                        <NoticeBox
+                            mdiIcon="mdi-lightbulb-alert-outline"
+                            color="tw-text-red"
+                            title={
+                                readFailed
+                                    ? 'Failed to read '
+                                    : 'Verification failed'
+                            }
+                        />
+                    </div>
                 )}
             </Main.Content>
             <Main.Footer>
                 <Back />
                 <Skip />
-                {allowVerification && !failed && (
+                {verificationStarted && !failed && (
                     <Next disabled={!gotAllResponses} />
                 )}
-                {(!allowVerification || failed) && (
+                {(!verificationStarted || failed) && (
                     <Next
                         label={failed ? 'Retry' : 'Verify'}
                         onClick={() => {
-                            setVerification(initialVerification);
-                            setFailed(false);
-                            setAllowVerification(true);
                             runVerification();
                         }}
                     />

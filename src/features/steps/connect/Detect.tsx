@@ -7,8 +7,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../../app/store';
-import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
+import NoticeBox from '../../../common/NoticeBox';
 import Searching from '../../../common/Searching';
 import { getConnectedDevices } from '../../device/deviceSlice';
 
@@ -40,16 +40,12 @@ export default () => {
                 <>
                     <Searching />
                     {longSearchDuration && (
-                        <div>
-                            <br />
-                            <br />
-                            <br />
-                            <p>Detection is taking longer than expected.</p>
-                            <br />
-                            <p>
-                                Contact support on <DevZoneLink /> if the
-                                problem persists.
-                            </p>
+                        <div className="tw-pt-8">
+                            <NoticeBox
+                                mdiIcon="mdi-clock-alert-outline"
+                                color="tw-text-primary"
+                                title="Detection is taking longer than expected"
+                            />
                         </div>
                     )}
                 </>
