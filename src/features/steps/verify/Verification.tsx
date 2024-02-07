@@ -5,6 +5,10 @@
  */
 
 import React, { useState } from 'react';
+import {
+    describeError,
+    logger,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
@@ -31,9 +35,7 @@ const formatResponse = (response: string, responseRegex: RegExp) => {
 export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [verificationStarted, setVerificationStarted] = useState(false);
-    const [connectFailed, setConnectFailed] = useState(false);
-    const [readFailed, setReadFailed] = useState(false);
-    const failed = connectFailed || readFailed;
+    const [failed, setFailed] = useState(false);
 
     const initialVerification = [
         ...getStepConfiguration('verify', device).commands.map(command => ({
@@ -50,13 +52,14 @@ export default () => {
 
     const runVerification = async () => {
         setVerification(initialVerification);
-        setReadFailed(false);
+        setFailed(false);
         setVerificationStarted(true);
         let serialPort: Awaited<ReturnType<typeof getUARTSerialPort>>;
         try {
             serialPort = await getUARTSerialPort(device);
         } catch (error) {
-            setConnectFailed(true);
+            logger.error(describeError(error));
+            setFailed(true);
             return;
         }
 
@@ -86,8 +89,9 @@ export default () => {
 
             setVerification(newVerification);
             serialPort.unregister();
-        } catch (error) {
-            setReadFailed(true);
+        } catch (e) {
+            logger.error('Received ERROR as return value from AT command');
+            setFailed(true);
         }
     };
 
@@ -95,7 +99,7 @@ export default () => {
         if (!verificationStarted) {
             return 'Verify';
         }
-        if (readFailed || connectFailed) {
+        if (failed) {
             return 'Verification failed';
         }
         if (gotAllResponses) {
@@ -154,11 +158,7 @@ export default () => {
                         <NoticeBox
                             mdiIcon="mdi-lightbulb-alert-outline"
                             color="tw-text-red"
-                            title={
-                                readFailed
-                                    ? 'Failed to read '
-                                    : 'Verification failed'
-                            }
+                            title="Failed to verify device"
                         />
                     </div>
                 )}
