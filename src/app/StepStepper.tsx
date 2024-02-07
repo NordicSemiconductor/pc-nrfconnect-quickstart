@@ -80,7 +80,7 @@ const Step = ({
                             relativeToCurrent <= 0
                                 ? 'tw-text-gray-200'
                                 : 'tw-text-gray-500',
-                            'mdi mdi-circle tw-relative tw-top-0.5 tw-z-0 tw-text-xl tw-leading-none'
+                            'mdi mdi-circle tw-relative tw-top-0.5 tw-z-0 tw-text-xl/5'
                         )}
                     />
                     {relativeToCurrent <= 0 && (

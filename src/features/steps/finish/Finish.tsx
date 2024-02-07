@@ -31,7 +31,7 @@ export default ({ next }: { next: () => void }) => {
                 subHeading={`You completed all steps for the ${deviceName}`}
             >
                 <div className="tw-flex tw-flex-col">
-                    <span className="mdi mdi-flag-checkered tw-text-8xl tw-leading-none tw-text-gray-700" />
+                    <span className="mdi mdi-flag-checkered tw-text-8xl/[6rem] tw-text-gray-700" />
                     <div className="tw-pt-10">
                         <Italic>
                             Did you find the information you expected?

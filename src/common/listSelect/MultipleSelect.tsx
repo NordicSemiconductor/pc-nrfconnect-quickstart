@@ -32,7 +32,7 @@ const MultipleSelectListItem = ({
                     selected
                         ? 'mdi-square-circle tw-text-gray-50'
                         : 'mdi-square-outline tw-text-primary',
-                    `mdi tw-text-xl tw-leading-none`
+                    `mdi tw-text-xl/5`
                 )}
             />
         }
