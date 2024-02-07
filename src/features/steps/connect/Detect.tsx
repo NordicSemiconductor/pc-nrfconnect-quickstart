@@ -35,7 +35,7 @@ export default () => {
         <Main>
             <Main.Content
                 heading="Detect"
-                subHeading="Connect Nordic development kit to your PC."
+                subHeading="Connect a Nordic development kit to your PC."
             >
                 <>
                     <Searching />
