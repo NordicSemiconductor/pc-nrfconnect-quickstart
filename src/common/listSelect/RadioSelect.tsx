@@ -32,7 +32,7 @@ const RadioSelectListItem = ({
                     selected
                         ? 'mdi-radiobox-marked tw-text-gray-50'
                         : 'mdi-radiobox-blank tw-text-primary',
-                    `mdi tw-text-xl tw-leading-none`
+                    `mdi tw-text-xl/5`
                 )}
             />
         }
