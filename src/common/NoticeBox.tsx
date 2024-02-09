@@ -25,15 +25,16 @@ export default ({
         <div>
             <b>{title}</b>
             <p>
-                Contact support on <DevZoneLink /> if the problem persists.
+                Contact support on <DevZoneLink /> and provide the{' '}
                 <button
                     type="button"
                     className="tw-inline tw-h-min tw-p-0 tw-text-primary"
                     onClick={() => logger.openLogFileLocation()}
                 >
-                    <span className="mdi mdi-text-box tw-mr-1 tw-align-middle tw-text-base tw-leading-none" />
+                    <span className="mdi mdi-text-box tw-mr-0.5 tw-text-base tw-leading-none" />
                     Log
-                </button>
+                </button>{' '}
+                if the problem persists.
             </p>
         </div>
     </div>

@@ -4,6 +4,10 @@
 
 -   `Program` step now ensures that device is connected before programming.
 
+### Changed
+
+-   Improved error/notice UI.
+
 ### Fixed
 
 -   Reading the ICCID value sometimes never finished.
