@@ -7,33 +7,12 @@
 import React from 'react';
 import { clipboard } from 'electron';
 
-const invokeIfSpaceOrEnterPressed =
-    (onClick: React.KeyboardEventHandler<Element>) =>
-    (event: React.KeyboardEvent) => {
-        event.stopPropagation();
-        if (event.key === ' ' || event.key === 'Enter') {
-            onClick(event);
-        }
-    };
-
-const blurAndInvoke =
-    (
-        onClick: React.MouseEventHandler<HTMLElement>
-    ): React.MouseEventHandler<HTMLElement> =>
-    (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-        event.currentTarget.blur();
-        onClick(event);
-    };
-
 export default ({ copyText }: { copyText: string }) => (
-    <span
-        role="button"
-        className="mdi mdi-content-copy tw-inline tw-leading-none active:tw-text-primary"
-        tabIndex={0}
-        onClick={blurAndInvoke(() => clipboard.writeText(copyText))}
-        onKeyUp={invokeIfSpaceOrEnterPressed(() =>
-            clipboard.writeText(copyText)
-        )}
-    />
+    <button
+        type="button"
+        className="tw-inline tw-h-min tw-p-0"
+        onClick={() => clipboard.writeText(copyText)}
+    >
+        <span className="mdi mdi-content-copy tw-inline tw-leading-none active:tw-text-primary" />
+    </button>
 );
