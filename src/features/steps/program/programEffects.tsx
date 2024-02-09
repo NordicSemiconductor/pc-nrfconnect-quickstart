@@ -15,7 +15,6 @@ import {
     prepareProgramming,
     ProgrammingState,
     ResetProgress,
-    setProgrammingError,
     setProgrammingProgress,
     setProgrammingState,
     setResetProgress,
@@ -46,10 +45,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
         resetProgress => dispatch(setResetProgress(resetProgress))
     )
         .then(() => dispatch(setProgrammingState(ProgrammingState.SUCCESS)))
-        .catch(error => {
-            dispatch(setProgrammingError(error));
-            dispatch(setProgrammingState(ProgrammingState.ERROR));
-        });
+        .catch(() => dispatch(setProgrammingState(ProgrammingState.ERROR)));
 };
 
 export const resetDevice = (): AppThunk => (dispatch, getState) => {
@@ -64,8 +60,5 @@ export const resetDevice = (): AppThunk => (dispatch, getState) => {
             dispatch(setResetProgress(ResetProgress.FINISHED));
             dispatch(setProgrammingState(ProgrammingState.SUCCESS));
         })
-        .catch(error => {
-            dispatch(setProgrammingError(error));
-            dispatch(setProgrammingState(ProgrammingState.ERROR));
-        });
+        .catch(() => dispatch(setProgrammingState(ProgrammingState.ERROR)));
 };

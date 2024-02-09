@@ -5,16 +5,14 @@
  */
 
 import React from 'react';
-import { describeError } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
-import { DevZoneLink } from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
+import NoticeBox from '../../../common/NoticeBox';
 import { resetDevice, startProgramming } from './programEffects';
 import {
-    getProgrammingError,
     getProgrammingProgress,
     ProgrammingState,
     setProgrammingState,
@@ -23,7 +21,6 @@ import ProgressIndicators from './ProgressIndicators';
 
 export default () => {
     const dispatch = useAppDispatch();
-    const error = useAppSelector(getProgrammingError);
     const failedCore = useAppSelector(getProgrammingProgress).find(
         p => (p.progress?.totalProgressPercentage || 0) < 100
     )?.core;
@@ -34,15 +31,19 @@ export default () => {
             <Main.Content heading="Programming failed">
                 <ProgressIndicators />
                 <div className="tw-pt-8">
-                    <p>
-                        {resetFailed
-                            ? 'Failed to reset the device. '
-                            : `Failed to program the ${failedCore} core. `}
-                        Contact support on <DevZoneLink /> if the problem
-                        persists.
-                    </p>
-                    <br />
-                    <p className="tw-select-text">{describeError(error)}</p>
+                    <NoticeBox
+                        mdiIcon={
+                            resetFailed
+                                ? 'mdi-restore-alert'
+                                : 'mdi-flash-alert-outline'
+                        }
+                        color="tw-text-red"
+                        title={
+                            resetFailed
+                                ? 'Failed to reset the device'
+                                : `Failed to program the ${failedCore} core`
+                        }
+                    />
                 </div>
             </Main.Content>
             <Main.Footer>
