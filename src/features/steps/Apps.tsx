@@ -9,9 +9,11 @@ import {
     apps,
     deviceInfo,
     DownloadableApp,
+    logger,
     Spinner,
     telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import describeError from '@nordicsemiconductor/pc-nrfconnect-shared/src/logging/describeError';
 
 import { useAppSelector } from '../../app/store';
 import { Back } from '../../common/Back';
@@ -95,7 +97,7 @@ export default () => {
                     )
                 )
             )
-            .catch(e => console.error(e));
+            .catch(e => logger.error(describeError(e)));
     };
 
     const anySelected = recommendedApps.some(app => app.selected);
