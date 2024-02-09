@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import { logger } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import {
     DeviceTraits,
@@ -43,7 +44,7 @@ export const startWatchingDevices = async (
         requiredTraits,
         initialDevices =>
             initialDevices.filter(hasSerialNumber).forEach(onDeviceArrived),
-        console.log,
+        logger.debug,
         {
             onDeviceArrived: device =>
                 hasSerialnumber(device) && onDeviceArrived(device),

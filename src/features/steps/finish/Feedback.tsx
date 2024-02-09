@@ -5,7 +5,11 @@
  */
 
 import React, { useState } from 'react';
-import { sendFeedback } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    describeError,
+    logger,
+    sendFeedback,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { Back } from '../../../common/Back';
 import { DevZoneLink } from '../../../common/Link';
@@ -43,7 +47,7 @@ export default ({ back, next }: { back: () => void; next: () => void }) => {
                         try {
                             sendFeedback(feedback);
                         } catch (e) {
-                            console.error(e);
+                            logger.error(describeError(e));
                         }
 
                         next();
