@@ -31,6 +31,7 @@ const Link = ({
         target="_blank"
         rel="noreferrer noopener"
         href={href}
+        title={href}
         onClick={event => {
             telemetry.sendEvent('Visiting link', { href });
             event.stopPropagation();
