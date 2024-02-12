@@ -43,7 +43,7 @@ export default () => (
                 <li>
                     <Link
                         label="Activate SIM card"
-                        href="nrfcloud.com/#/add-device/sim/verify"
+                        href="https://nrfcloud.com/#/add-device/sim/verify"
                         color="tw-text-primary"
                     />
                     .
