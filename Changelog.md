@@ -1,7 +1,8 @@
-## 0.2.2 - UNRELEASED
+## 0.2.1 - UNRELEASED
 
 ### Added
 
+-   Better usage data.
 -   `Program` step now ensures that device is connected before programming.
 
 ### Changed
@@ -12,12 +13,6 @@
 
 -   Reading the ICCID value sometimes never finished.
 -   Incorrect button label when failing to program.
-
-## 0.2.1 - 2023-12-14
-
-## Added
-
--   Better usage data.
 
 ## 0.2.0 - 2023-12-07
 

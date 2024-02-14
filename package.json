@@ -17,8 +17,7 @@
     "nrfConnectForDesktop": {
         "supportedDevices": [
             "PCA10090",
-            "PCA10153",
-            "PCA10171"
+            "PCA10153"
         ],
         "html": "dist/index.html",
         "nrfutil": {
