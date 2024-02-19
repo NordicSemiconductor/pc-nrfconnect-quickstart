@@ -133,7 +133,7 @@
                         "links": [
                             {
                                 "label": "AT Commands reference manual",
-                                "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html"
+                                "href": "https://infocenter.nordicsemi.com/topic/ref_at_commands_nrf91x1/REF/at_commands/intro_nrf91x1.html"
                             },
                             {
                                 "label": "IP AT Commands Documentation",
@@ -177,7 +177,7 @@
                             },
                             {
                                 "label": "AT Commands reference manual",
-                                "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro.html"
+                                "href": "https://infocenter.nordicsemi.com/topic/ref_at_commands_nrf91x1/REF/at_commands/intro_nrf91x1.html"
                             }
                         ]
                     },
