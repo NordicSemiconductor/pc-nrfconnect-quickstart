@@ -2,6 +2,7 @@
 
 ### Added
 
+-   Support for nRF9151 DK.
 -   Better usage data.
 -   `Program` step now ensures that device is connected before programming.
 
