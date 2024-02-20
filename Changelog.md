@@ -1,7 +1,8 @@
-## 0.2.1 - UNRELEASED
+## 0.2.1 - 2024-01-20
 
 ### Added
 
+-   Support for nRF9151 DK.
 -   Better usage data.
 -   `Program` step now ensures that device is connected before programming.
 
