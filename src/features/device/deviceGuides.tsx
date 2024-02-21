@@ -78,6 +78,7 @@ const choice = z.object({
     description: z.string(),
     documentation: link,
     firmware: z.array(firmware),
+    sampleSource: z.string(),
 });
 
 export type Choice = z.infer<typeof choice>;
