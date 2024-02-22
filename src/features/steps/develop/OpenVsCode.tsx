@@ -13,12 +13,28 @@ import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
 import {
+    getChoiceUnsafely,
+    getSelectedDeviceUnsafely,
+} from '../../device/deviceSlice';
+import {
     DevelopState,
     getIsVsCodeInstalled,
     setDevelopState,
 } from './developSlice';
 import { detectVsCodeRepeatedly } from './vsCodeEffects';
 import VsCodeNotInstalled from './VsCodeNotInstalled';
+
+const valueIsDefined = (
+    paramValuePair: [string, string | undefined | null]
+): paramValuePair is [string, string] => paramValuePair[1] != null;
+
+export const queryParamsString = (
+    queryParams: Record<string, string | undefined | null>
+) =>
+    Object.entries(queryParams)
+        .filter(valueIsDefined)
+        .map(([param, value]) => `${param}=${encodeURIComponent(value)}`)
+        .join('&');
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -32,6 +48,9 @@ export default () => {
     if (!isVsCodeInstalled) {
         return <VsCodeNotInstalled />;
     }
+
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    const sample = useAppSelector(getChoiceUnsafely).sampleSource;
 
     return (
         <Main>
@@ -63,7 +82,13 @@ export default () => {
                     label="Open VS Code with extension"
                     onClick={() => {
                         openUrl(
-                            'vscode://nordic-semiconductor.nrf-connect-extension-pack/quickstart'
+                            `vscode://nordic-semiconductor.nrf-connect-extension-pack/quickstart?${queryParamsString(
+                                {
+                                    deviceSerial: device.serialNumber,
+                                    deviceType: device.devkit?.boardVersion,
+                                    sample,
+                                }
+                            )}`
                         );
 
                         dispatch(setDevelopState(DevelopState.VS_CODE_OPENED));
