@@ -1,3 +1,9 @@
+## 0.2.2 - 2024-02-23
+
+### Changed
+
+-   Lowered supported nRF Connect for Desktop version to 4.4.0.
+
 ## 0.2.1 - 2024-02-21
 
 ### Added
