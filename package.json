@@ -1,6 +1,6 @@
 {
     "name": "pc-nrfconnect-quickstart",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Get started with a new Nordic Semiconductor device",
     "displayName": "Quick Start",
     "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-quickstart",
@@ -11,7 +11,7 @@
     "author": "Nordic Semiconductor ASA",
     "license": "SEE LICENSE IN LICENSE",
     "engines": {
-        "nrfconnect": ">=4.4.0"
+        "nrfconnect": ">=4.4.1"
     },
     "main": "dist/bundle.js",
     "nrfConnectForDesktop": {
