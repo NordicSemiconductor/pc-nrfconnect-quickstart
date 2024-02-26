@@ -1,3 +1,9 @@
+## 0.2.3 - UNRELEASED
+
+### Changed
+
+-   Increased required nRF Connect for Desktop version to 4.4.1.
+
 ## 0.2.2 - 2024-02-23
 
 ### Changed
