@@ -165,7 +165,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                <Skip />
+                {verificationStarted && !failed && gotAllResponses && <Skip />}
                 {verificationStarted && !failed && (
                     <Next disabled={!gotAllResponses} />
                 )}
