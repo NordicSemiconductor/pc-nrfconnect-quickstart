@@ -9,7 +9,29 @@ import { logger } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { DevZoneLink } from './Link';
 
-export default ({
+export const Box = ({
+    mdiIcon,
+    color,
+    title,
+    content,
+}: {
+    mdiIcon: string;
+    color: string;
+    title: string;
+    content: React.ReactNode;
+}) => (
+    <div className="tw-flex tw-flex-row tw-items-center tw-gap-4 tw-bg-gray-50 tw-p-4 tw-text-gray-700">
+        <span
+            className={`mdi ${mdiIcon} ${color} tw-align-middle tw-text-4xl/9`}
+        />
+        <div>
+            <b>{title}</b>
+            {content}
+        </div>
+    </div>
+);
+
+export const IssueBox = ({
     mdiIcon,
     color,
     title,
@@ -18,12 +40,11 @@ export default ({
     color: string;
     title: string;
 }) => (
-    <div className="tw-flex tw-flex-row tw-items-center tw-gap-4 tw-bg-gray-50 tw-p-4 tw-text-gray-700">
-        <span
-            className={`mdi ${mdiIcon} ${color} tw-align-middle tw-text-4xl/9`}
-        />
-        <div>
-            <b>{title}</b>
+    <Box
+        mdiIcon={mdiIcon}
+        color={color}
+        title={title}
+        content={
             <p>
                 Contact support on <DevZoneLink /> and provide the{' '}
                 <button
@@ -36,6 +57,25 @@ export default ({
                 </button>{' '}
                 if the problem persists.
             </p>
-        </div>
-    </div>
+        }
+    />
+);
+
+export const InfoBox = ({
+    mdiIcon,
+    color,
+    title,
+    content,
+}: {
+    mdiIcon: string;
+    color: string;
+    title: string;
+    content: string;
+}) => (
+    <Box
+        mdiIcon={mdiIcon}
+        color={color}
+        title={title}
+        content={<p>{content}</p>}
+    />
 );

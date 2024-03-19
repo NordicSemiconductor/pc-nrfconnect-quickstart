@@ -24,6 +24,7 @@ import {
     setChoice,
 } from '../../device/deviceSlice';
 import { startProgramming } from './programEffects';
+import { setFirmwareNote } from './programSlice';
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -112,6 +113,8 @@ export default () => {
                         });
 
                         dispatch(setChoice(selected));
+                        if (selected.firmwareNote)
+                            dispatch(setFirmwareNote(selected.firmwareNote));
                         dispatch(startProgramming());
                     }}
                 />

@@ -72,6 +72,13 @@ const firmware = z.object({
 
 export type Firmware = z.infer<typeof firmware>;
 
+export const firmwareNote = z.object({
+    title: z.string(),
+    content: z.string(),
+});
+
+export type FirmwareNote = z.infer<typeof firmwareNote>;
+
 const choice = z.object({
     name: z.string(),
     type: z.literal('jlink'),
@@ -79,6 +86,7 @@ const choice = z.object({
     documentation: link,
     firmware: z.array(firmware),
     sampleSource: z.string(),
+    firmwareNote: firmwareNote.optional(),
 });
 
 export type Choice = z.infer<typeof choice>;
