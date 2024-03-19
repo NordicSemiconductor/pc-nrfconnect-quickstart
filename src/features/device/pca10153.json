@@ -25,6 +25,10 @@
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html"
                 },
                 "sampleSource": "nrf/applications/serial_lte_modem",
+                "firmwareNote": {
+                    "title": "Increased power consumption",
+                    "content": "Modem Trace is enabled; the current consumption will be higher than usual."
+                },
                 "firmware": [
                     {
                         "core": "Modem",
@@ -53,6 +57,10 @@
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
                 },
                 "sampleSource": "nrf/applications/asset_tracker_v2",
+                "firmwareNote": {
+                    "title": "Increased power consumption",
+                    "content": "Modem Trace is enabled; the current consumption will be higher than usual."
+                },
                 "firmware": [
                     {
                         "core": "Modem",
@@ -81,6 +89,10 @@
                     "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
                 },
                 "sampleSource": "nrf/samples/cellular/modem_shell",
+                "firmwareNote": {
+                    "title": "Increased power consumption",
+                    "content": "Modem Trace is enabled; the current consumption will be higher than usual."
+                },
                 "firmware": [
                     {
                         "core": "Modem",
