@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../../app/store';
 import Main from '../../../common/Main';
-import NoticeBox from '../../../common/NoticeBox';
+import { IssueBox } from '../../../common/NoticeBox';
 import Searching from '../../../common/Searching';
 import { getConnectedDevices } from '../../device/deviceSlice';
 
@@ -41,7 +41,7 @@ export default () => {
                     <Searching />
                     {longSearchDuration && (
                         <div className="tw-pt-8">
-                            <NoticeBox
+                            <IssueBox
                                 mdiIcon="mdi-clock-alert-outline"
                                 color="tw-text-primary"
                                 title="Detection is taking longer than expected"

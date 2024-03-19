@@ -15,7 +15,7 @@ import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
-import NoticeBox from '../../../common/NoticeBox';
+import { IssueBox } from '../../../common/NoticeBox';
 import { getStepConfiguration } from '../../device/deviceGuides';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import getUARTSerialPort from '../../device/getUARTSerialPort';
@@ -155,7 +155,7 @@ export default () => {
                 </div>
                 {failed && (
                     <div className="tw-pt-8">
-                        <NoticeBox
+                        <IssueBox
                             mdiIcon="mdi-lightbulb-alert-outline"
                             color="tw-text-red"
                             title="Failed to verify device"

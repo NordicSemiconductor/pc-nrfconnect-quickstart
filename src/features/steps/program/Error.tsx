@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Main from '../../../common/Main';
 import { Next, Skip } from '../../../common/Next';
-import NoticeBox from '../../../common/NoticeBox';
+import { IssueBox } from '../../../common/NoticeBox';
 import { resetDevice, startProgramming } from './programEffects';
 import {
     getProgrammingProgress,
@@ -31,7 +31,7 @@ export default () => {
             <Main.Content heading="Programming failed">
                 <ProgressIndicators />
                 <div className="tw-pt-8">
-                    <NoticeBox
+                    <IssueBox
                         mdiIcon={
                             resetFailed
                                 ? 'mdi-restore-alert'
