@@ -1,3 +1,9 @@
+## 0.2.5 - 2024-03-26
+
+### Changed
+
+-   Updated mfw for nRF9151 DK and nRF9161 DK to 2.0.1.
+
 ## 0.2.4 - 2024-03-20
 
 ### Added
