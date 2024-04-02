@@ -23,7 +23,7 @@
                 "description": "Evaluate the cellular modem using AT commands.",
                 "documentation": {
                     "label": "Serial LTE Modem",
-                    "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/README.html"
+                    "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html"
                 },
                 "sampleSource": "nrf/applications/serial_lte_modem",
                 "firmwareNote": {
@@ -35,7 +35,7 @@
                         "core": "Modem",
                         "file": "mfw_nrf9160_1.3.6.zip",
                         "link": {
-                            "label": "Firmware 1.3.6",
+                            "label": "Firmware v1.3.6",
                             "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt"
                         }
                     },
@@ -54,8 +54,8 @@
                 "type": "jlink",
                 "description": "Evaluate cloud interaction, location services, GNSS, and real-time configurations.",
                 "documentation": {
-                    "label": "Asset Tracker V2",
-                    "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
+                    "label": "Asset Tracker v2",
+                    "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html"
                 },
                 "sampleSource": "nrf/applications/asset_tracker_v2",
                 "firmwareNote": {
@@ -67,7 +67,7 @@
                         "core": "Modem",
                         "file": "mfw_nrf9160_1.3.6.zip",
                         "link": {
-                            "label": "Firmware 1.3.6",
+                            "label": "Firmware v1.3.6",
                             "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt"
                         }
                     },
@@ -75,7 +75,7 @@
                         "core": "Application",
                         "file": "nrf9160dk_asset_tracker_v2_debug_2024-03-13_af2b60d2.hex",
                         "link": {
-                            "label": "Asset Tracker V2",
+                            "label": "Asset Tracker v2",
                             "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html"
                         }
                     }
@@ -87,7 +87,7 @@
                 "description": "Evaluate throughput, connectivity, and more.",
                 "documentation": {
                     "label": "Modem Shell",
-                    "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
+                    "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html"
                 },
                 "sampleSource": "nrf/samples/cellular/modem_shell",
                 "firmwareNote": {
@@ -99,7 +99,7 @@
                         "core": "Modem",
                         "file": "mfw_nrf9160_1.3.6.zip",
                         "link": {
-                            "label": "Firmware 1.3.6",
+                            "label": "Firmware v1.3.6",
                             "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt"
                         }
                     },
@@ -108,7 +108,7 @@
                         "file": "nrf9160dk_modem_shell_debug_2024-03-13_af2b60d2.hex",
                         "link": {
                             "label": "Modem Shell",
-                            "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html"
+                            "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html"
                         }
                     }
                 ]
@@ -149,11 +149,11 @@
                         "links": [
                             {
                                 "label": "AT Commands reference manual",
-                                "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro_nrf9160.html"
+                                "href": "https://docs.nordicsemi.com/bundle/ref_at_commands/page/REF/at_commands/intro_nrf9160.html"
                             },
                             {
                                 "label": "IP AT Commands Documentation",
-                                "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/serial_lte_modem/doc/AT_commands_intro.html"
+                                "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/doc/AT_commands.html"
                             }
                         ]
                     },
@@ -189,11 +189,11 @@
                         "links": [
                             {
                                 "label": "Modem shell commands",
-                                "href": "https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/cellular/modem_shell/README.html#overview"
+                                "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html#overview"
                             },
                             {
                                 "label": "AT Commands reference manual",
-                                "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fintro_nrf9160.html"
+                                "href": "https://docs.nordicsemi.com/bundle/ref_at_commands/page/REF/at_commands/intro_nrf9160.html"
                             }
                         ]
                     },
@@ -220,7 +220,7 @@
                 "description": "The main aspects and decisions you need to consider before and during the development of a low-power cellular Internet of Things product.",
                 "link": {
                     "label": "nWP044 - Best practices for cellular IoT development",
-                    "href": "https://infocenter.nordicsemi.com/index.jsp?topic=%2Fnwp_044%2FWP%2Fnwp_044%2Fintro.html"
+                    "href": "https://docs.nordicsemi.com/bundle/nwp_044/page/WP/nwp_044/intro.html"
                 }
             }
         ]
