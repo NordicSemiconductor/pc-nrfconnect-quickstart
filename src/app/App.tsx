@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import { logger, telemetry } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { setNrfutilLogger } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
+import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
@@ -41,6 +42,7 @@ export const App = () => {
     useEffect(() => {
         logger.initialise();
         setNrfutilLogger(logger);
+        NrfutilDeviceLib.setLogLevel('error');
     }, []);
     useDevicesInStore();
 
