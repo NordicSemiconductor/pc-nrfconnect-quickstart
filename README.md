@@ -1,20 +1,34 @@
-# nRF Connect Boilerplate
+# nRF Connect Quick Start
 
-[![Build Status](https://dev.azure.com/NordicSemiconductor/Wayland/_apis/build/status/pc-nrfconnect-boilerplate?branchName=master)](https://dev.azure.com/NordicSemiconductor/Wayland/_build/latest?definitionId=10&branchName=master)
+[![Build Status](https://dev.azure.com/NordicSemiconductor/Wayland/_apis/build/status/pc-nrfconnect-quickstart?branchName=master)](https://dev.azure.com/NordicSemiconductor/Wayland/_build/latest?definitionId=10&branchName=master)
 [![License](https://img.shields.io/badge/license-Modified%20BSD%20License-blue.svg)](LICENSE)
 
-_nRF Connect Boilerplate_ provides a starting point for developing apps that can
-be launched by
-[nRF Connect for Desktop](https://github.com/NordicSemiconductor/pc-nrfconnect-launcher).
+nRF Connect Quick Start is a cross-platform tool for guided setup and
+installation procedures of Nordic Semiconductor devices.
+
+## Installation
+
+nRF Connect Quick Start is installed from nRF Connect from Desktop. For detailed
+steps, see
+[Installing nRF Connect for Desktop apps](https://docs.nordicsemi.com/bundle/nrf-connect-desktop/page/installing_apps.html)
+in the nRF Connect from Desktop documentation.
+
+After installing and opening the app from nRF Connect for Desktop, connect your
+device to your machine using an USB cable and follow the steps in the
+application.
+
+## Documentation
+
+nRF Connect Quick Start is meant as an onboarding tool and it does not come with
+its own documentation. The onboarding steps will be different for each of the
+[supported devices](https://docs.nordicsemi.com/bundle/nrf-connect-quickstart/page/index.html).
 
 ## Development
 
 See the
 [app development](https://nordicsemiconductor.github.io/pc-nrfconnect-docs/)
 pages for details on how to develop apps for the nRF Connect for Desktop
-framework and specifically the description
-[how to create a new app project](https://nordicsemiconductor.github.io/pc-nrfconnect-docs/create_new_app),
-to understand how you may use this project.
+framework.
 
 ## Feedback
 
@@ -23,7 +37,7 @@ Please report issues on the [DevZone](https://devzone.nordicsemi.com) portal.
 ## Contributing
 
 See the
-[infos on contributing](https://nordicsemiconductor.github.io/pc-nrfconnect-docs/contributing)
+[information on contributing](https://nordicsemiconductor.github.io/pc-nrfconnect-docs/contributing)
 for details.
 
 ## License
