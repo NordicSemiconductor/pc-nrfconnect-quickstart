@@ -36,6 +36,7 @@ export default () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [verificationStarted, setVerificationStarted] = useState(false);
     const [failed, setFailed] = useState(false);
+    const [hasFailedBefore, setHasFailedBefore] = useState(false);
 
     const initialVerification = [
         ...getStepConfiguration('verify', device).commands.map(command => ({
@@ -60,6 +61,7 @@ export default () => {
         } catch (error) {
             logger.error(describeError(error));
             setFailed(true);
+            setHasFailedBefore(true);
             return;
         }
 
@@ -92,6 +94,7 @@ export default () => {
         } catch (e) {
             logger.error('Received ERROR as return value from AT command');
             setFailed(true);
+            setHasFailedBefore(true);
         }
     };
 
@@ -165,7 +168,7 @@ export default () => {
             </Main.Content>
             <Main.Footer>
                 <Back />
-                {verificationStarted && !failed && gotAllResponses && <Skip />}
+                {hasFailedBefore && !gotAllResponses && <Skip />}
                 {verificationStarted && !failed && (
                     <Next disabled={!gotAllResponses} />
                 )}
