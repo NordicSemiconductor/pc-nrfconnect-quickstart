@@ -1,3 +1,15 @@
+## 0.2.6 - 2024-04-12
+
+### Changed
+
+-   Updated Nordic Semiconductor documentation links.
+
+### Fixed
+
+-   Skip button is now shown consistently upon failure in the verification step.
+-   Modem firmware version v2.0.1 was wrongly displayed as v2.0.0 for nRF9151 DK
+    and nRF9161 DK.
+
 ## 0.2.5 - 2024-03-26
 
 ### Changed
