@@ -1,3 +1,10 @@
+## 0.2.7 - UNRELEASED
+
+### Added
+
+-   Option to program and evaluate the nRF Cloud multi-service firmware on the
+    nRF9161 DK and the nRF9151 DK.
+
 ## 0.2.6 - 2024-04-12
 
 ### Changed
