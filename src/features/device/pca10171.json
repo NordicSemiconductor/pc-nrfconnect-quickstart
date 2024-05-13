@@ -81,6 +81,38 @@
                 ]
             },
             {
+                "name": "nRF Cloud multi-service",
+                "type": "jlink",
+                "description": "Evaluate nRF Cloud services: onboarding, data collection, FOTA updates, logging, and alerts.",
+                "documentation": {
+                    "label": "nRF Cloud multi-service",
+                    "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html"
+                },
+                "sampleSource": "nrf/samples/cellular/nrf_cloud_multi_service",
+                "firmwareNote": {
+                    "title": "Increased power consumption",
+                    "content": "Modem Trace is enabled; the current consumption will be higher than usual."
+                },
+                "firmware": [
+                    {
+                        "core": "Modem",
+                        "file": "mfw_nrf91x1_2.0.1.zip",
+                        "link": {
+                            "label": "Firmware v2.0.1",
+                            "href": "https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt"
+                        }
+                    },
+                    {
+                        "core": "Application",
+                        "file": "nrf9151dk_nrfcloud_multi_service_coap_debug_2024-05-08_eef645c4.hex",
+                        "link": {
+                            "label": "nRF Cloud multi-service",
+                            "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html"
+                        }
+                    }
+                ]
+            },
+            {
                 "name": "Shell Command Line Interface",
                 "type": "jlink",
                 "description": "Evaluate throughput, connectivity, and more.",
@@ -172,6 +204,25 @@
                             "href": "https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/"
                         },
                         "description": "Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity."
+                    },
+                    {
+                        "app": "pc-nrfconnect-cellularmonitor",
+                        "description": "Automatically connect and evaluate parameters."
+                    }
+                ]
+            },
+            {
+                "ref": "nRF Cloud multi-service",
+                "resources": [
+                    {
+                        "app": "pc-nrfconnect-serial-terminal",
+                        "description": "Serial interface to send commands to the device.",
+                        "links": [
+                            {
+                                "label": "Evaluate nRF Cloud services",
+                                "href": "https://docs.nrfcloud.com/GettingStarted.html#next-steps"
+                            }
+                        ]
                     },
                     {
                         "app": "pc-nrfconnect-cellularmonitor",
