@@ -83,7 +83,7 @@
             {
                 "name": "nRF Cloud multi-service",
                 "type": "jlink",
-                "description": "Evaluate nRF Cloud services: onboarding, data collection, FOTA updates, logging, and alerts.",
+                "description": "Evaluate nRF Cloud services: onboarding, data collection, FOTA updates, location, logging, and alerts.",
                 "documentation": {
                     "label": "nRF Cloud multi-service",
                     "href": "https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html"
