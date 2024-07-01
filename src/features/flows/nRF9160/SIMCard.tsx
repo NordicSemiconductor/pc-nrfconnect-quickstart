@@ -6,12 +6,12 @@
 
 import React from 'react';
 
-import { Back } from '../../common/Back';
-import Link from '../../common/Link';
-import Main from '../../common/Main';
-import { Next } from '../../common/Next';
+import { Back } from '../../../common/Back';
+import Link from '../../../common/Link';
+import Main from '../../../common/Main';
+import { Next } from '../../../common/Next';
 
-export default () => (
+const SIMCard = () => (
     <Main>
         <Main.Content heading="Activate iBasis SIM card">
             <p>
@@ -56,3 +56,8 @@ export default () => (
         </Main.Footer>
     </Main>
 );
+
+export default () => ({
+    name: 'SIMCard',
+    component: SIMCard,
+});
