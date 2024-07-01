@@ -7,13 +7,17 @@
 import React from 'react';
 import { Button } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import type { Link as LinkType } from '../features/device/deviceGuides';
 import Link from './Link';
 
-interface ResourceProps {
+interface Link {
+    label: string;
+    href: string;
+}
+
+export interface ResourceProps {
     label: string;
     description: string;
-    link: LinkType;
+    link: Link;
 }
 
 export const Resource = ({ label, description, link }: ResourceProps) => (
@@ -32,7 +36,7 @@ interface ResourceWithButtonProps {
     description: string;
     buttonLabel: string;
     onClick: () => void;
-    links?: LinkType[];
+    links?: Link[];
     disabled?: boolean;
 }
 

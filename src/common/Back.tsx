@@ -8,7 +8,7 @@ import React from 'react';
 import { Button } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch } from '../app/store';
-import { goToPreviousStep } from '../features/steps/stepsSlice';
+import { goToPreviousStep } from '../features/flow/flowSlice';
 
 export const Back = ({
     label,
