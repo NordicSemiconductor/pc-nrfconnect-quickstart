@@ -21,10 +21,10 @@ export default () => {
             <Main.Content heading="Command Line">
                 <div className="tw-flex tw-flex-col tw-gap-6">
                     <Resource
-                        label="Install nRF Connect SDK and toolchain manually"
-                        description="Install manually using the command line"
+                        label="Installing the nRF Connect SDK"
+                        description="Install the nRF Connect toolchain and SDK."
                         link={{
-                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/installation/installing.html',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/installation/install_ncs.html',
                             label: 'Manual installation instructions',
                         }}
                     />
@@ -32,7 +32,7 @@ export default () => {
                         label="nRF Util"
                         description="A modular command line tool, enabling power users to manage Nordic Semiconductor devices and support automation."
                         link={{
-                            href: 'https://www.nordicsemi.com/Products/Development-tools/nrf-util',
+                            href: 'https://docs.nordicsemi.com/bundle/nrfutil/page/README.html',
                             label: 'nRF Util documentation',
                         }}
                     />
@@ -40,7 +40,7 @@ export default () => {
                         label="West"
                         description="A tool for managing multiple Git repositories and versions."
                         link={{
-                            href: 'https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/develop/west',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/develop/west/index.html',
                             label: 'West overview',
                         }}
                     />
