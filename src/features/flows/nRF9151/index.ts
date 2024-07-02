@@ -13,6 +13,7 @@ import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
+import SimCard from './SimCard';
 
 const infoConfig = {
     title: 'Massive IoT Powerhouse',
@@ -310,6 +311,7 @@ export default [
     Rename(),
     Program(programConfig),
     Verify(verificationConfig),
+    SimCard(),
     Evaluate(evaluationConfig),
     Learn(learnConfig),
     Develop(developConfig),
