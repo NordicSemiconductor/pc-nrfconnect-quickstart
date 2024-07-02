@@ -11,7 +11,7 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch } from '../app/store';
-import { goToNextStep } from '../features/steps/stepsSlice';
+import { goToNextStep } from '../features/flow/flowSlice';
 
 export const Next = ({
     disabled,

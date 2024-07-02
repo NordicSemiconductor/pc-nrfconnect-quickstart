@@ -12,12 +12,12 @@ import {
 
 import { DeviceIcon, deviceName } from '../features/device/deviceGuides';
 import { getSelectedDevice } from '../features/device/deviceSlice';
-import { getCurrentStep } from '../features/steps/stepsSlice';
+import { getCurrentStepIndex } from '../features/flow/flowSlice';
 import { useAppSelector } from './store';
 
 export default () => {
     const device = useAppSelector(getSelectedDevice);
-    const step = useAppSelector(getCurrentStep);
+    const reloadHeader = useAppSelector(getCurrentStepIndex);
     const [name, setName] = useState('');
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default () => {
                     ''
             );
         }
-    }, [device, step]);
+    }, [device, reloadHeader]);
 
     return (
         <div className="tw-flex tw-h-14 tw-max-h-14 tw-min-h-[56px] tw-w-full tw-flex-row tw-items-center tw-justify-around tw-bg-primary tw-px-8 tw-text-base tw-text-white">

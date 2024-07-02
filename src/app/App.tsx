@@ -11,9 +11,8 @@ import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfu
 
 import { startWatchingDevices } from '../features/device/deviceLib';
 import { addDevice, removeDevice } from '../features/device/deviceSlice';
-import Steps from '../features/steps';
+import Flow from '../features/flow';
 import Header from './Header';
-import StepStepper from './StepStepper';
 import { useAppDispatch } from './store';
 
 import './App.scss';
@@ -50,10 +49,7 @@ export const App = () => {
         <div className="tw-flex tw-h-full tw-w-full tw-flex-col">
             <Header />
             <div className="tw-flex tw-h-full tw-flex-row tw-overflow-hidden">
-                <StepStepper />
-                <div className="tw-flex-1">
-                    <Steps />
-                </div>
+                <Flow />
             </div>
         </div>
     );

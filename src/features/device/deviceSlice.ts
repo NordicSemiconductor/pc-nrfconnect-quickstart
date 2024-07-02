@@ -7,7 +7,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
-import { type Choice } from './deviceGuides';
+import { Choice } from '../../common/steps/program/programSlice';
 import { DeviceWithSerialnumber } from './deviceLib';
 
 interface State {
