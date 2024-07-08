@@ -13,8 +13,11 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 import path from 'path';
 
-import { ResetProgress } from '../steps/program/programSlice';
-import { Firmware, getFirmwareFolder } from './deviceGuides';
+import {
+    Firmware,
+    ResetProgress,
+} from '../../common/steps/program/programSlice';
+import { getFirmwareFolder } from './deviceGuides';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,
