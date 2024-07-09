@@ -21,6 +21,7 @@ import { getSelectedDeviceUnsafely } from '../../../features/device/deviceSlice'
 import getUARTSerialPort from '../../../features/device/getUARTSerialPort';
 import { Back } from '../../Back';
 import Copy from '../../Copy';
+import { formatResponse } from '../../formatATResponse';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { IssueBox } from '../../NoticeBox';
@@ -38,18 +39,6 @@ export interface Command {
     responseRegex: string;
     copiable?: boolean;
 }
-
-const formatResponse = (response: string, responseRegex: RegExp) => {
-    const filteredResponse = response
-        .split('\n')
-        .filter(line => !!line.trim() && line.trim() !== 'OK')
-        .join('')
-        .trim();
-
-    const [, match] = filteredResponse.match(responseRegex) ?? [];
-
-    return match;
-};
 
 const runVerification =
     (
@@ -73,10 +62,7 @@ const runVerification =
                 acc.then(() =>
                     serialPort.sendCommand(next.command).then(value => {
                         newResponses.push(
-                            formatResponse(
-                                value,
-                                new RegExp(next.responseRegex)
-                            )
+                            formatResponse(value, next.responseRegex)
                         );
 
                         return Promise.resolve();
