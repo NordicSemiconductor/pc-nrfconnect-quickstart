@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import path from 'path';
+
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
 import Evaluate from '../../../common/steps/Evaluate';
@@ -14,6 +16,8 @@ import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
 import SimCard from './SimCard';
+
+const firmwarePath = (file: string) => path.join(__dirname, 'firmware', file);
 
 const infoConfig = {
     title: 'Massive IoT Powerhouse',
@@ -38,7 +42,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.1.zip',
+                file: firmwarePath('mfw_nrf91x1_2.0.1.zip'),
                 link: {
                     label: 'Firmware v2.0.1',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
@@ -46,7 +50,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_serial_lte_modem_debug_2024-03-13_af2b60d2.hex',
+                file: firmwarePath(
+                    'nrf9151dk_serial_lte_modem_debug_2024-03-13_af2b60d2.hex'
+                ),
                 link: {
                     label: 'Serial LTE Modem',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
@@ -71,7 +77,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.1.zip',
+                file: firmwarePath('mfw_nrf91x1_2.0.1.zip'),
                 link: {
                     label: 'Firmware v2.0.1',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
@@ -79,7 +85,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_asset_tracker_v2_debug_2024-03-13_af2b60d2.hex',
+                file: firmwarePath(
+                    'nrf9151dk_asset_tracker_v2_debug_2024-03-13_af2b60d2.hex'
+                ),
                 link: {
                     label: 'Asset Tracker v2',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
@@ -104,7 +112,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.1.zip',
+                file: firmwarePath('mfw_nrf91x1_2.0.1.zip'),
                 link: {
                     label: 'Firmware v2.0.1',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
@@ -112,7 +120,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_nrfcloud_multi_service_coap_debug_2024-05-08_eef645c4.hex',
+                file: firmwarePath(
+                    'nrf9151dk_nrfcloud_multi_service_coap_debug_2024-05-08_eef645c4.hex'
+                ),
                 link: {
                     label: 'nRF Cloud multi-service',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
@@ -136,7 +146,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.1.zip',
+                file: firmwarePath('mfw_nrf91x1_2.0.1.zip'),
                 link: {
                     label: 'Firmware v2.0.1',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
@@ -144,7 +154,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_modem_shell_debug_2024-03-13_af2b60d2.hex',
+                file: firmwarePath(
+                    'nrf9151dk_modem_shell_debug_2024-03-13_af2b60d2.hex'
+                ),
                 link: {
                     label: 'Modem Shell',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
