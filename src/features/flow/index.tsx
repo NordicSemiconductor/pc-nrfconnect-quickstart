@@ -28,7 +28,7 @@ const useLogSteps = () => {
 
     // Telemetry when user changes step
     useEffect(() => {
-        const step = flow[currentStepIndex];
+        const step = flow[currentStepIndex] || 'Connect';
 
         logger.debug(`Changed step: ${step}`);
         telemetry.sendEvent('Changed step', { step });
