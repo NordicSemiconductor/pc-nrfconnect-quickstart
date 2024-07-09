@@ -46,7 +46,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9160dk_serial_lte_modem_debug_2024-03-13_af2b60d2.hex',
+                file: 'nrf9160dk_serial_lte_modem_debug_2024-07-04_20471118.hex',
                 link: {
                     label: 'Serial LTE Modem',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
@@ -79,7 +79,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9160dk_asset_tracker_v2_debug_2024-03-13_af2b60d2.hex',
+                file: 'nrf9160dk_asset_tracker_v2_debug_2024-07-04_20471118.hex',
                 link: {
                     label: 'Asset Tracker v2',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
@@ -111,7 +111,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9160dk_modem_shell_debug_2024-03-13_af2b60d2.hex',
+                file: 'nrf9160dk_modem_shell_debug_2024-07-04_20471118.hex',
                 link: {
                     label: 'Modem Shell',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
