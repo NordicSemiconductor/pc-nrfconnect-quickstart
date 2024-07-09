@@ -31,7 +31,8 @@ const slice = createSlice({
         },
         setFailed: (state, action: PayloadAction<boolean>) => {
             state.failed = action.payload;
-            state.showSkip = true;
+            // always keep/set to true except case showSkip=false and payload=false
+            state.showSkip = !(state.showSkip === false && !state.failed);
         },
         reset: () => initialState,
     },

@@ -173,10 +173,12 @@ export default ({ commands }: { commands: Command[] }) => {
             <Main.Footer>
                 <Back />
                 {showSkip && <Skip />}
-                {verifying && !failed && <Next disabled={!gotAllResponses} />}
-                {(!verifying || failed) && (
+                {gotAllResponses ? (
+                    <Next />
+                ) : (
                     <Next
                         label={failed ? 'Retry' : 'Verify'}
+                        disabled={verifying}
                         onClick={async () => {
                             setVerifying(true);
                             await dispatch(runVerification(commands, device));
