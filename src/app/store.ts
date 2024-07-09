@@ -9,7 +9,7 @@ import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
 import steps from '../common/steps/stepReducers';
 import device from '../features/device/deviceSlice';
-import flow from '../features/flow/flowSlice';
+import flowProgress from '../features/flow/flowSlice';
 
 const ifBuiltForDevelopment = <X>(value: X) =>
     process.env.NODE_ENV === 'development' ? value : undefined;
@@ -17,7 +17,7 @@ const ifBuiltForDevelopment = <X>(value: X) =>
 export const store = configureStore({
     reducer: {
         device,
-        flow,
+        flowProgress,
         steps,
     },
     devTools: {

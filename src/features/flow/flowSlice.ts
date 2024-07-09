@@ -23,7 +23,7 @@ const initialState: State = {
 };
 
 const slice = createSlice({
-    name: 'progress',
+    name: 'flowProgress',
     initialState,
     reducers: {
         setFlow: (state, action: PayloadAction<string[]>) => {
@@ -65,11 +65,11 @@ export const {
 } = slice.actions;
 
 export const isConnectVisible = (state: RootState) =>
-    state.flow.isConnectVisible;
-export const getFlow = (state: RootState) => state.flow.flow;
+    state.flowProgress.isConnectVisible;
+export const getFlow = (state: RootState) => state.flowProgress.flow;
 export const getCurrentStepIndex = (state: RootState) =>
-    state.flow.currentStepIndex;
+    state.flowProgress.currentStepIndex;
 export const getFinishedLastStep = (state: RootState) =>
-    state.flow.finishedLastStep;
+    state.flowProgress.finishedLastStep;
 
 export default slice.reducer;
