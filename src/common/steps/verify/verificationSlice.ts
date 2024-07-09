@@ -7,6 +7,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../../app/store';
+import { setChoice } from '../../../features/device/deviceSlice';
 
 interface State {
     responses: string[];
@@ -35,6 +36,9 @@ const slice = createSlice({
             state.showSkip = !(state.showSkip === false && !state.failed);
         },
         reset: () => initialState,
+    },
+    extraReducers: builder => {
+        builder.addCase(setChoice, () => initialState);
     },
 });
 
