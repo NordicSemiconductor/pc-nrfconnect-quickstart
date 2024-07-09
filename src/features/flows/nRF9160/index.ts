@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import path from 'path';
+
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
 import Evaluate from '../../../common/steps/Evaluate';
@@ -14,6 +16,8 @@ import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
 import SIMCard from './SIMCard';
+
+const firmwarePath = (file: string) => path.join(__dirname, 'firmware', file);
 
 const infoConfig = {
     title: 'Cellular Powerhouse',
@@ -38,7 +42,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf9160_1.3.6.zip',
+                file: firmwarePath('mfw_nrf9160_1.3.6.zip'),
                 link: {
                     label: 'Firmware v1.3.6',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt',
@@ -46,7 +50,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9160dk_serial_lte_modem_debug_2024-03-13_af2b60d2.hex',
+                file: firmwarePath(
+                    'nrf9160dk_serial_lte_modem_debug_2024-03-13_af2b60d2.hex'
+                ),
                 link: {
                     label: 'Serial LTE Modem',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
@@ -71,7 +77,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf9160_1.3.6.zip',
+                file: firmwarePath('mfw_nrf9160_1.3.6.zip'),
                 link: {
                     label: 'Firmware v1.3.6',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt',
@@ -79,7 +85,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9160dk_asset_tracker_v2_debug_2024-03-13_af2b60d2.hex',
+                file: firmwarePath(
+                    'nrf9160dk_asset_tracker_v2_debug_2024-03-13_af2b60d2.hex'
+                ),
                 link: {
                     label: 'Asset Tracker v2',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
@@ -103,7 +111,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf9160_1.3.6.zip',
+                file: firmwarePath('mfw_nrf9160_1.3.6.zip'),
                 link: {
                     label: 'Firmware v1.3.6',
                     href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt',
@@ -111,7 +119,9 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9160dk_modem_shell_debug_2024-03-13_af2b60d2.hex',
+                file: firmwarePath(
+                    'nrf9160dk_modem_shell_debug_2024-03-13_af2b60d2.hex'
+                ),
                 link: {
                     label: 'Modem Shell',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',

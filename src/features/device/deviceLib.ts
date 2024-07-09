@@ -74,13 +74,9 @@ export const program = (
     const batch = NrfutilDeviceLib.batch();
     batch.recover('Application');
     firmware.forEach(({ file }, index) => {
-        batch.program(
-            path.join(getFirmwareFolder(), file),
-            'Application',
-            undefined,
-            undefined,
-            { onProgress: progress => onProgress(index, progress) }
-        );
+        batch.program(file, 'Application', undefined, undefined, {
+            onProgress: progress => onProgress(index, progress),
+        });
     });
 
     batch.reset('Application', 'RESET_SYSTEM', {
