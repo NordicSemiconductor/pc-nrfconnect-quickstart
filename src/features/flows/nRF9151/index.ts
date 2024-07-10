@@ -6,13 +6,13 @@
 
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
-import Evaluate from '../../../common/steps/Evaluate';
 import Info from '../../../common/steps/Info';
 import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
+import Evaluate from './Evaluate';
 import SimCard from './SimCard';
 
 const infoConfig = {
@@ -173,93 +173,6 @@ const verificationConfig = [
     },
 ];
 
-const evaluationConfig = [
-    {
-        ref: 'AT Commands',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description:
-                    'Use the Serial Terminal PC application as a serial interface to send AT commands to the device',
-                links: [
-                    {
-                        label: 'AT Commands reference manual',
-                        href: 'https://docs.nordicsemi.com/bundle/ref_at_commands_nrf91x1/page/REF/at_commands/intro_nrf91x1.html',
-                    },
-                    {
-                        label: 'IP AT Commands Documentation',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/doc/AT_commands.html',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-    {
-        ref: 'Asset Tracking',
-        resources: [
-            {
-                title: 'Cellular IoT Fundamentals',
-                mainLink: {
-                    label: 'Open course',
-                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
-                },
-                description:
-                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-    {
-        ref: 'nRF Cloud multi-service',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description: 'Serial interface to send commands to the device.',
-                supplemetaryLinks: [
-                    {
-                        label: 'Evaluate nRF Cloud services',
-                        href: 'https://docs.nrfcloud.com/GettingStarted.html#next-steps',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-    {
-        ref: 'Shell Command Line Interface',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description: 'Serial interface to send commands to the device.',
-                supplemetaryLinks: [
-                    {
-                        label: 'Modem shell commands',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html#overview',
-                    },
-                    {
-                        label: 'AT Commands reference manual',
-                        href: 'https://docs.nordicsemi.com/bundle/ref_at_commands_nrf91x1/page/REF/at_commands/intro_nrf91x1.html',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-];
-
 const learnConfig = [
     {
         label: 'Developer Academy',
@@ -312,7 +225,7 @@ export default [
     Program(programConfig),
     Verify(verificationConfig),
     SimCard(),
-    Evaluate(evaluationConfig),
+    Evaluate(),
     Learn(learnConfig),
     Develop(developConfig),
     Apps(appsConfig),
