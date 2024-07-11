@@ -14,40 +14,49 @@ import { Next } from '../../../common/Next';
 const SIMCard = () => (
     <Main>
         <Main.Content heading="Plug in SIM card">
-            <p>There are two pre-activated SIM cards in the kit:</p>
-            <br />
-            <ol className="tw-list-outside tw-list-disc tw-pl-4">
-                <li>
-                    <Link
-                        label="SIM card from Onomondo"
-                        href="https://onomondo.com/go/nordic-dev-kit/#form"
-                        color="tw-text-primary"
-                    />{' '}
-                    with 10 MB free data.
-                    <br />
-                    If you register the SIM card, you will get additional 40 MB
-                    to use within the SIMs lifetime. In addition, you will get a
-                    two-month trial access to Onomondos real-time network
-                    insight tool.
-                </li>
-                <br />
-                <li>
-                    <Link
-                        label="SIM card from Wireless Logic"
-                        href="https://www.wirelesslogic.com/simclaim/nsctrial/"
-                        color="tw-text-primary"
-                    />{' '}
-                    with 5 MB free data for 6 months.
-                    <br />
-                    If you register the SIM card within the trial period, you
-                    will get additional 45 MB to use within 5 years.
-                </li>
-            </ol>
-            <br />
             <p>
-                Select the SIM card that is supported in your area (check the
-                links), plug it in, and it will work out of the box.
+                There are two pre-activated SIM cards included that work out of
+                the box, as long as the SIM card has coverage in your area:
             </p>
+            <div className="tw-pt-8">
+                <b>Onomondo</b>
+                <p>
+                    Includes 10 MB free data. If you register the SIM card, you
+                    will get additional 40 MB to use within the SIM&apos;s
+                    lifetime. In addition, you will get a two-month trial access
+                    to Onomondo&apos;s real-time network insight tool.
+                </p>
+                <Link
+                    label="Register ownership"
+                    href="https://onomondo.com/go/nordic-dev-kit/#form"
+                    color="tw-text-primary"
+                />{' '}
+                |{' '}
+                <Link
+                    label="Check coverage"
+                    href="https://onomondo.com/go/nordic-dev-kit/#network"
+                    color="tw-text-primary"
+                />
+            </div>
+            <div className="tw-pt-8">
+                <b>Wireless Logic</b>
+                <p>
+                    Includes 5 MB free data for 6 months. If you register the
+                    SIM card within the trial period, you will get additional 45
+                    MB to use within 5 years.
+                </p>
+                <Link
+                    label="Register ownership"
+                    href="https://www.wirelesslogic.com/simclaim/nsctrial/"
+                    color="tw-text-primary"
+                />{' '}
+                |{' '}
+                <Link
+                    label="Check coverage"
+                    href="https://www.wirelesslogic.com/simclaim/nsctrial/#COVERAGE"
+                    color="tw-text-primary"
+                />
+            </div>
         </Main.Content>
         <Main.Footer>
             <Back />
@@ -57,6 +66,6 @@ const SIMCard = () => (
 );
 
 export default () => ({
-    name: 'SIMCard',
+    name: 'SIM',
     component: SIMCard,
 });
