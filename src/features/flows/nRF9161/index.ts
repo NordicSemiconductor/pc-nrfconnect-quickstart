@@ -13,6 +13,7 @@ import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
+import CustomEvaluate from './Evaluate';
 
 const infoConfig = {
     title: 'Massive IoT Powerhouse',
@@ -217,22 +218,7 @@ const evaluationConfig = [
     },
     {
         ref: 'nRF Cloud multi-service',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description: 'Serial interface to send commands to the device.',
-                supplementaryLinks: [
-                    {
-                        label: 'Evaluate nRF Cloud services',
-                        href: 'https://docs.nrfcloud.com/GettingStarted.html#next-steps',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
+        component: CustomEvaluate,
     },
     {
         ref: 'Shell Command Line Interface',
