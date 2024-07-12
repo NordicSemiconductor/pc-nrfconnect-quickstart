@@ -89,7 +89,7 @@ export default () => {
                     <div className="tw-flex tw-flex-row tw-gap-1">
                         <p className={gettingToken ? 'ellipsis' : ''}>
                             {token && (
-                                <div className="tw-flex tw-flex-row tw-items-center tw-gap-1">
+                                <p className="tw-flex tw-flex-row tw-items-center tw-gap-1">
                                     <b
                                         title={token}
                                         className="tw-block tw-w-60 tw-overflow-hidden tw-text-ellipsis tw-whitespace-nowrap"
@@ -97,7 +97,7 @@ export default () => {
                                         {token}
                                     </b>
                                     <Copy copyText={token} />
-                                </div>
+                                </p>
                             )}
                             <b>{failed && 'ERROR'}</b>
                         </p>
