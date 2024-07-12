@@ -20,7 +20,7 @@ const initialState: State = {
 };
 
 const slice = createSlice({
-    name: 'develop',
+    name: 'nrf9151',
     initialState,
     reducers: {
         setAttestationToken: (
