@@ -7,7 +7,6 @@
 import React, { useState } from 'react';
 import {
     Button,
-    classNames,
     logger,
     openUrl,
     Spinner,
@@ -19,16 +18,10 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
 import { formatResponse } from '../../../common/formatATResponse';
-import Link from '../../../common/Link';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { IssueBox } from '../../../common/NoticeBox';
-import { ResourceWithButton } from '../../../common/Resource';
-import Evaluate from '../../../common/steps/Evaluate';
-import {
-    getChoiceUnsafely,
-    getSelectedDeviceUnsafely,
-} from '../../device/deviceSlice';
+import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import getUARTSerialPort from '../../device/getUARTSerialPort';
 import {
     getAttestationToken,
@@ -40,7 +33,7 @@ import {
 const nRFCloudLink =
     'https://docs.nordicsemi.com/bundle/nrf-cloud/page/GettingStarted.html';
 
-const MSSEvaluateStep = () => {
+export default () => {
     const dispatch = useAppDispatch();
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const token = useAppSelector(getAttestationToken);
@@ -150,84 +143,3 @@ const MSSEvaluateStep = () => {
         </Main>
     );
 };
-
-const baseEvaluationConfig = [
-    {
-        ref: 'AT Commands',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description:
-                    'Use the Serial Terminal PC application as a serial interface to send AT commands to the device',
-                links: [
-                    {
-                        label: 'AT Commands reference manual',
-                        href: 'https://docs.nordicsemi.com/bundle/ref_at_commands_nrf91x1/page/REF/at_commands/intro_nrf91x1.html',
-                    },
-                    {
-                        label: 'IP AT Commands Documentation',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/doc/AT_commands.html',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-    {
-        ref: 'Asset Tracking',
-        resources: [
-            {
-                title: 'Cellular IoT Fundamentals',
-                mainLink: {
-                    label: 'Open course',
-                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
-                },
-                description:
-                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-    {
-        ref: 'Shell Command Line Interface',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description: 'Serial interface to send commands to the device.',
-                supplemetaryLinks: [
-                    {
-                        label: 'Modem shell commands',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html#overview',
-                    },
-                    {
-                        label: 'AT Commands reference manual',
-                        href: 'https://docs.nordicsemi.com/bundle/ref_at_commands_nrf91x1/page/REF/at_commands/intro_nrf91x1.html',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-];
-
-const SelectEvaluate = () => {
-    const choice = useAppSelector(getChoiceUnsafely);
-    console.log(choice);
-    return choice.name === 'nRF Cloud multi-service'
-        ? MSSEvaluateStep()
-        : Evaluate(baseEvaluationConfig).component();
-};
-
-export default () => ({
-    name: 'Evaluate',
-    component: SelectEvaluate,
-});

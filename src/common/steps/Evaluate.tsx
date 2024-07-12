@@ -41,17 +41,22 @@ interface ResourcePage {
     resources: (AppResource | ExternalLinkResource)[];
 }
 
-const EvaluateStep = ({ resourcePages }: { resourcePages: ResourcePage[] }) => {
+interface ResourceComponent {
+    ref: string;
+    component: () => React.ReactNode;
+}
+
+const EvaluateStep = ({
+    ref,
+    resources,
+}: {
+    ref: string;
+    resources: (AppResource | ExternalLinkResource)[];
+}) => {
     const [busy, setBusy] = useState(false);
-    const choice = useAppSelector(getChoiceUnsafely);
-
-    const resources =
-        resourcePages.find(resource => resource.ref === choice.name)
-            ?.resources || [];
-
     return (
         <Main>
-            <Main.Content heading={`Evaluate ${choice.name}`}>
+            <Main.Content heading={`Evaluate ${ref}}`}>
                 <div className="tw-flex tw-flex-col tw-gap-6">
                     {resources.map(resource =>
                         isExternalLinkResource(resource) ? (
@@ -97,7 +102,25 @@ const EvaluateStep = ({ resourcePages }: { resourcePages: ResourcePage[] }) => {
     );
 };
 
-export default (resourcePages: ResourcePage[]) => ({
+const EvaluateDecider = ({
+    resourcePages,
+}: {
+    resourcePages: (ResourcePage | ResourceComponent)[];
+}) => {
+    const choice = useAppSelector(getChoiceUnsafely);
+
+    const resourcePage = resourcePages.find(
+        resource => resource.ref === choice.name
+    );
+    if ((resourcePage as ResourceComponent)?.component) {
+        return (resourcePage as ResourceComponent).component();
+    }
+    if ((resourcePage as ResourcePage)?.resources) {
+        return EvaluateStep({ ...(resourcePage as ResourcePage) });
+    }
+};
+
+export default (resourcePages: (ResourcePage | ResourceComponent)[]) => ({
     name: 'Evaluate',
-    component: () => EvaluateStep({ resourcePages }),
+    component: () => EvaluateDecider({ resourcePages }),
 });
