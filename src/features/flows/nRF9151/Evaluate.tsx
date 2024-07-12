@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     Button,
     logger,
@@ -40,6 +40,37 @@ export default () => {
     const failed = useAppSelector(getFailed);
     const [gettingToken, setGettingToken] = useState(false);
 
+    const getToken = useCallback(async () => {
+        setGettingToken(true);
+        dispatch(setFailed(false));
+
+        let serialPort:
+            | Awaited<ReturnType<typeof getUARTSerialPort>>
+            | undefined;
+        try {
+            serialPort = await getUARTSerialPort(device);
+            const attestationToken = await serialPort
+                .sendCommand('AT%ATTESTTOKEN')
+                .then(response =>
+                    formatResponse(response, '%ATTESTTOKEN: "(.*)"')
+                );
+
+            dispatch(setAttestationToken(attestationToken));
+        } catch (error) {
+            logger.error(describeError(error));
+            dispatch(setFailed(true));
+        }
+
+        setGettingToken(false);
+        serialPort?.unregister();
+    }, [device, dispatch]);
+
+    useEffect(() => {
+        if (!token && !failed && !gettingToken) {
+            getToken();
+        }
+    }, [token, failed, gettingToken, getToken]);
+
     return (
         <Main>
             <Main.Content
@@ -57,7 +88,6 @@ export default () => {
                     </div>
                     <div className="tw-flex tw-flex-row tw-gap-1">
                         <p className={gettingToken ? 'ellipsis' : ''}>
-                            {!gettingToken && !token && !failed && '...'}
                             {token && (
                                 <div className="tw-flex tw-flex-row tw-items-center tw-gap-1">
                                     <b
@@ -104,40 +134,14 @@ export default () => {
                 )}
                 <Back disabled={gettingToken} />
                 {!token && <Next label="Skip" variant="link-button" />}
-                {token ? (
-                    <Next disabled={failed} />
-                ) : (
+                {failed ? (
                     <Next
-                        label={failed ? 'Retry' : 'Get token'}
+                        label="Retry"
                         disabled={gettingToken}
-                        onClick={async () => {
-                            setGettingToken(true);
-                            dispatch(setFailed(false));
-
-                            let serialPort:
-                                | Awaited<ReturnType<typeof getUARTSerialPort>>
-                                | undefined;
-                            try {
-                                serialPort = await getUARTSerialPort(device);
-                                const attestationToken = await serialPort
-                                    .sendCommand('AT%ATTESTTOKEN')
-                                    .then(response =>
-                                        formatResponse(
-                                            response,
-                                            '%ATTESTTOKEN: "(.*)"'
-                                        )
-                                    );
-
-                                dispatch(setAttestationToken(attestationToken));
-                            } catch (error) {
-                                logger.error(describeError(error));
-                                dispatch(setFailed(true));
-                            }
-
-                            setGettingToken(false);
-                            serialPort?.unregister();
-                        }}
+                        onClick={getToken}
                     />
+                ) : (
+                    <Next disabled={gettingToken} />
                 )}
             </Main.Footer>
         </Main>

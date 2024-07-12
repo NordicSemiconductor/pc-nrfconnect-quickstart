@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     describeError,
     logger,
@@ -101,8 +101,16 @@ export default ({ commands }: { commands: Command[] }) => {
         if (gotAllResponses) {
             return 'Verification successful';
         }
-        return 'Verifying';
     };
+
+    useEffect(() => {
+        if (!failed && !gotAllResponses && !verifying) {
+            setVerifying(true);
+            dispatch(runVerification(commands, device)).then(() =>
+                setVerifying(false)
+            );
+        }
+    }, [failed, gotAllResponses, verifying, dispatch, commands, device]);
 
     return (
         <Main>
@@ -123,17 +131,12 @@ export default ({ commands }: { commands: Command[] }) => {
                             <div className="tw-flex tw-flex-row tw-items-center tw-gap-4">
                                 <p className={verifying ? 'ellipsis' : ''}>
                                     {!verifying && (
-                                        <>
-                                            {!gotAllResponses &&
-                                                !failed &&
-                                                '...'}
-                                            <b>
-                                                {!failed &&
-                                                    gotAllResponses &&
-                                                    responses[index]}
-                                                {failed && 'ERROR'}
-                                            </b>
-                                        </>
+                                        <b>
+                                            {!failed &&
+                                                gotAllResponses &&
+                                                responses[index]}
+                                            {failed && 'ERROR'}
+                                        </b>
                                     )}
                                 </p>
                                 {copiable &&
@@ -159,11 +162,9 @@ export default ({ commands }: { commands: Command[] }) => {
             <Main.Footer>
                 <Back />
                 {showSkip && <Skip />}
-                {gotAllResponses ? (
-                    <Next />
-                ) : (
+                {failed ? (
                     <Next
-                        label={failed ? 'Retry' : 'Verify'}
+                        label="Retry"
                         disabled={verifying}
                         onClick={async () => {
                             setVerifying(true);
@@ -171,6 +172,8 @@ export default ({ commands }: { commands: Command[] }) => {
                             setVerifying(false);
                         }}
                     />
+                ) : (
+                    <Next disabled={verifying} />
                 )}
             </Main.Footer>
         </Main>

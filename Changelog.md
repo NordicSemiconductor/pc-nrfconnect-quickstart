@@ -6,6 +6,10 @@
     nRF9161 DK and the nRF9151 DK.
 -   `SIM Card` step for nRF9151 DK and nRF9161 DK.
 
+### Changed
+
+-   `Verify` step starts verifying automatically.
+
 ## 0.2.6 - 2024-04-12
 
 ### Changed
