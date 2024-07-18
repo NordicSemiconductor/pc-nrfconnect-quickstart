@@ -13,12 +13,15 @@ import { Next } from '../../../common/Next';
 
 const SIMCard = () => (
     <Main>
-        <Main.Content heading="Plug in SIM card">
+        <Main.Content
+            heading="Plug in SIM card"
+            className="tw-flex tw-flex-col tw-gap-4"
+        >
             <p>
                 There are two pre-activated SIM cards included that work out of
                 the box, as long as the SIM card has coverage in your area:
             </p>
-            <div className="tw-pt-8">
+            <div>
                 <b>Onomondo</b>
                 <p>
                     Includes 10 MB free data. If you register the SIM card, you
@@ -38,7 +41,7 @@ const SIMCard = () => (
                     color="tw-text-primary"
                 />
             </div>
-            <div className="tw-pt-8">
+            <div>
                 <b>Wireless Logic</b>
                 <p>
                     Includes 5 MB free data for 6 months. If you register the
