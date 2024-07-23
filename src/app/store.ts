@@ -10,6 +10,7 @@ import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import steps from '../common/steps/stepReducers';
 import device from '../features/device/deviceSlice';
 import flowProgress from '../features/flow/flowSlice';
+import flows from '../features/flows/reducers';
 
 const ifBuiltForDevelopment = <X>(value: X) =>
     process.env.NODE_ENV === 'development' ? value : undefined;
@@ -19,6 +20,7 @@ export const store = configureStore({
         device,
         flowProgress,
         steps,
+        flows,
     },
     devTools: {
         maxAge: ifBuiltForDevelopment(100),

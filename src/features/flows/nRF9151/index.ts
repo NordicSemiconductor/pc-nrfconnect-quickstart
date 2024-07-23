@@ -13,6 +13,7 @@ import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
+import CustomEvaluate from './Evaluate';
 import SimCard from './SimCard';
 
 const infoConfig = {
@@ -218,22 +219,7 @@ const evaluationConfig = [
     },
     {
         ref: 'nRF Cloud multi-service',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description: 'Serial interface to send commands to the device.',
-                supplemetaryLinks: [
-                    {
-                        label: 'Evaluate nRF Cloud services',
-                        href: 'https://docs.nrfcloud.com/GettingStarted.html#next-steps',
-                    },
-                ],
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
+        component: CustomEvaluate,
     },
     {
         ref: 'Shell Command Line Interface',
@@ -259,7 +245,6 @@ const evaluationConfig = [
         ],
     },
 ];
-
 const learnConfig = [
     {
         label: 'Developer Academy',

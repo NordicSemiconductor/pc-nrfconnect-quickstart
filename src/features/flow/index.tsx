@@ -12,6 +12,7 @@ import { allReset } from '../../common/steps/stepReducers';
 import { getSelectedDevice } from '../device/deviceSlice';
 import type { Flow } from '../flows';
 import flows from '../flows';
+import { allReset as flowsAllReset } from '../flows/reducers';
 import Connect from './connect';
 import Finish from './finish';
 import FlowProgress from './FlowProgress';
@@ -42,6 +43,7 @@ const Flow = ({ flow }: { flow: Flow[] }) => {
 
     useEffect(() => {
         dispatch(allReset());
+        dispatch(flowsAllReset());
         dispatch(setFlow(flowWithFinish.map(f => f.name)));
     }, [flowWithFinish, dispatch]);
 
