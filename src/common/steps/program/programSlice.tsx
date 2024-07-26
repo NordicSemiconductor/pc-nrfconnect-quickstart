@@ -51,7 +51,6 @@ interface State {
     firmwareWithProgress: FirmwareWithProgress[];
     resetProgress: ResetProgress;
     firmwareNote: FirmwareNote | undefined;
-    programmingError: unknown;
 }
 
 const initialState: State = {
@@ -59,7 +58,6 @@ const initialState: State = {
     firmwareWithProgress: [],
     resetProgress: ResetProgress.NOT_STARTED,
     firmwareNote: undefined,
-    programmingError: undefined,
 };
 
 const slice = createSlice({
