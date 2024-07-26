@@ -41,7 +41,6 @@ type FirmwareWithProgress = Firmware & {
 
 export enum ProgrammingState {
     SELECT_FIRMWARE,
-    NO_DEVICE_CONNECTED,
     PROGRAMMING,
     SUCCESS,
     ERROR,
