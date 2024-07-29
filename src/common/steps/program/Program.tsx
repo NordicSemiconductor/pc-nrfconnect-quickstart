@@ -103,6 +103,7 @@ export default () => {
                             )
                         );
                     }}
+                    disabled={programming}
                 />
                 <Skip disabled={programming} />
                 {failed ? (
