@@ -103,18 +103,20 @@ export default () => {
                     }}
                     disabled={programming}
                 />
-                <Skip disabled={programming} />
                 {failed ? (
-                    <Next
-                        label={resetFailed ? 'Reset' : 'Retry'}
-                        onClick={() => {
-                            if (resetFailed) {
-                                dispatch(resetDevice());
-                            } else {
-                                dispatch(startProgramming());
-                            }
-                        }}
-                    />
+                    <>
+                        <Skip disabled={programming} />
+                        <Next
+                            label={resetFailed ? 'Reset' : 'Retry'}
+                            onClick={() => {
+                                if (resetFailed) {
+                                    dispatch(resetDevice());
+                                } else {
+                                    dispatch(startProgramming());
+                                }
+                            }}
+                        />
+                    </>
                 ) : (
                     <Next disabled={programming} />
                 )}
