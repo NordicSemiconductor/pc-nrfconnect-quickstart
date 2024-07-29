@@ -13,7 +13,7 @@ import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
-import SIMCard from './SIMCard';
+import SIM from './SIM';
 
 const infoConfig = {
     title: 'Cellular Powerhouse',
@@ -255,7 +255,7 @@ export default [
     Rename(),
     Program(programConfig),
     Verify(verificationConfig),
-    SIMCard(),
+    SIM(),
     Evaluate(evaluationConfig),
     Learn(learnConfig),
     Develop(developConfig),
