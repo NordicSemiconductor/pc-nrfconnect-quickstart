@@ -58,6 +58,6 @@ const SIMCard = () => (
 );
 
 export default () => ({
-    name: 'SIMCard',
+    name: 'SIM',
     component: SIMCard,
 });

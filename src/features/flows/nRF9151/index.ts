@@ -14,7 +14,7 @@ import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 import Verify from '../../../common/steps/verify';
 import CustomEvaluate from './Evaluate';
-import SimCard from './SimCard';
+import SIM from './SIM';
 
 const infoConfig = {
     title: 'Massive IoT Powerhouse',
@@ -296,7 +296,7 @@ export default [
     Rename(),
     Program(programConfig),
     Verify(verificationConfig),
-    SimCard(),
+    SIM(),
     Evaluate(evaluationConfig),
     Learn(learnConfig),
     Develop(developConfig),
