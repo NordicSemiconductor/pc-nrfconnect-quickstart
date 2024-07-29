@@ -71,14 +71,12 @@ export default () => {
                 <ProgressIndicators />
                 <div className="tw-pt-8">
                     {!failed && note && (
-                        <div className="tw-pt-8">
-                            <InfoBox
-                                mdiIcon="mdi-information-outline"
-                                color="tw-text-primary"
-                                title={note.title}
-                                content={note.content}
-                            />
-                        </div>
+                        <InfoBox
+                            mdiIcon="mdi-information-outline"
+                            color="tw-text-primary"
+                            title={note.title}
+                            content={note.content}
+                        />
                     )}
                     {programmingState === ProgrammingState.ERROR && (
                         <IssueBox

@@ -56,7 +56,7 @@ const EvaluateStep = ({
     const [busy, setBusy] = useState(false);
     return (
         <Main>
-            <Main.Content heading={`Evaluate ${ref}}`}>
+            <Main.Content heading={`Evaluate ${ref}`}>
                 <div className="tw-flex tw-flex-col tw-gap-6">
                     {resources.map(resource =>
                         isExternalLinkResource(resource) ? (
