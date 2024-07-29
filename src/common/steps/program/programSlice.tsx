@@ -41,7 +41,6 @@ type FirmwareWithProgress = Firmware & {
 
 export enum ProgrammingState {
     SELECT_FIRMWARE,
-    NO_DEVICE_CONNECTED,
     PROGRAMMING,
     SUCCESS,
     ERROR,
@@ -52,7 +51,6 @@ interface State {
     firmwareWithProgress: FirmwareWithProgress[];
     resetProgress: ResetProgress;
     firmwareNote: FirmwareNote | undefined;
-    programmingError: unknown;
 }
 
 const initialState: State = {
@@ -60,7 +58,6 @@ const initialState: State = {
     firmwareWithProgress: [],
     resetProgress: ResetProgress.NOT_STARTED,
     firmwareNote: undefined,
-    programmingError: undefined,
 };
 
 const slice = createSlice({

@@ -21,16 +21,14 @@ import {
 } from './programSlice';
 
 const checkDeviceConnected =
-    (): AppThunk<RootState, boolean> => (dispatch, getState) => {
-        const deviceConnected = selectedDeviceIsConnected(getState());
-        if (!deviceConnected) {
-            dispatch(setProgrammingState(ProgrammingState.NO_DEVICE_CONNECTED));
-        }
-        return deviceConnected;
-    };
+    (): AppThunk<RootState, boolean> => (_, getState) =>
+        selectedDeviceIsConnected(getState());
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
-    if (!dispatch(checkDeviceConnected())) return;
+    if (!dispatch(checkDeviceConnected())) {
+        dispatch(setProgrammingState(ProgrammingState.ERROR));
+        return;
+    }
 
     const device = getSelectedDeviceUnsafely(getState());
     const firmware = getChoiceUnsafely(getState()).firmware;
@@ -49,7 +47,10 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
 };
 
 export const resetDevice = (): AppThunk => (dispatch, getState) => {
-    if (!checkDeviceConnected()) return;
+    if (!dispatch(checkDeviceConnected())) {
+        dispatch(setProgrammingState(ProgrammingState.ERROR));
+        return;
+    }
 
     const device = getSelectedDeviceUnsafely(getState());
     dispatch(setResetProgress(ResetProgress.STARTED));
