@@ -46,6 +46,9 @@ export default ({ samples }: { samples: SampleWithRef[] }) => {
     const isVsCodeInstalled = useAppSelector(getIsVsCodeInstalled);
     const choice = useAppSelector(getChoiceUnsafely);
 
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    const sample = samples.find(s => s.ref === choice.name)?.sampleSource;
+
     useEffect(
         () => detectVsCodeRepeatedly(dispatch, isVsCodeInstalled),
         [dispatch, isVsCodeInstalled]
@@ -54,9 +57,6 @@ export default ({ samples }: { samples: SampleWithRef[] }) => {
     if (!isVsCodeInstalled) {
         return <VsCodeNotInstalled />;
     }
-
-    const device = useAppSelector(getSelectedDeviceUnsafely);
-    const sample = samples.find(s => s.ref === choice.name)?.sampleSource;
 
     return (
         <Main>
