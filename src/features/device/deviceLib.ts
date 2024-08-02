@@ -29,11 +29,6 @@ export type DeviceWithSerialnumber = NrfutilDevice & {
     serialNumber: string;
 };
 
-export const hasSerialnumber = (
-    device: NrfutilDevice
-): device is DeviceWithSerialnumber =>
-    'serialNumber' in device && device.serialNumber !== undefined;
-
 const hasSerialNumber = (
     device: NrfutilDevice
 ): device is DeviceWithSerialnumber =>
@@ -50,7 +45,7 @@ export const startWatchingDevices = async (
         logger.debug,
         {
             onDeviceArrived: device =>
-                hasSerialnumber(device) && onDeviceArrived(device),
+                hasSerialNumber(device) && onDeviceArrived(device),
             onDeviceLeft,
         }
     );
