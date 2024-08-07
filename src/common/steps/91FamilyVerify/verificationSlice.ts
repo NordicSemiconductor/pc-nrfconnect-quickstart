@@ -22,7 +22,7 @@ const initialState: State = {
 };
 
 const slice = createSlice({
-    name: 'verification',
+    name: 'verification91',
     initialState,
     reducers: {
         setResponses: (state, action: PayloadAction<string[]>) => {
