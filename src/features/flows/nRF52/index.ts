@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import Verify from '../../../common/steps/52FamilyVerify';
+import VerifyHelloWorld from '../../../common/steps/52FamilyVerify/VerifyHelloWorld';
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
 import Info from '../../../common/steps/Info';
@@ -38,7 +40,7 @@ const programConfig = [
         ],
     },
     {
-        name: 'Led and button sample',
+        name: 'Led and button',
         type: 'jlink',
         description:
             'Check that the LED&apos;s and buttons on the DK are working with this sample.',
@@ -58,7 +60,7 @@ const programConfig = [
         ],
     },
     {
-        name: 'Bluetooth UART Sample',
+        name: 'Bluetooth UART',
         type: 'jlink',
         description: 'Check that UART over BLE is working.',
         documentation: {
@@ -77,6 +79,21 @@ const programConfig = [
         ],
     },
 ] as Choice[];
+
+const verirfyConfig = [
+    {
+        ref: 'Hello World',
+        component: VerifyHelloWorld({portIndex: 0})
+    },
+    {
+        ref: 'Led and button sample',
+        component: VerifyHelloWorld({portIndex: 0})
+    },
+    {
+        ref: 'Bluetooth UART Sample',
+        component: VerifyHelloWorld({portIndex: 0})
+    },
+]
 
 const developConfig = [
     {
@@ -99,7 +116,7 @@ export default [
     Info(infoConfig),
     Rename(),
     Program(programConfig),
-    Empty('Verify'),
+    Verify()
     Empty('Evaluate'),
     Empty('Learn'),
     Develop(developConfig),
