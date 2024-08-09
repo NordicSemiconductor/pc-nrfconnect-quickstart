@@ -11,12 +11,11 @@ import {
     telemetry,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
-import { useAppSelector } from '../../app/store';
-import { getChoiceUnsafely } from '../../features/device/deviceSlice';
 import { Back } from '../Back';
 import Main from '../Main';
 import { Next } from '../Next';
 import { AppResourceButton, ResourceWithButton } from '../Resource';
+import StepByChoice from '../StepByChoice';
 
 interface CommonResourceProps {
     description: string;
@@ -104,25 +103,18 @@ const EvaluateStep = ({
     );
 };
 
-const EvaluateDecider = ({
-    resourcePages,
-}: {
-    resourcePages: (ResourcePage | ResourceComponent)[];
-}) => {
-    const choice = useAppSelector(getChoiceUnsafely);
-
-    const resourcePage = resourcePages.find(
-        resource => resource.ref === choice.name
-    );
-    if ((resourcePage as ResourceComponent)?.component) {
-        return (resourcePage as ResourceComponent).component();
-    }
-    if ((resourcePage as ResourcePage)?.resources) {
-        return EvaluateStep({ ...(resourcePage as ResourcePage) });
-    }
-};
-
 export default (resourcePages: (ResourcePage | ResourceComponent)[]) => ({
     name: 'Evaluate',
-    component: () => EvaluateDecider({ resourcePages }),
+    component: () =>
+        StepByChoice({
+            steps: resourcePages.reduce(
+                (acc, next) => ({
+                    ...acc,
+                    [next.ref]: (next as ResourceComponent).component
+                        ? (next as ResourceComponent).component
+                        : () => EvaluateStep({ ...(next as ResourcePage) }),
+                }),
+                {}
+            ),
+        }),
 });
