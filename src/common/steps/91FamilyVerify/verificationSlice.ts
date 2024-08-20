@@ -45,9 +45,10 @@ const slice = createSlice({
 export const { setResponses, setFailed, reset } = slice.actions;
 
 export const getResponses = (state: RootState) =>
-    state.steps.verification.responses;
-export const getFailed = (state: RootState) => state.steps.verification.failed;
+    state.steps.verification91.responses;
+export const getFailed = (state: RootState) =>
+    state.steps.verification91.failed;
 export const getShowSkip = (state: RootState) =>
-    state.steps.verification.showSkip;
+    state.steps.verification91.showSkip;
 
 export default slice.reducer;

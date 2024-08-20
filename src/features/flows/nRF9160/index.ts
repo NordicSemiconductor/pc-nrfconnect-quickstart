@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import Verify from '../../../common/steps/91FamilyVerify';
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
 import Evaluate from '../../../common/steps/Evaluate';
@@ -12,7 +13,6 @@ import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
-import Verify from '../../../common/steps/verify';
 import SIM from './SIM';
 
 const infoConfig = {
@@ -121,24 +121,43 @@ const programConfig = [
     },
 ] as Choice[];
 
-const verificationConfig = [
-    {
-        title: 'Manufacturer',
-        command: 'AT+CGMI',
-        responseRegex: '(.*)',
-    },
-    {
-        title: 'Hardware version',
-        command: 'AT%HWVERSION',
-        responseRegex: '%HWVERSION: (.*)',
-    },
-    {
-        title: 'International Mobile Equipment Identity',
-        command: 'AT+CGSN=1',
-        responseRegex: '\\+CGSN: "(.*)"',
-        copiable: true,
-    },
-];
+const verificationConfig = {
+    settings: [
+        {
+            ref: 'AT Commands',
+            vComIndex: 0,
+            mode: 'LINE' as const,
+        },
+        {
+            ref: 'Asset Tracking',
+            vComIndex: 0,
+            mode: 'LINE' as const,
+        },
+        {
+            ref: 'Shell Command Line Interface',
+            vComIndex: 0,
+            mode: 'SHELL' as const,
+        },
+    ],
+    commands: [
+        {
+            title: 'Manufacturer',
+            command: 'AT+CGMI',
+            responseRegex: '(.*)',
+        },
+        {
+            title: 'Hardware version',
+            command: 'AT%HWVERSION',
+            responseRegex: '%HWVERSION: (.*)',
+        },
+        {
+            title: 'International Mobile Equipment Identity',
+            command: 'AT+CGSN=1',
+            responseRegex: '\\+CGSN: "(.*)"',
+            copiable: true,
+        },
+    ],
+};
 
 const evaluationConfig = [
     {

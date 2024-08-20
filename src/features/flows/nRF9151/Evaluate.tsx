@@ -17,12 +17,11 @@ import describeError from '@nordicsemiconductor/pc-nrfconnect-shared/src/logging
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
-import { formatResponse } from '../../../common/formatATResponse';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { IssueBox } from '../../../common/NoticeBox';
+import runVerification from '../../../common/sendATCommands';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
-import getUARTSerialPort from '../../device/getUARTSerialPort';
 import {
     getAttestationToken,
     getFailed,
@@ -40,29 +39,28 @@ export default () => {
     const failed = useAppSelector(getFailed);
     const [gettingToken, setGettingToken] = useState(false);
 
-    const getToken = useCallback(async () => {
+    const getToken = useCallback(() => {
         setGettingToken(true);
         dispatch(setFailed(false));
 
-        let serialPort:
-            | Awaited<ReturnType<typeof getUARTSerialPort>>
-            | undefined;
-        try {
-            serialPort = await getUARTSerialPort(device);
-            const attestationToken = await serialPort
-                .sendCommand('AT%ATTESTTOKEN')
-                .then(response =>
-                    formatResponse(response, '%ATTESTTOKEN: "(.*)"')
-                );
-
-            dispatch(setAttestationToken(attestationToken));
-        } catch (error) {
-            logger.error(describeError(error));
-            dispatch(setFailed(true));
-        }
-
-        setGettingToken(false);
-        serialPort?.unregister();
+        runVerification(
+            [
+                {
+                    command: 'AT%ATTESTTOKEN',
+                    responseRegex: '%ATTESTTOKEN: "(.*)"',
+                },
+            ],
+            device.serialPorts?.[0].comName || '',
+            'SHELL'
+        )
+            .then(res => {
+                dispatch(setAttestationToken(res[0]));
+            })
+            .catch(e => {
+                logger.error(describeError(e));
+                dispatch(setFailed(true));
+            })
+            .finally(() => setGettingToken(false));
     }, [device, dispatch]);
 
     useEffect(() => {
