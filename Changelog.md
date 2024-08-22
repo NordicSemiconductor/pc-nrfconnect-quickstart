@@ -4,6 +4,7 @@
 
 -   Opening the `Serial Terminal` app from the `Evaluate step` now always
     automatically selects the correct serial port.
+-   Support for nRF54L15 DK.
 
 ## 0.3.0 - 2024-09-04
 
