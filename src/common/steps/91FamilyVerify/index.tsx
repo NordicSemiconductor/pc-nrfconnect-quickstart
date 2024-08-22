@@ -4,27 +4,23 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     describeError,
     logger,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import { useAppDispatch, useAppSelector } from '../../../app/store';
 import {
-    AppThunk,
-    RootState,
-    useAppDispatch,
-    useAppSelector,
-} from '../../../app/store';
-import { DeviceWithSerialnumber } from '../../../features/device/deviceLib';
-import { getSelectedDeviceUnsafely } from '../../../features/device/deviceSlice';
-import getUARTSerialPort from '../../../features/device/getUARTSerialPort';
+    getChoiceUnsafely,
+    getSelectedDeviceUnsafely,
+} from '../../../features/device/deviceSlice';
 import { Back } from '../../Back';
 import Copy from '../../Copy';
-import { formatResponse } from '../../formatATResponse';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { IssueBox } from '../../NoticeBox';
+import runVerification from '../../sendATCommands';
 import {
     getFailed,
     getResponses,
@@ -40,50 +36,16 @@ export interface Command {
     copiable?: boolean;
 }
 
-const runVerification =
-    (
-        commands: Command[],
-        device: DeviceWithSerialnumber
-    ): AppThunk<RootState, Promise<void>> =>
-    async dispatch => {
-        dispatch(setFailed(false));
-        let serialPort: Awaited<ReturnType<typeof getUARTSerialPort>>;
-        try {
-            serialPort = await getUARTSerialPort(device);
-        } catch (error) {
-            logger.error(describeError(error));
-            dispatch(setFailed(true));
-            return;
-        }
-
-        const newResponses: string[] = [];
-        const reducedPromise = commands.reduce(
-            (acc, next) =>
-                acc.then(() =>
-                    serialPort.sendCommand(next.command).then(value => {
-                        newResponses.push(
-                            formatResponse(value, next.responseRegex)
-                        );
-
-                        return Promise.resolve();
-                    })
-                ),
-            Promise.resolve()
-        );
-        try {
-            await reducedPromise;
-
-            dispatch(setResponses(newResponses));
-            serialPort.unregister();
-        } catch (e) {
-            logger.error('Received ERROR as return value from AT command');
-            dispatch(setFailed(true));
-        }
-    };
-
-const VerifyStep = ({ commands }: { commands: Command[] }) => {
+const VerifyStep = ({
+    path,
+    mode,
+    commands,
+}: {
+    path: string;
+    mode: 'LINE' | 'SHELL';
+    commands: Command[];
+}) => {
     const dispatch = useAppDispatch();
-    const device = useAppSelector(getSelectedDeviceUnsafely);
     const responses = useAppSelector(getResponses);
     const failed = useAppSelector(getFailed);
     const showSkip = useAppSelector(getShowSkip);
@@ -101,14 +63,26 @@ const VerifyStep = ({ commands }: { commands: Command[] }) => {
         return 'Verifying';
     };
 
+    const verify = useCallback(
+        () =>
+            runVerification(commands, path, mode)
+                .then(res => {
+                    dispatch(setResponses(res));
+                })
+                .catch(e => {
+                    logger.error(describeError(e));
+                    dispatch(setFailed(true));
+                })
+                .finally(() => setVerifying(false)),
+        [commands, path, mode, dispatch]
+    );
+
     useEffect(() => {
         if (!failed && !gotAllResponses && !verifying) {
             setVerifying(true);
-            dispatch(runVerification(commands, device)).then(() =>
-                setVerifying(false)
-            );
+            setTimeout(() => verify(), 3000);
         }
-    }, [failed, gotAllResponses, verifying, dispatch, commands, device]);
+    }, [failed, gotAllResponses, verifying, verify]);
 
     return (
         <Main>
@@ -158,7 +132,7 @@ const VerifyStep = ({ commands }: { commands: Command[] }) => {
                 )}
             </Main.Content>
             <Main.Footer>
-                <Back />
+                <Back disabled={verifying} />
                 {showSkip && <Skip />}
                 {failed ? (
                     <Next
@@ -166,8 +140,7 @@ const VerifyStep = ({ commands }: { commands: Command[] }) => {
                         disabled={verifying}
                         onClick={async () => {
                             setVerifying(true);
-                            await dispatch(runVerification(commands, device));
-                            setVerifying(false);
+                            await verify();
                         }}
                     />
                 ) : (
@@ -177,7 +150,35 @@ const VerifyStep = ({ commands }: { commands: Command[] }) => {
         </Main>
     );
 };
-export default (commands: Command[]) => ({
+
+const VerifyConfigLayer = ({
+    settings,
+    commands,
+}: {
+    settings: { ref: string; vComIndex: number; mode: 'LINE' | 'SHELL' }[];
+    commands: Command[];
+}) => {
+    const device = useAppSelector(getSelectedDeviceUnsafely);
+    const choice = useAppSelector(getChoiceUnsafely);
+    const choiceSettings = settings.find(s => s.ref === choice.name);
+    const path =
+        choiceSettings &&
+        device.serialPorts?.[choiceSettings.vComIndex]?.comName;
+    if (choiceSettings && path) {
+        return VerifyStep({
+            path,
+            mode: choiceSettings.mode,
+            commands,
+        });
+    }
+    logger.error(`Invalid config for ${choice.name}`);
+    return null;
+};
+
+export default (config: {
+    settings: { ref: string; vComIndex: number; mode: 'LINE' | 'SHELL' }[];
+    commands: Command[];
+}) => ({
     name: 'Verify',
-    component: () => VerifyStep({ commands }),
+    component: () => VerifyConfigLayer({ ...config }),
 });
