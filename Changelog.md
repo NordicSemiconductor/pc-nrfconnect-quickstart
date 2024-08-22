@@ -1,5 +1,9 @@
 ## 0.2.8 - UNRELEASED
 
+### Added
+
+-   Support for nRF52 DK, nRF52840 DK and nRF52833 DK.
+
 ### Changed
 
 -   Improved the verify step stability for nRF9160 DK, nRF9161 DK and nRF9151
