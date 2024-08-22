@@ -1,3 +1,9 @@
+## 0.2.8 - UNRELEASED
+
+### Changed
+
+-   Improved the verify step stability.
+
 ## 0.2.7 - 2024-08-07
 
 ### Added
