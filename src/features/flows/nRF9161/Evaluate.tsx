@@ -83,7 +83,8 @@ export default () => {
                         <p>
                             To evaluate all features you need to connect your DK
                             to nRF Cloud. Copy the attestation token below and
-                            follow the instructions.
+                            make sure you store it securely for later before
+                            proceeding with the instructions.
                         </p>
                     </div>
                     <div className="tw-flex tw-flex-row tw-gap-1">
