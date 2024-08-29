@@ -4,6 +4,11 @@
 
 -   Improved the verify step stability.
 
+### Fixed
+
+-   The hardware documentation links for the nRF9151 DK and nRF9160 DK lead to
+    non-existant pages.
+
 ## 0.2.7 - 2024-08-07
 
 ### Added
