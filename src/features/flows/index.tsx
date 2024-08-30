@@ -6,6 +6,7 @@
 
 import React from 'react';
 
+import NRF54L15 from './nRF54L15';
 import NRF9151 from './nRF9151';
 import NRF9160 from './nRF9160';
 import NRF9161 from './nRF9161';
@@ -19,4 +20,5 @@ export default {
     pca10090: NRF9160,
     pca10153: NRF9161,
     pca10171: NRF9151,
+    pca10156: NRF54L15,
 } as Record<string, Flow[]>;
