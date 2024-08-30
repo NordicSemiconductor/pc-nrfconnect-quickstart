@@ -2,7 +2,8 @@
 
 ### Changed
 
--   Improved the verify step stability.
+-   Improved the verify step stability for nRF9160 DK, nRF9161 DK and nRF9151
+    DK.
 
 ### Fixed
 
