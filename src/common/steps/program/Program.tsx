@@ -18,7 +18,9 @@ import {
     getFirmwareNote,
     getProgrammingProgress,
     getProgrammingState,
+    getResetProgress,
     ProgrammingState,
+    ResetProgress,
     setProgrammingState,
 } from './programSlice';
 import ProgressIndicators from './ProgressIndicators';
@@ -27,13 +29,17 @@ export default () => {
     const dispatch = useAppDispatch();
     const deviceConnected = useAppSelector(selectedDeviceIsConnected);
     const programmingState = useAppSelector(getProgrammingState);
+    const resetProgress = useAppSelector(getResetProgress);
     const note = useAppSelector(getFirmwareNote);
-    const failedCore = useAppSelector(getProgrammingProgress).find(
+    const programmingProgress = useAppSelector(getProgrammingProgress);
+    const failedCore = programmingProgress.find(
         p => (p.progress?.totalProgressPercentage || 0) < 100
     )?.core;
-    const resetFailed = !failedCore;
+    const notStarted = programmingProgress.every(p => !p.progress);
     const programming = programmingState === ProgrammingState.PROGRAMMING;
     const failed = programmingState === ProgrammingState.ERROR;
+    const resetFailed =
+        failed && resetProgress === ResetProgress.STARTED && !failedCore;
 
     const header = useMemo(() => {
         if (programming) {
@@ -46,24 +52,24 @@ export default () => {
     }, [programming, failed]);
 
     const errorIcon = useMemo(() => {
-        if (!deviceConnected) {
+        if (!deviceConnected || notStarted) {
             return 'mdi-lightbulb-alert-outline';
         }
         if (resetFailed) {
             return 'mdi-restore-alert';
         }
         return 'mdi-flash-alert-outline';
-    }, [deviceConnected, resetFailed]);
+    }, [deviceConnected, resetFailed, notStarted]);
 
     const errorText = useMemo(() => {
-        if (!deviceConnected) {
+        if (!deviceConnected || notStarted) {
             return 'No development kit detected';
         }
         if (resetFailed) {
             return 'Failed to reset the device';
         }
         return `Failed to program the ${failedCore} core`;
-    }, [deviceConnected, resetFailed, failedCore]);
+    }, [deviceConnected, resetFailed, failedCore, notStarted]);
 
     return (
         <Main>
@@ -78,7 +84,7 @@ export default () => {
                             content={note.content}
                         />
                     )}
-                    {programmingState === ProgrammingState.ERROR && (
+                    {failed && (
                         <IssueBox
                             mdiIcon={errorIcon}
                             color="tw-text-red"
