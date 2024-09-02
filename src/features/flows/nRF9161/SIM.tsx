@@ -15,8 +15,8 @@ const SIMCard = () => (
     <Main>
         <Main.Content heading="Plug in SIM card">
             <p>
-                There are two pre-activated SIM cards included that work out of
-                the box, as long as the SIM card has coverage in your area:
+                There is a pre-activated SIM card included that works out of the
+                box, as long as the SIM card has coverage in your area:
             </p>
             <div className="tw-pt-8">
                 <b>Onomondo</b>
