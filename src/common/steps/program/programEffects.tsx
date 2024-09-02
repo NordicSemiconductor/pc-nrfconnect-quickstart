@@ -25,16 +25,15 @@ const checkDeviceConnected =
         selectedDeviceIsConnected(getState());
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
+    const firmware = getChoiceUnsafely(getState()).firmware;
+    dispatch(prepareProgramming(firmware));
+
     if (!dispatch(checkDeviceConnected())) {
         dispatch(setProgrammingState(ProgrammingState.ERROR));
         return;
     }
 
     const device = getSelectedDeviceUnsafely(getState());
-    const firmware = getChoiceUnsafely(getState()).firmware;
-
-    dispatch(prepareProgramming(firmware));
-
     program(
         device,
         firmware,
