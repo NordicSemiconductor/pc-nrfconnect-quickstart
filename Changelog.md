@@ -1,14 +1,14 @@
-## 0.2.8 - UNRELEASED
+## 0.2.8 - 2024-09-04
 
 ### Changed
 
--   Improved the verify step stability for nRF9160 DK, nRF9161 DK and nRF9151
-    DK.
+-   Improved the verify step stability for the nRF9160 DK, the nRF9161 DK, and
+    the nRF9151 DK.
 
 ### Fixed
 
--   The hardware documentation links for the nRF9151 DK and nRF9160 DK lead to
-    non-existant pages.
+-   The hardware documentation links for the nRF9151 DK and nRF9160 DK that led
+    to non-existent pages.
 
 ## 0.2.7 - 2024-08-07
 
