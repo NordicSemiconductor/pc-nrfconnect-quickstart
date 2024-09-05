@@ -13,7 +13,6 @@ import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
-import Empty from './Empty';
 
 const infoConfig = {
     title: 'Next level multiprotocol SoC',
