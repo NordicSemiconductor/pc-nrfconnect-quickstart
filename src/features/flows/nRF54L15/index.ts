@@ -8,6 +8,7 @@ import Verify from '../../../common/steps/5xFamilyVerify';
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
 import Info from '../../../common/steps/Info';
+import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
@@ -104,6 +105,26 @@ const verifyConfig = [
     },
 ];
 
+const learnConfig = [
+    {
+        label: 'Developer Academy',
+        description: 'Interactive online learning platform for Nordic devices.',
+        link: {
+            label: 'Nordic Developer Academy',
+            href: 'https://academy.nordicsemi.com/',
+        },
+    },
+    {
+        label: 'Working with nRF54L Series',
+        description:
+            'In-depth information about features, DFU solution, development and much more.',
+        link: {
+            label: 'Working with nRF54L Series',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l.html',
+        },
+    },
+];
+
 const developConfig = [
     {
         ref: 'Hello World',
@@ -132,7 +153,7 @@ export default [
     Program(programConfig),
     Verify(verifyConfig),
     Empty('Evaluate'),
-    Empty('Learn'),
+    Learn(learnConfig),
     Develop(developConfig),
     Apps(appsConfig),
 ];
