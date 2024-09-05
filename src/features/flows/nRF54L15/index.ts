@@ -7,6 +7,7 @@
 import Verify from '../../../common/steps/5xFamilyVerify';
 import Apps from '../../../common/steps/Apps';
 import Develop from '../../../common/steps/develop';
+import Evaluate from '../../../common/steps/Evaluate';
 import Info from '../../../common/steps/Info';
 import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
@@ -105,6 +106,76 @@ const verifyConfig = [
     },
 ];
 
+const evaluateConfig = [
+    {
+        ref: 'Hello World',
+        resources: [
+            {
+                title: 'Test with serial output',
+                description:
+                    'Open the serial terminal application and press reset on the device to print output.',
+                app: 'pc-nrfconnect-serial-terminal',
+                vComIndex: 1,
+            },
+            {
+                title: 'Documentation',
+                description:
+                    'Read the whole documentation for the Hello World application.',
+                mainLink: {
+                    label: 'Open documentation',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+                },
+            },
+        ],
+    },
+    {
+        ref: 'LED Button Service',
+        resources: [
+            {
+                title: 'Test the sample',
+                description:
+                    'Follow the test instructions to evaluate the sample.',
+                mainLink: {
+                    label: 'Test instructions',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html#testing',
+                },
+            },
+            {
+                title: 'Documentation',
+                description:
+                    'Read the whole documentation for the Peripheral LBS application.',
+                mainLink: {
+                    label: 'Open documentation',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+                },
+            },
+        ],
+    },
+    {
+        ref: 'Nordic UART Service',
+        resources: [
+            {
+                title: 'Test the sample',
+                description:
+                    'Follow the test instructions to evaluate the sample.',
+                mainLink: {
+                    label: 'Open instructions',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html#testing',
+                },
+            },
+            {
+                title: 'Documentation',
+                description:
+                    'Read the whole documentation for the Nordic UART application.',
+                mainLink: {
+                    label: 'Open documentation',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+                },
+            },
+        ],
+    },
+];
+
 const learnConfig = [
     {
         label: 'Developer Academy',
@@ -152,7 +223,7 @@ export default [
     Rename(),
     Program(programConfig),
     Verify(verifyConfig),
-    Empty('Evaluate'),
+    Evaluate(evaluateConfig),
     Learn(learnConfig),
     Develop(developConfig),
     Apps(appsConfig),
