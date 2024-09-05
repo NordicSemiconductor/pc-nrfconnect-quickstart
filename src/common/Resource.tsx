@@ -85,12 +85,14 @@ export const AppResourceButton = ({
     disabled,
     app,
     vComIndex,
+    title,
     onInstallStart,
     onInstallFinish,
 }: {
     description: string;
     app: string;
     links?: Link[];
+    title?: string;
     disabled?: boolean;
     vComIndex?: number;
     onInstallStart?: () => void;
@@ -114,7 +116,7 @@ export const AppResourceButton = ({
         <div className="tw-flex tw-flex-row tw-justify-between tw-gap-10">
             <div className="tw-w-80">
                 <div>
-                    <b>{displayName}</b>
+                    <b>{title || displayName}</b>
                 </div>
                 {description}
                 {links?.map(({ label, href }) => (
