@@ -84,6 +84,7 @@ export const AppResourceButton = ({
     links,
     disabled,
     app,
+    vComIndex,
     onInstallStart,
     onInstallFinish,
 }: {
@@ -91,12 +92,16 @@ export const AppResourceButton = ({
     app: string;
     links?: Link[];
     disabled?: boolean;
+    vComIndex?: number;
     onInstallStart?: () => void;
     onInstallFinish?: () => void;
 }) => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [displayName, setDisplayName] = useState(app);
     const [isInstalling, setIsInstalling] = useState(false);
+    const path = vComIndex
+        ? device.serialPorts?.[vComIndex]?.comName
+        : undefined;
 
     useEffect(() => {
         apps.getDownloadableApps().then(({ apps: receivedApps }) => {
@@ -143,15 +148,17 @@ export const AppResourceButton = ({
                         onInstallFinish?.();
                     }
 
+                    const deviceOptions = path
+                        ? { serialPortPath: path }
+                        : { serialNumber: device.serialNumber };
+
                     openWindow.openApp(
                         {
                             name: app,
                             source: 'official',
                         },
                         {
-                            device: {
-                                serialNumber: device.serialNumber,
-                            },
+                            device: deviceOptions,
                         }
                     );
 

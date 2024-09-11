@@ -30,6 +30,7 @@ interface ExternalLinkResource extends CommonResourceProps {
 
 interface AppResource extends CommonResourceProps {
     app: string;
+    vComIndex?: number;
 }
 
 const isExternalLinkResource = (
@@ -84,6 +85,7 @@ const EvaluateStep = ({
                                 links={resource.supplementaryLinks}
                                 onInstallStart={() => setBusy(true)}
                                 onInstallFinish={() => setBusy(false)}
+                                vComIndex={resource.vComIndex}
                             />
                         )
                     )}
