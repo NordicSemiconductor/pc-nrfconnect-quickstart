@@ -206,6 +206,7 @@ const evaluationConfig = [
                 app: 'pc-nrfconnect-serial-terminal',
                 description:
                     'Use the Serial Terminal PC application as a serial interface to send AT commands to the device',
+                vComIndex: 0,
                 supplementaryLinks: [
                     {
                         label: 'AT Commands reference manual',
@@ -251,6 +252,7 @@ const evaluationConfig = [
             {
                 app: 'pc-nrfconnect-serial-terminal',
                 description: 'Serial interface to send commands to the device.',
+                vComIndex: 0,
                 supplemetaryLinks: [
                     {
                         label: 'Modem shell commands',

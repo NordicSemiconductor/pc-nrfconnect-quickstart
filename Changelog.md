@@ -1,3 +1,10 @@
+## UNRELEASED
+
+### Added
+
+-   Opening the nRF Connect Serial Terminal app from the Evaluate step now
+    always automatically selects the correct serial port.
+
 ## 0.3.0 - 2024-09-04
 
 ### Changed
