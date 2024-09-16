@@ -1,3 +1,10 @@
+## UNRELEASED
+
+### Added
+
+-   Rereferenced resource for developing with nRF91 Series devices in the
+    `Learn` step for the nRF9151 DK and nRF9161 DK.
+
 ## 0.3.0 - 2024-09-04
 
 ### Changed

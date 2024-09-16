@@ -287,6 +287,15 @@ const learnConfig = [
             href: 'https://docs.nordicsemi.com/bundle/nwp_044/page/WP/nwp_044/intro.html',
         },
     },
+    {
+        label: 'Developing with nRF91 Series',
+        description:
+            'In-depth information on working with nRF91 Series devices.',
+        link: {
+            label: 'Developing with nRF91 Series',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf91/index.html',
+        },
+    },
 ];
 
 const developConfig = [
