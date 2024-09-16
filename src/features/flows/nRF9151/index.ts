@@ -271,22 +271,33 @@ const evaluationConfig = [
         ],
     },
 ];
+
 const learnConfig = [
     {
         label: 'Developer Academy',
-        description: 'Interactive online learning platform for Nordic devices.',
+        description:
+            'Speed up your wireless IoT learning journey with Nordic devices.',
         link: {
             label: 'Nordic Developer Academy',
             href: 'https://academy.nordicsemi.com/',
         },
     },
     {
-        label: 'Best practices',
+        label: 'nRF Connect SDK and Zephyr',
         description:
-            'The main aspects and decisions you need to consider before and during the development phase of a low-power cellular Internet of Things product.',
+            'Learn about the application development in the nRF Connect SDK and Zephyr.',
         link: {
-            label: 'nWP044 - Best practices for cellular IoT development',
-            href: 'https://docs.nordicsemi.com/bundle/nwp_044/page/WP/nwp_044/intro.html',
+            label: 'Application development',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev.html',
+        },
+    },
+    {
+        label: 'Developing with nRF91 Series',
+        description:
+            'Device-specific information on working with nRF91 Series devices.',
+        link: {
+            label: 'Developing with nRF91 Series',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf91/index.html',
         },
     },
 ];
