@@ -18,6 +18,7 @@ import { AppResourceButton, ResourceWithButton } from '../Resource';
 import StepByChoice from '../StepByChoice';
 
 interface CommonResourceProps {
+    title?: string;
     description: string;
     supplementaryLinks?: { label: string; href: string }[];
 }
@@ -81,6 +82,7 @@ const EvaluateStep = ({
                                 key={resource.app}
                                 description={resource.description}
                                 app={resource.app}
+                                title={resource.title}
                                 links={resource.supplementaryLinks}
                                 onInstallStart={() => setBusy(true)}
                                 onInstallFinish={() => setBusy(false)}
