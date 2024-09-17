@@ -220,6 +220,7 @@ const appsConfig = [
     'pc-nrfconnect-ble',
     'pc-nrfconnect-programmer',
     'pc-nrfconnect-serial-terminal',
+    'pc-nrfconnect-serial-board-configurator',
     'pc-nrfconnect-dtm',
 ];
 
