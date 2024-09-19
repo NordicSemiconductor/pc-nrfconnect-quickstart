@@ -47,7 +47,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_serial_lte_modem_debug_2024-07-04_20471118.hex',
+                file: 'nrf9151dk_serial_lte_modem.hex',
                 link: {
                     label: 'Serial LTE Modem',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
@@ -80,7 +80,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_asset_tracker_v2_debug_2024-07-04_20471118.hex',
+                file: 'nrf9151dk_asset_tracker.hex',
                 link: {
                     label: 'Asset Tracker v2',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
@@ -113,7 +113,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_nrfcloud_multi_service_coap_debug_2024-07-04_20471118.hex',
+                file: 'nrf9151dk_nrfcloud_multi_service.hex',
                 link: {
                     label: 'nRF Cloud multi-service',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
@@ -145,7 +145,7 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9151dk_modem_shell_debug_2024-07-04_20471118.hex',
+                file: 'nrf9151dk_modem_shell.hex',
                 link: {
                     label: 'Modem Shell',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
