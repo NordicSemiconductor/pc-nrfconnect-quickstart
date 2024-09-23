@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     classNames,
     getPersistedNickname,
@@ -37,6 +37,14 @@ export default () => {
     const [selectedSerialNumber, setSelectedSerialNumber] = useState<
         string | undefined
     >(previouslySelectedDevice?.serialNumber);
+
+    useEffect(() => {
+        if (
+            !connectedDevices.find(d => d.serialNumber === selectedSerialNumber)
+        ) {
+            setSelectedSerialNumber(undefined);
+        }
+    }, [connectedDevices, selectedSerialNumber]);
 
     const items = connectedDevices.map(device => {
         const isSelected = selectedSerialNumber === device.serialNumber;
