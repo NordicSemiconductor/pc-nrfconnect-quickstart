@@ -91,7 +91,7 @@ export default ({ vComIndex, regex }: { vComIndex: number; regex: RegExp }) => {
                 subHeading="Functional verification of the development kit and code"
             >
                 <p>Serial output from the {choice.name} application:</p>
-                <div className="alt-font tw-mt-4 tw-bg-gray-600 tw-p-4 tw-text-gray-50">
+                <div className="alt-font tw-relative tw-mt-4 tw-bg-gray-700 tw-p-4 tw-text-gray-50">
                     {!validResponse && <div className="cursor" />}
                     {validResponse
                         ?.split('\n')
@@ -99,6 +99,12 @@ export default ({ vComIndex, regex }: { vComIndex: number; regex: RegExp }) => {
                         .map(line => (
                             <p key={line}>{line}</p>
                         ))}
+                    {validResponse && (
+                        <div className="tw-absolute tw-right-4 tw-top-1/2 tw--translate-y-1/2">
+                            <span className="mdi mdi-circle tw-top-0.5 tw-z-0 tw-text-4xl tw-text-green" />
+                            <span className="mdi-check-bold mdi tw-absolute tw-left-1.5 tw-top-1 tw-z-10 tw-text-2xl tw-text-white" />
+                        </div>
+                    )}
                 </div>
                 {error && (
                     <div className="tw-pt-4">
