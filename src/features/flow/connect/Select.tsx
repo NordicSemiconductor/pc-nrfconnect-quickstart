@@ -62,7 +62,10 @@ export default () => {
             // This is to avoid the case where multiple devices are connected and all but one is removed
             // Without this it would cause an autoselect which wouldn't be intuitive
             firstTime = false;
-            if (connectedDevices.length === 1) {
+            if (
+                connectedDevices.length === 1 &&
+                isSupportedDevice(connectedDevices[0])
+            ) {
                 select(connectedDevices[0]);
             }
         }
