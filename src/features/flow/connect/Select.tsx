@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     classNames,
     getPersistedNickname,
@@ -30,6 +30,7 @@ const isSupportedDevice = (device: DeviceWithSerialnumber) =>
     device.devkit?.boardVersion &&
     Object.keys(flows).includes(device.devkit?.boardVersion?.toLowerCase());
 
+let firstTime = true;
 export default () => {
     const dispatch = useAppDispatch();
     const connectedDevices = useAppSelector(getConnectedDevices);
@@ -45,6 +46,22 @@ export default () => {
             setSelectedSerialNumber(undefined);
         }
     }, [connectedDevices, selectedSerialNumber]);
+
+    const select = useCallback(
+        (device: DeviceWithSerialnumber) => {
+            dispatch(selectDevice(device));
+            logger.debug(`Selected device: ${deviceName(device)}`);
+            dispatch(setIsConnectVisible(false));
+        },
+        [dispatch]
+    );
+
+    useEffect(() => {
+        if (firstTime && connectedDevices.length === 1) {
+            firstTime = false;
+            select(connectedDevices[0]);
+        }
+    }, [connectedDevices, select]);
 
     const items = connectedDevices.map(device => {
         const isSelected = selectedSerialNumber === device.serialNumber;
@@ -117,11 +134,7 @@ export default () => {
                                 device.serialNumber === selectedSerialNumber
                         );
                         if (selectedDevice?.devkit?.boardVersion) {
-                            dispatch(selectDevice(selectedDevice));
-                            logger.debug(
-                                `Selected device: ${deviceName(selectedDevice)}`
-                            );
-                            dispatch(setIsConnectVisible(false));
+                            select(selectedDevice);
                         }
                     }}
                 />
