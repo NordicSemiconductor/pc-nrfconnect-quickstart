@@ -49,6 +49,7 @@ export default () => {
 
     const select = useCallback(
         (device: DeviceWithSerialnumber) => {
+            firstTime = false;
             dispatch(selectDevice(device));
             logger.debug(`Selected device: ${deviceName(device)}`);
             dispatch(setIsConnectVisible(false));
@@ -57,9 +58,13 @@ export default () => {
     );
 
     useEffect(() => {
-        if (firstTime && connectedDevices.length === 1) {
+        if (firstTime && connectedDevices.length > 0) {
+            // This is to avoid the case where multiple devices are connected and all but one is removed
+            // Without this it would cause an autoselect which wouldn't be intuitive
             firstTime = false;
-            select(connectedDevices[0]);
+            if (connectedDevices.length === 1) {
+                select(connectedDevices[0]);
+            }
         }
     }, [connectedDevices, select]);
 
