@@ -117,17 +117,11 @@ export default () => {
                                 device.serialNumber === selectedSerialNumber
                         );
                         if (selectedDevice?.devkit?.boardVersion) {
-                            try {
-                                dispatch(selectDevice(selectedDevice));
-                                logger.debug(
-                                    `Selected device: ${deviceName(
-                                        selectedDevice
-                                    )}`
-                                );
-                                dispatch(setIsConnectVisible(false));
-                            } catch (e) {
-                                logger.error(e);
-                            }
+                            dispatch(selectDevice(selectedDevice));
+                            logger.debug(
+                                `Selected device: ${deviceName(selectedDevice)}`
+                            );
+                            dispatch(setIsConnectVisible(false));
                         }
                     }}
                 />
