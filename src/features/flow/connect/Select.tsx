@@ -49,6 +49,7 @@ export default () => {
 
     const select = useCallback(
         (device: DeviceWithSerialnumber) => {
+            firstTime = false;
             dispatch(selectDevice(device));
             logger.debug(`Selected device: ${deviceName(device)}`);
             dispatch(setIsConnectVisible(false));
@@ -58,7 +59,6 @@ export default () => {
 
     useEffect(() => {
         if (firstTime && connectedDevices.length === 1) {
-            firstTime = false;
             select(connectedDevices[0]);
         }
     }, [connectedDevices, select]);
