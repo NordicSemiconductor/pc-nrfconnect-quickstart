@@ -217,7 +217,6 @@ const developConfig = [
 ];
 
 const appsConfig = [
-    'pc-nrfconnect-ble',
     'pc-nrfconnect-programmer',
     'pc-nrfconnect-serial-terminal',
     'pc-nrfconnect-board-configurator',
