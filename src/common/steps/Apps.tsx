@@ -42,11 +42,13 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
             <Spinner size="sm" />
         ),
         content: (
-            <div className="tw-flex tw-flex-row tw-items-start tw-justify-start">
+            <div className="tw-flex tw-flex-row tw-items-center tw-justify-start">
                 <div className="tw-w-32 tw-flex-shrink-0 tw-pr-5">
                     <b>{app.displayName}</b>
                 </div>
-                <div className="tw-w-80">{app.description}</div>
+                <div className="tw-flex tw-w-80 tw-flex-col">
+                    {app.description}
+                </div>
             </div>
         ),
     }));
