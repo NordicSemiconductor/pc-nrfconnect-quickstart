@@ -4,7 +4,7 @@
 
 -   Opening the nRF Connect Serial Terminal app from the Evaluate step now
     always automatically selects the correct serial port.
--   Support for the nRF54L15 DK.
+-   Support for the nRF54L15 DK, nRF52 DK, nRF52840 DK, and nRF52833 DK.
 -   New learning resource links in the Learn step for the nRF9151 DK, nRF9160 DK
     and nRF9161 DK.
 -   Automatic selection of the device if only one is connected when at the
