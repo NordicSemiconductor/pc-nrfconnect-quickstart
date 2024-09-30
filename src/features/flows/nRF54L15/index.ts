@@ -193,7 +193,7 @@ const learnConfig = [
     {
         label: 'Developing with nRF54L Series',
         description:
-            'Device-specific information about features, DFU solution, development and much more.',
+            'Device-specific information about features, DFU solution, and development.',
         link: {
             label: 'Developing with nRF54L Series',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/index.html',
