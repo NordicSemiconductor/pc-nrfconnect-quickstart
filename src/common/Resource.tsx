@@ -101,9 +101,10 @@ export const AppResourceButton = ({
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [displayName, setDisplayName] = useState(app);
     const [isInstalling, setIsInstalling] = useState(false);
-    const path = vComIndex
-        ? device.serialPorts?.[vComIndex]?.comName
-        : undefined;
+    const path =
+        vComIndex !== undefined
+            ? device.serialPorts?.[vComIndex]?.comName
+            : undefined;
 
     useEffect(() => {
         apps.getDownloadableApps().then(({ apps: receivedApps }) => {
