@@ -12,7 +12,7 @@ import { type RootState } from '../../../app/store';
 export interface Firmware {
     core: 'Modem' | 'Application' | 'Network';
     file: string;
-    link: { label: string; href: string };
+    link?: { label: string; href: string };
 }
 
 interface FirmwareNote {
