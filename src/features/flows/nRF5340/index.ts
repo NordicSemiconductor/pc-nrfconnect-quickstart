@@ -15,27 +15,27 @@ import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
 
 const infoConfig = {
-    title: 'Next-level multiprotocol SoC',
+    title: 'Dual-core Bluetooth 5.4 SoC',
     markdownContent:
-        '![nRF54L15 DK](54L15DK.png)  \n&nbsp;  \nnRF54L15 is the first System-on-Chip (SoC) in the nRF54L Series. It is an ultra-low power Bluetooth 5.4 SoC with a new best-in-class multiprotocol radio and advanced security features.  \n&nbsp;  \nThe nRF54L Series takes the popular nRF52 Series to the next level with excellent processing power and efficiency, expanded memory, and new peripherals, all in a more compact package.',
+        '![nRF5340 DK](5340DK.png)  \n&nbsp;  \nThe nRF5340 DK supports development with an extensive range of wireless protocols. It supports Bluetooth® Low Energy with features such as high-throughput 2 Mbps, Advertising Extensions, and Long Range. Mesh protocols (like Bluetooth Mesh, Thread, and Zigbee) can run concurrently with Bluetooth Low Energy, enabling smartphones to provision, commission, configure, and control mesh nodes, which is a prerequisite for [Matter](https://www.nordicsemi.com/Products/Technologies/Matter) applications. The DK also supports NFC, ANT, 802.15.4, and 2.4-GHz proprietary protocols.  \n&nbsp;  \n&nbsp;  \n![nRF5340 DK Technologies](5340DKTech.png)  \n&nbsp;  \nThe nRF5340 DK is bundled with an NFC antenna that quickly enables testing of nRF5340’s NFC-A tag functionality. The board comes with the SEGGER J-Link debugger, enabling full-blown programming and debugging of both the nRF5340 SoC and external targets.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf5340_dk/page/UG/dk/intro.html)',
 };
 
 const programConfig = [
     {
         name: 'Hello World',
         type: 'jlink',
-        description: 'Program to check that UART on this DK is working.',
+        description: 'Check that UART is working with this sample.',
         documentation: {
             label: 'Hello World',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/zephyr/samples/hello_world/README.html',
         },
         firmware: [
             {
                 core: 'Application',
-                file: 'nrf54l15dk_hello_world.hex',
+                file: 'nrf53dk_hello_world.hex',
                 link: {
                     label: 'Hello World',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/zephyr/samples/hello_world/README.html',
                 },
             },
         ],
@@ -44,38 +44,46 @@ const programConfig = [
         name: 'Peripheral LED Button Service',
         type: 'jlink',
         description:
-            'Program to check that the LEDs and buttons on the DK are working.',
+            'Check that the LEDs and buttons on the DK are working with this sample.',
         documentation: {
             label: 'Peripheral LBS',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
         },
         firmware: [
             {
                 core: 'Application',
-                file: 'nrf54l15dk_lbs.hex',
+                file: 'nrf53dk_lbs_app.hex',
                 link: {
                     label: 'Peripheral LBS',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
                 },
+            },
+            {
+                core: 'Network',
+                file: 'nrf53dk_lbs_net.hex',
             },
         ],
     },
     {
         name: 'Peripheral UART Service',
         type: 'jlink',
-        description: 'Program to check that UART over Bluetooth LE is working.',
+        description: 'Check that UART over Bluetooth® LE is working.',
         documentation: {
             label: 'Peripheral UART Service',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_uart/README.html',
         },
         firmware: [
             {
                 core: 'Application',
-                file: 'nrf54l15dk_peripheral_uart.hex',
+                file: 'nrf53dk_peripheral_uart_app.hex',
                 link: {
                     label: 'Peripheral UART Service',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_uart/README.html',
                 },
+            },
+            {
+                core: 'Network',
+                file: 'nrf53dk_peripheral_uart_net.hex',
             },
         ],
     },
@@ -86,7 +94,7 @@ const verifyConfig = [
         ref: 'Hello World',
         config: {
             vComIndex: 1,
-            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf54l15pdk@.*\r\n)/,
+            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf5340dk\/nrf5340)/,
         },
     },
     {
@@ -175,7 +183,7 @@ const learnConfig = [
     {
         label: 'Developer Academy',
         description:
-            'Speed up your wireless IoT learning journey with Nordic devices.',
+            'Get the know-how to build wireless products using Nordic Semiconductor solutions.',
         link: {
             label: 'Nordic Developer Academy',
             href: 'https://academy.nordicsemi.com/',
@@ -191,12 +199,12 @@ const learnConfig = [
         },
     },
     {
-        label: 'Developing with nRF54L Series',
+        label: 'Developing with nRF53 Series',
         description:
             'Device-specific information about features, DFU solution, and development.',
         link: {
-            label: 'Developing with nRF54L Series',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf54l/index.html',
+            label: 'Developing with nRF53 Series',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/app_dev/device_guides/nrf53/index.html',
         },
     },
 ];
@@ -219,7 +227,6 @@ const developConfig = [
 const appsConfig = [
     'pc-nrfconnect-programmer',
     'pc-nrfconnect-serial-terminal',
-    'pc-nrfconnect-board-configurator',
     'pc-nrfconnect-dtm',
 ];
 
