@@ -112,7 +112,7 @@ const evaluateConfig = [
             {
                 title: 'Test the sample',
                 description:
-                    'Open the nRF Connect Serial terminal application and press reset on the device to print the output.',
+                    'Open the nRF Connect Serial Terminal application and press reset on the device to print the output.',
                 app: 'pc-nrfconnect-serial-terminal',
                 vComIndex: 1,
             },

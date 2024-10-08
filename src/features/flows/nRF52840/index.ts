@@ -112,7 +112,7 @@ const evaluateConfig = [
             {
                 title: 'Test the sample',
                 description:
-                    'Open the nRF Connect Serial terminal application and press reset on the device to print the output.',
+                    'Open the nRF Connect Serial Terminal application and press reset on the device to print the output.',
                 app: 'pc-nrfconnect-serial-terminal',
                 vComIndex: 0,
             },
@@ -175,7 +175,7 @@ const learnConfig = [
     {
         label: 'Developer Academy',
         description:
-            'Get the know-how to build wireless products using Nordic Semiconductor solutions',
+            'Get the know-how to build wireless products using Nordic Semiconductor solutions.',
         link: {
             label: 'Nordic Developer Academy',
             href: 'https://academy.nordicsemi.com/',
