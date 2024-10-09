@@ -129,9 +129,6 @@ export default () => {
                     items={items}
                     onSelect={item => setSelectedSerialNumber(item.id)}
                 />
-                <div className="tw-pt-5">
-                    <Searching />
-                </div>
             </Main.Content>
             <Main.Footer>
                 <Next
