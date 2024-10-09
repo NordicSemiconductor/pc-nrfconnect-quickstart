@@ -44,7 +44,7 @@ export default () => {
                             <IssueBox
                                 mdiIcon="mdi-clock-alert-outline"
                                 color="tw-text-primary"
-                                title="Detection is taking longer than expected"
+                                title="Detection is taking longer than expected. Ensure the kit is powered on."
                             />
                         </div>
                     )}
