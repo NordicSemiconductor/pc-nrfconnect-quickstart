@@ -24,7 +24,7 @@ const programConfig = [
     {
         name: 'Hello World',
         type: 'jlink',
-        description: 'Check that UART is working with this sample.',
+        description: 'Print "Hello World" to a console using UART.',
         documentation: {
             label: 'Hello World',
             href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/zephyr/samples/hello_world/README.html',
@@ -44,7 +44,7 @@ const programConfig = [
         name: 'Peripheral LED Button Service',
         type: 'jlink',
         description:
-            'Check that the LEDs and buttons on the DK are working with this sample.',
+            'Sample for controlling LEDs and buttons on the DK. Test it with Bluetooth® LE in the Evaluate step.',
         documentation: {
             label: 'Peripheral LBS',
             href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
@@ -65,11 +65,12 @@ const programConfig = [
         ],
     },
     {
-        name: 'Peripheral UART Service',
+        name: 'Peripheral UART',
         type: 'jlink',
-        description: 'Check that UART over Bluetooth® LE is working.',
+        description:
+            'Sample for emulating UART over Bluetooth® LE. Test it with Bluetooth® LE in the Evaluate step.',
         documentation: {
-            label: 'Peripheral UART Service',
+            label: 'Peripheral UART',
             href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_uart/README.html',
         },
         firmware: [
