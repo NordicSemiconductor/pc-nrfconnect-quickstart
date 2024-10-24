@@ -11,7 +11,7 @@ import {
     shellParser,
     xTerminalShellParserWrapper,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { Terminal } from 'xterm-headless';
+import { Terminal } from '@xterm/headless';
 
 import { formatResponse } from './formatATResponse';
 
