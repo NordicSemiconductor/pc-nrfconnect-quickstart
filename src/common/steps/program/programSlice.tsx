@@ -8,7 +8,7 @@ import { type Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../../app/store';
-import { Firmware, FirmwareNote } from '../../../features/device/deviceSlice';
+import type { Firmware } from '../../../features/device/deviceSlice';
 
 export enum ResetProgress {
     NOT_STARTED,
@@ -31,14 +31,12 @@ interface State {
     programmingState: ProgrammingState;
     firmwareWithProgress: FirmwareWithProgress[];
     resetProgress: ResetProgress;
-    firmwareNote: FirmwareNote | undefined;
 }
 
 const initialState: State = {
     programmingState: ProgrammingState.SELECT_FIRMWARE,
     firmwareWithProgress: [],
     resetProgress: ResetProgress.NOT_STARTED,
-    firmwareNote: undefined,
 };
 
 const slice = createSlice({
@@ -84,11 +82,6 @@ const slice = createSlice({
 
             state.firmwareWithProgress = updatedFirmwareWithProgress;
         },
-        setFirmwareNote: (
-            state,
-            action: PayloadAction<FirmwareNote | undefined>
-        ) => {
-            state.firmwareNote = action.payload;
         },
 
         reset: () => initialState,
@@ -100,7 +93,6 @@ export const {
     setResetProgress,
     prepareProgramming,
     setProgrammingProgress,
-    setFirmwareNote,
     reset,
 } = slice.actions;
 
@@ -110,7 +102,5 @@ export const getProgrammingProgress = (state: RootState) =>
     state.steps.program.firmwareWithProgress;
 export const getResetProgress = (state: RootState) =>
     state.steps.program.resetProgress;
-export const getFirmwareNote = (state: RootState) =>
-    state.steps.program.firmwareNote;
 
 export default slice.reducer;

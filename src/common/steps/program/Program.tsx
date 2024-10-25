@@ -8,14 +8,16 @@ import React, { useMemo } from 'react';
 import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { selectedDeviceIsConnected } from '../../../features/device/deviceSlice';
+import {
+    getChoiceUnsafely,
+    selectedDeviceIsConnected,
+} from '../../../features/device/deviceSlice';
 import { Back } from '../../Back';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { InfoBox, IssueBox } from '../../NoticeBox';
 import { resetDevice, startProgramming } from './programEffects';
 import {
-    getFirmwareNote,
     getProgrammingProgress,
     getProgrammingState,
     getResetProgress,
@@ -30,7 +32,7 @@ export default () => {
     const deviceConnected = useAppSelector(selectedDeviceIsConnected);
     const programmingState = useAppSelector(getProgrammingState);
     const resetProgress = useAppSelector(getResetProgress);
-    const note = useAppSelector(getFirmwareNote);
+    const note = useAppSelector(getChoiceUnsafely).firmwareNote;
     const programmingProgress = useAppSelector(getProgrammingProgress);
     const failedCore = programmingProgress.find(
         p => (p.progress?.totalProgressPercentage || 0) < 100

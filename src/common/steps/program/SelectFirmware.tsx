@@ -106,8 +106,6 @@ export default ({ choices }: { choices: Choice[] }) => {
                         });
 
                         dispatch(setChoice(selected));
-                        if (selected.firmwareNote)
-                            dispatch(setFirmwareNote(selected.firmwareNote));
                         dispatch(startProgramming());
                     }}
                 />
