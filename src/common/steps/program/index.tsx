@@ -7,8 +7,9 @@
 import React from 'react';
 
 import { useAppSelector } from '../../../app/store';
+import { Choice } from '../../../features/device/deviceSlice';
 import Program from './Program';
-import { Choice, getProgrammingState, ProgrammingState } from './programSlice';
+import { getProgrammingState, ProgrammingState } from './programSlice';
 import SelectFirmware from './SelectFirmware';
 
 const ProgramStep = ({ choices }: { choices: Choice[] }) => {

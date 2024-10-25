@@ -8,26 +8,7 @@ import { type Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../../app/store';
-
-export interface Firmware {
-    core: 'Modem' | 'Application' | 'Network';
-    file: string;
-    link?: { label: string; href: string };
-}
-
-interface FirmwareNote {
-    title: string;
-    content: string;
-}
-
-export interface Choice {
-    name: string;
-    type: 'jlink';
-    description: string;
-    documentation: { label: string; href: string };
-    firmware: Firmware[];
-    firmwareNote: FirmwareNote | undefined;
-}
+import { Firmware, FirmwareNote } from '../../../features/device/deviceSlice';
 
 export enum ResetProgress {
     NOT_STARTED,

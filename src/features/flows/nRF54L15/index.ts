@@ -11,8 +11,8 @@ import Evaluate from '../../../common/steps/Evaluate';
 import Info from '../../../common/steps/Info';
 import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
-import { Choice } from '../../../common/steps/program/programSlice';
 import Rename from '../../../common/steps/Rename';
+import { Choice } from '../../device/deviceSlice';
 
 const infoConfig = {
     title: 'Next-level multiprotocol SoC',

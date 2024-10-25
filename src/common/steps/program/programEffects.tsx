@@ -4,8 +4,17 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import { Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
+import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
+import path from 'path';
+
 import { type AppThunk, RootState } from '../../../app/store';
-import { program, reset } from '../../../features/device/deviceLib';
+import { getFirmwareFolder } from '../../../features/device/deviceGuides';
+import {
+    DeviceWithSerialnumber,
+    reset,
+} from '../../../features/device/deviceLib';
+import type { Firmware } from '../../../features/device/deviceSlice';
 import {
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
@@ -61,4 +70,36 @@ export const resetDevice = (): AppThunk => (dispatch, getState) => {
             dispatch(setProgrammingState(ProgrammingState.SUCCESS));
         })
         .catch(() => dispatch(setProgrammingState(ProgrammingState.ERROR)));
+};
+
+const program = (
+    device: DeviceWithSerialnumber,
+    firmware: Firmware[],
+    onProgress: (index: number, progress: Progress) => void,
+    onResetProgress: (resetProgress: ResetProgress) => void
+) => {
+    const batch = NrfutilDeviceLib.batch();
+    batch.recover('Application');
+    firmware.forEach(({ file }, index) => {
+        batch.program(
+            path.join(getFirmwareFolder(), file),
+            'Application',
+            undefined,
+            undefined,
+            { onProgress: progress => onProgress(index, progress) }
+        );
+    });
+
+    batch.reset('Application', 'RESET_SYSTEM', {
+        onTaskBegin: () => {
+            onResetProgress(ResetProgress.STARTED);
+        },
+        onTaskEnd: end => {
+            if (end.result === 'success') {
+                onResetProgress(ResetProgress.FINISHED);
+            }
+        },
+    });
+
+    return batch.run(device);
 };

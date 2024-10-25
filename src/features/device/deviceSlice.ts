@@ -7,8 +7,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
-import { Choice } from '../../common/steps/program/programSlice';
 import { DeviceWithSerialnumber } from './deviceLib';
+
+export interface Firmware {
+    core: 'Modem' | 'Application' | 'Network';
+    file: string;
+    link?: { label: string; href: string };
+}
+
+export interface FirmwareNote {
+    title: string;
+    content: string;
+}
+
+export interface Choice {
+    name: string;
+    type: 'jlink';
+    description: string;
+    documentation: { label: string; href: string };
+    firmware: Firmware[];
+    firmwareNote: FirmwareNote | undefined;
+}
 
 interface State {
     choice?: Choice;
