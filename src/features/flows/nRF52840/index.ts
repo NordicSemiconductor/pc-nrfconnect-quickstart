@@ -27,7 +27,7 @@ const programConfig = [
         description: 'Print "Hello World" to a console using UART.',
         documentation: {
             label: 'Hello World',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/zephyr/samples/hello_world/README.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
         },
         firmware: [
             {
@@ -35,7 +35,7 @@ const programConfig = [
                 file: 'nrf52840dk_hello_world.hex',
                 link: {
                     label: 'Hello World',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/zephyr/samples/hello_world/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
                 },
             },
         ],
@@ -47,7 +47,7 @@ const programConfig = [
             'Sample for controlling LEDs and buttons on the DK. Test it with Bluetooth® LE in the Evaluate step.',
         documentation: {
             label: 'Peripheral LBS',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
         },
         firmware: [
             {
@@ -55,7 +55,7 @@ const programConfig = [
                 file: 'nrf52840dk_lbs.hex',
                 link: {
                     label: 'Peripheral LBS',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
                 },
             },
         ],
@@ -67,7 +67,7 @@ const programConfig = [
             'Sample for emulating UART over Bluetooth® LE. Test it with Bluetooth® LE in the Evaluate step.',
         documentation: {
             label: 'Peripheral UART',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
         },
         firmware: [
             {
@@ -75,7 +75,7 @@ const programConfig = [
                 file: 'nrf52840dk_peripheral_uart.hex',
                 link: {
                     label: 'Peripheral UART Service',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-2.7.0/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
                 },
             },
         ],
