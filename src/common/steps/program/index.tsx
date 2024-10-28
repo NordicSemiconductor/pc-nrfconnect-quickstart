@@ -9,16 +9,16 @@ import React from 'react';
 import { useAppSelector } from '../../../app/store';
 import { Choice } from '../../../features/device/deviceSlice';
 import Program from './Program';
-import { getProgrammingState, ProgrammingState } from './programSlice';
+import { getProgrammingProgress } from './programSlice';
 import SelectFirmware from './SelectFirmware';
 
 const ProgramStep = ({ choices }: { choices: Choice[] }) => {
-    const programmingState = useAppSelector(getProgrammingState);
+    const hasStartedProgramming = !!useAppSelector(getProgrammingProgress);
 
-    return programmingState === ProgrammingState.SELECT_FIRMWARE ? (
-        <SelectFirmware choices={choices} />
-    ) : (
+    return hasStartedProgramming ? (
         <Program />
+    ) : (
+        <SelectFirmware choices={choices} />
     );
 };
 

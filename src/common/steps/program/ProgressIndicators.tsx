@@ -9,13 +9,7 @@ import { classNames } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
 import Link from '../../Link';
-import {
-    getProgrammingProgress,
-    getProgrammingState,
-    getResetProgress,
-    ProgrammingState,
-    ResetProgress,
-} from './programSlice';
+import { getError, getProgrammingProgress } from './programSlice';
 
 const ProgressBar = ({
     percentage,
@@ -37,45 +31,23 @@ const ProgressBar = ({
     </div>
 );
 
-const getResetProgressPercentage = (resetProgress: ResetProgress) => {
-    switch (resetProgress) {
-        case ResetProgress.NOT_STARTED:
-            return 0;
-        case ResetProgress.STARTED:
-            return 50;
-        case ResetProgress.FINISHED:
-            return 100;
-    }
-};
-
 export default () => {
-    const programmingState = useAppSelector(getProgrammingState);
-    const firmwareProgress = useAppSelector(getProgrammingProgress);
-    const resetProgress = useAppSelector(getResetProgress);
+    const programProgress = useAppSelector(getProgrammingProgress);
+    const failed = !!useAppSelector(getError);
+
+    if (!programProgress) return null;
 
     return (
         <div className="tw-flex tw-w-full tw-flex-col tw-gap-8">
-            {firmwareProgress.map(({ file, core, link, progress }) => (
-                <div key={file} className="tw-flex tw-flex-col tw-gap-1">
+            {programProgress.map(({ title, link, progress }) => (
+                <div key={title} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-items-center tw-justify-between tw-text-sm">
-                        <p>{core} core</p>
+                        <p>{title}</p>
                         {link && <Link label={link.label} href={link.href} />}
                     </div>
-                    <ProgressBar
-                        percentage={progress?.totalProgressPercentage || 0}
-                        failed={programmingState === ProgrammingState.ERROR}
-                    />
+                    <ProgressBar percentage={progress || 0} failed={failed} />
                 </div>
             ))}
-            <div className="tw-flex tw-flex-col tw-gap-1">
-                <div className="tw-flex tw-flex-row tw-items-center tw-justify-start tw-text-sm">
-                    <p>Reset device</p>
-                </div>
-                <ProgressBar
-                    percentage={getResetProgressPercentage(resetProgress)}
-                    failed={programmingState === ProgrammingState.ERROR}
-                />
-            </div>
         </div>
     );
 };

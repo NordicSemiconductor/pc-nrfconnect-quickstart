@@ -5,101 +5,228 @@
  */
 
 import { Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
-import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
+import {
+    DeviceCore,
+    NrfutilDeviceLib,
+} from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 import path from 'path';
 
 import { type AppThunk, RootState } from '../../../app/store';
 import { getFirmwareFolder } from '../../../features/device/deviceGuides';
+import { reset } from '../../../features/device/deviceLib';
 import {
-    DeviceWithSerialnumber,
-    reset,
-} from '../../../features/device/deviceLib';
-import type { Firmware } from '../../../features/device/deviceSlice';
-import {
+    Choice,
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
     selectedDeviceIsConnected,
+    supportedProgrammingTypes,
 } from '../../../features/device/deviceSlice';
 import {
     prepareProgramming,
-    ProgrammingState,
-    ResetProgress,
+    removeError,
+    setError,
     setProgrammingProgress,
-    setProgrammingState,
-    setResetProgress,
 } from './programSlice';
 
 const checkDeviceConnected =
-    (): AppThunk<RootState, boolean> => (_, getState) =>
-        selectedDeviceIsConnected(getState());
+    (): AppThunk<RootState, boolean> => (dispatch, getState) => {
+        if (!selectedDeviceIsConnected(getState())) {
+            dispatch(
+                setError({
+                    icon: 'mdi-lightbulb-alert-outline',
+                    text: 'No development kit detected',
+                })
+            );
+            return false;
+        }
+        return true;
+    };
+
+interface VisibleBatchOperation {
+    title: string;
+    link?: { label: string; href: string };
+}
+
+const jlinkProgram =
+    (
+        choice: Choice,
+        batch: ReturnType<typeof NrfutilDeviceLib.batch>
+    ): AppThunk<RootState, VisibleBatchOperation[]> =>
+    dispatch => {
+        const cores = choice.firmware.reduce((prev, curr) => {
+            const nonModemCore =
+                curr.core === 'Modem' ? 'Application' : curr.core;
+            if (prev.includes(nonModemCore)) return prev;
+            return prev.concat(nonModemCore);
+        }, [] as Omit<DeviceCore, 'Modem'>[]);
+
+        cores.forEach((core, index) => {
+            batch.recover(core as DeviceCore, {
+                onTaskBegin: () => {
+                    dispatch(
+                        setProgrammingProgress({
+                            index: 0,
+                            // index + 1 because we should show some progress on the first action
+                            progress: ((index + 1) / (cores.length + 1)) * 100,
+                        })
+                    );
+                },
+            });
+        });
+        batch.collect(cores.length, () => {
+            dispatch(setProgrammingProgress({ index: 0, progress: 100 }));
+        });
+
+        choice.firmware.forEach(({ file, core }, index) => {
+            batch.program(
+                path.join(getFirmwareFolder(), file),
+                core === 'Modem' ? 'Application' : core,
+                undefined,
+                undefined,
+                {
+                    onProgress: ({
+                        totalProgressPercentage: progress,
+                    }: Progress) =>
+                        dispatch(
+                            setProgrammingProgress({
+                                index: index + 1,
+                                progress,
+                            })
+                        ),
+                    onException: () => {
+                        dispatch(
+                            setError({
+                                icon: 'mdi-flash-alert-outline',
+                                text: `Failed to program the ${core} core`,
+                            })
+                        );
+                    },
+                }
+            );
+        });
+
+        const batchOperations = [
+            { title: 'Erase device' },
+            ...choice.firmware.map(f => ({
+                title: `${f.core} core`,
+                link: f.link,
+            })),
+        ];
+
+        return batchOperations;
+    };
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
-    const firmware = getChoiceUnsafely(getState()).firmware;
-    dispatch(prepareProgramming(firmware));
+    const choice = getChoiceUnsafely(getState());
 
-    if (!dispatch(checkDeviceConnected())) {
-        dispatch(setProgrammingState(ProgrammingState.ERROR));
-        return;
-    }
-
-    const device = getSelectedDeviceUnsafely(getState());
-    program(
-        device,
-        firmware,
-        (index, progress) =>
-            dispatch(setProgrammingProgress({ index, progress })),
-        resetProgress => dispatch(setResetProgress(resetProgress))
-    )
-        .then(() => dispatch(setProgrammingState(ProgrammingState.SUCCESS)))
-        .catch(() => dispatch(setProgrammingState(ProgrammingState.ERROR)));
-};
-
-export const resetDevice = (): AppThunk => (dispatch, getState) => {
-    if (!dispatch(checkDeviceConnected())) {
-        dispatch(setProgrammingState(ProgrammingState.ERROR));
-        return;
-    }
-
-    const device = getSelectedDeviceUnsafely(getState());
-    dispatch(setResetProgress(ResetProgress.STARTED));
-    dispatch(setProgrammingState(ProgrammingState.PROGRAMMING));
-
-    reset(device)
-        .then(() => {
-            dispatch(setResetProgress(ResetProgress.FINISHED));
-            dispatch(setProgrammingState(ProgrammingState.SUCCESS));
-        })
-        .catch(() => dispatch(setProgrammingState(ProgrammingState.ERROR)));
-};
-
-const program = (
-    device: DeviceWithSerialnumber,
-    firmware: Firmware[],
-    onProgress: (index: number, progress: Progress) => void,
-    onResetProgress: (resetProgress: ResetProgress) => void
-) => {
-    const batch = NrfutilDeviceLib.batch();
-    batch.recover('Application');
-    firmware.forEach(({ file }, index) => {
-        batch.program(
-            path.join(getFirmwareFolder(), file),
-            'Application',
-            undefined,
-            undefined,
-            { onProgress: progress => onProgress(index, progress) }
+    if (supportedProgrammingTypes.indexOf(choice.type) === -1) {
+        dispatch(
+            setError({
+                icon: 'mdi-lightbulb-alert-outline',
+                text: 'Unsupported programming choice',
+            })
         );
-    });
+        return;
+    }
 
-    batch.reset('Application', 'RESET_SYSTEM', {
+    const device = getSelectedDeviceUnsafely(getState());
+    const batch = NrfutilDeviceLib.batch();
+    let displayedBatchOperations: {
+        title: string;
+        link?: { label: string; href: string };
+    }[];
+    switch (choice.type) {
+        case 'jlink':
+            displayedBatchOperations = dispatch(jlinkProgram(choice, batch));
+            break;
+
+            break;
+    }
+
+    // use 'RESET_DEFAULT' which is default when not passing anything for reset argument
+    batch.reset('Application', undefined, {
         onTaskBegin: () => {
-            onResetProgress(ResetProgress.STARTED);
+            dispatch(
+                setProgrammingProgress({
+                    index: displayedBatchOperations.length,
+                    progress: 50,
+                })
+            );
         },
         onTaskEnd: end => {
             if (end.result === 'success') {
-                onResetProgress(ResetProgress.FINISHED);
+                dispatch(
+                    setProgrammingProgress({
+                        index: displayedBatchOperations.length,
+                        progress: 100,
+                    })
+                );
             }
+        },
+        onException: () => {
+            dispatch(
+                setError({
+                    icon: 'mdi-restore-alert',
+                    text: 'Failed to reset the device',
+                })
+            );
         },
     });
 
+    dispatch(
+        prepareProgramming([
+            ...displayedBatchOperations,
+            { title: 'Reset device' },
+        ])
+    );
+
+    if (!dispatch(checkDeviceConnected())) return;
+
     return batch.run(device);
+};
+
+export const resetDevice = (): AppThunk => (dispatch, getState) => {
+    if (!dispatch(checkDeviceConnected())) return;
+
+    const device = getSelectedDeviceUnsafely(getState());
+
+    // batchWithProgress should always be filled here
+    const batchLength = getState().steps.program.batchWithProgress?.length;
+    // length 0 is alse an invalid state
+    if (!batchLength) {
+        console.error('Could not find valid programming progress batch');
+        dispatch(
+            setError({
+                icon: 'mdi-lightbulb-alert-outline',
+                text: 'Program is in invalid state. Please contact support.',
+            })
+        );
+        return;
+    }
+    dispatch(removeError(undefined));
+    const index = batchLength - 1;
+    dispatch(
+        setProgrammingProgress({
+            index,
+            progress: 50,
+        })
+    );
+
+    reset(device)
+        .then(() => {
+            dispatch(
+                setProgrammingProgress({
+                    index,
+                    progress: 100,
+                })
+            );
+        })
+        .catch(() =>
+            dispatch(
+                setError({
+                    icon: 'mdi-restore-alert',
+                    text: 'Failed to reset the device',
+                })
+            )
+        );
 };

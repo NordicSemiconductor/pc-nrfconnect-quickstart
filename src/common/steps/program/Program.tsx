@@ -8,77 +8,40 @@ import React, { useMemo } from 'react';
 import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
-import {
-    getChoiceUnsafely,
-    selectedDeviceIsConnected,
-} from '../../../features/device/deviceSlice';
+import { getChoiceUnsafely } from '../../../features/device/deviceSlice';
 import { Back } from '../../Back';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { InfoBox, IssueBox } from '../../NoticeBox';
 import { resetDevice, startProgramming } from './programEffects';
-import {
-    getProgrammingProgress,
-    getProgrammingState,
-    getResetProgress,
-    ProgrammingState,
-    ResetProgress,
-    setProgrammingState,
-} from './programSlice';
+import { getError, getProgrammingProgress, reset } from './programSlice';
 import ProgressIndicators from './ProgressIndicators';
 
 export default () => {
     const dispatch = useAppDispatch();
-    const deviceConnected = useAppSelector(selectedDeviceIsConnected);
-    const programmingState = useAppSelector(getProgrammingState);
-    const resetProgress = useAppSelector(getResetProgress);
     const note = useAppSelector(getChoiceUnsafely).firmwareNote;
+    const error = useAppSelector(getError);
     const programmingProgress = useAppSelector(getProgrammingProgress);
-    const failedCore = programmingProgress.find(
-        p => (p.progress?.totalProgressPercentage || 0) < 100
-    )?.core;
-    const notStarted = programmingProgress.every(p => !p.progress);
-    const programming = programmingState === ProgrammingState.PROGRAMMING;
-    const failed = programmingState === ProgrammingState.ERROR;
-    const resetFailed =
-        failed && resetProgress === ResetProgress.STARTED && !failedCore;
+    const succeeded = programmingProgress?.every(p => p.progress === 100);
+    const programming = !error && !succeeded;
+    // Check if anything except last component (reset) failed
+    const resetFailed = !(
+        (programmingProgress?.findIndex(p => (p.progress || 0) < 100) || 0) <
+        (programmingProgress?.length || 0) - 1
+    );
 
     const header = useMemo(() => {
-        if (programming) {
-            return 'Programming';
-        }
-        if (failed) {
-            return 'Programming failed';
-        }
-        return 'Programming successful';
-    }, [programming, failed]);
-
-    const errorIcon = useMemo(() => {
-        if (!deviceConnected || notStarted) {
-            return 'mdi-lightbulb-alert-outline';
-        }
-        if (resetFailed) {
-            return 'mdi-restore-alert';
-        }
-        return 'mdi-flash-alert-outline';
-    }, [deviceConnected, resetFailed, notStarted]);
-
-    const errorText = useMemo(() => {
-        if (!deviceConnected || notStarted) {
-            return 'No development kit detected';
-        }
-        if (resetFailed) {
-            return 'Failed to reset the device';
-        }
-        return `Failed to program the ${failedCore} core`;
-    }, [deviceConnected, resetFailed, failedCore, notStarted]);
+        if (error) return 'Programming failed';
+        if (succeeded) return 'Programming successful';
+        return 'Programming';
+    }, [error, succeeded]);
 
     return (
         <Main>
             <Main.Content heading={header}>
                 <ProgressIndicators />
                 <div className="tw-pt-8">
-                    {!failed && note && (
+                    {!error && note && (
                         <InfoBox
                             mdiIcon="mdi-information-outline"
                             color="tw-text-primary"
@@ -86,11 +49,11 @@ export default () => {
                             content={note.content}
                         />
                     )}
-                    {failed && (
+                    {!!error && (
                         <IssueBox
-                            mdiIcon={errorIcon}
+                            mdiIcon={error.icon}
                             color="tw-text-red"
-                            title={errorText}
+                            title={error.text}
                         />
                     )}
                 </div>
@@ -103,15 +66,11 @@ export default () => {
                 )}
                 <Back
                     onClick={() => {
-                        dispatch(
-                            setProgrammingState(
-                                ProgrammingState.SELECT_FIRMWARE
-                            )
-                        );
+                        dispatch(reset());
                     }}
                     disabled={programming}
                 />
-                {failed ? (
+                {error ? (
                     <>
                         <Skip disabled={programming} />
                         <Next

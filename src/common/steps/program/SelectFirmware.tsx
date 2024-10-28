@@ -24,7 +24,6 @@ import { RadioSelect } from '../../listSelect/RadioSelect';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { startProgramming } from './programEffects';
-import { setFirmwareNote } from './programSlice';
 
 export default ({ choices }: { choices: Choice[] }) => {
     const dispatch = useAppDispatch();

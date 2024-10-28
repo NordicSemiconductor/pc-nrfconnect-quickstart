@@ -20,9 +20,11 @@ export interface FirmwareNote {
     content: string;
 }
 
+export const supportedProgrammingTypes = ['jlink'] as const;
+
 export interface Choice {
     name: string;
-    type: 'jlink';
+    type: (typeof supportedProgrammingTypes)[number];
     description: string;
     documentation: { label: string; href: string };
     firmware: Firmware[];
