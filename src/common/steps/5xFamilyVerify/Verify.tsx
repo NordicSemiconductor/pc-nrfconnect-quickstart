@@ -86,11 +86,8 @@ export default ({ vComIndex, regex }: { vComIndex: number; regex: RegExp }) => {
 
     return (
         <Main>
-            <Main.Content
-                heading={getHeading()}
-                subHeading="Functional verification of the development kit and code"
-            >
-                <p>Serial output from the {choice.name} application:</p>
+            <Main.Content heading={getHeading()}>
+                <p>Serial output from the {choice.name} sample:</p>
                 <div className="alt-font tw-relative tw-mt-4 tw-bg-gray-700 tw-p-4 tw-text-gray-50">
                     {!validResponse && <div className="cursor" />}
                     {validResponse
