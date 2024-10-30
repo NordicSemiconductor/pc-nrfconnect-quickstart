@@ -98,7 +98,7 @@ const verifyConfig = [
         },
     },
     {
-        ref: 'Peripheral UART Service',
+        ref: 'Peripheral UART',
         config: {
             vComIndex: 1,
             regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Nordic UART service example)/,
@@ -149,7 +149,7 @@ const evaluateConfig = [
         ],
     },
     {
-        ref: 'Peripheral UART Service',
+        ref: 'Peripheral UART',
         resources: [
             {
                 title: 'Test the sample',
@@ -212,7 +212,7 @@ const developConfig = [
         sampleSource: 'nrf/samples/bluetooth/peripheral_lbs',
     },
     {
-        ref: 'Peripheral UART Service',
+        ref: 'Peripheral UART',
         sampleSource: 'nrf/samples/bluetooth/peripheral_uart',
     },
 ];
