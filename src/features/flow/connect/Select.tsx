@@ -7,6 +7,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
     classNames,
+    deviceInfo,
     getPersistedNickname,
     logger,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
@@ -15,7 +16,6 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { RadioSelect } from '../../../common/listSelect/RadioSelect';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
-import Searching from '../../../common/Searching';
 import { DeviceIcon, deviceName } from '../../device/deviceGuides';
 import { DeviceWithSerialnumber } from '../../device/deviceLib';
 import {
@@ -27,8 +27,7 @@ import flows from '../../flows';
 import { setIsConnectVisible } from '../flowSlice';
 
 const isSupportedDevice = (device: DeviceWithSerialnumber) =>
-    device.devkit?.boardVersion &&
-    Object.keys(flows).includes(device.devkit?.boardVersion?.toLowerCase());
+    !!flows[deviceInfo(device).name || ''];
 
 let firstTime = true;
 export default () => {
@@ -138,7 +137,7 @@ export default () => {
                             device =>
                                 device.serialNumber === selectedSerialNumber
                         );
-                        if (selectedDevice?.devkit?.boardVersion) {
+                        if (selectedDevice) {
                             select(selectedDevice);
                         }
                     }}

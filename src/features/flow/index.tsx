@@ -5,7 +5,11 @@
  */
 
 import React, { useEffect, useMemo } from 'react';
-import { logger, telemetry } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    deviceInfo,
+    logger,
+    telemetry,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { allReset } from '../../common/steps/stepReducers';
@@ -57,9 +61,9 @@ const Flow = ({ flow }: { flow: Flow[] }) => {
 
 export default () => {
     const showConnect = useAppSelector(isConnectVisible);
-    const device =
-        useAppSelector(getSelectedDevice)?.devkit?.boardVersion?.toLowerCase();
-    const validFlow = device && Object.keys(flows).includes(device);
+    const device = useAppSelector(getSelectedDevice);
+    const deviceName = device && deviceInfo(device).name;
+    const validFlow = deviceName && !!flows[deviceName];
 
     useLogSteps();
 
@@ -68,7 +72,7 @@ export default () => {
             <FlowProgress />
             <div className="tw-flex-1">
                 {validFlow && !showConnect ? (
-                    <Flow flow={flows[device as keyof typeof flows]} />
+                    <Flow flow={flows[deviceName]} />
                 ) : (
                     <Connect />
                 )}

@@ -21,12 +21,12 @@ export interface Flow {
 }
 
 export default {
-    pca10056: NRF52840,
-    pca10100: NRF52833,
-    pca10040: NRF52,
-    pca10095: NRF5340,
-    pca10090: NRF9160,
-    pca10153: NRF9161,
-    pca10171: NRF9151,
-    pca10156: NRF54L15,
+    [NRF52840.device]: NRF52840.flow,
+    [NRF52833.device]: NRF52833.flow,
+    [NRF52.device]: NRF52.flow,
+    [NRF5340.device]: NRF5340.flow,
+    [NRF9160.device]: NRF9160.flow,
+    [NRF9161.device]: NRF9161.flow,
+    [NRF9151.device]: NRF9151.flow,
+    [NRF54L15.device]: NRF54L15.flow,
 } as Record<string, Flow[]>;
