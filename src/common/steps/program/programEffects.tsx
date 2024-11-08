@@ -19,7 +19,6 @@ import {
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
     selectedDeviceIsConnected,
-    supportedProgrammingTypes,
 } from '../../../features/device/deviceSlice';
 import {
     prepareProgramming,
@@ -119,28 +118,25 @@ const jlinkProgram =
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
     const choice = getChoiceUnsafely(getState());
 
-    if (supportedProgrammingTypes.indexOf(choice.type) === -1) {
-        dispatch(
-            setError({
-                icon: 'mdi-lightbulb-alert-outline',
-                text: 'Unsupported programming choice',
-            })
-        );
-        return;
-    }
-
     const device = getSelectedDeviceUnsafely(getState());
     const batch = NrfutilDeviceLib.batch();
     let displayedBatchOperations: {
         title: string;
         link?: { label: string; href: string };
     }[];
+
     switch (choice.type) {
         case 'jlink':
             displayedBatchOperations = dispatch(jlinkProgram(choice, batch));
             break;
-
-            break;
+        default:
+            dispatch(
+                setError({
+                    icon: 'mdi-lightbulb-alert-outline',
+                    text: 'Unsupported programming choice',
+                })
+            );
+            return;
     }
 
     // use 'RESET_DEFAULT' which is default when not passing anything for reset argument
