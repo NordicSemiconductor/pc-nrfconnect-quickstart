@@ -127,6 +127,52 @@ const jlinkProgram =
         return batchOperations;
     };
 
+const buttonlessDfuProgram =
+    (
+        choice: Choice,
+        batch: ReturnType<typeof NrfutilDeviceLib.batch>
+    ): AppThunk<RootState, VisibleBatchOperation[]> =>
+    dispatch => {
+        choice.firmware.forEach(({ file, core }, index) => {
+            batch.program(
+                path.join(getFirmwareFolder(), file),
+                core === 'Modem' ? 'Application' : core,
+                undefined,
+                undefined,
+                {
+                    onProgress: ({
+                        totalProgressPercentage: progress,
+                    }: Progress) =>
+                        dispatch(
+                            setProgrammingProgress({
+                                index: index + 1,
+                                progress,
+                            })
+                        ),
+                    onTaskEnd: end => {
+                        if (end.error) {
+                            dispatch(
+                                setError({
+                                    icon: 'mdi-flash-alert-outline',
+                                    text: `Failed to program the ${core} core`,
+                                })
+                            );
+                        }
+                    },
+                }
+            );
+        });
+
+        const batchOperations = [
+            ...choice.firmware.map(f => ({
+                title: `${f.core} core`,
+                link: f.link,
+            })),
+        ];
+
+        return batchOperations;
+    };
+
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
     const choice = getChoiceUnsafely(getState());
     dispatch(removeError(undefined));
@@ -141,6 +187,11 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     switch (choice.type) {
         case 'jlink':
             displayedBatchOperations = dispatch(jlinkProgram(choice, batch));
+            break;
+        case 'buttonless-dfu':
+            displayedBatchOperations = dispatch(
+                buttonlessDfuProgram(choice, batch)
+            );
             break;
         default:
             dispatch(
