@@ -14,6 +14,7 @@ import NRF9160 from './nRF9160';
 import NRF9161 from './nRF9161';
 import NRF52833 from './nRF52833';
 import NRF52840 from './nRF52840';
+import THINGY91X from './thingy91x';
 
 export interface Flow {
     name: string;
@@ -29,4 +30,5 @@ export default {
     [NRF9161.device]: NRF9161.flow,
     [NRF9151.device]: NRF9151.flow,
     [NRF54L15.device]: NRF54L15.flow,
+    [THINGY91X.device]: THINGY91X.flow,
 } as Record<string, Flow[]>;
