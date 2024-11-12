@@ -224,13 +224,16 @@ const appsConfig = [
     'pc-nrfconnect-dtm',
 ];
 
-export default [
-    Info(infoConfig),
-    Rename(),
-    Program(programConfig),
-    Verify(verifyConfig),
-    Evaluate(evaluateConfig),
-    Learn(learnConfig),
-    Develop(developConfig),
-    Apps(appsConfig),
-];
+export default {
+    device: 'nRF54L15 DK',
+    flow: [
+        Info(infoConfig),
+        Rename(),
+        Program(programConfig),
+        Verify(verifyConfig),
+        Evaluate(evaluateConfig),
+        Learn(learnConfig),
+        Develop(developConfig),
+        Apps(appsConfig),
+    ],
+};

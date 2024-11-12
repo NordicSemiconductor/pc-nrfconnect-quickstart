@@ -328,14 +328,17 @@ const appsConfig = [
     'pc-nrfconnect-ppk',
 ];
 
-export default [
-    Info(infoConfig),
-    Rename(),
-    Program(programConfig),
-    Verify(verificationConfig),
-    SIM(),
-    Evaluate(evaluationConfig),
-    Learn(learnConfig),
-    Develop(developConfig),
-    Apps(appsConfig),
-];
+export default {
+    device: 'nRF9161 DK',
+    flow: [
+        Info(infoConfig),
+        Rename(),
+        Program(programConfig),
+        Verify(verificationConfig),
+        SIM(),
+        Evaluate(evaluationConfig),
+        Learn(learnConfig),
+        Develop(developConfig),
+        Apps(appsConfig),
+    ],
+};
