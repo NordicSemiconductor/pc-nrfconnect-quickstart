@@ -4,94 +4,50 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { type Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../../app/store';
 
-export interface Firmware {
-    core: 'Modem' | 'Application' | 'Network';
-    file: string;
-    link?: { label: string; href: string };
-}
-
-interface FirmwareNote {
+type BatchComponent = {
     title: string;
-    content: string;
-}
-
-export interface Choice {
-    name: string;
-    type: 'jlink';
-    description: string;
-    documentation: { label: string; href: string };
-    firmware: Firmware[];
-    firmwareNote: FirmwareNote | undefined;
-}
-
-export enum ResetProgress {
-    NOT_STARTED,
-    STARTED,
-    FINISHED,
-}
-
-type FirmwareWithProgress = Firmware & {
-    progress?: Progress;
+    link?: { label: string; href: string };
 };
 
-export enum ProgrammingState {
-    SELECT_FIRMWARE,
-    PROGRAMMING,
-    SUCCESS,
-    ERROR,
-}
+type BatchWithProgress = BatchComponent & {
+    progress?: number;
+};
 
 interface State {
-    programmingState: ProgrammingState;
-    firmwareWithProgress: FirmwareWithProgress[];
-    resetProgress: ResetProgress;
-    firmwareNote: FirmwareNote | undefined;
+    batchWithProgress?: BatchWithProgress[];
+    error?: { icon: string; text: string };
 }
 
 const initialState: State = {
-    programmingState: ProgrammingState.SELECT_FIRMWARE,
-    firmwareWithProgress: [],
-    resetProgress: ResetProgress.NOT_STARTED,
-    firmwareNote: undefined,
+    batchWithProgress: undefined,
+    error: undefined,
 };
 
 const slice = createSlice({
     name: 'program',
     initialState,
     reducers: {
-        setProgrammingState: (
-            state,
-            action: PayloadAction<ProgrammingState>
-        ) => {
-            state.programmingState = action.payload;
-        },
         prepareProgramming: (
             state,
-            action: PayloadAction<FirmwareWithProgress[]>
+            action: PayloadAction<BatchWithProgress[]>
         ) => {
-            state.firmwareWithProgress = action.payload;
-            state.resetProgress = ResetProgress.NOT_STARTED;
-            state.programmingState = ProgrammingState.PROGRAMMING;
-        },
-        setResetProgress: (
-            state,
-            { payload: resetProgress }: PayloadAction<ResetProgress>
-        ) => {
-            state.resetProgress = resetProgress;
+            state.batchWithProgress = action.payload;
         },
         setProgrammingProgress: (
             state,
             action: PayloadAction<{
-                progress: Progress;
+                progress: number;
                 index: number;
             }>
         ) => {
-            const updatedFirmwareWithProgress = state.firmwareWithProgress.map(
+            // This is here for lint but cannot happen
+            if (!state.batchWithProgress) return;
+
+            const updatedFirmwareWithProgress = state.batchWithProgress.map(
                 (f, index) =>
                     index === action.payload.index
                         ? {
@@ -101,13 +57,16 @@ const slice = createSlice({
                         : f
             );
 
-            state.firmwareWithProgress = updatedFirmwareWithProgress;
+            state.batchWithProgress = updatedFirmwareWithProgress;
         },
-        setFirmwareNote: (
+        setError: (
             state,
-            action: PayloadAction<FirmwareNote | undefined>
+            action: PayloadAction<{ icon: string; text: string }>
         ) => {
-            state.firmwareNote = action.payload;
+            state.error = action.payload;
+        },
+        removeError: state => {
+            state.error = undefined;
         },
 
         reset: () => initialState,
@@ -115,21 +74,15 @@ const slice = createSlice({
 });
 
 export const {
-    setProgrammingState,
-    setResetProgress,
     prepareProgramming,
     setProgrammingProgress,
-    setFirmwareNote,
+    setError,
+    removeError,
     reset,
 } = slice.actions;
 
-export const getProgrammingState = (state: RootState) =>
-    state.steps.program.programmingState;
 export const getProgrammingProgress = (state: RootState) =>
-    state.steps.program.firmwareWithProgress;
-export const getResetProgress = (state: RootState) =>
-    state.steps.program.resetProgress;
-export const getFirmwareNote = (state: RootState) =>
-    state.steps.program.firmwareNote;
+    state.steps.program.batchWithProgress;
+export const getError = (state: RootState) => state.steps.program.error;
 
 export default slice.reducer;

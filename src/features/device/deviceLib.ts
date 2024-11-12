@@ -5,19 +5,11 @@
  */
 
 import { logger } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import {
     DeviceTraits,
     NrfutilDevice,
     NrfutilDeviceLib,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
-import path from 'path';
-
-import {
-    Firmware,
-    ResetProgress,
-} from '../../common/steps/program/programSlice';
-import { getFirmwareFolder } from './deviceGuides';
 
 const requiredTraits: DeviceTraits = {
     jlink: true,
@@ -56,38 +48,5 @@ export const startWatchingDevices = async (
         }
     };
 };
-
 export const reset = (device: DeviceWithSerialnumber) =>
     NrfutilDeviceLib.reset(device, 'Application', 'RESET_SYSTEM');
-
-export const program = (
-    device: DeviceWithSerialnumber,
-    firmware: Firmware[],
-    onProgress: (index: number, progress: Progress) => void,
-    onResetProgress: (resetProgress: ResetProgress) => void
-) => {
-    const batch = NrfutilDeviceLib.batch();
-    batch.recover('Application');
-    firmware.forEach(({ file }, index) => {
-        batch.program(
-            path.join(getFirmwareFolder(), file),
-            'Application',
-            undefined,
-            undefined,
-            { onProgress: progress => onProgress(index, progress) }
-        );
-    });
-
-    batch.reset('Application', 'RESET_SYSTEM', {
-        onTaskBegin: () => {
-            onResetProgress(ResetProgress.STARTED);
-        },
-        onTaskEnd: end => {
-            if (end.result === 'success') {
-                onResetProgress(ResetProgress.FINISHED);
-            }
-        },
-    });
-
-    return batch.run(device);
-};

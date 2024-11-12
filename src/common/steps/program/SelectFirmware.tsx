@@ -13,6 +13,7 @@ import {
 import { selectFirmwareWithoutProgrammingOption } from '../../../app/devOptions';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import {
+    Choice,
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
     setChoice,
@@ -23,7 +24,6 @@ import { RadioSelect } from '../../listSelect/RadioSelect';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { startProgramming } from './programEffects';
-import { Choice, setFirmwareNote } from './programSlice';
 
 export default ({ choices }: { choices: Choice[] }) => {
     const dispatch = useAppDispatch();
@@ -105,8 +105,6 @@ export default ({ choices }: { choices: Choice[] }) => {
                         });
 
                         dispatch(setChoice(selected));
-                        if (selected.firmwareNote)
-                            dispatch(setFirmwareNote(selected.firmwareNote));
                         dispatch(startProgramming());
                     }}
                 />
