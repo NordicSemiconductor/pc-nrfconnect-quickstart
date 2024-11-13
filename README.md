@@ -3,8 +3,8 @@
 [![Build Status](https://dev.azure.com/NordicSemiconductor/Wayland/_apis/build/status/pc-nrfconnect-quickstart?branchName=master)](https://dev.azure.com/NordicSemiconductor/Wayland/_build/latest?definitionId=10&branchName=master)
 [![License](https://img.shields.io/badge/license-Modified%20BSD%20License-blue.svg)](LICENSE)
 
-The Quick Start app is a cross-platform tool for guided setup and
-installation procedures of Nordic Semiconductor devices.
+The Quick Start app is a cross-platform tool for guided setup and installation
+procedures of Nordic Semiconductor devices.
 
 ## Installation
 
@@ -19,8 +19,8 @@ application.
 
 ## Documentation
 
-The Quick Start app is meant as an onboarding tool and it does not come with
-its own documentation. The onboarding steps will be different for each of the
+The Quick Start app is meant as an onboarding tool and it does not come with its
+own documentation. The onboarding steps will be different for each of the
 [supported devices](https://docs.nordicsemi.com/bundle/nrf-connect-quickstart/page/index.html).
 
 ## Development
