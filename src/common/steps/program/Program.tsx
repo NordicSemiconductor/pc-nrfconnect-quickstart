@@ -14,22 +14,27 @@ import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { InfoBox, IssueBox } from '../../NoticeBox';
 import { resetDevice, startProgramming } from './programEffects';
-import { getError, getProgrammingProgress, reset } from './programSlice';
+import {
+    getActiveBatchComponentIndex,
+    getError,
+    getProgrammingBatchLength,
+    getProgrammingProgress,
+    reset,
+} from './programSlice';
 import ProgressIndicators from './ProgressIndicators';
 
 export default () => {
     const dispatch = useAppDispatch();
     const note = useAppSelector(getChoiceUnsafely).firmwareNote;
     const error = useAppSelector(getError);
+    const activeIndex = useAppSelector(getActiveBatchComponentIndex);
+    const batchLength = useAppSelector(getProgrammingBatchLength);
     const programmingProgress = useAppSelector(getProgrammingProgress);
-    const succeeded = programmingProgress?.every(p => p.progress === 100);
+    const succeeded =
+        programmingProgress === 100 && activeIndex === batchLength - 1;
     const programming = !error && !succeeded;
     // Check if anything except last component (reset) failed
-    const resetFailed = !(
-        (programmingProgress?.findIndex(p => (p.progress || 0) < 100) || 0) <
-        (programmingProgress?.length || 0) - 1
-    );
-
+    const resetFailed = error && activeIndex === batchLength - 1;
     const header = useMemo(() => {
         if (error) return 'Programming failed';
         if (succeeded) return 'Programming successful';

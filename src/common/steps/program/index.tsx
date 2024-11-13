@@ -9,11 +9,11 @@ import React from 'react';
 import { useAppSelector } from '../../../app/store';
 import { Choice } from '../../../features/device/deviceSlice';
 import Program from './Program';
-import { getProgrammingProgress } from './programSlice';
+import { getProgrammingBatchLength } from './programSlice';
 import SelectFirmware from './SelectFirmware';
 
 const ProgramStep = ({ choices }: { choices: Choice[] }) => {
-    const hasStartedProgramming = !!useAppSelector(getProgrammingProgress);
+    const hasStartedProgramming = !!useAppSelector(getProgrammingBatchLength);
 
     return hasStartedProgramming ? (
         <Program />

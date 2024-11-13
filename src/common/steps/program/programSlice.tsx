@@ -13,16 +13,18 @@ type BatchComponent = {
     link?: { label: string; href: string };
 };
 
-type BatchWithProgress = BatchComponent & {
-    progress?: number;
-};
-
 interface State {
-    batchWithProgress?: BatchWithProgress[];
+    index: number;
+    progress: number;
+    batchLength: number;
+    batchWithProgress?: BatchComponent;
     error?: { icon: string; text: string };
 }
 
 const initialState: State = {
+    index: -1,
+    progress: 0,
+    batchLength: 0,
     batchWithProgress: undefined,
     error: undefined,
 };
@@ -31,39 +33,31 @@ const slice = createSlice({
     name: 'program',
     initialState,
     reducers: {
-        prepareProgramming: (
+        setBatchLength: (state, action: PayloadAction<number>) => {
+            state.batchLength = action.payload;
+        },
+        setActiveBatchComponent: (
             state,
-            action: PayloadAction<BatchWithProgress[]>
+            action: PayloadAction<BatchComponent>
         ) => {
             state.batchWithProgress = action.payload;
+            state.index += 1;
+            state.progress = 0;
         },
-        setProgrammingProgress: (
-            state,
-            action: PayloadAction<{
-                progress: number;
-                index: number;
-            }>
-        ) => {
-            // This is here for lint but cannot happen
-            if (!state.batchWithProgress) return;
-
-            const updatedFirmwareWithProgress = state.batchWithProgress.map(
-                (f, index) =>
-                    index === action.payload.index
-                        ? {
-                              ...f,
-                              progress: action.payload.progress,
-                          }
-                        : f
-            );
-
-            state.batchWithProgress = updatedFirmwareWithProgress;
+        setProgrammingProgress: (state, action: PayloadAction<number>) => {
+            state.progress = action.payload;
         },
         setError: (
             state,
             action: PayloadAction<{ icon: string; text: string }>
         ) => {
             state.error = action.payload;
+        },
+        softReset: state => {
+            state.index = -1;
+            state.progress = 0;
+            state.batchWithProgress = undefined;
+            state.error = undefined;
         },
         removeError: state => {
             state.error = undefined;
@@ -74,15 +68,23 @@ const slice = createSlice({
 });
 
 export const {
-    prepareProgramming,
+    setActiveBatchComponent,
     setProgrammingProgress,
+    setBatchLength,
     setError,
     removeError,
+    softReset,
     reset,
 } = slice.actions;
 
-export const getProgrammingProgress = (state: RootState) =>
+export const getActiveBatchComponentIndex = (state: RootState) =>
+    state.steps.program.index;
+export const getActiveBatchComponent = (state: RootState) =>
     state.steps.program.batchWithProgress;
+export const getProgrammingProgress = (state: RootState) =>
+    state.steps.program.progress;
+export const getProgrammingBatchLength = (state: RootState) =>
+    state.steps.program.batchLength;
 export const getError = (state: RootState) => state.steps.program.error;
 
 export default slice.reducer;
