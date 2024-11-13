@@ -1,14 +1,14 @@
-# nRF Connect Quick Start
+# Quick Start app
 
 [![Build Status](https://dev.azure.com/NordicSemiconductor/Wayland/_apis/build/status/pc-nrfconnect-quickstart?branchName=master)](https://dev.azure.com/NordicSemiconductor/Wayland/_build/latest?definitionId=10&branchName=master)
 [![License](https://img.shields.io/badge/license-Modified%20BSD%20License-blue.svg)](LICENSE)
 
-nRF Connect Quick Start is a cross-platform tool for guided setup and
+The Quick Start app is a cross-platform tool for guided setup and
 installation procedures of Nordic Semiconductor devices.
 
 ## Installation
 
-nRF Connect Quick Start is installed from nRF Connect from Desktop. For detailed
+The Quick Start app is installed from nRF Connect from Desktop. For detailed
 steps, see
 [Installing nRF Connect for Desktop apps](https://docs.nordicsemi.com/bundle/nrf-connect-desktop/page/installing_apps.html)
 in the nRF Connect from Desktop documentation.
@@ -19,7 +19,7 @@ application.
 
 ## Documentation
 
-nRF Connect Quick Start is meant as an onboarding tool and it does not come with
+The Quick Start app is meant as an onboarding tool and it does not come with
 its own documentation. The onboarding steps will be different for each of the
 [supported devices](https://docs.nordicsemi.com/bundle/nrf-connect-quickstart/page/index.html).
 
