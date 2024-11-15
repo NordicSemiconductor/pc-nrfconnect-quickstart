@@ -38,7 +38,11 @@ export default () => {
     if (!programProgress) return null;
 
     return (
-        <div className="tw-flex tw-w-full tw-flex-col tw-gap-8">
+        <div
+            className={`tw-flex tw-w-full tw-flex-col ${
+                programProgress.length === 4 ? 'tw-gap-[15px]' : 'tw-gap-8'
+            }`}
+        >
             {programProgress.map(({ title, link, progress }) => (
                 <div key={title} className="tw-flex tw-flex-col tw-gap-1">
                     <div className="tw-flex tw-flex-row tw-items-center tw-justify-between tw-text-sm">
