@@ -23,6 +23,7 @@ import {
 import {
     prepareProgramming,
     removeError,
+    RetryRef,
     setError,
     setProgrammingProgress,
 } from './programSlice';
@@ -140,6 +141,8 @@ const jlinkProgram =
                         setError({
                             icon: 'mdi-restore-alert',
                             text: 'Failed to reset the device',
+                            buttonText: 'Reset',
+                            retryRef: 'reset',
                         })
                     );
                 }
@@ -246,7 +249,19 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     });
 };
 
-export const resetDevice = (): AppThunk => (dispatch, getState) => {
+export const retry =
+    (retryref: RetryRef = 'standard'): AppThunk =>
+    dispatch => {
+        switch (retryref) {
+            case 'reset':
+                return dispatch(resetDevice());
+            case 'standard':
+            default:
+                return dispatch(startProgramming());
+        }
+    };
+
+const resetDevice = (): AppThunk => (dispatch, getState) => {
     if (!dispatch(checkDeviceConnected())) return;
 
     const device = getSelectedDeviceUnsafely(getState());
@@ -287,6 +302,8 @@ export const resetDevice = (): AppThunk => (dispatch, getState) => {
                 setError({
                     icon: 'mdi-restore-alert',
                     text: 'Failed to reset the device',
+                    buttonText: 'Reset',
+                    retryRef: 'reset',
                 })
             )
         );

@@ -17,9 +17,17 @@ type BatchWithProgress = BatchComponent & {
     progress?: number;
 };
 
+export type RetryRef = 'reset' | 'standard';
+interface Error {
+    icon: string;
+    text: string;
+    buttonText?: string;
+    retryRef?: RetryRef;
+}
+
 interface State {
     batchWithProgress?: BatchWithProgress[];
-    error?: { icon: string; text: string };
+    error?: Error;
 }
 
 const initialState: State = {
@@ -59,10 +67,7 @@ const slice = createSlice({
 
             state.batchWithProgress = updatedFirmwareWithProgress;
         },
-        setError: (
-            state,
-            action: PayloadAction<{ icon: string; text: string }>
-        ) => {
+        setError: (state, action: PayloadAction<Error>) => {
             state.error = action.payload;
         },
         removeError: state => {
