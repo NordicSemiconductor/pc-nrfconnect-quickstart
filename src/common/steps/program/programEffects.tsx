@@ -70,6 +70,16 @@ const jlinkProgram =
                         })
                     );
                 },
+                onTaskEnd: end => {
+                    if (end.error) {
+                        dispatch(
+                            setError({
+                                icon: 'mdi-lightbulb-alert-outline',
+                                text: 'Failed to erase device',
+                            })
+                        );
+                    }
+                },
             });
         });
         batch.collect(cores.length, () => {
@@ -92,13 +102,15 @@ const jlinkProgram =
                                 progress,
                             })
                         ),
-                    onException: () => {
-                        dispatch(
-                            setError({
-                                icon: 'mdi-flash-alert-outline',
-                                text: `Failed to program the ${core} core`,
-                            })
-                        );
+                    onTaskEnd: end => {
+                        if (end.error) {
+                            dispatch(
+                                setError({
+                                    icon: 'mdi-flash-alert-outline',
+                                    text: `Failed to program the ${core} core`,
+                                })
+                            );
+                        }
                     },
                 }
             );
@@ -117,6 +129,7 @@ const jlinkProgram =
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
     const choice = getChoiceUnsafely(getState());
+    dispatch(removeError(undefined));
 
     const device = getSelectedDeviceUnsafely(getState());
     const batch = NrfutilDeviceLib.batch();
@@ -158,14 +171,14 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
                     })
                 );
             }
-        },
-        onException: () => {
-            dispatch(
-                setError({
-                    icon: 'mdi-restore-alert',
-                    text: 'Failed to reset the device',
-                })
-            );
+            if (end.error) {
+                dispatch(
+                    setError({
+                        icon: 'mdi-restore-alert',
+                        text: 'Failed to reset the device',
+                    })
+                );
+            }
         },
     });
 
