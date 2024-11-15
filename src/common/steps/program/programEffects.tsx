@@ -191,7 +191,16 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
 
     if (!dispatch(checkDeviceConnected())) return;
 
-    return batch.run(device);
+    return batch.run(device).catch(() => {
+        if (!getState().steps.program.error) {
+            dispatch(
+                setError({
+                    icon: 'mdi-lightbulb-alert-outline',
+                    text: 'Unknown error',
+                })
+            );
+        }
+    });
 };
 
 export const resetDevice = (): AppThunk => (dispatch, getState) => {
