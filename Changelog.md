@@ -1,9 +1,13 @@
 ## 1.1.0 - unreleased
 
+### Added
+
+-   Support for Nordic Thingy:91 X.
+
 ### Changed
 
--   Updated mfw for nRF9151 DK and nRF9161 DK to 2.0.2.
--   Updated mfw for nRF9160 DK to 1.3.7.
+-   Updated modem firmware packages for nRF9151 DK and nRF9161 DK to 2.0.2.
+-   Updated modem firmware packages for nRF9160 DK to 1.3.7.
 
 ## 1.0.1 - 2024-11-11
 
