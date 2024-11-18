@@ -41,8 +41,8 @@ const programConfig = [
                 core: 'Modem',
                 file: 'mfw_nrf91x1_2.0.2.zip',
                 link: {
-                    label: 'Firmware v2.0.1',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
                 },
             },
             {
@@ -74,8 +74,8 @@ const programConfig = [
                 core: 'Modem',
                 file: 'mfw_nrf91x1_2.0.2.zip',
                 link: {
-                    label: 'Firmware v2.0.1',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
                 },
             },
             {
@@ -107,8 +107,8 @@ const programConfig = [
                 core: 'Modem',
                 file: 'mfw_nrf91x1_2.0.2.zip',
                 link: {
-                    label: 'Firmware v2.0.1',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
                 },
             },
             {
@@ -139,8 +139,8 @@ const programConfig = [
                 core: 'Modem',
                 file: 'mfw_nrf91x1_2.0.2.zip',
                 link: {
-                    label: 'Firmware v2.0.1',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.1_release_notes.txt',
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
                 },
             },
             {
