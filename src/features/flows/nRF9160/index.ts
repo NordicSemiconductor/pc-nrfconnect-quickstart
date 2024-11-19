@@ -38,10 +38,10 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf9160_1.3.6.zip',
+                file: 'mfw_nrf9160_1.3.7.zip',
                 link: {
-                    label: 'Firmware v1.3.6',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt',
+                    label: 'Firmware v1.3.7',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
                 },
             },
             {
@@ -71,10 +71,10 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf9160_1.3.6.zip',
+                file: 'mfw_nrf9160_1.3.7.zip',
                 link: {
-                    label: 'Firmware v1.3.6',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt',
+                    label: 'Firmware v1.3.7',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
                 },
             },
             {
@@ -103,10 +103,10 @@ const programConfig = [
         firmware: [
             {
                 core: 'Modem',
-                file: 'mfw_nrf9160_1.3.6.zip',
+                file: 'mfw_nrf9160_1.3.7.zip',
                 link: {
-                    label: 'Firmware v1.3.6',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.6_release_notes.txt',
+                    label: 'Firmware v1.3.7',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
                 },
             },
             {

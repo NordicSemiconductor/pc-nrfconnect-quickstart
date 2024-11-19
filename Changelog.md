@@ -3,6 +3,7 @@
 ### Changed
 
 -   Updated mfw for nRF9151 DK and nRF9161 DK to 2.0.2.
+-   Updated mfw for nRF9160 DK to 1.3.7.
 
 ## 1.0.1 - unreleased
 
