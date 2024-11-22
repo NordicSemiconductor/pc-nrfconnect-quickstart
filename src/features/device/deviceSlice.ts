@@ -20,7 +20,7 @@ export interface FirmwareNote {
     content: string;
 }
 
-export const supportedProgrammingTypes = ['jlink'] as const;
+export const supportedProgrammingTypes = ['jlink', 'secure-domain'] as const;
 
 export interface Choice {
     name: string;
