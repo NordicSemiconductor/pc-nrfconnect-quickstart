@@ -210,6 +210,71 @@ const buttonlessDfuProgram =
         ];
     };
 
+const secureDomainProgram =
+    (
+        choice: Choice,
+        batch: ReturnType<typeof NrfutilDeviceLib.batch>
+    ): AppThunk<RootState, VisibleBatchOperation[]> =>
+    dispatch => {
+        const batchOperations = [
+            ...choice.firmware.map(f => ({
+                title: `${f.core} core`,
+                link: f.link,
+            })),
+        ];
+
+        // try {
+        // const lcs = await NrfDeviceLib.lcs().x
+        // if (!lcs) {
+        //     // add secure bundle to batchOperations
+        //     batch.program()
+        // batch.advancelcs()
+        // }
+        // } catch(e){
+        //     dispatch(setError({
+        //         icon: 'mdi-lightbulb-alert-outline',
+        //         text: 'Failed to read state of device',
+        //     }))
+        //     return [
+        //     {title: 'Check LCS'}, // maybe 'program secure bundle?'
+        //         ...batchOperations,
+        //     ]
+        // }
+        // ALTERNATIVELY
+        // Just run a single get LCS
+        // If fails then set error and return batchoperations without any operations
+        // If it's due to device disconnected, then error will be overridden anyway
+        // If in EMPTY then set setup batch and return operations with extra start step
+        // If not in EMPTY then return batchoperations without secure bundle step
+
+        batch.recover('Application');
+
+        choice.firmware.forEach(({ file, core }, index) => {
+            batch.program(
+                path.join(getFirmwareFolder(), file),
+                'Application',
+                undefined,
+                undefined,
+                {
+                    onProgress: ({
+                        totalProgressPercentage: progress,
+                    }: Progress) =>
+                        dispatch(setProgrammingProgress({ index, progress })),
+                    onException: () => {
+                        dispatch(
+                            setError({
+                                icon: 'mdi-flash-alert-outline',
+                                text: `Failed to program the ${core} core`,
+                            })
+                        );
+                    },
+                }
+            );
+        });
+
+        return batchOperations;
+    };
+
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
     const choice = getChoiceUnsafely(getState());
     dispatch(removeError(undefined));
@@ -228,6 +293,11 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
         case 'buttonless-dfu':
             displayedBatchOperations = dispatch(
                 buttonlessDfuProgram(choice, batch)
+            );
+            break;
+        case 'secure-domain':
+            displayedBatchOperations = dispatch(
+                secureDomainProgram(choice, batch)
             );
             break;
         default:

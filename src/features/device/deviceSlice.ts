@@ -20,7 +20,11 @@ export interface FirmwareNote {
     content: string;
 }
 
-export const supportedProgrammingTypes = ['jlink', 'buttonless-dfu'] as const;
+export const supportedProgrammingTypes = [
+    'jlink',
+    'buttonless-dfu',
+    'secure-domain',
+] as const;
 
 export interface Choice {
     name: string;
