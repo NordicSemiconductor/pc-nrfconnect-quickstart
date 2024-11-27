@@ -1,6 +1,6 @@
 {
     "name": "pc-nrfconnect-quickstart",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "Get started with a new Nordic Semiconductor device",
     "displayName": "Quick Start",
     "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-quickstart",
@@ -22,7 +22,7 @@
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
-                "2.6.4"
+                "2.7.5"
             ]
         }
     },
@@ -52,6 +52,6 @@
     },
     "prettier": "@nordicsemiconductor/pc-nrfconnect-shared/config/prettier.config.js",
     "devDependencies": {
-        "@nordicsemiconductor/pc-nrfconnect-shared": "^188.0.0"
+        "@nordicsemiconductor/pc-nrfconnect-shared": "^191.0.0"
     }
 }

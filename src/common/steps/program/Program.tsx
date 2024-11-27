@@ -13,7 +13,7 @@ import { Back } from '../../Back';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
 import { InfoBox, IssueBox } from '../../NoticeBox';
-import { resetDevice, startProgramming } from './programEffects';
+import { retry } from './programEffects';
 import { getError, getProgrammingProgress, reset } from './programSlice';
 import ProgressIndicators from './ProgressIndicators';
 
@@ -24,11 +24,6 @@ export default () => {
     const programmingProgress = useAppSelector(getProgrammingProgress);
     const succeeded = programmingProgress?.every(p => p.progress === 100);
     const programming = !error && !succeeded;
-    // Check if anything except last component (reset) failed
-    const resetFailed = !(
-        (programmingProgress?.findIndex(p => (p.progress || 0) < 100) || 0) <
-        (programmingProgress?.length || 0) - 1
-    );
 
     const header = useMemo(() => {
         if (error) return 'Programming failed';
@@ -74,14 +69,8 @@ export default () => {
                     <>
                         <Skip disabled={programming} />
                         <Next
-                            label={resetFailed ? 'Reset' : 'Retry'}
-                            onClick={() => {
-                                if (resetFailed) {
-                                    dispatch(resetDevice());
-                                } else {
-                                    dispatch(startProgramming());
-                                }
-                            }}
+                            label={error.buttonText || 'Retry'}
+                            onClick={() => dispatch(retry(error.retryRef))}
                         />
                     </>
                 ) : (

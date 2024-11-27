@@ -23,6 +23,7 @@ import {
 import {
     prepareProgramming,
     removeError,
+    RetryRef,
     setError,
     setProgrammingProgress,
 } from './programSlice';
@@ -116,15 +117,90 @@ const jlinkProgram =
             );
         });
 
-        const batchOperations = [
+        // use 'RESET_DEFAULT' which is default when not passing anything for reset argument
+        batch.reset('Application', undefined, {
+            onTaskBegin: () => {
+                dispatch(
+                    setProgrammingProgress({
+                        index: 1 + choice.firmware.length,
+                        progress: 50,
+                    })
+                );
+            },
+            onTaskEnd: end => {
+                if (end.result === 'success') {
+                    dispatch(
+                        setProgrammingProgress({
+                            index: 1 + choice.firmware.length,
+                            progress: 100,
+                        })
+                    );
+                }
+                if (end.error) {
+                    dispatch(
+                        setError({
+                            icon: 'mdi-restore-alert',
+                            text: 'Failed to reset the device',
+                            buttonText: 'Reset',
+                            retryRef: 'reset',
+                        })
+                    );
+                }
+            },
+        });
+
+        return [
             { title: 'Erase device' },
             ...choice.firmware.map(f => ({
                 title: `${f.core} core`,
                 link: f.link,
             })),
+            { title: 'Reset device' },
         ];
+    };
 
-        return batchOperations;
+const buttonlessDfuProgram =
+    (
+        choice: Choice,
+        batch: ReturnType<typeof NrfutilDeviceLib.batch>
+    ): AppThunk<RootState, VisibleBatchOperation[]> =>
+    dispatch => {
+        choice.firmware.forEach(({ file, core }) => {
+            batch.program(
+                path.join(getFirmwareFolder(), file),
+                core === 'Modem' ? 'Application' : core,
+                undefined,
+                undefined,
+                {
+                    onProgress: ({
+                        totalProgressPercentage: progress,
+                    }: Progress) =>
+                        dispatch(
+                            setProgrammingProgress({
+                                index: 0,
+                                progress,
+                            })
+                        ),
+                    onTaskEnd: end => {
+                        if (end.error) {
+                            dispatch(
+                                setError({
+                                    icon: 'mdi-flash-alert-outline',
+                                    text: `Failed to program the ${core} core`,
+                                })
+                            );
+                        }
+                    },
+                }
+            );
+        });
+
+        return [
+            ...choice.firmware.map(f => ({
+                title: `${f.core} core`,
+                link: f.link,
+            })),
+        ];
     };
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
@@ -142,6 +218,11 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
         case 'jlink':
             displayedBatchOperations = dispatch(jlinkProgram(choice, batch));
             break;
+        case 'buttonless-dfu':
+            displayedBatchOperations = dispatch(
+                buttonlessDfuProgram(choice, batch)
+            );
+            break;
         default:
             dispatch(
                 setError({
@@ -152,44 +233,9 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
             return;
     }
 
-    // use 'RESET_DEFAULT' which is default when not passing anything for reset argument
-    batch.reset('Application', undefined, {
-        onTaskBegin: () => {
-            dispatch(
-                setProgrammingProgress({
-                    index: displayedBatchOperations.length,
-                    progress: 50,
-                })
-            );
-        },
-        onTaskEnd: end => {
-            if (end.result === 'success') {
-                dispatch(
-                    setProgrammingProgress({
-                        index: displayedBatchOperations.length,
-                        progress: 100,
-                    })
-                );
-            }
-            if (end.error) {
-                dispatch(
-                    setError({
-                        icon: 'mdi-restore-alert',
-                        text: 'Failed to reset the device',
-                    })
-                );
-            }
-        },
-    });
-
-    dispatch(
-        prepareProgramming([
-            ...displayedBatchOperations,
-            { title: 'Reset device' },
-        ])
-    );
-
     if (!dispatch(checkDeviceConnected())) return;
+
+    dispatch(prepareProgramming(displayedBatchOperations));
 
     return batch.run(device).catch(() => {
         if (!getState().steps.program.error) {
@@ -203,7 +249,19 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     });
 };
 
-export const resetDevice = (): AppThunk => (dispatch, getState) => {
+export const retry =
+    (retryref: RetryRef = 'standard'): AppThunk =>
+    dispatch => {
+        switch (retryref) {
+            case 'reset':
+                return dispatch(resetDevice());
+            case 'standard':
+            default:
+                return dispatch(startProgramming());
+        }
+    };
+
+const resetDevice = (): AppThunk => (dispatch, getState) => {
     if (!dispatch(checkDeviceConnected())) return;
 
     const device = getSelectedDeviceUnsafely(getState());
@@ -244,6 +302,8 @@ export const resetDevice = (): AppThunk => (dispatch, getState) => {
                 setError({
                     icon: 'mdi-restore-alert',
                     text: 'Failed to reset the device',
+                    buttonText: 'Reset',
+                    retryRef: 'reset',
                 })
             )
         );
