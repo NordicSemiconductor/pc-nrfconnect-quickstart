@@ -240,9 +240,9 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
             return;
     }
 
-    if (!dispatch(checkDeviceConnected())) return;
-
     dispatch(prepareProgramming(displayedBatchOperations));
+
+    if (!dispatch(checkDeviceConnected())) return;
 
     return batch.run(device).catch(() => {
         if (!getState().steps.program.error) {
