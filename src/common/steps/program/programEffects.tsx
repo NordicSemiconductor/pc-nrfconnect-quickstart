@@ -183,6 +183,13 @@ const buttonlessDfuProgram =
                         ),
                     onTaskEnd: end => {
                         if (end.error) {
+                            // Thingy91X gets an onProgress event 100% when it fails which breaks expectations here. It will be changed/fixed in nrfutil
+                            dispatch(
+                                setProgrammingProgress({
+                                    index: 0,
+                                    progress: 0,
+                                })
+                            );
                             dispatch(
                                 setError({
                                     icon: 'mdi-flash-alert-outline',
@@ -233,9 +240,9 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
             return;
     }
 
-    if (!dispatch(checkDeviceConnected())) return;
-
     dispatch(prepareProgramming(displayedBatchOperations));
+
+    if (!dispatch(checkDeviceConnected())) return;
 
     return batch.run(device).catch(() => {
         if (!getState().steps.program.error) {
