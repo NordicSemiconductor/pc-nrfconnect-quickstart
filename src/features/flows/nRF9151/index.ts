@@ -253,7 +253,7 @@ const evaluationConfig = [
                 app: 'pc-nrfconnect-serial-terminal',
                 description: 'Serial interface to send commands to the device.',
                 vComIndex: 0,
-                supplemetaryLinks: [
+                supplementaryLinks: [
                     {
                         label: 'Modem shell commands',
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html#overview',
