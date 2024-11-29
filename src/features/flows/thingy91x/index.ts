@@ -29,7 +29,7 @@ const programConfig = [
             'Connect to hello.nrfcloud.com to retrive real-time data and do simple prototyping.',
         documentation: {
             label: 'Hello nRF Cloud',
-            href: 'https://github.com/hello-nrfcloud/firmware/blob/main/README.md',
+            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
         },
         firmware: [
             {
@@ -37,7 +37,7 @@ const programConfig = [
                 file: 'thingy91x_hello.nrfcloud.zip',
                 link: {
                     label: 'Hello nRF Cloud',
-                    href: 'https://github.com/hello-nrfcloud/firmware/blob/main/README.md',
+                    href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
                 },
             },
         ],
