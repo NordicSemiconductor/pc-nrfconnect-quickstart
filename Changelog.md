@@ -9,6 +9,10 @@
 -   Updated modem firmware packages for nRF9151 DK and nRF9161 DK to 2.0.2.
 -   Updated modem firmware packages for nRF9160 DK to 1.3.7.
 
+### Fixed
+
+-   Some cases when network core programming for nRF5340 DK was failing.
+
 ## 1.0.1 - 2024-11-11
 
 ### Changed
