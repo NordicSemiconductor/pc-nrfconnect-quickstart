@@ -11,7 +11,7 @@
 
 ### Fixed
 
--   Some cases when network core programming for nRF5340 DK was failing.
+-   Some cases when programming the network core on the nRF5340 DK would fail.
 
 ## 1.0.1 - 2024-11-11
 
