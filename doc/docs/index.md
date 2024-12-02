@@ -11,6 +11,7 @@ After installing and opening the app from nRF Connect for Desktop, connect your 
 
 ## Supported devices
 
+- Nordic Thingy:91 X
 - nRF9161 DK
 - nRF9160 DK
 - nRF9151 DK
