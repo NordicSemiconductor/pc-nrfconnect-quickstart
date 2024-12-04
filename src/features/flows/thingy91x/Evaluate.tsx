@@ -79,10 +79,10 @@ export default () => {
                     <div>
                         <b>Claim your device</b>
                         <p>
-                            To evaluate all features you need to connect your DK
-                            to nRF Cloud. Copy the attestation token below and
-                            make sure you store it securely for later before
-                            proceeding with the instructions.
+                            To evaluate all features you need to connect your
+                            device to nRF Cloud. Copy the attestation token
+                            below and make sure you store it securely for later
+                            before proceeding with the instructions.
                         </p>
                     </div>
                     <div className="tw-flex tw-flex-row tw-gap-1">
