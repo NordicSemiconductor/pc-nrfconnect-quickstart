@@ -1,3 +1,10 @@
+## 1.1.1 - UNRELEASED
+
+### Changed
+
+-   The Evaluation step for the Nordic Thingy:91 X reads the attestation token
+    and directs you to nRF Cloud.
+
 ## 1.1.0 - 2024-11-29
 
 ### Added

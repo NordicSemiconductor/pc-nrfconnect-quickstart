@@ -13,6 +13,7 @@ import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import Rename from '../../../common/steps/Rename';
 import { Choice } from '../../device/deviceSlice';
+import CustomEvaluate from './Evaluate';
 import SIM from './SIM';
 
 const infoConfig = {
@@ -198,19 +199,7 @@ const evaluateConfig = [
     },
     {
         ref: 'nRF Cloud multi-service',
-        resources: [
-            {
-                app: 'pc-nrfconnect-serial-terminal',
-                description: 'Serial interface to send commands to the device.',
-                vComIndex: 0,
-                supplementaryLinks: [
-                    {
-                        label: 'Evaluate nRF Cloud services',
-                        href: 'https://docs.nrfcloud.com/GettingStarted.html#next-steps',
-                    },
-                ],
-            },
-        ],
+        component: CustomEvaluate,
     },
     {
         ref: 'Shell Command Line Interface',
