@@ -11,6 +11,7 @@ After installing and opening the app from nRF Connect for Desktop, connect your 
 
 ## Supported devices
 
+- Nordic Thingy:91 X
 - nRF9161 DK
 - nRF9160 DK
 - nRF9151 DK
@@ -19,3 +20,8 @@ After installing and opening the app from nRF Connect for Desktop, connect your 
 - nRF52840 DK
 - nRF52833 DK
 - nRF52 DK
+
+## Application source code
+
+The code of the application is open source and [available on GitHub](https://github.com/NordicSemiconductor/pc-nrfconnect-quickstart).
+Feel free to fork the repository and clone it for secondary development or feature contributions.
