@@ -86,6 +86,7 @@ export default () => {
                         </p>
                     </div>
                     <div className="tw-flex tw-flex-row tw-gap-1">
+                        <p>Attestation token:</p>
                         <p className={gettingToken ? 'ellipsis' : ''}>
                             {token && (
                                 <p className="tw-flex tw-flex-row tw-items-center tw-gap-1">
