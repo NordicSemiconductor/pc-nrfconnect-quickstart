@@ -1,3 +1,10 @@
+## UNRELEASED
+
+### Added
+
+-   Label to attestation token in the evaluation step for the nRF9161 DK and
+    nRF9151 DK.
+
 ## 1.2.0 - 2024-12-06
 
 ### Changed
