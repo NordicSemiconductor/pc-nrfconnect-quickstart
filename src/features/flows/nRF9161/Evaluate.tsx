@@ -21,10 +21,14 @@ import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
 import { IssueBox } from '../../../common/NoticeBox';
 import runVerification from '../../../common/sendATCommands';
-import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
+import {
+    getSelectedDeviceUnsafely,
+    selectedDeviceIsConnected,
+} from '../../device/deviceSlice';
 import {
     getAttestationToken,
     getFailed,
+    reset,
     setAttestationToken,
     setFailed,
 } from './nrf9161Slice';
@@ -38,11 +42,16 @@ export default () => {
     const token = useAppSelector(getAttestationToken);
     const failed = useAppSelector(getFailed);
     const [gettingToken, setGettingToken] = useState(false);
+    const deviceConnected = useAppSelector(selectedDeviceIsConnected);
 
     const getToken = useCallback(() => {
+        dispatch(reset());
         setGettingToken(true);
-        dispatch(setFailed(false));
 
+        if (!deviceConnected) {
+            dispatch(setFailed('No development kit connected.'));
+            return;
+        }
         runVerification(
             [
                 {
@@ -58,12 +67,12 @@ export default () => {
             })
             .catch(e => {
                 logger.error(describeError(e));
-                dispatch(setFailed(true));
+                dispatch(setFailed('Failed to get the attestation token.'));
             })
             .finally(() => {
                 setGettingToken(false);
             });
-    }, [device, dispatch]);
+    }, [device, dispatch, deviceConnected]);
 
     useEffect(() => {
         if (!token && !failed && !gettingToken) {
@@ -122,7 +131,7 @@ export default () => {
                         <IssueBox
                             mdiIcon="mdi-lightbulb-alert-outline"
                             color="tw-text-red"
-                            title="Failed to get the attestation token."
+                            title={failed}
                         />
                     )}
                 </div>
