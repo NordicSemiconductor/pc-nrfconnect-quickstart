@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/store';
 import {
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
+    selectedDeviceIsConnected,
 } from '../../../features/device/deviceSlice';
 import { Back } from '../../Back';
 import Copy from '../../Copy';
@@ -50,6 +51,7 @@ const VerifyStep = ({
     const failed = useAppSelector(getFailed);
     const showSkip = useAppSelector(getShowSkip);
     const [verifying, setVerifying] = useState(false);
+    const deviceConnected = useAppSelector(selectedDeviceIsConnected);
 
     const gotAllResponses = responses.length === commands.length;
 
@@ -63,19 +65,25 @@ const VerifyStep = ({
         return 'Verifying';
     };
 
-    const verify = useCallback(
-        () =>
-            runVerification(commands, path, mode)
-                .then(res => {
-                    dispatch(setResponses(res));
-                })
-                .catch(e => {
-                    logger.error(describeError(e));
-                    dispatch(setFailed(true));
-                })
-                .finally(() => setVerifying(false)),
-        [commands, path, mode, dispatch]
-    );
+    const verify = useCallback(() => {
+        if (!deviceConnected) {
+            dispatch(setFailed('No development kit connected.'));
+            setVerifying(false);
+            return;
+        }
+
+        runVerification(commands, path, mode)
+            .then(res => {
+                dispatch(setResponses(res));
+            })
+            .catch(e => {
+                logger.error(e);
+                dispatch(setFailed(describeError('Failed to verify device.')));
+            })
+            .finally(() => {
+                setVerifying(false);
+            });
+    }, [commands, path, mode, dispatch, deviceConnected]);
 
     useEffect(() => {
         if (!failed && !gotAllResponses && !verifying) {
@@ -122,7 +130,7 @@ const VerifyStep = ({
                         <IssueBox
                             mdiIcon="mdi-lightbulb-alert-outline"
                             color="tw-text-red"
-                            title="Failed to verify device"
+                            title={failed}
                         />
                     </div>
                 )}
@@ -134,9 +142,9 @@ const VerifyStep = ({
                     <Next
                         label="Retry"
                         disabled={verifying}
-                        onClick={async () => {
+                        onClick={() => {
                             setVerifying(true);
-                            await verify();
+                            verify();
                         }}
                     />
                 ) : (

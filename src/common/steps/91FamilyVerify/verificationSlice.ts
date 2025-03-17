@@ -11,13 +11,13 @@ import { setChoice } from '../../../features/device/deviceSlice';
 
 interface State {
     responses: string[];
-    failed: boolean;
+    failed?: string;
     showSkip: boolean;
 }
 
 const initialState: State = {
     responses: [],
-    failed: false,
+    failed: undefined,
     showSkip: false,
 };
 
@@ -27,10 +27,10 @@ const slice = createSlice({
     reducers: {
         setResponses: (state, action: PayloadAction<string[]>) => {
             state.responses = action.payload;
-            state.failed = false;
+            state.failed = undefined;
             state.showSkip = false;
         },
-        setFailed: (state, action: PayloadAction<boolean>) => {
+        setFailed: (state, action: PayloadAction<string>) => {
             state.failed = action.payload;
             // always keep/set to true except case showSkip=false and payload=false
             state.showSkip = !(state.showSkip === false && !state.failed);
