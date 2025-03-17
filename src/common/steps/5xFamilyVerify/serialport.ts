@@ -14,6 +14,7 @@ import {
     DeviceWithSerialnumber,
     reset,
 } from '../../../features/device/deviceLib';
+import { selectedDeviceIsConnected } from '../../../features/device/deviceSlice';
 import { setResponse } from './verifySlice';
 
 const decoder = new TextDecoder();
@@ -22,7 +23,11 @@ export default (
         device: DeviceWithSerialnumber,
         vComIndex: number
     ): AppThunk<RootState, Promise<() => void>> =>
-    async dispatch => {
+    async (dispatch, getState) => {
+        if (!selectedDeviceIsConnected(getState())) {
+            throw new Error('No development kit connected.');
+        }
+
         const path = device.serialPorts?.[vComIndex].comName;
 
         if (!path) {
