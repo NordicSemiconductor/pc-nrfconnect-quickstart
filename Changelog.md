@@ -1,3 +1,9 @@
+## 1.2.1 - UNRELEASED
+
+### Added
+
+-   Notification that informs user if device is disconnected in relevant steps.
+
 ## 1.2.0 - 2024-12-06
 
 ### Changed
