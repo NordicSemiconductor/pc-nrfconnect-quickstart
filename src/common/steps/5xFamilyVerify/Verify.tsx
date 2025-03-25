@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { IssueBox } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import describeError from '@nordicsemiconductor/pc-nrfconnect-shared/src/logging/describeError';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
@@ -15,7 +16,6 @@ import {
 import { Back } from '../../Back';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
-import { IssueBox } from '../../NoticeBox';
 import runVerification from './serialport';
 import { getError, getResponse, reset, setError } from './verifySlice';
 

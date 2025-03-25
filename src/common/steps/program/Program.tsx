@@ -5,14 +5,17 @@
  */
 
 import React, { useMemo } from 'react';
-import { Spinner } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import {
+    InfoBox,
+    IssueBox,
+    Spinner,
+} from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { getChoiceUnsafely } from '../../../features/device/deviceSlice';
 import { Back } from '../../Back';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
-import { InfoBox, IssueBox } from '../../NoticeBox';
 import { retry } from './programEffects';
 import { getError, getProgrammingProgress, reset } from './programSlice';
 import ProgressIndicators from './ProgressIndicators';
