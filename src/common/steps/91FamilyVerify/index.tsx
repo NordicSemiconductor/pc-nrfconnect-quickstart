@@ -7,6 +7,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
     describeError,
+    IssueBox,
     logger,
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
@@ -20,7 +21,6 @@ import { Back } from '../../Back';
 import Copy from '../../Copy';
 import Main from '../../Main';
 import { Next, Skip } from '../../Next';
-import { IssueBox } from '../../NoticeBox';
 import runVerification from '../../sendATCommands';
 import {
     getFailed,

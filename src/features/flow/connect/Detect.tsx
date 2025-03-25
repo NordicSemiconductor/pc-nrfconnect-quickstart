@@ -5,10 +5,10 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import { IssueBox } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { useAppSelector } from '../../../app/store';
 import Main from '../../../common/Main';
-import { IssueBox } from '../../../common/NoticeBox';
 import Searching from '../../../common/Searching';
 import { getConnectedDevices } from '../../device/deviceSlice';
 

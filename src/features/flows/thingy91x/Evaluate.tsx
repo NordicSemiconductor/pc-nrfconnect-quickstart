@@ -7,6 +7,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
     Button,
+    IssueBox,
     logger,
     openUrl,
     Spinner,
@@ -19,7 +20,6 @@ import { Back } from '../../../common/Back';
 import Copy from '../../../common/Copy';
 import Main from '../../../common/Main';
 import { Next } from '../../../common/Next';
-import { IssueBox } from '../../../common/NoticeBox';
 import runVerification from '../../../common/sendATCommands';
 import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 import {
