@@ -22,7 +22,7 @@
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
-                "2.8.6"
+                "2.10.1"
             ]
         }
     },
@@ -52,6 +52,6 @@
     },
     "prettier": "@nordicsemiconductor/pc-nrfconnect-shared/config/prettier.config.js",
     "devDependencies": {
-        "@nordicsemiconductor/pc-nrfconnect-shared": "^208.0.0"
+        "@nordicsemiconductor/pc-nrfconnect-shared": "^209.0.0"
     }
 }

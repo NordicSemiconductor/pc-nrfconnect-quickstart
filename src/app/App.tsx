@@ -41,6 +41,7 @@ export const App = () => {
     useEffect(() => {
         logger.initialise();
         setNrfutilLogger(logger);
+        NrfutilDeviceLib.setVerboseLogging(true);
         NrfutilDeviceLib.setLogLevel('error');
     }, []);
     useDevicesInStore();
