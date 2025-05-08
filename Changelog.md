@@ -2,7 +2,12 @@
 
 ### Added
 
--   Notification that informs user if device is disconnected in relevant steps.
+-   Notification that informs user if device is disconnected. This notification
+    can appear in relevant steps.
+
+### Changed
+
+-   Update dependencies to support the nRF Connect for Desktop v5.2.0 release.
 
 ## 1.2.0 - 2024-12-06
 
