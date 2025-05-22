@@ -104,8 +104,8 @@ const verifyConfig = [
     {
         ref: 'Wi-Fi Bluetooth LE Provisioning',
         config: {
-            vComIndex: 0,
-            regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Wi-Fi Bluetooth LE provisioning sample)/,
+            vComIndex: 1,
+            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3})/,
         },
     },
 ];
