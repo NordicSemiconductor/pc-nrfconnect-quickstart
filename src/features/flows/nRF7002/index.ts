@@ -86,15 +86,15 @@ const verifyConfig = [
     {
         ref: 'Hello World',
         config: {
-            vComIndex: 0,
-            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf7002dk\/nrf5340\/cpuapp)/,
+            vComIndex: 1,
+            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf5340dk\/nrf5340\/cpuapp)/,
         },
     },
     {
         ref: 'Wi-Fi Scan',
         config: {
-            vComIndex: 0,
-            regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Wi-Fi scan sample)/,
+            vComIndex: 1,
+            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3})/,
         },
     },
     {
@@ -115,7 +115,7 @@ const evaluateConfig = [
                 description:
                     'Open the nRF Connect Serial Terminal application and press reset on the device to print the output.',
                 app: 'pc-nrfconnect-serial-terminal',
-                vComIndex: 0,
+                vComIndex: 1,
             },
             {
                 title: 'Documentation',
@@ -135,7 +135,7 @@ const evaluateConfig = [
                 description:
                     'Open the nRF Connect Serial Terminal application to view the scan results of nearby Wi-Fi access points.',
                 app: 'pc-nrfconnect-serial-terminal',
-                vComIndex: 0,
+                vComIndex: 1,
             },
             {
                 title: 'Documentation',
