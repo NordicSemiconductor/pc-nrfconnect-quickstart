@@ -72,11 +72,15 @@ const programConfig = [
         firmware: [
             {
                 core: 'Application',
-                file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0.zip',
+                file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged.hex',
                 link: {
                     label: 'Wi-Fi Bluetooth LE based provision',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/provisioning/ble/README.html',
                 },
+            },
+            {
+                core: 'Network',
+                file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged_CPUNET.hex',
             },
         ],
     },
