@@ -223,7 +223,6 @@ const developConfig = [
 const appsConfig = [
     'pc-nrfconnect-programmer',
     'pc-nrfconnect-serial-terminal',
-    'pc-nrfconnect-dtm',
 ];
 
 export default {
