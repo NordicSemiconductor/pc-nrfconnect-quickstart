@@ -15,6 +15,7 @@ After installing and opening the app from nRF Connect for Desktop, connect your 
 - nRF9161 DK
 - nRF9160 DK
 - nRF9151 DK
+- nRF7002 DK
 - nRF54L15 DK
 - nRF5340 DK
 - nRF52840 DK
