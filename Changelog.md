@@ -1,3 +1,9 @@
+## Unreleased
+
+### Changed
+
+-   Text in the Info step for the nRF54L15 DK.
+
 ## 1.3.0 - 2025-06-24
 
 ### Added

@@ -15,9 +15,9 @@ import Rename from '../../../common/steps/Rename';
 import { Choice } from '../../device/deviceSlice';
 
 const infoConfig = {
-    title: 'Next-level multiprotocol SoC',
+    title: 'Explore the nRF54L Series',
     markdownContent:
-        '![nRF54L15 DK](54L15DK.png)  \n&nbsp;  \nnRF54L15 is the first System-on-Chip (SoC) in the nRF54L Series. It is an ultra-low power Bluetooth 5.4 SoC with a new best-in-class multiprotocol radio and advanced security features.  \n&nbsp;  \nThe nRF54L Series takes the popular nRF52 Series to the next level with excellent processing power and efficiency, expanded memory, and new peripherals, all in a more compact package.',
+        '![nRF54L15 DK](54L15DK.png)  \n&nbsp;  \nThe nRF54L15 DK features the nRF54L15 wireless SoC and can also emulate nRF54L10 and nRF54L05.  \n&nbsp;  \nnRF54L15, nRF54L10, and nRF54L05 are the members of the nRF54L Series. These wireless SoCs integrate an ultra-low-power, multiprotocol 2.4-GHz radio and the MCU functionality. They feature a 128 MHz Arm Cortex-M33 processor, comprehensive peripheral set, and scalable memory configurations of up to 1.5 MB NVM and up to 256 KB RAM.  \n&nbsp;  \nThe multiprotocol 2.4-GHz radio supports Bluetooth® LE, Thread, Matter, Zigbee, Amazon Sidewalk, and 2.4-GHz proprietary protocols, all of which with up to 4-Mbps data rate. The radio is also capable of Bluetooth Core 6.0, including Bluetooth Channel Sounding.  \n&nbsp;  \nFor datasheet and more information, check the [nRF54L15 SoC](https://www.nordicsemi.com/Products/nRF54L15) and the [nRF54L15 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54L15-DK) web pages.',
 };
 
 const programConfig = [
