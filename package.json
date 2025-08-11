@@ -16,8 +16,16 @@
     "main": "dist/bundle.js",
     "nrfConnectForDesktop": {
         "supportedDevices": [
+            "PCA10040",
             "PCA10090",
-            "PCA10153"
+            "PCA10153",
+            "PCA10156",
+            "PCA10095",
+            "PCA10143",
+            "PCA10171",
+            "PCA10100",
+            "PCA10056",
+            "PCA20035"
         ],
         "html": "dist/index.html",
         "nrfutil": {
