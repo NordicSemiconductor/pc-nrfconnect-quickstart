@@ -4,10 +4,6 @@
 
 -   Text in the Info step for the nRF54L15 DK.
 
-### Fixed
-
--   The verify step for the nRF5340 DK always failed.
-
 ## 1.3.0 - 2025-06-24
 
 ### Added

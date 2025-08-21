@@ -94,21 +94,21 @@ const verifyConfig = [
     {
         ref: 'Hello World',
         config: {
-            vComIndex: 2,
+            vComIndex: 1,
             regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf5340dk\/nrf5340)/,
         },
     },
     {
         ref: 'Peripheral LED Button Service',
         config: {
-            vComIndex: 2,
+            vComIndex: 1,
             regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Bluetooth Peripheral LBS example)/,
         },
     },
     {
         ref: 'Peripheral UART',
         config: {
-            vComIndex: 2,
+            vComIndex: 1,
             regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Nordic UART service example)/,
         },
     },
