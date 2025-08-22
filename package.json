@@ -22,7 +22,7 @@
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
-                "2.12.7"
+                "2.12.8"
             ]
         },
         "nrfutilCore": "8.0.0"
