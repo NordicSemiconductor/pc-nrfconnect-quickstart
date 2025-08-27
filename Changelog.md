@@ -8,6 +8,7 @@
 ### Changed
 
 -   Order of samples for the nRF9151 DK, the nRF9161 DK and the Thingy:91 X.
+-   Text in the Info step for the nRF54L15 DK.
 
 ### Removed
 
