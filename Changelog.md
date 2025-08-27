@@ -3,6 +3,7 @@
 ### Added
 
 -   Support for nRF9151 SMA DK.
+-   Support for the nRF54LM20 DK.
 
 ### Changed
 

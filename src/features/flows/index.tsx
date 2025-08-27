@@ -8,6 +8,7 @@ import React from 'react';
 
 import NRF52 from './nRF52';
 import NRF54L15 from './nRF54L15';
+import NRF54LM20 from './nRF54LM20';
 import NRF5340 from './nRF5340';
 import NRF7002 from './nRF7002';
 import NRF9151 from './nRF9151';
@@ -34,5 +35,6 @@ export default {
     [NRF9151.device]: NRF9151.flow,
     [NRF9151SMA.device]: NRF9151SMA.flow,
     [NRF54L15.device]: NRF54L15.flow,
+    [NRF54LM20.device]: NRF54LM20.flow,
     [THINGY91X.device]: THINGY91X.flow,
 } as Record<string, Flow[]>;
