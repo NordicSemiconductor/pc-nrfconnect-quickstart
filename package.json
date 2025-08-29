@@ -15,6 +15,7 @@
     },
     "main": "dist/bundle.js",
     "nrfConnectForDesktop": {
+        "nrfutilCore": "8.0.0",
         "supportedDevices": [
             "PCA10090",
             "PCA10153"
@@ -22,7 +23,7 @@
         "html": "dist/index.html",
         "nrfutil": {
             "device": [
-                "2.10.2"
+                "2.12.9"
             ]
         }
     },
@@ -52,6 +53,6 @@
     },
     "prettier": "@nordicsemiconductor/pc-nrfconnect-shared/config/prettier.config.js",
     "devDependencies": {
-        "@nordicsemiconductor/pc-nrfconnect-shared": "^210.0.0"
+        "@nordicsemiconductor/pc-nrfconnect-shared": "^225.0.0"
     }
 }
