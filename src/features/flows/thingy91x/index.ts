@@ -13,7 +13,6 @@ import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import Rename from '../../../common/steps/Rename';
 import { Choice } from '../../device/deviceSlice';
-import CustomEvaluate from './Evaluate';
 import SIM from './SIM';
 
 const infoConfig = {
@@ -24,10 +23,10 @@ const infoConfig = {
 
 const programConfig = [
     {
-        name: 'Start prototyping',
+        name: 'Start testing',
         type: 'buttonless-dfu',
         description:
-            'Connect to hello.nrfcloud.com to retrive real-time data and do simple prototyping.',
+            'Connect to hello.nrfcloud.com to retrieve real-time data and do simple testing.',
         documentation: {
             label: 'Hello nRF Cloud',
             href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
@@ -39,6 +38,31 @@ const programConfig = [
                 link: {
                     label: 'Hello nRF Cloud',
                     href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                },
+            },
+        ],
+    },
+    {
+        name: 'Asset Tracker',
+        type: 'jlink',
+        description:
+            'Enable cloud-connected, battery-efficient asset tracking and sensor data collection with customizable, power-optimized features.',
+        documentation: {
+            label: 'Asset Tracker Template',
+            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+        },
+        firmwareNote: {
+            title: 'Increased power consumption',
+            content:
+                'Modem Trace is enabled; the current consumption will be higher than usual.',
+        },
+        firmware: [
+            {
+                core: 'Application',
+                file: 'thingy91x_asset_tracker_template.hex',
+                link: {
+                    label: 'Asset Tracker Template',
+                    href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
                 },
             },
         ],
@@ -58,26 +82,6 @@ const programConfig = [
                 link: {
                     label: 'Serial LTE Modem',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
-                },
-            },
-        ],
-    },
-    {
-        name: 'nRF Cloud multi-service',
-        type: 'buttonless-dfu',
-        description:
-            'Evaluate nRF Cloud services: onboarding, data collection, FOTA updates, location, logging, and alerts.',
-        documentation: {
-            label: 'nRF Cloud multi-service',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
-        },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'thingy91x_nrfcloud_multi_service.zip',
-                link: {
-                    label: 'nRF Cloud multi-service',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
                 },
             },
         ],
@@ -106,19 +110,19 @@ const programConfig = [
 const verifyConfig = {
     settings: [
         {
-            ref: 'Start prototyping',
+            ref: 'Start testing',
             vComIndex: 0,
             mode: 'SHELL' as const,
+        },
+        {
+            ref: 'Asset Tracker',
+            vComIndex: 0,
+            mode: 'LINE' as const,
         },
         {
             ref: 'AT Commands',
             vComIndex: 0,
             mode: 'LINE' as const,
-        },
-        {
-            ref: 'nRF Cloud multi-service',
-            vComIndex: 0,
-            mode: 'SHELL' as const,
         },
         {
             ref: 'Shell Command Line Interface',
@@ -148,7 +152,7 @@ const verifyConfig = {
 
 const evaluateConfig = [
     {
-        ref: 'Start prototyping',
+        ref: 'Start testing',
         resources: [
             {
                 title: 'Discover the features',
@@ -177,6 +181,24 @@ const evaluateConfig = [
         ],
     },
     {
+        ref: 'Asset Tracker',
+        resources: [
+            {
+                title: 'Cellular IoT Fundamentals',
+                mainLink: {
+                    label: 'Open course',
+                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
+                },
+                description:
+                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
+            },
+            {
+                app: 'pc-nrfconnect-cellularmonitor',
+                description: 'Automatically connect and evaluate parameters.',
+            },
+        ],
+    },
+    {
         ref: 'AT Commands',
         resources: [
             {
@@ -196,10 +218,6 @@ const evaluateConfig = [
                 ],
             },
         ],
-    },
-    {
-        ref: 'nRF Cloud multi-service',
-        component: CustomEvaluate,
     },
     {
         ref: 'Shell Command Line Interface',
@@ -246,16 +264,16 @@ const learnConfig = [
 const developConfig = [
     // Not in NCS
     // {
-    //     ref: 'Start prototyping',
+    //     ref: 'Start testing',
     //     sampleSource: 'Unknown',
     // },
     {
-        ref: 'AT Commands',
-        sampleSource: 'nrf/applications/serial_lte_modem',
+        ref: 'Asset Tracker',
+        sampleSource: 'nrf/applications/asset_tracker_template',
     },
     {
-        ref: 'nRF Cloud multi-service',
-        sampleSource: 'nrf/samples/cellular/nrf_cloud_multi_service',
+        ref: 'AT Commands',
+        sampleSource: 'nrf/applications/serial_lte_modem',
     },
     {
         ref: 'Shell Command Line Interface',

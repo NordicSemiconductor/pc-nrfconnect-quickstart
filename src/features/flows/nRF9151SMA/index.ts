@@ -22,6 +22,39 @@ const infoConfig = {
 
 const programConfig = [
     {
+        name: 'Asset Tracker',
+        type: 'jlink',
+        description:
+            'Enable cloud-connected, battery-efficient asset tracking and sensor data collection with customizable, power-optimized features.',
+        documentation: {
+            label: 'Asset Tracker Template',
+            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+        },
+        firmwareNote: {
+            title: 'Increased power consumption',
+            content:
+                'Modem Trace is enabled; the current consumption will be higher than usual.',
+        },
+        firmware: [
+            {
+                core: 'Modem',
+                file: 'mfw_nrf91x1_2.0.2.zip',
+                link: {
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                },
+            },
+            {
+                core: 'Application',
+                file: 'nrf9151dk_asset_tracker_template.hex',
+                link: {
+                    label: 'Asset Tracker Template',
+                    href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                },
+            },
+        ],
+    },
+    {
         name: 'AT Commands',
         type: 'jlink',
         description: 'Evaluate the cellular modem using AT commands.',
@@ -90,6 +123,11 @@ const programConfig = [
 const verificationConfig = {
     settings: [
         {
+            ref: 'Asset Tracker',
+            vComIndex: 0,
+            mode: 'LINE' as const,
+        },
+        {
             ref: 'AT Commands',
             vComIndex: 0,
             mode: 'LINE' as const,
@@ -121,6 +159,24 @@ const verificationConfig = {
 };
 
 const evaluationConfig = [
+    {
+        ref: 'Asset Tracker',
+        resources: [
+            {
+                title: 'Cellular IoT Fundamentals',
+                mainLink: {
+                    label: 'Open course',
+                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
+                },
+                description:
+                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
+            },
+            {
+                app: 'pc-nrfconnect-cellularmonitor',
+                description: 'Automatically connect and evaluate parameters.',
+            },
+        ],
+    },
     {
         ref: 'AT Commands',
         resources: [
@@ -203,6 +259,10 @@ const learnConfig = [
 ];
 
 const developConfig = [
+    {
+        ref: 'Asset Tracker',
+        sampleSource: 'nrf/applications/asset_tracker_template',
+    },
     {
         ref: 'AT Commands',
         sampleSource: 'nrf/applications/serial_lte_modem',
