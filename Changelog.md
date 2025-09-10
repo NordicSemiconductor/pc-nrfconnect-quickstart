@@ -4,6 +4,15 @@
 
 -   Support for nRF9151 SMA DK.
 
+### Changed
+
+-   Order of samples for the nRF9151 DK, the nRF9161 DK and the Thingy:91 X.
+
+### Removed
+
+-   nRF Cloud multi-service sample from the nRF9151 DK and the Thingy:91 X quick
+    start flow.
+
 ## 1.3.1 - 2025-08-21
 
 ### Changed
