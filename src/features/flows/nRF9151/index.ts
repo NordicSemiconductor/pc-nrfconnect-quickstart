@@ -13,7 +13,6 @@ import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import Rename from '../../../common/steps/Rename';
 import { Choice } from '../../device/deviceSlice';
-import CustomEvaluate from './Evaluate';
 import SIM from './SIM';
 
 const infoConfig = {
@@ -23,6 +22,39 @@ const infoConfig = {
 };
 
 const programConfig = [
+    {
+        name: 'Asset Tracker',
+        type: 'jlink',
+        description:
+            'Enable cloud-connected, battery-efficient asset tracking and sensor data collection with customizable, power-optimized features.',
+        documentation: {
+            label: 'Asset Tracker Template',
+            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+        },
+        firmwareNote: {
+            title: 'Increased power consumption',
+            content:
+                'Modem Trace is enabled; the current consumption will be higher than usual.',
+        },
+        firmware: [
+            {
+                core: 'Modem',
+                file: 'mfw_nrf91x1_2.0.2.zip',
+                link: {
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                },
+            },
+            {
+                core: 'Application',
+                file: 'nrf9151dk_asset_tracker_template.hex',
+                link: {
+                    label: 'Asset Tracker',
+                    href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                },
+            },
+        ],
+    },
     {
         name: 'AT Commands',
         type: 'jlink',
@@ -51,72 +83,6 @@ const programConfig = [
                 link: {
                     label: 'Serial LTE Modem',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
-                },
-            },
-        ],
-    },
-    {
-        name: 'Asset Tracking',
-        type: 'jlink',
-        description:
-            'Evaluate cloud interaction, location services, GNSS, and real-time configurations.',
-        documentation: {
-            label: 'Asset Tracker v2',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
-        },
-        firmwareNote: {
-            title: 'Increased power consumption',
-            content:
-                'Modem Trace is enabled; the current consumption will be higher than usual.',
-        },
-        firmware: [
-            {
-                core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.2.zip',
-                link: {
-                    label: 'Firmware v2.0.2',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
-                },
-            },
-            {
-                core: 'Application',
-                file: 'nrf9151dk_asset_tracker.hex',
-                link: {
-                    label: 'Asset Tracker v2',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
-                },
-            },
-        ],
-    },
-    {
-        name: 'nRF Cloud multi-service',
-        type: 'jlink',
-        description:
-            'Evaluate nRF Cloud services: onboarding, data collection, FOTA updates, location, logging, and alerts.',
-        documentation: {
-            label: 'nRF Cloud multi-service',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
-        },
-        firmwareNote: {
-            title: 'Increased power consumption',
-            content:
-                'Modem Trace is enabled; the current consumption will be higher than usual.',
-        },
-        firmware: [
-            {
-                core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.2.zip',
-                link: {
-                    label: 'Firmware v2.0.2',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
-                },
-            },
-            {
-                core: 'Application',
-                file: 'nrf9151dk_nrfcloud_multi_service.hex',
-                link: {
-                    label: 'nRF Cloud multi-service',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
                 },
             },
         ],
@@ -153,29 +119,62 @@ const programConfig = [
             },
         ],
     },
+    {
+        name: 'Legacy Asset Tracker',
+        type: 'jlink',
+        description:
+            'Evaluate cloud interaction, location services, GNSS, and real-time configurations.',
+        documentation: {
+            label: 'Asset Tracker v2',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
+        },
+        firmwareNote: {
+            title: 'Increased power consumption',
+            content:
+                'Modem Trace is enabled; the current consumption will be higher than usual.',
+        },
+        firmware: [
+            {
+                core: 'Modem',
+                file: 'mfw_nrf91x1_2.0.2.zip',
+                link: {
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                },
+            },
+            {
+                core: 'Application',
+                file: 'nrf9161dk_asset_tracker.hex',
+                link: {
+                    label: 'Asset Tracker v2',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
+                },
+            },
+        ],
+    },
 ] as Choice[];
 
 const verificationConfig = {
     settings: [
+        {
+            ref: 'Asset Tracker',
+            vComIndex: 0,
+            mode: 'LINE' as const,
+        },
         {
             ref: 'AT Commands',
             vComIndex: 0,
             mode: 'LINE' as const,
         },
         {
-            ref: 'Asset Tracking',
-            vComIndex: 0,
-            mode: 'LINE' as const,
-        },
-        {
-            ref: 'nRF Cloud multi-service',
-            vComIndex: 0,
-            mode: 'SHELL' as const,
-        },
-        {
             ref: 'Shell Command Line Interface',
             vComIndex: 0,
             mode: 'SHELL' as const,
+        },
+        {
+            ref: 'Legacy Asset Tracker',
+            vComIndex: 0,
+            mode: 'LINE' as const,
         },
     ],
     commands: [
@@ -199,6 +198,24 @@ const verificationConfig = {
 };
 
 const evaluationConfig = [
+    {
+        ref: 'Asset Tracker',
+        resources: [
+            {
+                title: 'Cellular IoT Fundamentals',
+                mainLink: {
+                    label: 'Open course',
+                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
+                },
+                description:
+                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
+            },
+            {
+                app: 'pc-nrfconnect-cellularmonitor',
+                description: 'Automatically connect and evaluate parameters.',
+            },
+        ],
+    },
     {
         ref: 'AT Commands',
         resources: [
@@ -225,28 +242,6 @@ const evaluationConfig = [
         ],
     },
     {
-        ref: 'Asset Tracking',
-        resources: [
-            {
-                title: 'Cellular IoT Fundamentals',
-                mainLink: {
-                    label: 'Open course',
-                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
-                },
-                description:
-                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
-    },
-    {
-        ref: 'nRF Cloud multi-service',
-        component: CustomEvaluate,
-    },
-    {
         ref: 'Shell Command Line Interface',
         resources: [
             {
@@ -263,6 +258,24 @@ const evaluationConfig = [
                         href: 'https://docs.nordicsemi.com/bundle/ref_at_commands_nrf91x1/page/REF/at_commands/intro_nrf91x1.html',
                     },
                 ],
+            },
+            {
+                app: 'pc-nrfconnect-cellularmonitor',
+                description: 'Automatically connect and evaluate parameters.',
+            },
+        ],
+    },
+    {
+        ref: 'Legacy Asset Tracker',
+        resources: [
+            {
+                title: 'Cellular IoT Fundamentals',
+                mainLink: {
+                    label: 'Open course',
+                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
+                },
+                description:
+                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
             },
             {
                 app: 'pc-nrfconnect-cellularmonitor',
@@ -304,20 +317,20 @@ const learnConfig = [
 
 const developConfig = [
     {
+        ref: 'Asset Tracker',
+        sampleSource: 'nrf/applications/asset_tracker_template',
+    },
+    {
         ref: 'AT Commands',
         sampleSource: 'nrf/applications/serial_lte_modem',
     },
     {
-        ref: 'Asset Tracking',
-        sampleSource: 'nrf/applications/asset_tracker_v2',
-    },
-    {
-        ref: 'nRF Cloud multi-service',
-        sampleSource: 'nrf/samples/cellular/nrf_cloud_multi_service',
-    },
-    {
         ref: 'Shell Command Line Interface',
         sampleSource: 'nrf/samples/cellular/modem_shell',
+    },
+    {
+        ref: 'Legacy Asset Tracker',
+        sampleSource: 'nrf/applications/asset_tracker_v2',
     },
 ];
 
