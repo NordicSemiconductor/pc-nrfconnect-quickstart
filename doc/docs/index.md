@@ -14,6 +14,7 @@ After installing and opening the app from nRF Connect for Desktop, connect your 
 - Nordic Thingy:91 X
 - nRF9161 DK
 - nRF9160 DK
+- nRF9151 SMA DK
 - nRF9151 DK
 - nRF7002 DK
 - nRF54L15 DK

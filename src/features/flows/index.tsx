@@ -11,6 +11,7 @@ import NRF54L15 from './nRF54L15';
 import NRF5340 from './nRF5340';
 import NRF7002 from './nRF7002';
 import NRF9151 from './nRF9151';
+import NRF9151SMA from './nRF9151SMA';
 import NRF9160 from './nRF9160';
 import NRF9161 from './nRF9161';
 import NRF52833 from './nRF52833';
@@ -31,6 +32,7 @@ export default {
     [NRF9160.device]: NRF9160.flow,
     [NRF9161.device]: NRF9161.flow,
     [NRF9151.device]: NRF9151.flow,
+    [NRF9151SMA.device]: NRF9151SMA.flow,
     [NRF54L15.device]: NRF54L15.flow,
     [THINGY91X.device]: THINGY91X.flow,
 } as Record<string, Flow[]>;
