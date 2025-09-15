@@ -4,6 +4,8 @@
 
 -   Support for nRF9151 SMA DK.
 -   Support for the nRF54LM20 DK.
+-   Asset Tracker Template sample for the nRF9151 DK, the nRF9161 DK and the
+    Thingy:91 X.
 
 ### Changed
 
