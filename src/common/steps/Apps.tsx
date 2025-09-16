@@ -111,7 +111,7 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
                 heading="Select apps to install"
                 subHeading={`Check out these nRF Connect for Desktop applications for ${
                     deviceInfo(device).name
-                }:`}
+                }`}
             >
                 <MultipleSelect
                     items={items}
