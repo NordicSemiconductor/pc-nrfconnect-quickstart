@@ -88,6 +88,7 @@ export const AppResourceButton = ({
     title,
     onInstallStart,
     onInstallFinish,
+    selectDeviceOnAppOpen,
 }: {
     description: string;
     app: string;
@@ -97,6 +98,7 @@ export const AppResourceButton = ({
     vComIndex?: number;
     onInstallStart?: () => void;
     onInstallFinish?: () => void;
+    selectDeviceOnAppOpen?: boolean;
 }) => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const [displayName, setDisplayName] = useState(app);
@@ -105,6 +107,8 @@ export const AppResourceButton = ({
         vComIndex !== undefined
             ? device.serialPorts?.[vComIndex]?.comName
             : undefined;
+
+    const selectDevice = selectDeviceOnAppOpen !== false;
 
     useEffect(() => {
         apps.getDownloadableApps().then(({ apps: receivedApps }) => {
@@ -151,18 +155,20 @@ export const AppResourceButton = ({
                         onInstallFinish?.();
                     }
 
-                    const deviceOptions = path
-                        ? { serialPortPath: path }
-                        : { serialNumber: device.serialNumber };
+                    const options = selectDevice
+                        ? {
+                              device: path
+                                  ? { serialPortPath: path }
+                                  : { serialNumber: device.serialNumber },
+                          }
+                        : {};
 
                     openWindow.openApp(
                         {
                             name: app,
                             source: 'official',
                         },
-                        {
-                            device: deviceOptions,
-                        }
+                        options
                     );
 
                     telemetry.sendEvent('Opened evaluation app', {

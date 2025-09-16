@@ -195,6 +195,7 @@ const evaluateConfig = [
                 app: 'pc-nrfconnect-ppk',
                 description:
                     'The Power Profiler app is the recommended software tool for measurements.',
+                selectDeviceOnAppOpen: false,
             },
         ],
     },
