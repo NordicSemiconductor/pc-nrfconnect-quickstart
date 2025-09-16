@@ -44,7 +44,7 @@ const programConfig = [
     },
     {
         name: 'Asset Tracker',
-        type: 'jlink',
+        type: 'buttonless-dfu',
         description:
             'Enable cloud-connected, battery-efficient asset tracking and sensor data collection with customizable, power-optimized features.',
         documentation: {
@@ -59,7 +59,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Application',
-                file: 'thingy91x_asset_tracker_template.hex',
+                file: 'thingy91x_asset_tracker_template.zip',
                 link: {
                     label: 'Asset Tracker Template',
                     href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
@@ -117,7 +117,7 @@ const verifyConfig = {
         {
             ref: 'Asset Tracker',
             vComIndex: 0,
-            mode: 'LINE' as const,
+            mode: 'SHELL' as const,
         },
         {
             ref: 'AT Commands',
