@@ -30,6 +30,7 @@ interface ExternalLinkResource extends CommonResourceProps {
 
 interface AppResource extends CommonResourceProps {
     app: string;
+    selectDeviceOnAppOpen?: boolean;
     vComIndex?: number;
 }
 
@@ -87,6 +88,9 @@ const EvaluateStep = ({
                                 onInstallStart={() => setBusy(true)}
                                 onInstallFinish={() => setBusy(false)}
                                 vComIndex={resource.vComIndex}
+                                selectDeviceOnAppOpen={
+                                    resource.selectDeviceOnAppOpen
+                                }
                             />
                         )
                     )}
