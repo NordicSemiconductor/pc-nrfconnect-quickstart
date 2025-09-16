@@ -117,7 +117,7 @@ const verifyConfig = {
         {
             ref: 'Asset Tracker',
             vComIndex: 0,
-            mode: 'LINE' as const,
+            mode: 'SHELL' as const,
         },
         {
             ref: 'AT Commands',
