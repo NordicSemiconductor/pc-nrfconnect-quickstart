@@ -67,7 +67,7 @@ const programConfig = [
             'Sample for measuring power consumption when Bluetooth® LE stack is used for communication.',
         documentation: {
             label: 'Peripheral Power Profiling',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54lm20dk/doc/index.html',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html',
         },
         firmware: [
             {
@@ -75,7 +75,7 @@ const programConfig = [
                 file: 'nrf54l15dk_peripheral_uart.hex',
                 link: {
                     label: 'Peripheral Power Profiling',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54lm20dk/doc/index.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html',
                 },
             },
         ],
@@ -180,7 +180,7 @@ const evaluateConfig = [
                     'Follow the testing steps instructions to evaluate the sample.',
                 mainLink: {
                     label: 'Testing steps',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54lm20dk/doc/index.html#testing_the_leds_and_buttons_in_the_nrf54lm20_dk',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html#testing',
                 },
             },
             {
@@ -188,7 +188,7 @@ const evaluateConfig = [
                 description: 'Read the complete documentation for the sample.',
                 mainLink: {
                     label: 'Open documentation',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html',
                 },
             },
             {
