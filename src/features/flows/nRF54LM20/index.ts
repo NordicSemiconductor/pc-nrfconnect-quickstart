@@ -61,20 +61,21 @@ const programConfig = [
         ],
     },
     {
-        name: 'Power Profiling',
+        name: 'Peripheral Power Profiling',
         type: 'jlink',
-        description: '',
+        description:
+            'Sample for measuring power consumption when Bluetooth® LE stack is used for communication.',
         documentation: {
-            label: '',
-            href: '',
+            label: 'Peripheral Power Profiling',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54lm20dk/doc/index.html',
         },
         firmware: [
             {
                 core: 'Application',
                 file: 'nrf54l15dk_peripheral_uart.hex',
                 link: {
-                    label: '',
-                    href: '',
+                    label: 'Peripheral Power Profiling',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54lm20dk/doc/index.html',
                 },
             },
         ],
@@ -117,7 +118,7 @@ const verifyConfig = [
         },
     },
     {
-        ref: 'Power Profiling',
+        ref: 'Peripheral Power Profiling',
     },
     {
         ref: 'Peripheral UART',
@@ -171,7 +172,7 @@ const evaluateConfig = [
         ],
     },
     {
-        ref: 'Power Profiling',
+        ref: 'Peripheral Power Profiling',
         resources: [
             {
                 title: 'Test the sample',
@@ -179,7 +180,7 @@ const evaluateConfig = [
                     'Follow the testing steps instructions to evaluate the sample.',
                 mainLink: {
                     label: 'Testing steps',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html#testing',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54lm20dk/doc/index.html#testing_the_leds_and_buttons_in_the_nrf54lm20_dk',
                 },
             },
             {
@@ -189,6 +190,11 @@ const evaluateConfig = [
                     label: 'Open documentation',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
                 },
+            },
+            {
+                app: 'pc-nrfconnect-ppk',
+                description:
+                    'The Power Profiler app is the recommended software tool for measurements.',
             },
         ],
     },
@@ -256,7 +262,7 @@ const developConfig = [
         sampleSource: 'nrf/samples/bluetooth/peripheral_lbs',
     },
     {
-        ref: 'Power Profiling',
+        ref: 'Peripheral Power Profiling',
         sampleSource: 'nrf/samples/bluetooth/peripheral_uart',
     },
     {
@@ -266,6 +272,7 @@ const developConfig = [
 ];
 
 const appsConfig = [
+    'pc-nrfconnect-ppk',
     'pc-nrfconnect-programmer',
     'pc-nrfconnect-serial-terminal',
     'pc-nrfconnect-board-configurator',
