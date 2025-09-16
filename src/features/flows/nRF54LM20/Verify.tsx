@@ -39,7 +39,7 @@ export default (
                                           mdiIcon="mdi-information-outline"
                                           color="tw-text-primary"
                                           title="Verification for the Power Profiling sample is not supported."
-                                          content="Normally, samples in Quick Start are verified by checking the UART output from the DK. Because the Power Profiling sample's UART is disabled to achieve low power consumption, this method won't work. Instead, you can verify that the sample is working correctly by moving directly to the Evaluate step."
+                                          content="Normally, samples in Quick Start are verified by checking the UART output from the DK. Because the Power Profiling sample's UART is disabled to achieve low power consumption, this method won't work. Instead, you can verify that the sample is working correctly by continuing directly to the Evaluate step."
                                       />
                                   </Main.Content>
                                   <Main.Footer>
