@@ -6,7 +6,6 @@
 
 @import '~@nordicsemiconductor/pc-nrfconnect-shared/styles';
 
-
 @font-face {
     font-family: 'RobotoReg';
     src: url('../../../../resources/RobotoMono-Regular.ttf') format('truetype');
@@ -27,13 +26,25 @@
 }
 
 @-webkit-keyframes blink {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes blink {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
