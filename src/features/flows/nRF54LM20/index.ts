@@ -191,11 +191,6 @@ const evaluateConfig = [
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html',
                 },
             },
-            {
-                app: 'pc-nrfconnect-ppk',
-                description:
-                    'The Power Profiler app is the recommended software tool for measurements.',
-            },
         ],
     },
     {
