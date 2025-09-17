@@ -317,10 +317,6 @@ const learnConfig = [
 
 const developConfig = [
     {
-        ref: 'Asset Tracker',
-        sampleSource: 'nrf/applications/asset_tracker_template',
-    },
-    {
         ref: 'AT Commands',
         sampleSource: 'nrf/applications/serial_lte_modem',
     },
