@@ -33,6 +33,9 @@ const programConfig = [
         },
         firmware: [
             {
+                file: 'thingy91x_connectivity_bridge.zip',
+            },
+            {
                 core: 'Application',
                 file: 'thingy91x_hello.nrfcloud.zip',
                 link: {
@@ -58,6 +61,9 @@ const programConfig = [
         },
         firmware: [
             {
+                file: 'thingy91x_connectivity_bridge.zip',
+            },
+            {
                 core: 'Application',
                 file: 'thingy91x_asset_tracker_template.zip',
                 link: {
@@ -77,6 +83,9 @@ const programConfig = [
         },
         firmware: [
             {
+                file: 'thingy91x_connectivity_bridge.zip',
+            },
+            {
                 core: 'Application',
                 file: 'thingy91x_serial_lte_modem.zip',
                 link: {
@@ -95,6 +104,9 @@ const programConfig = [
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
         },
         firmware: [
+            {
+                file: 'thingy91x_connectivity_bridge.zip',
+            },
             {
                 core: 'Application',
                 file: 'thingy91x_modem_shell.zip',
