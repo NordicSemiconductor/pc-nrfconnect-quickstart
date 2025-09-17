@@ -32,7 +32,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Application',
-                file: '',
+                file: 'nrf54lm20dk_hello_world.hex',
                 link: {
                     label: 'Hello World',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
@@ -72,7 +72,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Application',
-                file: 'nrf54l15dk_peripheral_uart.hex',
+                file: 'nrf54lm20dk_power_profiling.hex',
                 link: {
                     label: 'Peripheral Power Profiling',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html',
@@ -92,7 +92,7 @@ const programConfig = [
         firmware: [
             {
                 core: 'Application',
-                file: 'nrf54l15dk_peripheral_uart.hex',
+                file: 'nrf54lm20dk_peripheral_uart.hex',
                 link: {
                     label: 'Peripheral UART Service',
                     href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
@@ -107,14 +107,14 @@ const verifyConfig = [
         ref: 'Hello World',
         config: {
             vComIndex: 1,
-            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf54l15pdk@.*\r\n)/,
+            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf54lm20dk.*\r\n)/,
         },
     },
     {
         ref: 'Peripheral LED Button Service',
         config: {
             vComIndex: 1,
-            regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Bluetooth Peripheral LBS example)/,
+            regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Bluetooth Peripheral LBS sample)/,
         },
     },
     {
@@ -124,7 +124,7 @@ const verifyConfig = [
         ref: 'Peripheral UART',
         config: {
             vComIndex: 1,
-            regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Nordic UART service example)/,
+            regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Nordic UART service sample)/,
         },
     },
 ];
