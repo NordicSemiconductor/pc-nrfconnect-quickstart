@@ -262,15 +262,6 @@ const learnConfig = [
 ];
 
 const developConfig = [
-    // Not in NCS
-    // {
-    //     ref: 'Start testing',
-    //     sampleSource: 'Unknown',
-    // },
-    {
-        ref: 'Asset Tracker',
-        sampleSource: 'nrf/applications/asset_tracker_template',
-    },
     {
         ref: 'AT Commands',
         sampleSource: 'nrf/applications/serial_lte_modem',
