@@ -15,7 +15,7 @@
     },
     "main": "dist/bundle.js",
     "nrfConnectForDesktop": {
-        "nrfutilCore": "8.0.0",
+        "nrfutilCore": "8.1.1",
         "supportedDevices": [
             "PCA10090",
             "PCA10153"
