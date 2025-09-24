@@ -83,7 +83,7 @@ export default () => {
     return (
         <Main>
             <Main.Content
-                heading="Evaluate nRF Cloud multi-service sample"
+                heading="Evaluate Asset Tracker sample"
                 subHeading="Onboarding, data collection, FOTA updates, location, logging, alerts, and more."
             >
                 <div className="tw-flex tw-flex-col tw-gap-4">

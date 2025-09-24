@@ -1,10 +1,19 @@
-## Unreleased
+## 1.4.1 - Unreleased
 
 ### Added
 
+-   Asset Tracker sample to the nRF9161 DK.
 -   The Evaluation step for the Asset Tracker sample for the Nordic Thingy:91 X,
     the nRF 9151 SMA DK and the nRF 9151 DK now reads the attestation token and
     directs you to nRF Cloud.
+
+### Removed
+
+-   nRF Cloud multi-service sample from the nRF9161 DK.
+
+### Fixed
+
+-   Re-added the AT Commands sample for the nRF9161 DK.
 
 ## 1.4.0 - 2025-09-18
 
