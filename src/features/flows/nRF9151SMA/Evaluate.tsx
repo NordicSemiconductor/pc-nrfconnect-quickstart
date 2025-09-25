@@ -31,7 +31,7 @@ import {
     reset,
     setAttestationToken,
     setFailed,
-} from './nrf9161Slice';
+} from './nrf9151SMASlice';
 
 const nRFCloudLink =
     'https://docs.nordicsemi.com/bundle/nrf-cloud/page/GettingStarted.html';
@@ -50,8 +50,10 @@ export default () => {
 
         if (!deviceConnected) {
             dispatch(setFailed('No development kit connected.'));
+            setGettingToken(false);
             return;
         }
+
         runVerification(
             [
                 {
@@ -69,9 +71,7 @@ export default () => {
                 logger.error(describeError(e));
                 dispatch(setFailed('Failed to get the attestation token.'));
             })
-            .finally(() => {
-                setGettingToken(false);
-            });
+            .finally(() => setGettingToken(false));
     }, [device, dispatch, deviceConnected]);
 
     useEffect(() => {
