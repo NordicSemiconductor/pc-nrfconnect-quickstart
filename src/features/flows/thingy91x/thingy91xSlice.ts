@@ -11,12 +11,12 @@ import { setChoice } from '../../device/deviceSlice';
 
 interface State {
     attestationToken?: string;
-    failed: boolean;
+    failed?: string;
 }
 
 const initialState: State = {
     attestationToken: undefined,
-    failed: false,
+    failed: undefined,
 };
 
 const slice = createSlice({
@@ -29,7 +29,7 @@ const slice = createSlice({
         ) => {
             state.attestationToken = attestationToken;
         },
-        setFailed: (state, { payload: failed }: PayloadAction<boolean>) => {
+        setFailed: (state, { payload: failed }: PayloadAction<string>) => {
             state.failed = failed;
         },
 
