@@ -26,7 +26,7 @@ const programConfig = [
         name: 'Asset Tracker',
         type: 'jlink',
         description:
-            'Enable cloud-connected, battery-efficient asset tracking and sensor data collection with customizable, power-optimized features.',
+            'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
             label: 'Asset Tracker Template',
             href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
