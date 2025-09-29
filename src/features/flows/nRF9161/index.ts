@@ -24,13 +24,13 @@ const infoConfig = {
 
 const programConfig = [
     {
-        name: 'nRF Cloud multi-service',
+        name: 'Asset Tracker',
         type: 'jlink',
         description:
-            'Evaluate nRF Cloud services: onboarding, data collection, FOTA updates, logging, and alerts.',
+            'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
-            label: 'nRF Cloud multi-service',
-            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
+            label: 'Asset Tracker Template',
+            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
         },
         firmwareNote: {
             title: 'Increased power consumption',
@@ -48,10 +48,42 @@ const programConfig = [
             },
             {
                 core: 'Application',
-                file: 'nrf9161dk_nrfcloud_multi_service.hex',
+                file: 'nrf9161dk_asset_tracker_template.hex',
                 link: {
-                    label: 'nRF Cloud multi-service',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/nrf_cloud_multi_service/README.html',
+                    label: 'Asset Tracker',
+                    href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                },
+            },
+        ],
+    },
+    {
+        name: 'AT Commands',
+        type: 'jlink',
+        description: 'Evaluate the cellular modem using AT commands.',
+        documentation: {
+            label: 'Serial LTE Modem',
+            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+        },
+        firmwareNote: {
+            title: 'Increased power consumption',
+            content:
+                'Modem Trace is enabled; the current consumption will be higher than usual.',
+        },
+        firmware: [
+            {
+                core: 'Modem',
+                file: 'mfw_nrf91x1_2.0.2.zip',
+                link: {
+                    label: 'Firmware v2.0.2',
+                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                },
+            },
+            {
+                core: 'Application',
+                file: 'nrf9161dk_serial_lte_modem.hex',
+                link: {
+                    label: 'Serial LTE Modem',
+                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
                 },
             },
         ],
@@ -126,9 +158,14 @@ const programConfig = [
 const verificationConfig = {
     settings: [
         {
-            ref: 'nRF Cloud multi-service',
+            ref: 'Asset Tracker',
             vComIndex: 0,
             mode: 'SHELL' as const,
+        },
+        {
+            ref: 'AT Commands',
+            vComIndex: 0,
+            mode: 'LINE' as const,
         },
         {
             ref: 'Shell Command Line Interface',
@@ -163,8 +200,33 @@ const verificationConfig = {
 
 const evaluationConfig = [
     {
-        ref: 'nRF Cloud multi-service',
+        ref: 'Asset Tracker',
         component: CustomEvaluate,
+    },
+    {
+        ref: 'AT Commands',
+        resources: [
+            {
+                app: 'pc-nrfconnect-serial-terminal',
+                description:
+                    'Use the Serial Terminal desktop application as a serial interface to send AT commands to the device.',
+                vComIndex: 0,
+                supplementaryLinks: [
+                    {
+                        label: 'AT Commands reference manual',
+                        href: 'https://docs.nordicsemi.com/bundle/ref_at_commands_nrf91x1/page/REF/at_commands/intro_nrf91x1.html',
+                    },
+                    {
+                        label: 'IP AT Commands Documentation',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/doc/AT_commands.html',
+                    },
+                ],
+            },
+            {
+                app: 'pc-nrfconnect-cellularmonitor',
+                description: 'Automatically connect and evaluate parameters.',
+            },
+        ],
     },
     {
         ref: 'Shell Command Line Interface',

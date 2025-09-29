@@ -13,6 +13,7 @@ import Learn from '../../../common/steps/Learn';
 import Program from '../../../common/steps/program';
 import Rename from '../../../common/steps/Rename';
 import { Choice } from '../../device/deviceSlice';
+import CustomEvaluate from './Evaluate';
 import SIM from './SIM';
 
 const infoConfig = {
@@ -26,7 +27,7 @@ const programConfig = [
         name: 'Asset Tracker',
         type: 'jlink',
         description:
-            'Enable cloud-connected, battery-efficient asset tracking and sensor data collection with customizable, power-optimized features.',
+            'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
             label: 'Asset Tracker Template',
             href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
@@ -200,21 +201,7 @@ const verificationConfig = {
 const evaluationConfig = [
     {
         ref: 'Asset Tracker',
-        resources: [
-            {
-                title: 'Cellular IoT Fundamentals',
-                mainLink: {
-                    label: 'Open course',
-                    href: 'https://academy.nordicsemi.com/courses/cellular-iot-fundamentals/lessons/lesson-1-cellular-fundamentals/topic/lesson-1-exercise-1/',
-                },
-                description:
-                    'Follow Exercise 1 in the Cellular IoT Fundamentals course to evaluate cloud connectivity.',
-            },
-            {
-                app: 'pc-nrfconnect-cellularmonitor',
-                description: 'Automatically connect and evaluate parameters.',
-            },
-        ],
+        component: CustomEvaluate,
     },
     {
         ref: 'AT Commands',
