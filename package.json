@@ -21,6 +21,10 @@
             "PCA10153"
         ],
         "html": "dist/index.html",
+        "fixedSize": {
+            "width": 800,
+            "height": 550
+        },
         "nrfutil": {
             "device": [
                 "2.13.2"
