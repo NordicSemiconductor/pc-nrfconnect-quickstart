@@ -4,22 +4,18 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { Progress } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
-import {
-    DeviceCore,
-    NrfutilDeviceLib,
-} from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
-import path from 'path';
-
 import { type AppThunk, RootState } from '../../../app/store';
-import { getFirmwareFolder } from '../../../features/device/deviceGuides';
-import { reset } from '../../../features/device/deviceLib';
 import {
-    Choice,
+    DeviceWithSerialnumber,
+    reset,
+} from '../../../features/device/deviceLib';
+import {
     getChoiceUnsafely,
     getSelectedDeviceUnsafely,
     selectedDeviceIsConnected,
 } from '../../../features/device/deviceSlice';
+import jlinkBatch from './actionVariants/jlinkBatch';
+import withConnectivityBridge from './actionVariants/withConnectivityBridge';
 import {
     prepareProgramming,
     removeError,
@@ -47,188 +43,23 @@ interface VisibleBatchOperation {
     link?: { label: string; href: string };
 }
 
-const jlinkProgram =
-    (
-        choice: Choice,
-        batch: ReturnType<typeof NrfutilDeviceLib.batch>
-    ): AppThunk<RootState, VisibleBatchOperation[]> =>
-    dispatch => {
-        const cores = choice.firmware.reduce((prev, curr) => {
-            const nonModemCore =
-                curr.core === 'Modem' ? 'Application' : curr.core;
-            if (prev.includes(nonModemCore)) return prev;
-            return prev.concat(nonModemCore);
-        }, [] as Omit<DeviceCore, 'Modem'>[]);
-
-        cores.forEach((core, index) => {
-            batch.recover(core as DeviceCore, {
-                onTaskBegin: () => {
-                    dispatch(
-                        setProgrammingProgress({
-                            index: 0,
-                            // index + 1 because we should show some progress on the first action
-                            progress: ((index + 1) / (cores.length + 1)) * 100,
-                        })
-                    );
-                },
-                onTaskEnd: end => {
-                    if (end.error) {
-                        dispatch(
-                            setError({
-                                icon: 'mdi-lightbulb-alert-outline',
-                                text: 'Failed to erase device',
-                            })
-                        );
-                    }
-                },
-            });
-        });
-        batch.collect(cores.length, () => {
-            dispatch(setProgrammingProgress({ index: 0, progress: 100 }));
-        });
-
-        choice.firmware.forEach(({ file, core }, index) => {
-            batch.program(
-                path.join(getFirmwareFolder(), file),
-                core === 'Modem' ? 'Application' : core,
-                undefined,
-                undefined,
-                {
-                    onProgress: ({
-                        totalProgressPercentage: progress,
-                    }: Progress) =>
-                        dispatch(
-                            setProgrammingProgress({
-                                index: index + 1,
-                                progress,
-                            })
-                        ),
-                    onTaskEnd: end => {
-                        if (end.error) {
-                            dispatch(
-                                setError({
-                                    icon: 'mdi-flash-alert-outline',
-                                    text: `Failed to program the ${core} core`,
-                                })
-                            );
-                        }
-                    },
-                }
-            );
-        });
-
-        // use 'RESET_DEFAULT' which is default when not passing anything for reset argument
-        batch.reset('Application', undefined, {
-            onTaskBegin: () => {
-                dispatch(
-                    setProgrammingProgress({
-                        index: 1 + choice.firmware.length,
-                        progress: 50,
-                    })
-                );
-            },
-            onTaskEnd: end => {
-                if (end.result === 'success') {
-                    dispatch(
-                        setProgrammingProgress({
-                            index: 1 + choice.firmware.length,
-                            progress: 100,
-                        })
-                    );
-                }
-                if (end.error) {
-                    dispatch(
-                        setError({
-                            icon: 'mdi-restore-alert',
-                            text: 'Failed to reset the device',
-                            buttonText: 'Reset',
-                            retryRef: 'reset',
-                        })
-                    );
-                }
-            },
-        });
-
-        return [
-            { title: 'Erase device' },
-            ...choice.firmware.map(f => ({
-                title: `${f.core} core`,
-                link: f.link,
-            })),
-            { title: 'Reset device' },
-        ];
-    };
-
-const buttonlessDfuProgram =
-    (
-        choice: Choice,
-        batch: ReturnType<typeof NrfutilDeviceLib.batch>
-    ): AppThunk<RootState, VisibleBatchOperation[]> =>
-    dispatch => {
-        choice.firmware.forEach(({ file, core }) => {
-            batch.program(
-                path.join(getFirmwareFolder(), file),
-                core === 'Modem' ? 'Application' : core,
-                undefined,
-                undefined,
-                {
-                    onProgress: ({
-                        totalProgressPercentage: progress,
-                    }: Progress) =>
-                        dispatch(
-                            setProgrammingProgress({
-                                index: 0,
-                                progress,
-                            })
-                        ),
-                    onTaskEnd: end => {
-                        if (end.error) {
-                            // Thingy91X gets an onProgress event 100% when it fails which breaks expectations here. It will be changed/fixed in nrfutil
-                            dispatch(
-                                setProgrammingProgress({
-                                    index: 0,
-                                    progress: 0,
-                                })
-                            );
-                            dispatch(
-                                setError({
-                                    icon: 'mdi-flash-alert-outline',
-                                    text: `Failed to program the ${core} core`,
-                                })
-                            );
-                        }
-                    },
-                }
-            );
-        });
-
-        return [
-            ...choice.firmware.map(f => ({
-                title: `${f.core} core`,
-                link: f.link,
-            })),
-        ];
-    };
+export interface ActionVariant {
+    run: (device: DeviceWithSerialnumber) => Promise<unknown>;
+    operations: VisibleBatchOperation[];
+}
 
 export const startProgramming = (): AppThunk => (dispatch, getState) => {
     const choice = getChoiceUnsafely(getState());
     dispatch(removeError(undefined));
 
-    const device = getSelectedDeviceUnsafely(getState());
-    const batch = NrfutilDeviceLib.batch();
-    let displayedBatchOperations: {
-        title: string;
-        link?: { label: string; href: string };
-    }[];
+    let action: ActionVariant;
 
     switch (choice.type) {
         case 'jlink':
-            displayedBatchOperations = dispatch(jlinkProgram(choice, batch));
+            action = dispatch(jlinkBatch(choice));
             break;
         case 'buttonless-dfu':
-            displayedBatchOperations = dispatch(
-                buttonlessDfuProgram(choice, batch)
-            );
+            action = dispatch(withConnectivityBridge(choice));
             break;
         default:
             dispatch(
@@ -240,11 +71,11 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
             return;
     }
 
-    dispatch(prepareProgramming(displayedBatchOperations));
+    dispatch(prepareProgramming(action.operations));
 
     if (!dispatch(checkDeviceConnected())) return;
 
-    return batch.run(device).catch(() => {
+    return action.run(getSelectedDeviceUnsafely(getState())).catch(() => {
         if (!getState().steps.program.error) {
             dispatch(
                 setError({
