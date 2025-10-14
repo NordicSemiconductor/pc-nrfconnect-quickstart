@@ -1,3 +1,9 @@
+## 1.5.1 - unreleased
+
+### Changed
+
+-   Updated firmware for Nordic Thingy:91 X.
+
 ## 1.5.0 - 2025-10-01
 
 ### Added
