@@ -33,8 +33,8 @@ import {
     setFailed,
 } from './nrf9161Slice';
 
-const nRFCloudLink =
-    'https://docs.nordicsemi.com/bundle/nrf-cloud/page/GettingStarted.html';
+const provisioningLink =
+    'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/common/provisioning.html';
 
 export default () => {
     const dispatch = useAppDispatch();
@@ -118,9 +118,9 @@ export default () => {
                         size="xl"
                         onClick={() => {
                             telemetry.sendEvent('Opened evaluation link', {
-                                link: nRFCloudLink,
+                                link: provisioningLink,
                             });
-                            openUrl(nRFCloudLink);
+                            openUrl(provisioningLink);
                         }}
                         className="tw-w-fit"
                     >
