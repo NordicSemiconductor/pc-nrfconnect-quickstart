@@ -2,7 +2,7 @@
 
 ### Changed
 
-- Changed "Open Instructions" URL to point to the Asset Tracker Template steps on
+- Changed "Open Instructions" URL to point to the Asset Tracker Template steps about
   how to claim the device on nRF Cloud.
 
 ## 1.5.1 - 2025-10-15
