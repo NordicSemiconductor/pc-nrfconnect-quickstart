@@ -1,3 +1,10 @@
+## 1.5.2 - 2025-10-22
+
+### Changed
+
+- Changed "Open Instructions" URL to point to the Asset Tracker Template steps on
+  how to claim the device on nRF Cloud.
+
 ## 1.5.1 - 2025-10-15
 
 ### Changed
