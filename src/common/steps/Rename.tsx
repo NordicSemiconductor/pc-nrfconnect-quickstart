@@ -17,6 +17,15 @@ import { Back } from '../Back';
 import Main from '../Main';
 import { Next, Skip } from '../Next';
 
+const Test = () => {
+    const [temp, setTemp] = React.useState(0);
+    return (
+        <button type="button" onClick={() => setTemp(temp + 1)}>
+            {temp}
+        </button>
+    );
+};
+
 const RenameStep = () => {
     const device = useAppSelector(getSelectedDeviceUnsafely);
     const previousNickname = device
@@ -27,10 +36,19 @@ const RenameStep = () => {
     const maxLength = 20;
 
     return (
-        <Main>
+        <Main
+            detectDisconnectedDevice={{
+                onConnectionStatusChanged: connected => {
+                    if (!connected) {
+                        return { showDisconnectView: true as boolean };
+                    }
+                },
+            }}
+        >
             <Main.Content heading="Give your kit a custom name">
                 <div className="tw-flex tw-w-64 tw-flex-col tw-items-center">
                     <div className="tw-self-end tw-text-xs">{`${nickname.length}/${maxLength}`}</div>
+                    <Test />
                     <input
                         placeholder="Name your device"
                         type="text"
