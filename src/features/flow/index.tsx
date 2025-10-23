@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import {
     deviceInfo,
     logger,
@@ -40,16 +40,24 @@ const useLogSteps = () => {
     }, [flow, currentStepIndex]);
 };
 
-const Flow = ({ flow }: { flow: Flow[] }) => {
+const Flow = () => {
     const dispatch = useAppDispatch();
+    const device = useAppSelector(getSelectedDevice);
+    const deviceName = device && deviceInfo(device).name;
+    const validFlow = deviceName && !!flows[deviceName];
     const currentStepIndex = useAppSelector(getCurrentStepIndex);
-    const flowWithFinish = useMemo(() => [...flow, Finish()], [flow]);
+    const [flowWithFinish, setFlowWithFinish] = React.useState<Flow[]>([]);
 
     useEffect(() => {
-        dispatch(allReset());
-        dispatch(flowsAllReset());
-        dispatch(setFlow(flowWithFinish.map(f => f.name)));
-    }, [flowWithFinish, dispatch]);
+        if (validFlow && !flowWithFinish.length) {
+            const newFlow = [...flows[deviceName], Finish()];
+
+            dispatch(allReset());
+            dispatch(flowsAllReset());
+            setFlowWithFinish(newFlow);
+            dispatch(setFlow(newFlow.map(f => f.name)));
+        }
+    }, [validFlow, flowWithFinish, deviceName, dispatch]);
 
     const Step =
         currentStepIndex >= 0
@@ -61,9 +69,6 @@ const Flow = ({ flow }: { flow: Flow[] }) => {
 
 export default () => {
     const showConnect = useAppSelector(isConnectVisible);
-    const device = useAppSelector(getSelectedDevice);
-    const deviceName = device && deviceInfo(device).name;
-    const validFlow = deviceName && !!flows[deviceName];
 
     useLogSteps();
 
@@ -71,11 +76,7 @@ export default () => {
         <>
             <FlowProgress />
             <div className="tw-flex-1">
-                {validFlow && !showConnect ? (
-                    <Flow flow={flows[deviceName]} />
-                ) : (
-                    <Connect />
-                )}
+                {!showConnect ? <Flow /> : <Connect />}
             </div>
         </>
     );
