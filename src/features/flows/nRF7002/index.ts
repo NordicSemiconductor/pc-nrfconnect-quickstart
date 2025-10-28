@@ -23,66 +23,72 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Hello World',
-        type: 'jlink',
+        type: 'jlink-batch',
         description: 'Print "Hello World" to a console using UART.',
         documentation: {
             label: 'Hello World',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'nrf53dk_hello_world.hex',
-                link: {
-                    label: 'Hello World',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Application',
+                    file: 'nrf53dk_hello_world.hex',
+                    link: {
+                        label: 'Hello World',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
     {
         name: 'Wi-Fi Scan',
-        type: 'jlink',
+        type: 'jlink-batch',
         description:
             'Sample for scanning for Wi-Fi access points using the nRF7002 companion IC.',
         documentation: {
             label: 'Wi-Fi Scan',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/scan/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'nrf7002dk_wifi_scan_sample_ncs2.9.0.hex',
-                link: {
-                    label: 'Wi-Fi Scan',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/scan/README.html',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Application',
+                    file: 'nrf7002dk_wifi_scan_sample_ncs2.9.0.hex',
+                    link: {
+                        label: 'Wi-Fi Scan',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/scan/README.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
     {
         name: 'Wi-Fi Bluetooth LE Provisioning',
-        type: 'jlink',
+        type: 'jlink-batch',
         description:
             'Sample for provisioning Wi-Fi credentials over Bluetooth Low Energy.',
         documentation: {
             label: 'Wi-Fi Bluetooth LE based provision',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/provisioning/ble/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged.hex',
-                link: {
-                    label: 'Wi-Fi Bluetooth LE based provision',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/provisioning/ble/README.html',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Application',
+                    file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged.hex',
+                    link: {
+                        label: 'Wi-Fi Bluetooth LE based provision',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/wifi/provisioning/ble/README.html',
+                    },
                 },
-            },
-            {
-                core: 'Network',
-                file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged_CPUNET.hex',
-            },
-        ],
+                {
+                    core: 'Network',
+                    file: 'nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged_CPUNET.hex',
+                },
+            ],
+        },
     },
 ] as Choice[];
 
