@@ -1,4 +1,9 @@
-## Unreleased
+## 1.6.0 - Unreleased
+
+### Added
+
+-   Firmware for programming the Connectivity bridge application on Nordic
+    Thingy:91 X.
 
 ### Fixed
 
