@@ -1,3 +1,10 @@
+## Unreleased
+
+### Fixed
+
+-   Rare issue where the quick start progress would be reset. This has been
+    observed on Windows when using Nordic Thingy:91 X.
+
 ## 1.5.2 - 2025-10-22
 
 ### Changed
