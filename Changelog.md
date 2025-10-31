@@ -1,3 +1,17 @@
+## 1.5.3 - unreleased
+
+### Added
+
+-   Button linking to DevAcademy exercise 1 in all Asset Tracker evaluation
+    steps for all supported DKs (nRF9151 DK, nRF9161 DK, nRF9151 SMA DK, and
+    Thingy:91 X). This exercise provides step-by-step guidance for the Quick
+    Start process and nRF Cloud claiming and provisioning.
+
+### Changed
+
+-   Asset Tracker app descriptions across all board configurations to include
+    extra help text.
+
 ## 1.5.2 - 2025-10-22
 
 ### Changed
