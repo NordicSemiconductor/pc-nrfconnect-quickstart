@@ -14,9 +14,8 @@ import Select from './Select';
 let isFirstEnumeration = true;
 export default () => {
     const connectedDevices = useAppSelector(getConnectedDevices);
-    const [hasWaitedMinDuration, setHasWaitedMinDuration] = useState(
-        !isFirstEnumeration
-    );
+    const [hasWaitedMinDuration, setHasWaitedMinDuration] =
+        useState(!isFirstEnumeration);
 
     useEffect(() => {
         if (!hasWaitedMinDuration) {

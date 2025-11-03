@@ -25,13 +25,13 @@ const useDevicesInStore = () => {
     useEffect(() => {
         const stopWatchingDevicesPromise = startWatchingDevices(
             device => dispatch(addDevice(device)),
-            deviceId => dispatch(removeDevice(deviceId))
+            deviceId => dispatch(removeDevice(deviceId)),
         );
         logger.debug('Started watching devices');
 
         return () => {
             stopWatchingDevicesPromise.then(stopWatchingDevices =>
-                stopWatchingDevices()
+                stopWatchingDevices(),
             );
         };
     }, [dispatch]);

@@ -25,7 +25,7 @@ export default () => {
             setName(
                 getPersistedNickname(device.serialNumber) ||
                     deviceName(device) ||
-                    ''
+                    '',
             );
         }
     }, [device, reloadHeader]);

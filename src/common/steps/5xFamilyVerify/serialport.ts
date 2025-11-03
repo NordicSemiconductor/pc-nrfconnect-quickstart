@@ -21,7 +21,7 @@ const decoder = new TextDecoder();
 
 export default (
         device: DeviceWithSerialnumber,
-        vComIndex: number
+        vComIndex: number,
     ): AppThunk<RootState, Promise<() => void>> =>
     async (dispatch, getState) => {
         if (!selectedDeviceIsConnected(getState())) {
@@ -42,7 +42,7 @@ export default (
                     path,
                     baudRate: 115200,
                 },
-                { overwrite: true, settingsLocked: true }
+                { overwrite: true, settingsLocked: true },
             );
         } catch (e) {
             logger.error(e);
@@ -50,7 +50,7 @@ export default (
         }
 
         const unregister = sp.onData(data =>
-            dispatch(setResponse(decoder.decode(data)))
+            dispatch(setResponse(decoder.decode(data))),
         );
 
         const cleanup = () => {

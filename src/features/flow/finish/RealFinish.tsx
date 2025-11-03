@@ -20,7 +20,7 @@ import { getSelectedDeviceUnsafely } from '../../device/deviceSlice';
 
 export default ({ back }: { back: () => void }) => {
     const deviceName = deviceInfo(
-        useAppSelector(getSelectedDeviceUnsafely)
+        useAppSelector(getSelectedDeviceUnsafely),
     ).name;
 
     return (

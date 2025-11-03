@@ -12,15 +12,15 @@ describe('queryParamsString', () => {
             queryParamsString({
                 aParam: 'aValue',
                 anotherParam: 'anotherValue',
-            })
+            }),
         ).toMatch(
-            /aParam=aValue&anotherParam=anotherValue|anotherParam=anotherValue&aParam=aValue/
+            /aParam=aValue&anotherParam=anotherValue|anotherParam=anotherValue&aParam=aValue/,
         );
     });
 
     it('escapes special characters', () => {
         expect(
-            queryParamsString({ param: 'special characters follow /?&=\\' })
+            queryParamsString({ param: 'special characters follow /?&=\\' }),
         ).toBe('param=special%20characters%20follow%20%2F%3F%26%3D%5C');
     });
 
@@ -30,7 +30,7 @@ describe('queryParamsString', () => {
                 param: 'something',
                 notDefined: undefined,
                 notSet: null,
-            })
+            }),
         ).toBe('param=something');
     });
 });

@@ -31,13 +31,13 @@ const slice = createSlice({
     reducers: {
         setDevelopState: (
             state,
-            { payload: newState }: PayloadAction<DevelopState>
+            { payload: newState }: PayloadAction<DevelopState>,
         ) => {
             state.developState = newState;
         },
         setIsVsCodeInstalled: (
             state,
-            { payload: isVsCodeInstalled }: PayloadAction<boolean>
+            { payload: isVsCodeInstalled }: PayloadAction<boolean>,
         ) => {
             state.isVsCodeInstalled = isVsCodeInstalled;
         },

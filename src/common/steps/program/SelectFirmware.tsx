@@ -31,7 +31,7 @@ export default ({ choices }: { choices: Choice[] }) => {
     const previouslySelectedChoice = useAppSelector(getChoiceUnsafely);
 
     const [selected, setSelected] = React.useState<Choice | undefined>(
-        previouslySelectedChoice
+        previouslySelectedChoice,
     );
 
     const items = choices.map(choice => {
@@ -72,7 +72,7 @@ export default ({ choices }: { choices: Choice[] }) => {
                     items={items}
                     onSelect={item =>
                         setSelected(
-                            choices.find(choice => choice.name === item.id)
+                            choices.find(choice => choice.name === item.id),
                         )
                     }
                 />

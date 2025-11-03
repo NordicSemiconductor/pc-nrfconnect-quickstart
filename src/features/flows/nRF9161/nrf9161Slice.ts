@@ -25,7 +25,7 @@ const slice = createSlice({
     reducers: {
         setAttestationToken: (
             state,
-            { payload: attestationToken }: PayloadAction<string>
+            { payload: attestationToken }: PayloadAction<string>,
         ) => {
             state.attestationToken = attestationToken;
         },

@@ -22,13 +22,13 @@ export type DeviceWithSerialnumber = NrfutilDevice & {
 };
 
 const hasSerialNumber = (
-    device: NrfutilDevice
+    device: NrfutilDevice,
 ): device is DeviceWithSerialnumber =>
     'serialNumber' in device && device.serialNumber !== undefined;
 
 export const startWatchingDevices = async (
     onDeviceArrived: (device: DeviceWithSerialnumber) => void,
-    onDeviceLeft: (deviceId: number) => void
+    onDeviceLeft: (deviceId: number) => void,
 ) => {
     const stopHotplugEvents = await NrfutilDeviceLib.list(
         requiredTraits,
@@ -39,7 +39,7 @@ export const startWatchingDevices = async (
             onDeviceArrived: device =>
                 hasSerialNumber(device) && onDeviceArrived(device),
             onDeviceLeft,
-        }
+        },
     );
 
     return () => {

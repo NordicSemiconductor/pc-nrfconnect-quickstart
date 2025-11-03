@@ -71,7 +71,7 @@ const slice = createSlice({
     reducers: {
         addDevice: (
             state,
-            { payload: device }: PayloadAction<DeviceWithSerialnumber>
+            { payload: device }: PayloadAction<DeviceWithSerialnumber>,
         ) => {
             if (state.selectedDevice?.serialNumber === device.serialNumber) {
                 state.selectedDevice = device as DeviceWithSerialnumber;
@@ -91,14 +91,14 @@ const slice = createSlice({
             state,
             {
                 payload: device,
-            }: PayloadAction<DeviceWithSerialnumber | undefined>
+            }: PayloadAction<DeviceWithSerialnumber | undefined>,
         ) => {
             state.selectedDevice = device;
         },
 
         setChoice: (
             state,
-            { payload: choice }: PayloadAction<Choice | undefined>
+            { payload: choice }: PayloadAction<Choice | undefined>,
         ) => {
             state.choice = choice;
         },
@@ -116,7 +116,7 @@ export const getSelectedDevice = (state: RootState) =>
 
 export const selectedDeviceIsConnected = (state: RootState) =>
     state.device.connectedDevices.has(
-        state.device.selectedDevice?.serialNumber ?? ''
+        state.device.selectedDevice?.serialNumber ?? '',
     );
 
 export const getSelectedDeviceUnsafely = (state: RootState) =>

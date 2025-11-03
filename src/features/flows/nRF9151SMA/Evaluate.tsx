@@ -62,7 +62,7 @@ export default () => {
                 },
             ],
             device.serialPorts?.[0].comName || '',
-            'SHELL'
+            'SHELL',
         )
             .then(res => {
                 dispatch(setAttestationToken(res[0]));

@@ -31,7 +31,7 @@ const checkDeviceConnected =
                 setError({
                     icon: 'mdi-lightbulb-alert-outline',
                     text: 'No development kit detected',
-                })
+                }),
             );
             return false;
         }
@@ -57,7 +57,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
     switch (choice.type) {
         case 'jlink-batch':
             config = dispatch(
-                jlinkBatch(choice.programmingOptions.firmwareList)
+                jlinkBatch(choice.programmingOptions.firmwareList),
             );
             break;
         case 'action-list':
@@ -68,7 +68,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
                 setError({
                     icon: 'mdi-lightbulb-alert-outline',
                     text: 'Unsupported programming choice',
-                })
+                }),
             );
             return;
     }
@@ -83,7 +83,7 @@ export const startProgramming = (): AppThunk => (dispatch, getState) => {
                 setError({
                     icon: 'mdi-lightbulb-alert-outline',
                     text: 'Unknown error',
-                })
+                }),
             );
         }
     });
@@ -115,7 +115,7 @@ const resetDevice = (): AppThunk => (dispatch, getState) => {
             setError({
                 icon: 'mdi-lightbulb-alert-outline',
                 text: 'Program is in invalid state. Please contact support.',
-            })
+            }),
         );
         return;
     }
@@ -125,7 +125,7 @@ const resetDevice = (): AppThunk => (dispatch, getState) => {
         setProgrammingProgress({
             index,
             progress: 50,
-        })
+        }),
     );
 
     reset(device)
@@ -134,7 +134,7 @@ const resetDevice = (): AppThunk => (dispatch, getState) => {
                 setProgrammingProgress({
                     index,
                     progress: 100,
-                })
+                }),
             );
         })
         .catch(() =>
@@ -144,7 +144,7 @@ const resetDevice = (): AppThunk => (dispatch, getState) => {
                     text: 'Failed to reset the device',
                     buttonText: 'Reset',
                     retryRef: 'reset',
-                })
-            )
+                }),
+            ),
         );
 };

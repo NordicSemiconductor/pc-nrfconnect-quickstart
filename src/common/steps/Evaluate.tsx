@@ -34,7 +34,7 @@ interface AppResource extends CommonResourceProps {
 }
 
 const isExternalLinkResource = (
-    resource: AppResource | ExternalLinkResource
+    resource: AppResource | ExternalLinkResource,
 ): resource is ExternalLinkResource => 'mainLink' in resource;
 
 interface ResourcePage {
@@ -72,7 +72,7 @@ const EvaluateStep = ({
                                         'Opened evaluation link',
                                         {
                                             link: resource.mainLink.href,
-                                        }
+                                        },
                                     );
                                     openUrl(resource.mainLink.href);
                                 }}
@@ -88,7 +88,7 @@ const EvaluateStep = ({
                                 onInstallFinish={() => setBusy(false)}
                                 vComIndex={resource.vComIndex}
                             />
-                        )
+                        ),
                     )}
                 </div>
             </Main.Content>
@@ -116,7 +116,7 @@ export default (resourcePages: (ResourcePage | ResourceComponent)[]) => ({
                         ? (next as ResourceComponent).component
                         : () => EvaluateStep({ ...(next as ResourcePage) }),
                 }),
-                {}
+                {},
             ),
         }),
 });

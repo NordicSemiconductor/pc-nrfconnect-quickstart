@@ -17,17 +17,20 @@ import type { ProgrammingConfig } from '../programEffects';
 import { setError, setProgrammingProgress } from '../programSlice';
 
 export default (
-        firmwares: Firmware[]
+        firmwares: Firmware[],
     ): AppThunk<RootState, ProgrammingConfig> =>
     dispatch => {
         const batch = NrfutilDeviceLib.batch();
 
-        const cores = firmwares.reduce((prev, curr) => {
-            const nonModemCore =
-                curr.core === 'Modem' ? 'Application' : curr.core;
-            if (prev.includes(nonModemCore)) return prev;
-            return prev.concat(nonModemCore);
-        }, [] as Omit<DeviceCore, 'Modem'>[]);
+        const cores = firmwares.reduce(
+            (prev, curr) => {
+                const nonModemCore =
+                    curr.core === 'Modem' ? 'Application' : curr.core;
+                if (prev.includes(nonModemCore)) return prev;
+                return prev.concat(nonModemCore);
+            },
+            [] as Omit<DeviceCore, 'Modem'>[],
+        );
 
         cores.forEach((core, index) => {
             batch.recover(core as DeviceCore, {
@@ -37,7 +40,7 @@ export default (
                             index: 0,
                             // index + 1 because we should show some progress on the first action
                             progress: ((index + 1) / (cores.length + 1)) * 100,
-                        })
+                        }),
                     );
                 },
                 onTaskEnd: end => {
@@ -46,7 +49,7 @@ export default (
                             setError({
                                 icon: 'mdi-lightbulb-alert-outline',
                                 text: 'Failed to erase device',
-                            })
+                            }),
                         );
                     }
                 },
@@ -68,7 +71,7 @@ export default (
                             setProgrammingProgress({
                                 index: index + 1,
                                 progress,
-                            })
+                            }),
                         ),
                     onTaskEnd: end => {
                         if (end.error) {
@@ -76,11 +79,11 @@ export default (
                                 setError({
                                     icon: 'mdi-flash-alert-outline',
                                     text: `Failed to program the ${core} core`,
-                                })
+                                }),
                             );
                         }
                     },
-                }
+                },
             );
         });
 
@@ -91,7 +94,7 @@ export default (
                     setProgrammingProgress({
                         index: 1 + firmwares.length,
                         progress: 50,
-                    })
+                    }),
                 );
             },
             onTaskEnd: end => {
@@ -100,7 +103,7 @@ export default (
                         setProgrammingProgress({
                             index: 1 + firmwares.length,
                             progress: 100,
-                        })
+                        }),
                     );
                 }
                 if (end.error) {
@@ -110,7 +113,7 @@ export default (
                             text: 'Failed to reset the device',
                             buttonText: 'Reset',
                             retryRef: 'reset',
-                        })
+                        }),
                     );
                 }
             },

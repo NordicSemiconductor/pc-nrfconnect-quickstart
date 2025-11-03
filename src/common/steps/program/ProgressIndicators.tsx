@@ -24,7 +24,7 @@ const ProgressBar = ({
                 'tw-h-full',
                 percentage < 100 && failed && 'tw-bg-red',
                 percentage < 100 && !failed && 'tw-bg-primary',
-                percentage >= 100 && 'tw-bg-green'
+                percentage >= 100 && 'tw-bg-green',
             )}
             style={{ width: `${failed ? 100 : percentage}%` }}
         />

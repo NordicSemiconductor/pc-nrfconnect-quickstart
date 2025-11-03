@@ -53,7 +53,7 @@ export default () => {
             logger.debug(`Selected device: ${deviceName(device)}`);
             dispatch(setIsConnectVisible(false));
         },
-        [dispatch]
+        [dispatch],
     );
 
     useEffect(() => {
@@ -88,7 +88,7 @@ export default () => {
                                 'tw-h-5',
                                 isSelected
                                     ? 'tw-fill-white'
-                                    : 'tw-fill-gray-700'
+                                    : 'tw-fill-gray-700',
                             )}
                         />
                     </div>
@@ -135,7 +135,7 @@ export default () => {
                     onClick={() => {
                         const selectedDevice = connectedDevices.find(
                             device =>
-                                device.serialNumber === selectedSerialNumber
+                                device.serialNumber === selectedSerialNumber,
                         );
                         if (selectedDevice) {
                             select(selectedDevice);

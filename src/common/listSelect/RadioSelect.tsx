@@ -32,7 +32,7 @@ const RadioSelectListItem = ({
                     selected
                         ? 'mdi-radiobox-marked tw-text-gray-50'
                         : 'mdi-radiobox-blank tw-text-primary',
-                    `mdi tw-text-xl/5`
+                    `mdi tw-text-xl/5`,
                 )}
             />
         }
@@ -67,7 +67,7 @@ export const RadioSelect = <T extends SelectableListItem>({
                 >
                     {item.content}
                 </RadioSelectListItem>
-            )
+            ),
         )}
     </div>
 );

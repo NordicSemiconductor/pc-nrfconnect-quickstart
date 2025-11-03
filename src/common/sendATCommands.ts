@@ -72,7 +72,7 @@ const sendCommandLineMode = (serialPort: SerialPort, command: string) =>
 export default async (
     commands: Command[],
     path: string,
-    mode: 'LINE' | 'SHELL'
+    mode: 'LINE' | 'SHELL',
 ) => {
     let serialPort: {
         sendCommand: (cmd: string) => Promise<string>;
@@ -84,7 +84,7 @@ export default async (
             path,
             baudRate: 115200,
         },
-        { overwrite: true, settingsLocked: true }
+        { overwrite: true, settingsLocked: true },
     );
 
     if (mode === 'SHELL') {
@@ -94,7 +94,7 @@ export default async (
                 new Terminal({
                     allowProposedApi: true,
                     cols: 999,
-                })
+                }),
             ),
             {
                 logRegex:
@@ -102,7 +102,7 @@ export default async (
                 errorRegex: /ERROR/,
                 timeout: 1000,
                 columnWidth: 80,
-            }
+            },
         );
         serialPort = {
             sendCommand: (cmd: string) => sendCommandShellMode(sp, cmd),
@@ -127,18 +127,18 @@ export default async (
             acc.then(() =>
                 serialPort.sendCommand(next.command).then(value => {
                     newResponses.push(
-                        formatResponse(value, next.responseRegex)
+                        formatResponse(value, next.responseRegex),
                     );
 
                     return Promise.resolve();
-                })
+                }),
             ),
-        Promise.resolve()
+        Promise.resolve(),
     );
 
     try {
         await reducedPromise;
-    } catch (e) {
+    } catch {
         serialPort.unregister();
         throw new Error('Received ERROR as return value from AT command');
     }

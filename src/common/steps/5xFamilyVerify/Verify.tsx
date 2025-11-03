@@ -45,10 +45,10 @@ export default ({ vComIndex, regex }: { vComIndex: number; regex: RegExp }) => {
                                 setErrorTimeout(undefined);
                                 dispatch(
                                     setError(
-                                        'Timed out or did not receive expected value'
-                                    )
+                                        'Timed out or did not receive expected value',
+                                    ),
                                 );
-                            }, 3000)
+                            }, 3000),
                         );
                     })
                     .catch(e => dispatch(setError(describeError(e))));
