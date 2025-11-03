@@ -58,7 +58,7 @@ const RenameStep = () => {
                             telemetry.sendEvent(
                                 newNickname.length > 0
                                     ? 'Set device nickname'
-                                    : 'Reset device nickname'
+                                    : 'Reset device nickname',
                             );
                         }
 

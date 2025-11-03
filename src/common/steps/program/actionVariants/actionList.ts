@@ -15,7 +15,7 @@ import type { ProgrammingConfig } from '../programEffects';
 import { setError, setProgrammingProgress } from '../programSlice';
 
 export default (
-        actionList: ActionListEntry[]
+        actionList: ActionListEntry[],
     ): AppThunk<RootState, ProgrammingConfig> =>
     dispatch => {
         const array: ProgrammingConfig['actions'] = [];
@@ -46,17 +46,17 @@ export default (
                                         setProgrammingProgress({
                                             index,
                                             progress,
-                                        })
+                                        }),
                                     ),
                                 core,
-                                undefined
+                                undefined,
                             );
                         } catch (e) {
                             dispatch(
                                 setError({
                                     icon: 'mdi-flash-alert-outline',
                                     text: `Failed to program the ${coreLabel}`,
-                                })
+                                }),
                             );
                             throw e;
                         }
@@ -79,7 +79,7 @@ export default (
                         acc.then(async () => {
                             await next(device);
                         }),
-                    Promise.resolve()
+                    Promise.resolve(),
                 ),
             actions: array,
         };

@@ -19,7 +19,7 @@ const isVsCodeInstalledOnMacOS = async () => {
         const { path } = await app.getApplicationInfoForProtocol('vscode://');
 
         return existsSync(path);
-    } catch (error) {
+    } catch {
         return false;
     }
 };
@@ -29,7 +29,7 @@ const isVsCodeInstalledOnWindows = async () => {
         const { path } = await app.getApplicationInfoForProtocol('vscode://');
 
         return existsSync(join(dirname(path), 'bin', 'code'));
-    } catch (error) {
+    } catch {
         return false;
     }
 };
@@ -53,7 +53,7 @@ export const detectVsCode = async (dispatch: AppDispatch) => {
 
 export const detectVsCodeRepeatedly = (
     dispatch: AppDispatch,
-    wasVsCodeInstalled: boolean
+    wasVsCodeInstalled: boolean,
 ) => {
     const id = setInterval(async () => {
         const isVsCodeInstalledNow = await isVsCodeInstalled();

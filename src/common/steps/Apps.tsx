@@ -59,13 +59,14 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
                 downloadableApps
                     .filter(
                         app =>
-                            app.source === 'official' && apps.includes(app.name)
+                            app.source === 'official' &&
+                            apps.includes(app.name),
                     )
                     .map(app => ({
                         ...app,
                         selected: false,
                         installing: false,
-                    }))
+                    })),
             );
         });
     }, [apps, device]);
@@ -77,7 +78,7 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
                     a.selected = selected;
                 }
                 return a;
-            })
+            }),
         );
 
     const installApp = (appToBeInstalled: App) => {
@@ -92,9 +93,9 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
                                   selected: false,
                                   installing: false,
                               }
-                            : app
-                    )
-                )
+                            : app,
+                    ),
+                ),
             )
             .catch(e => logger.error(describeError(e)));
     };
@@ -102,7 +103,7 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
     const anySelected = recommendedApps.some(app => app.selected);
     const anyInstalling = recommendedApps.some(app => app.installing);
     const allInstalled = recommendedApps.every(app =>
-        appsService.isInstalled(app)
+        appsService.isInstalled(app),
     );
 
     return (
@@ -144,8 +145,8 @@ const AppsStep = ({ apps }: { apps: string[] }) => {
                                                           ...app,
                                                           installing: true,
                                                       }
-                                                    : a
-                                            )
+                                                    : a,
+                                            ),
                                         );
                                         telemetry.sendEvent('Installing app', {
                                             app,

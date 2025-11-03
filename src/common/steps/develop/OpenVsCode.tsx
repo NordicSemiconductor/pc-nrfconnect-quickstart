@@ -25,11 +25,11 @@ import { detectVsCodeRepeatedly } from './vsCodeEffects';
 import VsCodeNotInstalled from './VsCodeNotInstalled';
 
 const valueIsDefined = (
-    paramValuePair: [string, string | undefined | null]
+    paramValuePair: [string, string | undefined | null],
 ): paramValuePair is [string, string] => paramValuePair[1] != null;
 
 export const queryParamsString = (
-    queryParams: Record<string, string | undefined | null>
+    queryParams: Record<string, string | undefined | null>,
 ) =>
     Object.entries(queryParams)
         .filter(valueIsDefined)
@@ -51,7 +51,7 @@ export default ({ samples }: { samples: SampleWithRef[] }) => {
 
     useEffect(
         () => detectVsCodeRepeatedly(dispatch, isVsCodeInstalled),
-        [dispatch, isVsCodeInstalled]
+        [dispatch, isVsCodeInstalled],
     );
 
     if (!isVsCodeInstalled) {
@@ -93,8 +93,8 @@ export default ({ samples }: { samples: SampleWithRef[] }) => {
                                     deviceSerial: device.serialNumber,
                                     deviceType: device.devkit?.boardVersion,
                                     sample,
-                                }
-                            )}`
+                                },
+                            )}`,
                         );
 
                         dispatch(setDevelopState(DevelopState.VS_CODE_OPENED));

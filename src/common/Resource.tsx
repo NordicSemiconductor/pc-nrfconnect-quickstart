@@ -139,8 +139,8 @@ export const AppResourceButton = ({
                         .getDownloadableApps()
                         .then(({ apps: receivedApps }) =>
                             receivedApps.find(
-                                a => a.name === app && a.source === 'official'
-                            )
+                                a => a.name === app && a.source === 'official',
+                            ),
                         );
 
                     if (appInfo && !apps.isInstalled(appInfo)) {
@@ -162,7 +162,7 @@ export const AppResourceButton = ({
                         },
                         {
                             device: deviceOptions,
-                        }
+                        },
                     );
 
                     telemetry.sendEvent('Opened evaluation app', {

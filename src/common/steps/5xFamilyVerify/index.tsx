@@ -8,7 +8,7 @@ import StepByChoice from '../../StepByChoice';
 import Verify from './Verify';
 
 export default (
-    config: { ref: string; config: { vComIndex: number; regex: RegExp } }[]
+    config: { ref: string; config: { vComIndex: number; regex: RegExp } }[],
 ) => ({
     name: 'Verify',
     component: () =>
@@ -18,7 +18,7 @@ export default (
                     ...acc,
                     [next.ref]: () => Verify({ ...next.config }),
                 }),
-                {}
+                {},
             ),
         }),
 });

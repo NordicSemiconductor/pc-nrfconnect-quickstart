@@ -33,7 +33,7 @@ const slice = createSlice({
         goToNextStep: state => {
             state.currentStepIndex = Math.min(
                 (state.currentStepIndex += 1),
-                state.flow.length - 1
+                state.flow.length - 1,
             );
         },
         goToPreviousStep: state => {
@@ -43,7 +43,7 @@ const slice = createSlice({
             }
             state.currentStepIndex = Math.max(
                 (state.currentStepIndex -= 1),
-                -1
+                -1,
             );
         },
         setFinishedLastStep: (state, action: PayloadAction<boolean>) => {

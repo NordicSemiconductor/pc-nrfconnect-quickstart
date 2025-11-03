@@ -22,7 +22,7 @@ export default (
     pages: {
         ref: string;
         config?: VerifyConfig;
-    }[]
+    }[],
 ) => ({
     name: 'Verify',
     component: () =>
@@ -49,7 +49,7 @@ export default (
                               </Main>
                           ),
                 }),
-                {}
+                {},
             ),
         }),
 });

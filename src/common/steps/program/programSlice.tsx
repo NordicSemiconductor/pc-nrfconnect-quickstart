@@ -41,7 +41,7 @@ const slice = createSlice({
     reducers: {
         prepareProgramming: (
             state,
-            action: PayloadAction<ProgrammingActionWithProgress[]>
+            action: PayloadAction<ProgrammingActionWithProgress[]>,
         ) => {
             state.programmingActions = action.payload;
         },
@@ -50,7 +50,7 @@ const slice = createSlice({
             action: PayloadAction<{
                 progress: number;
                 index: number;
-            }>
+            }>,
         ) => {
             // This is here for lint but cannot happen
             if (!state.programmingActions) return;
@@ -62,7 +62,7 @@ const slice = createSlice({
                               ...f,
                               progress: action.payload.progress,
                           }
-                        : f
+                        : f,
             );
 
             state.programmingActions = updatedFirmwareWithProgress;

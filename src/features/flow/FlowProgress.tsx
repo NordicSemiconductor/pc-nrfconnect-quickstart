@@ -21,7 +21,7 @@ const Line = ({ dark = true }: { dark?: boolean }) => (
             'tw-ml-[9px]',
             'tw-w-0.5',
             'tw-flex-1',
-            dark ? 'tw-bg-gray-600' : 'tw-bg-gray-200'
+            dark ? 'tw-bg-gray-600' : 'tw-bg-gray-200',
         )}
     />
 );
@@ -41,7 +41,7 @@ const Step = ({
         <div
             className={classNames(
                 'tw-flex tw-flex-col',
-                !isLast ? 'tw-h-full' : ''
+                !isLast ? 'tw-h-full' : '',
             )}
         >
             <div className="tw-flex tw-flex-row tw-items-center">
@@ -51,7 +51,7 @@ const Step = ({
                             relativeToCurrent <= 0
                                 ? 'tw-text-gray-200'
                                 : 'tw-text-gray-500',
-                            'mdi mdi-circle tw-relative tw-top-0.5 tw-z-0 tw-text-xl/5'
+                            'mdi mdi-circle tw-relative tw-top-0.5 tw-z-0 tw-text-xl/5',
                         )}
                     />
                     {relativeToCurrent <= 0 && (
@@ -61,7 +61,7 @@ const Step = ({
                                     !(isLast && finishedLastStep)
                                     ? 'mdi-circle tw-left-1.5 tw-top-1.5 tw-text-[8px]'
                                     : 'mdi-check-bold tw-left-[5px] tw-top-1 tw-text-[10px]',
-                                'mdi tw-absolute tw-z-10 tw-text-gray-900'
+                                'mdi tw-absolute tw-z-10 tw-text-gray-900',
                             )}
                         />
                     )}
@@ -71,7 +71,7 @@ const Step = ({
                         relativeToCurrent <= 0
                             ? 'tw-text-gray-200'
                             : 'tw-text-gray-500',
-                        'tw-col-span tw-whitespace-nowrap tw-pl-3.5 tw-text-xs tw-font-medium tw-tracking-wide'
+                        'tw-col-span tw-whitespace-nowrap tw-pl-3.5 tw-text-xs tw-font-medium tw-tracking-wide',
                     )}
                 >
                     {label}
@@ -93,7 +93,7 @@ export default () => {
                 'tw-relative tw-flex tw-flex-col tw-items-start tw-bg-gray-900 tw-py-10 tw-transition-all',
                 showFlowProgress
                     ? 'tw-translate-x-0 tw-px-10'
-                    : 'tw-w-0 tw-translate-x-[-100%] tw-overflow-hidden tw-px-0'
+                    : 'tw-w-0 tw-translate-x-[-100%] tw-overflow-hidden tw-px-0',
             )}
         >
             {flow.map((step, index) => (
