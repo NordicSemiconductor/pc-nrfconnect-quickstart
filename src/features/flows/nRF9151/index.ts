@@ -25,7 +25,7 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Asset Tracker',
-        type: 'jlink',
+        type: 'jlink-batch',
         description:
             'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
@@ -37,28 +37,30 @@ const programConfig = [
             content:
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
-        firmware: [
-            {
-                core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.2.zip',
-                link: {
-                    label: 'Firmware v2.0.2',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Modem',
+                    file: 'mfw_nrf91x1_2.0.2.zip',
+                    link: {
+                        label: 'Firmware v2.0.2',
+                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                    },
                 },
-            },
-            {
-                core: 'Application',
-                file: 'nrf9151dk_asset_tracker_template.hex',
-                link: {
-                    label: 'Asset Tracker',
-                    href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                {
+                    core: 'Application',
+                    file: 'nrf9151dk_asset_tracker_template.hex',
+                    link: {
+                        label: 'Asset Tracker',
+                        href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
     {
         name: 'AT Commands',
-        type: 'jlink',
+        type: 'jlink-batch',
         description: 'Evaluate the cellular modem using AT commands.',
         documentation: {
             label: 'Serial LTE Modem',
@@ -69,28 +71,30 @@ const programConfig = [
             content:
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
-        firmware: [
-            {
-                core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.2.zip',
-                link: {
-                    label: 'Firmware v2.0.2',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Modem',
+                    file: 'mfw_nrf91x1_2.0.2.zip',
+                    link: {
+                        label: 'Firmware v2.0.2',
+                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                    },
                 },
-            },
-            {
-                core: 'Application',
-                file: 'nrf9151dk_serial_lte_modem.hex',
-                link: {
-                    label: 'Serial LTE Modem',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+                {
+                    core: 'Application',
+                    file: 'nrf9151dk_serial_lte_modem.hex',
+                    link: {
+                        label: 'Serial LTE Modem',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
     {
         name: 'Shell Command Line Interface',
-        type: 'jlink',
+        type: 'jlink-batch',
         description: 'Evaluate throughput, connectivity, and more.',
         documentation: {
             label: 'Modem Shell',
@@ -101,28 +105,30 @@ const programConfig = [
             content:
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
-        firmware: [
-            {
-                core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.2.zip',
-                link: {
-                    label: 'Firmware v2.0.2',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Modem',
+                    file: 'mfw_nrf91x1_2.0.2.zip',
+                    link: {
+                        label: 'Firmware v2.0.2',
+                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                    },
                 },
-            },
-            {
-                core: 'Application',
-                file: 'nrf9151dk_modem_shell.hex',
-                link: {
-                    label: 'Modem Shell',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                {
+                    core: 'Application',
+                    file: 'nrf9151dk_modem_shell.hex',
+                    link: {
+                        label: 'Modem Shell',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
     {
         name: 'Legacy Asset Tracker',
-        type: 'jlink',
+        type: 'jlink-batch',
         description:
             'Evaluate cloud interaction, location services, GNSS, and real-time configurations.',
         documentation: {
@@ -134,24 +140,26 @@ const programConfig = [
             content:
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
-        firmware: [
-            {
-                core: 'Modem',
-                file: 'mfw_nrf91x1_2.0.2.zip',
-                link: {
-                    label: 'Firmware v2.0.2',
-                    href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Modem',
+                    file: 'mfw_nrf91x1_2.0.2.zip',
+                    link: {
+                        label: 'Firmware v2.0.2',
+                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                    },
                 },
-            },
-            {
-                core: 'Application',
-                file: 'nrf9161dk_asset_tracker.hex',
-                link: {
-                    label: 'Asset Tracker v2',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
+                {
+                    core: 'Application',
+                    file: 'nrf9161dk_asset_tracker.hex',
+                    link: {
+                        label: 'Asset Tracker v2',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
 ] as Choice[];
 

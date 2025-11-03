@@ -8,12 +8,12 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../../app/store';
 
-type BatchComponent = {
+type ProgrammingAction = {
     title: string;
     link?: { label: string; href: string };
 };
 
-type BatchWithProgress = BatchComponent & {
+type ProgrammingActionWithProgress = ProgrammingAction & {
     progress?: number;
 };
 
@@ -26,12 +26,12 @@ interface Error {
 }
 
 interface State {
-    batchWithProgress?: BatchWithProgress[];
+    programmingActions?: ProgrammingActionWithProgress[];
     error?: Error;
 }
 
 const initialState: State = {
-    batchWithProgress: undefined,
+    programmingActions: undefined,
     error: undefined,
 };
 
@@ -41,9 +41,9 @@ const slice = createSlice({
     reducers: {
         prepareProgramming: (
             state,
-            action: PayloadAction<BatchWithProgress[]>
+            action: PayloadAction<ProgrammingActionWithProgress[]>
         ) => {
-            state.batchWithProgress = action.payload;
+            state.programmingActions = action.payload;
         },
         setProgrammingProgress: (
             state,
@@ -53,9 +53,9 @@ const slice = createSlice({
             }>
         ) => {
             // This is here for lint but cannot happen
-            if (!state.batchWithProgress) return;
+            if (!state.programmingActions) return;
 
-            const updatedFirmwareWithProgress = state.batchWithProgress.map(
+            const updatedFirmwareWithProgress = state.programmingActions.map(
                 (f, index) =>
                     index === action.payload.index
                         ? {
@@ -65,7 +65,7 @@ const slice = createSlice({
                         : f
             );
 
-            state.batchWithProgress = updatedFirmwareWithProgress;
+            state.programmingActions = updatedFirmwareWithProgress;
         },
         setError: (state, action: PayloadAction<Error>) => {
             state.error = action.payload;
@@ -87,7 +87,7 @@ export const {
 } = slice.actions;
 
 export const getProgrammingProgress = (state: RootState) =>
-    state.steps.program.batchWithProgress;
+    state.steps.program.programmingActions;
 export const getError = (state: RootState) => state.steps.program.error;
 
 export default slice.reducer;

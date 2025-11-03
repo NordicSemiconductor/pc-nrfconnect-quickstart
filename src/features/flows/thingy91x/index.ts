@@ -25,27 +25,46 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Start testing',
-        type: 'buttonless-dfu',
+        type: 'action-list',
         description:
             'Connect to hello.nrfcloud.com to retrieve real-time data and do simple testing.',
         documentation: {
             label: 'Hello nRF Cloud',
             href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'thingy91x_hello.nrfcloud.zip',
-                link: {
-                    label: 'Hello nRF Cloud',
-                    href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+        programmingOptions: {
+            actions: [
+                {
+                    type: 'programming',
+                    firmware: {
+                        file: 'thingy91x_connectivity_bridge.zip',
+                        link: {
+                            label: 'Hello nRF Cloud',
+                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                        },
+                    },
                 },
-            },
-        ],
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'programming',
+                    firmware: {
+                        core: 'Application',
+                        file: 'thingy91x_hello.nrfcloud.zip',
+                        link: {
+                            label: 'Hello nRF Cloud',
+                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                        },
+                    },
+                },
+            ],
+        },
     },
     {
         name: 'Asset Tracker',
-        type: 'buttonless-dfu',
+        type: 'action-list',
         description:
             'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
@@ -57,54 +76,111 @@ const programConfig = [
             content:
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'thingy91x_asset_tracker_template.zip',
-                link: {
-                    label: 'Asset Tracker Template',
-                    href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+        programmingOptions: {
+            actions: [
+                {
+                    type: 'programming',
+                    firmware: {
+                        file: 'thingy91x_connectivity_bridge.zip',
+                        link: {
+                            label: 'Hello nRF Cloud',
+                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                        },
+                    },
                 },
-            },
-        ],
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'programming',
+                    firmware: {
+                        core: 'Application',
+                        file: 'thingy91x_asset_tracker_template.zip',
+                        link: {
+                            label: 'Asset Tracker Template',
+                            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                        },
+                    },
+                },
+            ],
+        },
     },
     {
         name: 'AT Commands',
-        type: 'buttonless-dfu',
+        type: 'action-list',
         description: 'Evaluate the cellular modem using AT commands.',
         documentation: {
             label: 'Serial LTE Modem',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'thingy91x_serial_lte_modem.zip',
-                link: {
-                    label: 'Serial LTE Modem',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+        programmingOptions: {
+            actions: [
+                {
+                    type: 'programming',
+                    firmware: {
+                        file: 'thingy91x_connectivity_bridge.zip',
+                        link: {
+                            label: 'Hello nRF Cloud',
+                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                        },
+                    },
                 },
-            },
-        ],
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'programming',
+                    firmware: {
+                        core: 'Application',
+                        file: 'thingy91x_serial_lte_modem.zip',
+                        link: {
+                            label: 'Serial LTE Modem',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+                        },
+                    },
+                },
+            ],
+        },
     },
     {
         name: 'Shell Command Line Interface',
-        type: 'buttonless-dfu',
+        type: 'action-list',
         description: 'Evaluate throughput, connectivity, and more.',
         documentation: {
             label: 'Modem Shell',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'thingy91x_modem_shell.zip',
-                link: {
-                    label: 'Modem Shell',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+        programmingOptions: {
+            actions: [
+                {
+                    type: 'programming',
+                    firmware: {
+                        file: 'thingy91x_connectivity_bridge.zip',
+                        link: {
+                            label: 'Hello nRF Cloud',
+                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                        },
+                    },
                 },
-            },
-        ],
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'programming',
+                    firmware: {
+                        core: 'Application',
+                        file: 'thingy91x_modem_shell.zip',
+                        link: {
+                            label: 'Modem Shell',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                        },
+                    },
+                },
+            ],
+        },
     },
 ] as Choice[];
 

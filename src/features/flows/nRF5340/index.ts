@@ -23,70 +23,76 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Hello World',
-        type: 'jlink',
+        type: 'jlink-batch',
         description: 'Print "Hello World" to a console using UART.',
         documentation: {
             label: 'Hello World',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'nrf53dk_hello_world.hex',
-                link: {
-                    label: 'Hello World',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Application',
+                    file: 'nrf53dk_hello_world.hex',
+                    link: {
+                        label: 'Hello World',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
+                    },
                 },
-            },
-        ],
+            ],
+        },
     },
     {
         name: 'Peripheral LED Button Service',
-        type: 'jlink',
+        type: 'jlink-batch',
         description:
             'Sample for controlling LEDs and buttons on the DK. Test it with Bluetooth® LE in the Evaluate step.',
         documentation: {
             label: 'Peripheral LBS',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'nrf53dk_lbs_app.hex',
-                link: {
-                    label: 'Peripheral LBS',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Application',
+                    file: 'nrf53dk_lbs_app.hex',
+                    link: {
+                        label: 'Peripheral LBS',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
+                    },
                 },
-            },
-            {
-                core: 'Network',
-                file: 'nrf53dk_lbs_net.hex',
-            },
-        ],
+                {
+                    core: 'Network',
+                    file: 'nrf53dk_lbs_net.hex',
+                },
+            ],
+        },
     },
     {
         name: 'Peripheral UART',
-        type: 'jlink',
+        type: 'jlink-batch',
         description:
             'Sample for emulating UART over Bluetooth® LE. Test it with Bluetooth® LE in the Evaluate step.',
         documentation: {
             label: 'Peripheral UART',
             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
         },
-        firmware: [
-            {
-                core: 'Application',
-                file: 'nrf53dk_peripheral_uart_app.hex',
-                link: {
-                    label: 'Peripheral UART Service',
-                    href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+        programmingOptions: {
+            firmwareList: [
+                {
+                    core: 'Application',
+                    file: 'nrf53dk_peripheral_uart_app.hex',
+                    link: {
+                        label: 'Peripheral UART Service',
+                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
+                    },
                 },
-            },
-            {
-                core: 'Network',
-                file: 'nrf53dk_peripheral_uart_net.hex',
-            },
-        ],
+                {
+                    core: 'Network',
+                    file: 'nrf53dk_peripheral_uart_net.hex',
+                },
+            ],
+        },
     },
 ] as Choice[];
 

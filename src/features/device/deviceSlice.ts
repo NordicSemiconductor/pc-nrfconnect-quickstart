@@ -15,21 +15,45 @@ export interface Firmware {
     link?: { label: string; href: string };
 }
 
-export interface FirmwareNote {
+interface FirmwareNote {
     title: string;
     content: string;
 }
 
-export const supportedProgrammingTypes = ['jlink', 'buttonless-dfu'] as const;
-
-export interface Choice {
+interface ChoiceInfo {
     name: string;
-    type: (typeof supportedProgrammingTypes)[number];
     description: string;
     documentation: { label: string; href: string };
-    firmware: Firmware[];
     firmwareNote: FirmwareNote | undefined;
 }
+
+interface BatchChoice extends ChoiceInfo {
+    type: 'jlink-batch';
+    programmingOptions: {
+        firmwareList: Firmware[];
+    };
+}
+
+interface ProgrammingAction {
+    type: 'programming';
+    firmware: Firmware;
+}
+
+interface WaitAction {
+    type: 'wait';
+    durationMs: number;
+}
+
+export type ActionListEntry = ProgrammingAction | WaitAction;
+
+interface ActionListChoice extends ChoiceInfo {
+    type: 'action-list';
+    programmingOptions: {
+        actions: ActionListEntry[];
+    };
+}
+
+export type Choice = BatchChoice | ActionListChoice;
 
 interface State {
     choice?: Choice;
