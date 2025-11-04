@@ -15,9 +15,9 @@ import { Choice } from '../../device/deviceSlice';
 import Verify from './Verify';
 
 const infoConfig = {
-    title: 'nRF54L Series —–—–  –— nRF54LV10 DK',
+    title: 'nRF54L Series – nRF54LV10 DK',
     markdownContent:
-        '![nRF54LM20 DK](54LV10DK.png)  \n&nbsp; ![nRF54LM20 DK](54LV10DK@2x.png)  \n&nbsp;  \nThe nRF54LM20 DK enables development with nRF54LM20A SoC.  \n&nbsp;  \nnRF54LM20A is part of the nRF54L Series. All wireless System-on-Chip (SoC) options in the series integrate an ultra-low-power, multiprotocol 2.4-GHz radio and MCU functionality featuring a 128-MHz Arm Cortex-M33 processor. The nRF54LM20A features an extended peripheral set, high-speed USB, increased memory size with 2036 KB NVM and 512 KB RAM, and up to 66 GPIOs.  \n&nbsp;  \n![nRF54LV10 DK Technologies](54LV10Tech.png)  \nThe multiprotocol 2.4-GHz radio of nRF54LM20A supports Bluetooth® LE with optional features, including Channel Sounding introduced in Bluetooth Core 6.0, as well as 802.15.4-2020 for standards such as Thread, Matter, and Zigbee. It also supports a proprietary 2.4-GHz mode with up to 4 Mbps for higher throughput.  \n&nbsp;  \nFor more information, read the [datasheet](https://docs.nordicsemi.com/bundle/ps_nrf54LM20A/page/keyfeatures_html5.html) and visit the [nRF54LM20A SoC](https://www.nordicsemi.com/Products/nRF54LM20A) and the [nRF54LM20 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54LM20-DK) web pages.',
+        '![nRF54LV10 DK](54LV10DK@2x.png)  \n&nbsp;  \nThe nRF54LV10 DK enables development with the nRF54LV10A SoC.  \n&nbsp;  \nnRF54LV10A is part of the nRF54L Series. All wireless System-on-Chip (SoC) options in the series integrate an ultra-low-power multiprotocol 2.4 GHz radio with MCU (Microcontroller Unit) functionality featuring a 128 MHz Arm® Cortex®-M33 processor.  \n&nbsp;  \n![nRF54LV10 DK Technologies](54LV10Tech.png)  \nnRF54LV10A is designed for applications requiring a low-voltage, 1.2-1.7V power supply and GPIOs. These include direct supply from silver oxide coin-cells. In these applications, the built-in hibernation mode extends the shelf life of devices with an enclosed battery. Additionally, low-voltage GPIO simplifies integration with external devices with voltage-limited IO interfaces.  \n&nbsp;  \nThe datasheet for the SoC and more information can be found on the web pages for the [nRF54LV10A SoC](https://www.nordicsemi.com/Products/nRF54LV10A) and the [nRF54LV10 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54LV10-DK).',
 };
 
 const programConfig = [
@@ -33,7 +33,7 @@ const programConfig = [
             firmwareList: [
                 {
                     core: 'Application',
-                    file: 'nrf54lm20dk_hello_world.hex',
+                    file: 'nrf54lv10dk_hello_world.hex',
                     link: {
                         label: 'Hello World',
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/samples/hello_world/README.html',
@@ -55,7 +55,7 @@ const programConfig = [
             firmwareList: [
                 {
                     core: 'Application',
-                    file: 'nrf54lm20dk_lbs.hex',
+                    file: 'nrf54lv10dk_lbs.hex',
                     link: {
                         label: 'Peripheral LBS',
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_lbs/README.html',
@@ -77,7 +77,7 @@ const programConfig = [
             firmwareList: [
                 {
                     core: 'Application',
-                    file: 'nrf54lm20dk_power_profiling.hex',
+                    file: 'nrf54lv10dk_power_profiling.hex',
                     link: {
                         label: 'Peripheral Power Profiling',
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_power_profiling/README.html',
@@ -99,7 +99,7 @@ const programConfig = [
             firmwareList: [
                 {
                     core: 'Application',
-                    file: 'nrf54lm20dk_peripheral_uart.hex',
+                    file: 'nrf54lv10dk_peripheral_uart.hex',
                     link: {
                         label: 'Peripheral UART Service',
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/bluetooth/peripheral_uart/README.html',
@@ -114,14 +114,14 @@ const verifyConfig = [
     {
         ref: 'Hello World',
         config: {
-            vComIndex: 1,
-            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello World! nrf54lm20dk.*\r\n)/,
+            vComIndex: 0,
+            regex: /(\*{3} Booting nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nHello world from nrf54lv10dk.*\r\n)/,
         },
     },
     {
         ref: 'Peripheral LED Button Service',
         config: {
-            vComIndex: 1,
+            vComIndex: 0,
             regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Bluetooth Peripheral LBS sample)/,
         },
     },
@@ -131,7 +131,7 @@ const verifyConfig = [
     {
         ref: 'Peripheral UART',
         config: {
-            vComIndex: 1,
+            vComIndex: 0,
             regex: /(\*{3} Using nRF Connect SDK .* \*{3}\r\n\*{3} Using Zephyr OS .* \*{3}\r\nStarting Nordic UART service sample)/,
         },
     },
