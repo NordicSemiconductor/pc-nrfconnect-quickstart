@@ -5,6 +5,11 @@
 - Firmware for programming the Connectivity bridge application on Nordic
   Thingy:91 X.
 
+### Changed
+
+- Updated modem firmware packages for nRF9151 DK, nRF9151 SMA DK, Thingy:91 X
+  and nRF9161 DK to 2.0.3.
+
 ### Fixed
 
 - Rare issue where the quick start progress would be reset. This has been
