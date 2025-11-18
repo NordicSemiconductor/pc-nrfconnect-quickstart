@@ -25,7 +25,7 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Asset Tracker',
-        type: 'jlink-batch',
+        type: 'action-list',
         description:
             'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
@@ -38,21 +38,30 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.2.zip',
-                    link: {
-                        label: 'Firmware v2.0.2',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    vComIndex: 0,
+                    mode: 'LINE',
+                    version: '2.0.2',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.2.zip',
+                        link: {
+                            label: 'Firmware v2.0.2',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.2_release_notes.txt',
+                        },
                     },
                 },
                 {
-                    core: 'Application',
-                    file: 'nrf9151dk_asset_tracker_template.hex',
-                    link: {
-                        label: 'Asset Tracker',
-                        href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                    type: 'programming',
+                    firmware: {
+                        core: 'Application',
+                        file: 'nrf9151dk_asset_tracker_template.hex',
+                        link: {
+                            label: 'Asset Tracker',
+                            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                        },
                     },
                 },
             ],
