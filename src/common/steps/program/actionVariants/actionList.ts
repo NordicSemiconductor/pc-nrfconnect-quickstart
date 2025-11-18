@@ -21,7 +21,7 @@ export default (
         const array: ProgrammingConfig['actions'] = [];
 
         const addActionEntry = (item: ProgrammingConfig['actions'][number]) =>
-            array.push(item);
+            array.push(item) - 1;
 
         const actions = actionList.map(action => {
             switch (action.type) {
@@ -31,11 +31,10 @@ export default (
                         ? `${core} core`
                         : 'Connectivity bridge';
 
-                    const index =
-                        addActionEntry({
-                            title: coreLabel,
-                            link,
-                        }) - 1;
+                    const index = addActionEntry({
+                        title: coreLabel,
+                        link,
+                    });
                     return async (device: DeviceWithSerialnumber) => {
                         try {
                             await NrfutilDeviceLib.program(
