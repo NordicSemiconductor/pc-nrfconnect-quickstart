@@ -6,6 +6,11 @@
   Thingy:91 X.
 - Support for the nRF54LV10 DK.
 
+### Changed
+
+- Updated modem firmware packages for the nRF9151 DK, the nRF9151 SMA DK, and
+  the nRF9161 DK to v2.0.3.
+
 ### Fixed
 
 - Rare issue where the quick start progress would be reset. This has been
