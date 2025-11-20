@@ -7,8 +7,8 @@
 
 ### Changed
 
-- Updated modem firmware packages for nRF9151 DK, nRF9151 SMA DK and nRF9161 DK
-  to 2.0.3.
+- Updated modem firmware packages for the nRF9151 DK, the nRF9151 SMA DK, and the nRF9161 DK
+  to v2.0.3.
 
 ### Fixed
 
