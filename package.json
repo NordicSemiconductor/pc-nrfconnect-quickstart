@@ -54,6 +54,6 @@
     },
     "prettier": "@nordicsemiconductor/pc-nrfconnect-shared/config/prettier.config.js",
     "devDependencies": {
-        "@nordicsemiconductor/pc-nrfconnect-shared": "^234.0.0"
+        "@nordicsemiconductor/pc-nrfconnect-shared": "^239.0.0"
     }
 }
