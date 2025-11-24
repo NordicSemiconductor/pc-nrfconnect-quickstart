@@ -38,10 +38,6 @@ const programConfig = [
                     type: 'programming',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
-                        link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
-                        },
                     },
                 },
                 {
@@ -82,10 +78,6 @@ const programConfig = [
                     type: 'programming',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
-                        link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
-                        },
                     },
                 },
                 {
@@ -120,10 +112,6 @@ const programConfig = [
                     type: 'programming',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
-                        link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
-                        },
                     },
                 },
                 {
@@ -158,10 +146,6 @@ const programConfig = [
                     type: 'programming',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
-                        link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
-                        },
                     },
                 },
                 {
