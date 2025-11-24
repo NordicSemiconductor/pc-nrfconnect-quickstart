@@ -39,8 +39,8 @@ const programConfig = [
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
                 },
@@ -83,8 +83,8 @@ const programConfig = [
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
                 },
@@ -121,8 +121,8 @@ const programConfig = [
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
                 },
@@ -159,8 +159,8 @@ const programConfig = [
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
-                            label: 'Hello nRF Cloud',
-                            href: 'https://hello-nrfcloud.github.io/firmware/html/index.html',
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
                 },
