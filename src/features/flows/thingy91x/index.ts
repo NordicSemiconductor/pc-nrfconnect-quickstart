@@ -152,6 +152,17 @@ const programConfig = [
                         },
                     },
                 },
+                {
+                    type: 'programming',
+                    firmware: {
+                        core: 'Application',
+                        file: 'thingy91x_modem_shell.zip',
+                        link: {
+                            label: 'Modem Shell',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                        },
+                    },
+                },
             ],
         },
     },
