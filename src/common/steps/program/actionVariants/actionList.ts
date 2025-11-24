@@ -29,7 +29,7 @@ export default (
                     const { file, core, link } = action.firmware;
                     const coreLabel = core
                         ? `${core} core`
-                        : 'Connectivity bridge';
+                        : 'nRF5340';
 
                     const index =
                         addActionEntry({
