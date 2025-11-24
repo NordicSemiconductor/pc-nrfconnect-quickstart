@@ -145,21 +145,21 @@ const programConfig = [
                 {
                     type: 'programming',
                     firmware: {
-                        file: 'thingy91x_connectivity_bridge.zip',
+                        core: 'Application',
+                        file: 'thingy91x_modem_shell.zip',
                         link: {
-                            label: 'Connectivity bridge',
-                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
+                            label: 'Modem Shell',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
                         },
                     },
                 },
                 {
                     type: 'programming',
                     firmware: {
-                        core: 'Application',
-                        file: 'thingy91x_modem_shell.zip',
+                        file: 'thingy91x_connectivity_bridge.zip',
                         link: {
-                            label: 'Modem Shell',
-                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
                 },
