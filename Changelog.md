@@ -4,6 +4,7 @@
 
 - Firmware for programming the Connectivity bridge application on Nordic
   Thingy:91 X.
+- Support for the nRF54LV10 DK.
 
 ### Changed
 
