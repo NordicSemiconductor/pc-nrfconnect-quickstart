@@ -27,9 +27,7 @@ export default (
             switch (action.type) {
                 case 'programming': {
                     const { file, core, link } = action.firmware;
-                    const coreLabel = core
-                        ? `${core} core`
-                        : 'Connectivity bridge';
+                    const coreLabel = core ? `${core} core` : 'nRF5340';
 
                     const index =
                         addActionEntry({
