@@ -35,7 +35,7 @@ interface BatchChoice extends ChoiceInfo {
 }
 
 interface ProgrammingAction {
-    type: 'programming';
+    type: 'program';
     firmware: Firmware;
 }
 
