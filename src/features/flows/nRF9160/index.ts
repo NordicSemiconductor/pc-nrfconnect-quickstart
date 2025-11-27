@@ -24,7 +24,7 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'AT Commands',
-        type: 'jlink-batch',
+        type: 'action-list',
         description: 'Evaluate the cellular modem using AT commands.',
         documentation: {
             label: 'Serial LTE Modem',
@@ -36,16 +36,9 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf9160_1.3.7.zip',
-                    link: {
-                        label: 'Firmware v1.3.7',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
-                    },
-                },
-                {
+                    type: 'program',
                     core: 'Application',
                     file: 'nrf9160dk_serial_lte_modem.hex',
                     link: {
@@ -53,12 +46,30 @@ const programConfig = [
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
                     },
                 },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf9160_1.3.7.zip',
+                        link: {
+                            label: 'Firmware v1.3.7',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
+                        },
+                    },
+                    version: '1.3.7',
+                    vComIndex: 0,
+                    mode: 'LINE',
+                },
             ],
         },
     },
     {
         name: 'Asset Tracking',
-        type: 'jlink-batch',
+        type: 'action-list',
         description:
             'Evaluate cloud interaction, location services, GNSS, and real-time configurations.',
         documentation: {
@@ -71,16 +82,9 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf9160_1.3.7.zip',
-                    link: {
-                        label: 'Firmware v1.3.7',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
-                    },
-                },
-                {
+                    type: 'program',
                     core: 'Application',
                     file: 'nrf9160dk_asset_tracker.hex',
                     link: {
@@ -88,12 +92,30 @@ const programConfig = [
                         href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
                     },
                 },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf9160_1.3.7.zip',
+                        link: {
+                            label: 'Firmware v1.3.7',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
+                        },
+                    },
+                    version: '1.3.7',
+                    vComIndex: 0,
+                    mode: 'LINE',
+                },
             ],
         },
     },
     {
         name: 'Shell Command Line Interface',
-        type: 'jlink-batch',
+        type: 'action-list',
         description: 'Evaluate throughput, connectivity, and more.',
         documentation: {
             label: 'Modem Shell',
@@ -115,12 +137,23 @@ const programConfig = [
                     },
                 },
                 {
-                    core: 'Application',
-                    file: 'nrf9160dk_modem_shell.hex',
-                    link: {
-                        label: 'Modem Shell',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Application',
+                        file: 'nrf9160dk_modem_shell.hex',
+                        link: {
+                            label: 'Modem Shell',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                        },
                     },
+
+                    version: '1.3.7',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
             ],
         },

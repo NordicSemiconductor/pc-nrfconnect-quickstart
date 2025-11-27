@@ -46,6 +46,10 @@ const programConfig = [
                     },
                 },
                 {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
                     type: 'program',
                     firmware: {
                         coreLabel: 'nRF5340',
@@ -55,6 +59,24 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
             ],
         },
@@ -78,6 +100,21 @@ const programConfig = [
                 {
                     type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
+                        file: 'thingy91x_connectivity_bridge.zip',
+                        link: {
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
+                        },
+                    },
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
+                    firmware: {
                         core: 'Application',
                         file: 'thingy91x_asset_tracker_template.zip',
                         link: {
@@ -87,15 +124,22 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'program',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
                     firmware: {
-                        file: 'thingy91x_connectivity_bridge.zip',
-                        coreLabel: 'nRF5340',
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
                         link: {
-                            label: 'Connectivity bridge',
-                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
                         },
                     },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
             ],
         },
@@ -122,6 +166,10 @@ const programConfig = [
                     },
                 },
                 {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
                     type: 'program',
                     firmware: {
                         coreLabel: 'nRF5340',
@@ -131,6 +179,24 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'LINE',
                 },
             ],
         },
@@ -157,6 +223,10 @@ const programConfig = [
                     },
                 },
                 {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
                     type: 'program',
                     firmware: {
                         coreLabel: 'nRF5340',
@@ -166,6 +236,24 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
             ],
         },
