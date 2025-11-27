@@ -71,11 +71,11 @@ export default (
                                 ],
                                 serialportPath,
                                 action.mode,
-                            );
+                            ).catch(() => undefined);
 
                             if (
-                                res.length === 1 &&
-                                res[0].includes(action.version)
+                                res?.length === 1 &&
+                                res?.[0].includes(action.version)
                             ) {
                                 dispatch(
                                     setProgrammingProgress({
