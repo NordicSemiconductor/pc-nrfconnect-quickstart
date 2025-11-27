@@ -35,7 +35,7 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_hello.nrfcloud.zip',
@@ -46,7 +46,7 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
@@ -75,7 +75,7 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_asset_tracker_template.zip',
@@ -86,7 +86,7 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
@@ -109,7 +109,7 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_serial_lte_modem.zip',
@@ -120,7 +120,7 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
@@ -143,7 +143,7 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_modem_shell.zip',
@@ -154,7 +154,7 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'program',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
