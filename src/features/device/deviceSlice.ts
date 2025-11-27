@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import { DeviceCore } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
@@ -45,7 +46,18 @@ interface WaitAction {
     durationMs: number;
 }
 
-export type ActionListEntry = ProgrammingAction | WaitAction;
+interface ProgramModemFirmwareAction {
+    type: 'program-modem-firmware';
+    firmware: Firmware;
+    version: string;
+    vComIndex: number;
+    mode: 'LINE' | 'SHELL';
+}
+
+export type ActionListEntry =
+    | ProgrammingAction
+    | WaitAction
+    | ProgramModemFirmwareAction;
 
 interface ActionListChoice extends ChoiceInfo {
     type: 'action-list';
