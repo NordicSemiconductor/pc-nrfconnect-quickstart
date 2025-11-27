@@ -24,7 +24,7 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Asset Tracker',
-        type: 'jlink-batch',
+        type: 'action-list',
         description:
             'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
@@ -37,16 +37,27 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
                 {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     core: 'Application',
                     file: 'nrf9151dk_asset_tracker_template.hex',
                     link: {
@@ -59,7 +70,7 @@ const programConfig = [
     },
     {
         name: 'AT Commands',
-        type: 'jlink-batch',
+        type: 'action-list',
         description: 'Evaluate the cellular modem using AT commands.',
         documentation: {
             label: 'Serial LTE Modem',
@@ -71,16 +82,27 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'LINE',
                 },
                 {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     core: 'Application',
                     file: 'nrf9151dk_serial_lte_modem.hex',
                     link: {
@@ -93,7 +115,7 @@ const programConfig = [
     },
     {
         name: 'Shell Command Line Interface',
-        type: 'jlink-batch',
+        type: 'action-list',
         description: 'Evaluate throughput, connectivity, and more.',
         documentation: {
             label: 'Modem Shell',
@@ -105,16 +127,27 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
                 {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     core: 'Application',
                     file: 'nrf9151dk_modem_shell.hex',
                     link: {
