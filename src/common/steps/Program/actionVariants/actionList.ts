@@ -25,10 +25,10 @@ export default (
 
         const actions = actionList.map(action => {
             switch (action.type) {
-                case 'programming': {
                     const { file, core, link } = action.firmware;
                     const coreLabel = core ? `${core} core` : 'nRF5340';
 
+                case 'program': {
                     const index = addActionEntry({
                         title: coreLabel,
                         link,
