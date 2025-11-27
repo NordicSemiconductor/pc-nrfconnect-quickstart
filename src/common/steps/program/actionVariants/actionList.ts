@@ -29,8 +29,9 @@ export default (
                     const coreLabel = core ? `${core} core` : 'nRF5340';
 
                 case 'program': {
+                    const { file, core, link, coreLabel } = action.firmware;
                     const index = addActionEntry({
-                        title: coreLabel,
+                        title: `${coreLabel || core} core`,
                         link,
                     });
                     return async (device: DeviceWithSerialnumber) => {
@@ -52,7 +53,7 @@ export default (
                             dispatch(
                                 setError({
                                     icon: 'mdi-flash-alert-outline',
-                                    text: `Failed to program the ${coreLabel}`,
+                                    text: `Failed to program the ${coreLabel || core} core`,
                                 }),
                             );
                             throw e;

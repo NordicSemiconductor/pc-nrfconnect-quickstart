@@ -48,6 +48,7 @@ const programConfig = [
                 {
                     type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',
@@ -89,6 +90,7 @@ const programConfig = [
                     type: 'program',
                     firmware: {
                         file: 'thingy91x_connectivity_bridge.zip',
+                        coreLabel: 'nRF5340',
                         link: {
                             label: 'Connectivity bridge',
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
@@ -122,6 +124,7 @@ const programConfig = [
                 {
                     type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',
@@ -156,6 +159,7 @@ const programConfig = [
                 {
                     type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',

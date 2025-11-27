@@ -10,7 +10,8 @@ import { type RootState } from '../../app/store';
 import { DeviceWithSerialnumber } from './deviceLib';
 
 export interface Firmware {
-    core: 'Modem' | 'Application' | 'Network';
+    core?: DeviceCore;
+    coreLabel?: string;
     file: string;
     link?: { label: string; href: string };
 }
