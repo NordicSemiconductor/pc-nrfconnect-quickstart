@@ -1,3 +1,16 @@
+## 1.7.0 - Unreleased
+
+### Added
+
+- Samples for Nordic Thingy:91 X now also program the modem firmware package.
+
+### Changed
+
+- Modem firmware package is now programmed on devices only if not already
+  programmed.
+- Order of programming firmware for nRF91 Series devices. Application is now
+  programmed before modem firmware.
+
 ## 1.6.0 - 2025-11-24
 
 ### Added
