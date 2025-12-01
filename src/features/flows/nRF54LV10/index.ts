@@ -5,11 +5,11 @@
  */
 
 import Apps from '../../../common/steps/Apps';
-import Develop from '../../../common/steps/develop';
+import Develop from '../../../common/steps/Develop';
 import Evaluate from '../../../common/steps/Evaluate';
 import Info from '../../../common/steps/Info';
 import Learn from '../../../common/steps/Learn';
-import Program from '../../../common/steps/program';
+import Program from '../../../common/steps/Program';
 import Rename from '../../../common/steps/Rename';
 import { Choice } from '../../device/deviceSlice';
 import Verify from './Verify';

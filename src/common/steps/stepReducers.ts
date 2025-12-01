@@ -15,8 +15,8 @@ import verification5x, {
 import verification91, {
     reset as verification91Reset,
 } from './91FamilyVerify/verificationSlice';
-import develop, { reset as developReset } from './develop/developSlice';
-import program, { reset as programReset } from './program/programSlice';
+import develop, { reset as developReset } from './Develop/developSlice';
+import program, { reset as programReset } from './Program/programSlice';
 
 export const allReset = (): AppThunk => dispatch => {
     dispatch(setChoice(undefined));
