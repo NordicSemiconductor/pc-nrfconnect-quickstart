@@ -1,5 +1,14 @@
 ## 1.7.0 - Unreleased
 
+### Added
+
+- Samples for Nordic Thingy:91 X now also program the modem firmware package.
+
+### Changed
+
+- Modem firmware package is now programmed on devices only if not already
+  programmed.
+
 ### Fixed
 
 - Issue with the app crashing at the verification step when the device was
