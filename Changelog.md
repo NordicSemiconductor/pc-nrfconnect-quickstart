@@ -1,3 +1,14 @@
+## Unreleased
+
+### Added
+
+- Samples for the Thingy 91:X now programs the modem firmware package.
+
+### Changed
+
+- Only program modem firmware package on devices if not already programmed.
+- Firmware programming order for 91 family devices.
+
 ## 1.6.0 - 2025-11-24
 
 ### Added
