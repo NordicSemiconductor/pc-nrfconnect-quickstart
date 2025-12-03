@@ -169,11 +169,13 @@ const VerifyConfigLayer = ({
         choiceSettings &&
         device.serialPorts?.[choiceSettings.vComIndex]?.comName;
     if (choiceSettings && path) {
-        return VerifyStep({
-            path,
-            mode: choiceSettings.mode,
-            commands,
-        });
+        return (
+            <VerifyStep
+                path={path}
+                mode={choiceSettings.mode}
+                commands={commands}
+            />
+        );
     }
     logger.error(`Invalid config for ${choice.name}`);
     return null;
