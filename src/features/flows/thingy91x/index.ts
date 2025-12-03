@@ -35,6 +35,24 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
                     type: 'program',
                     firmware: {
                         core: 'Application',
@@ -60,24 +78,6 @@ const programConfig = [
                         },
                     },
                 },
-                {
-                    type: 'wait',
-                    durationMs: 2000,
-                },
-                {
-                    type: 'program-modem-firmware',
-                    firmware: {
-                        core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
-                        link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
-                        },
-                    },
-                    version: '2.0.3',
-                    vComIndex: 0,
-                    mode: 'SHELL',
-                },
             ],
         },
     },
@@ -98,15 +98,18 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'program',
+                    type: 'program-modem-firmware',
                     firmware: {
-                        coreLabel: 'nRF5340',
-                        file: 'thingy91x_connectivity_bridge.zip',
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
                         link: {
-                            label: 'Connectivity bridge',
-                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
                         },
                     },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
                 },
                 {
                     type: 'wait',
@@ -128,18 +131,15 @@ const programConfig = [
                     durationMs: 2000,
                 },
                 {
-                    type: 'program-modem-firmware',
+                    type: 'program',
                     firmware: {
-                        core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        coreLabel: 'nRF5340',
+                        file: 'thingy91x_connectivity_bridge.zip',
                         link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                            label: 'Connectivity bridge',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
-                    version: '2.0.3',
-                    vComIndex: 0,
-                    mode: 'SHELL',
                 },
             ],
         },
@@ -154,6 +154,24 @@ const programConfig = [
         },
         programmingOptions: {
             actions: [
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'LINE',
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
                 {
                     type: 'program',
                     firmware: {
@@ -180,24 +198,6 @@ const programConfig = [
                         },
                     },
                 },
-                {
-                    type: 'wait',
-                    durationMs: 2000,
-                },
-                {
-                    type: 'program-modem-firmware',
-                    firmware: {
-                        core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
-                        link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
-                        },
-                    },
-                    version: '2.0.3',
-                    vComIndex: 0,
-                    mode: 'LINE',
-                },
             ],
         },
     },
@@ -211,6 +211,24 @@ const programConfig = [
         },
         programmingOptions: {
             actions: [
+                {
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    mode: 'SHELL',
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
                 {
                     type: 'program',
                     firmware: {
@@ -236,24 +254,6 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/connectivity_bridge/README.html',
                         },
                     },
-                },
-                {
-                    type: 'wait',
-                    durationMs: 2000,
-                },
-                {
-                    type: 'program-modem-firmware',
-                    firmware: {
-                        core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
-                        link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
-                        },
-                    },
-                    version: '2.0.3',
-                    vComIndex: 0,
-                    mode: 'SHELL',
                 },
             ],
         },
