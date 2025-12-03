@@ -8,6 +8,7 @@ import { logger } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { NrfutilDeviceLib } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 import path from 'path';
 
+import { alwaysProgramMwfNoATCheck } from '../../../../app/devOptions';
 import { AppThunk, RootState } from '../../../../app/store';
 import { getFirmwareFolder } from '../../../../features/device/deviceGuides';
 import { DeviceWithSerialnumber } from '../../../../features/device/deviceLib';
@@ -53,47 +54,50 @@ export default (
                         const ATProgressWeight = 0.2;
                         const programmingProgressWeight = 1 - ATProgressWeight;
 
-                        try {
-                            dispatch(
-                                setProgrammingProgress({
-                                    index,
-                                    // Give some initial progress for AT commands
-                                    progress: (ATProgressWeight * 100) / 2,
-                                }),
-                            );
-                            const res = await sendATCommands(
-                                [
-                                    {
-                                        command: 'AT+CGMR',
-                                        responseRegex:
-                                            '.*(\\d+\\.\\d+\\.\\d+).*',
-                                    },
-                                ],
-                                serialportPath,
-                                action.mode,
-                            ).catch(() => undefined);
+                        dispatch(
+                            setProgrammingProgress({
+                                index,
+                                // Give some initial progress for AT commands
+                                progress: (ATProgressWeight * 100) / 2,
+                            }),
+                        );
 
-                            if (
-                                res?.length === 1 &&
-                                res?.[0].includes(action.version)
-                            ) {
+                        if (!alwaysProgramMwfNoATCheck) {
+                            try {
+                                const res = await sendATCommands(
+                                    [
+                                        {
+                                            command: 'AT+CGMR',
+                                            responseRegex:
+                                                '.*(\\d+\\.\\d+\\.\\d+).*',
+                                        },
+                                    ],
+                                    serialportPath,
+                                    action.mode,
+                                ).catch(() => undefined);
+
+                                if (
+                                    res?.length === 1 &&
+                                    res?.[0].includes(action.version)
+                                ) {
+                                    dispatch(
+                                        setProgrammingProgress({
+                                            index,
+                                            progress: 100,
+                                        }),
+                                    );
+                                    return;
+                                }
+                            } catch (e) {
                                 dispatch(
-                                    setProgrammingProgress({
-                                        index,
-                                        progress: 100,
+                                    setError({
+                                        icon: 'mdi-flash-alert-outline',
+                                        text: `Failed to communicate with the modem on ${serialportPath}`,
                                     }),
                                 );
-                                return;
+                                logger.error(e);
+                                throw e;
                             }
-                        } catch (e) {
-                            dispatch(
-                                setError({
-                                    icon: 'mdi-flash-alert-outline',
-                                    text: `Failed to communicate with the modem on ${serialportPath}`,
-                                }),
-                            );
-                            logger.error(e);
-                            throw e;
                         }
 
                         try {
