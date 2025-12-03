@@ -1,3 +1,9 @@
+## 1.7.0 - Unreleased
+
+### Fixed
+
+- Case if device is disconnected in the verification step it will crash the app.
+
 ## 1.6.0 - 2025-11-24
 
 ### Added
