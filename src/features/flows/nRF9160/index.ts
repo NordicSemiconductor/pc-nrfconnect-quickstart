@@ -49,7 +49,6 @@ const programConfig = [
                     },
                     version: '1.3.7',
                     vComIndex: 0,
-                    mode: 'LINE',
                 },
                 {
                     type: 'wait',
@@ -97,7 +96,6 @@ const programConfig = [
                     },
                     version: '1.3.7',
                     vComIndex: 0,
-                    mode: 'LINE',
                 },
                 {
                     type: 'wait',
@@ -145,7 +143,6 @@ const programConfig = [
 
                     version: '1.3.7',
                     vComIndex: 0,
-                    mode: 'SHELL',
                 },
                 {
                     type: 'wait',

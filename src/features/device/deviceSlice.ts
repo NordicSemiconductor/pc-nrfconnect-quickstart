@@ -51,7 +51,6 @@ interface ProgramModemFirmwareAction {
     firmware: Firmware;
     version: string;
     vComIndex: number;
-    mode: 'LINE' | 'SHELL';
 }
 
 export type ActionListEntry =
