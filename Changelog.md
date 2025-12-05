@@ -2,8 +2,7 @@
 
 ### Fixed
 
-- Case if device is disconnected and connected again in the verification step it
-  will crash the app.
+- Issue with the app crashing at the verification step when the device was disconnected and connected again.
 
 ## 1.6.0 - 2025-11-24
 
