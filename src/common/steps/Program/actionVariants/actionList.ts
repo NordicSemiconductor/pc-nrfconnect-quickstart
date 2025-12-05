@@ -73,7 +73,6 @@ export default (
                                         },
                                     ],
                                     serialportPath,
-                                    action.mode,
                                 ).catch(() => undefined);
 
                                 if (

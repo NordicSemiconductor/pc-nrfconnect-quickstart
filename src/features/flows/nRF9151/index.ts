@@ -43,7 +43,6 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     version: '2.0.3',
                     vComIndex: 0,
-                    mode: 'SHELL',
                     firmware: {
                         core: 'Modem',
                         file: 'mfw_nrf91x1_2.0.3.zip',
@@ -90,7 +89,6 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     version: '2.0.3',
                     vComIndex: 0,
-                    mode: 'LINE',
                     firmware: {
                         core: 'Modem',
                         file: 'mfw_nrf91x1_2.0.3.zip',
@@ -137,7 +135,6 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     version: '2.0.3',
                     vComIndex: 0,
-                    mode: 'SHELL',
                     firmware: {
                         core: 'Modem',
                         file: 'mfw_nrf91x1_2.0.3.zip',
@@ -185,7 +182,6 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     version: '2.0.3',
                     vComIndex: 0,
-                    mode: 'LINE',
                     firmware: {
                         core: 'Modem',
                         file: 'mfw_nrf91x1_2.0.3.zip',
