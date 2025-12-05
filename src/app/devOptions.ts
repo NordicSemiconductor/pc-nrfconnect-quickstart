@@ -5,3 +5,4 @@
  */
 
 export const selectFirmwareWithoutProgrammingOption = false;
+export const alwaysProgramMwfNoATCheck = false;

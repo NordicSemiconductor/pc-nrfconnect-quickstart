@@ -22,24 +22,20 @@ export default (
     dispatch => {
         const batch = NrfutilDeviceLib.batch();
 
-        const cores = firmwares.reduce(
-            (prev, curr) => {
-                const nonModemCore =
-                    curr.core === 'Modem' ? 'Application' : curr.core;
-                if (prev.includes(nonModemCore)) return prev;
-                return prev.concat(nonModemCore);
-            },
-            [] as Omit<DeviceCore, 'Modem'>[],
-        );
+        const nonDuplicateCores = firmwares
+            .map(({ core }) => (core === 'Modem' ? 'Application' : core))
+            .filter((core, index, self) => self.indexOf(core) === index);
 
-        cores.forEach((core, index) => {
+        nonDuplicateCores.forEach((core, index) => {
             batch.recover(core as DeviceCore, {
                 onTaskBegin: () => {
                     dispatch(
                         setProgrammingProgress({
                             index: 0,
-                            // index + 1 because we should show some progress on the first action
-                            progress: ((index + 1) / (cores.length + 1)) * 100,
+                            // + 1 because we should show some progress on the first action
+                            progress:
+                                ((index + 1) / (nonDuplicateCores.length + 1)) *
+                                100,
                         }),
                     );
                 },
@@ -55,14 +51,14 @@ export default (
                 },
             });
         });
-        batch.collect(cores.length, () => {
+        batch.collect(nonDuplicateCores.length, () => {
             dispatch(setProgrammingProgress({ index: 0, progress: 100 }));
         });
 
-        firmwares.forEach(({ file, core }, index) => {
+        firmwares.forEach(({ file, core, coreLabel }, index) => {
             batch.program(
                 path.join(getFirmwareFolder(), file),
-                core === 'Modem' ? 'Application' : core,
+                core === 'Modem' ? 'Application' : (core as DeviceCore),
                 undefined,
                 undefined,
                 {
@@ -78,7 +74,7 @@ export default (
                             dispatch(
                                 setError({
                                     icon: 'mdi-flash-alert-outline',
-                                    text: `Failed to program the ${core} core`,
+                                    text: `Failed to program the ${coreLabel || core} core`,
                                 }),
                             );
                         }
