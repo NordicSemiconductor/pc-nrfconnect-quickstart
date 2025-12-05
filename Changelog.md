@@ -1,3 +1,10 @@
+## 1.7.0 - Unreleased
+
+### Fixed
+
+- Issue with the app crashing at the verification step when the device was
+  disconnected and connected again.
+
 ## 1.6.0 - 2025-11-24
 
 ### Added
