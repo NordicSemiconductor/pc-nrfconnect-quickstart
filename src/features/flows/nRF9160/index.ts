@@ -140,7 +140,6 @@ const programConfig = [
                             href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/dev-kits/nrf9160-dk/release_notes_modemfirmware/mfw_nrf9160_1.3.7_release_notes.txt',
                         },
                     },
-
                     version: '1.3.7',
                     vComIndex: 0,
                 },
