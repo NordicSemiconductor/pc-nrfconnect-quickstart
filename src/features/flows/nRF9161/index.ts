@@ -140,9 +140,9 @@ const programConfig = [
                             label: 'Firmware v2.0.3',
                             href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
                         },
-                        version: '2.0.3',
-                        vComIndex: 0,
                     },
+                    version: '2.0.3',
+                    vComIndex: 0,
                 },
                 {
                     type: 'wait',
