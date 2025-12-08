@@ -11,7 +11,10 @@ import path from 'path';
 import { alwaysProgramMwfNoATCheck } from '../../../../app/devOptions';
 import { AppThunk, RootState } from '../../../../app/store';
 import { getFirmwareFolder } from '../../../../features/device/deviceGuides';
-import { DeviceWithSerialnumber } from '../../../../features/device/deviceLib';
+import {
+    DeviceWithSerialnumber,
+    reset,
+} from '../../../../features/device/deviceLib';
 import { ActionListEntry } from '../../../../features/device/deviceSlice';
 import sendATCommands from '../../../sendATCommands';
 import type { ProgrammingConfig } from '../programEffects';
@@ -21,10 +24,10 @@ export default (
         actionList: ActionListEntry[],
     ): AppThunk<RootState, ProgrammingConfig> =>
     dispatch => {
-        const array: ProgrammingConfig['actions'] = [];
+        const actionLabels: ProgrammingConfig['actions'] = [];
 
         const addActionEntry = (item: ProgrammingConfig['actions'][number]) =>
-            array.push(item) - 1;
+            actionLabels.push(item) - 1;
 
         const actions = actionList.map(action => {
             switch (action.type) {
@@ -168,6 +171,32 @@ export default (
                     return () => {};
             }
         });
+        const index = addActionEntry({
+            title: 'Reset device',
+        });
+        actions.push(async (device: DeviceWithSerialnumber) => {
+            dispatch(
+                setProgrammingProgress({
+                    index,
+                    progress: 20,
+                }),
+            );
+            await new Promise<void>(resolve => {
+                setTimeout(
+                    () =>
+                        reset(device).then(() => {
+                            dispatch(
+                                setProgrammingProgress({
+                                    index,
+                                    progress: 100,
+                                }),
+                            );
+                            resolve();
+                        }),
+                    1000,
+                );
+            });
+        });
 
         return {
             run: device =>
@@ -178,6 +207,6 @@ export default (
                         }),
                     Promise.resolve(),
                 ),
-            actions: array,
+            actions: actionLabels,
         };
     };
