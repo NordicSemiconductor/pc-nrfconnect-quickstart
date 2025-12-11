@@ -167,35 +167,31 @@ export default (
                         new Promise(resolve => {
                             setTimeout(resolve, action.durationMs);
                         });
-                default:
-                    return () => {};
-            }
-        });
-        const index = addActionEntry({
-            title: 'Reset device',
-        });
-        actions.push(async (device: DeviceWithSerialnumber) => {
-            dispatch(
-                setProgrammingProgress({
-                    index,
-                    progress: 20,
-                }),
-            );
-            await new Promise<void>(resolve => {
-                setTimeout(
-                    () =>
-                        reset(device).then(() => {
+                case 'reset': {
+                    const index = addActionEntry({
+                        title: 'Reset device',
+                    });
+
+                    return async (device: DeviceWithSerialnumber) => {
+                        dispatch(
+                            setProgrammingProgress({
+                                index,
+                                progress: 20,
+                            }),
+                        );
+                        await reset(device).then(() => {
                             dispatch(
                                 setProgrammingProgress({
                                     index,
                                     progress: 100,
                                 }),
                             );
-                            resolve();
-                        }),
-                    1000,
-                );
-            });
+                        });
+                    };
+                }
+                default:
+                    return () => {};
+            }
         });
 
         return {

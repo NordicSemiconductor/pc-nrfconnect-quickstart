@@ -67,6 +67,9 @@ const programConfig = [
                         },
                     },
                 },
+                {
+                    type: 'reset',
+                },
             ],
         },
     },
@@ -112,6 +115,9 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
                         },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
@@ -159,6 +165,9 @@ const programConfig = [
                         },
                     },
                 },
+                {
+                    type: 'reset',
+                },
             ],
         },
     },
@@ -205,6 +214,9 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
                         },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
