@@ -25,7 +25,7 @@ const infoConfig = {
 const programConfig = [
     {
         name: 'Asset Tracker',
-        type: 'jlink-batch',
+        type: 'action-list',
         description:
             'Enable a customizable, power-optimized application framework that provides cloud-connected, battery-efficient asset tracking and sensor data collection.',
         documentation: {
@@ -38,29 +38,44 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
                 },
                 {
-                    core: 'Application',
-                    file: 'nrf9151dk_asset_tracker_template.hex',
-                    link: {
-                        label: 'Asset Tracker',
-                        href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
+                    firmware: {
+                        core: 'Application',
+                        file: 'nrf9151dk_asset_tracker_template.hex',
+                        link: {
+                            label: 'Asset Tracker',
+                            href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
+                        },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
     },
     {
         name: 'AT Commands',
-        type: 'jlink-batch',
+        type: 'action-list',
         description: 'Evaluate the cellular modem using AT commands.',
         documentation: {
             label: 'Serial LTE Modem',
@@ -72,29 +87,44 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
                 },
                 {
-                    core: 'Application',
-                    file: 'nrf9151dk_serial_lte_modem.hex',
-                    link: {
-                        label: 'Serial LTE Modem',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
+                    firmware: {
+                        core: 'Application',
+                        file: 'nrf9151dk_serial_lte_modem.hex',
+                        link: {
+                            label: 'Serial LTE Modem',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/serial_lte_modem/README.html',
+                        },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
     },
     {
         name: 'Shell Command Line Interface',
-        type: 'jlink-batch',
+        type: 'action-list',
         description: 'Evaluate throughput, connectivity, and more.',
         documentation: {
             label: 'Modem Shell',
@@ -106,29 +136,44 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
                 },
                 {
-                    core: 'Application',
-                    file: 'nrf9151dk_modem_shell.hex',
-                    link: {
-                        label: 'Modem Shell',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
+                    firmware: {
+                        core: 'Application',
+                        file: 'nrf9151dk_modem_shell.hex',
+                        link: {
+                            label: 'Modem Shell',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
+                        },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
     },
     {
         name: 'Legacy Asset Tracker',
-        type: 'jlink-batch',
+        type: 'action-list',
         description:
             'Evaluate cloud interaction, location services, GNSS, and real-time configurations.',
         documentation: {
@@ -141,22 +186,37 @@ const programConfig = [
                 'Modem Trace is enabled; the current consumption will be higher than usual.',
         },
         programmingOptions: {
-            firmwareList: [
+            actions: [
                 {
-                    core: 'Modem',
-                    file: 'mfw_nrf91x1_2.0.3.zip',
-                    link: {
-                        label: 'Firmware v2.0.3',
-                        href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                    type: 'program-modem-firmware',
+                    version: '2.0.3',
+                    vComIndex: 0,
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
                     },
                 },
                 {
-                    core: 'Application',
-                    file: 'nrf9161dk_asset_tracker.hex',
-                    link: {
-                        label: 'Asset Tracker v2',
-                        href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
+                    firmware: {
+                        core: 'Application',
+                        file: 'nrf9161dk_asset_tracker.hex',
+                        link: {
+                            label: 'Asset Tracker v2',
+                            href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/applications/asset_tracker_v2/README.html',
+                        },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
