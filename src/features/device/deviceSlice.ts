@@ -53,10 +53,15 @@ interface ProgramModemFirmwareAction {
     vComIndex: number;
 }
 
+interface ResetAction {
+    type: 'reset';
+}
+
 export type ActionListEntry =
     | ProgrammingAction
     | WaitAction
-    | ProgramModemFirmwareAction;
+    | ProgramModemFirmwareAction
+    | ResetAction;
 
 interface ActionListChoice extends ChoiceInfo {
     type: 'action-list';

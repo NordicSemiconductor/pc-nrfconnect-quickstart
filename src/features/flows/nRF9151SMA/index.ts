@@ -66,6 +66,9 @@ const programConfig = [
                         },
                     },
                 },
+                {
+                    type: 'reset',
+                },
             ],
         },
     },
@@ -112,6 +115,9 @@ const programConfig = [
                         },
                     },
                 },
+                {
+                    type: 'reset',
+                },
             ],
         },
     },
@@ -157,6 +163,9 @@ const programConfig = [
                             href: 'https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/samples/cellular/modem_shell/README.html',
                         },
                     },
+                },
+                {
+                    type: 'reset',
                 },
             ],
         },
