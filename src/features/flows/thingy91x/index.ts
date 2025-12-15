@@ -38,13 +38,13 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     firmware: {
                         core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        file: 'mfw_nrf91x1_2.0.4.zip',
                         link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                            label: 'Firmware v2.0.4',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.4_release_notes.txt',
                         },
                     },
-                    version: '2.0.3',
+                    version: '2.0.4',
                     vComIndex: 0,
                 },
                 {
@@ -100,13 +100,13 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     firmware: {
                         core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        file: 'mfw_nrf91x1_2.0.4.zip',
                         link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                            label: 'Firmware v2.0.4',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.4_release_notes.txt',
                         },
                     },
-                    version: '2.0.3',
+                    version: '2.0.4',
                     vComIndex: 0,
                 },
                 {
@@ -156,13 +156,13 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     firmware: {
                         core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        file: 'mfw_nrf91x1_2.0.4.zip',
                         link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                            label: 'Firmware v2.0.4',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.4_release_notes.txt',
                         },
                     },
-                    version: '2.0.3',
+                    version: '2.0.4',
                     vComIndex: 0,
                 },
                 {
@@ -212,13 +212,13 @@ const programConfig = [
                     type: 'program-modem-firmware',
                     firmware: {
                         core: 'Modem',
-                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        file: 'mfw_nrf91x1_2.0.4.zip',
                         link: {
-                            label: 'Firmware v2.0.3',
-                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                            label: 'Firmware v2.0.4',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.4_release_notes.txt',
                         },
                     },
-                    version: '2.0.3',
+                    version: '2.0.4',
                     vComIndex: 0,
                 },
                 {
