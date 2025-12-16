@@ -1,8 +1,8 @@
-## 1.7.0 - Unreleased
+## 1.7.0 - 2025-12-16
 
 ### Added
 
-- Samples for Nordic Thingy:91 X now also program the modem firmware package.
+- Modem firmware package v2.0.3 for Nordic Thingy:91 X.
 
 ### Changed
 
