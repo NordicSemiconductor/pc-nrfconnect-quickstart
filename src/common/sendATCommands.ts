@@ -72,7 +72,7 @@ const sendCommandLineMode = (serialPort: SerialPort, command: string) =>
 export default async (
     commands: Command[],
     path: string,
-    mode: 'LINE' | 'SHELL',
+    mode?: 'LINE' | 'SHELL',
 ) => {
     let serialPort: {
         sendCommand: (cmd: string) => Promise<string>;
@@ -86,6 +86,15 @@ export default async (
         },
         { overwrite: true, settingsLocked: true },
     );
+
+    if (!mode) {
+        try {
+            await sendCommandLineMode(createdSerialPort, 'at AT');
+            mode = 'SHELL';
+        } catch {
+            mode = 'LINE';
+        }
+    }
 
     if (mode === 'SHELL') {
         const sp = await shellParser(

@@ -4,13 +4,15 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import { DeviceCore } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/device';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { type RootState } from '../../app/store';
 import { DeviceWithSerialnumber } from './deviceLib';
 
 export interface Firmware {
-    core: 'Modem' | 'Application' | 'Network';
+    core?: DeviceCore;
+    coreLabel?: string;
     file: string;
     link?: { label: string; href: string };
 }
@@ -35,7 +37,7 @@ interface BatchChoice extends ChoiceInfo {
 }
 
 interface ProgrammingAction {
-    type: 'programming';
+    type: 'program';
     firmware: Firmware;
 }
 
@@ -44,7 +46,22 @@ interface WaitAction {
     durationMs: number;
 }
 
-export type ActionListEntry = ProgrammingAction | WaitAction;
+interface ProgramModemFirmwareAction {
+    type: 'program-modem-firmware';
+    firmware: Firmware;
+    version: string;
+    vComIndex: number;
+}
+
+interface ResetAction {
+    type: 'reset';
+}
+
+export type ActionListEntry =
+    | ProgrammingAction
+    | WaitAction
+    | ProgramModemFirmwareAction
+    | ResetAction;
 
 interface ActionListChoice extends ChoiceInfo {
     type: 'action-list';

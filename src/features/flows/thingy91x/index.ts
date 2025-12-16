@@ -35,7 +35,24 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_hello.nrfcloud.zip',
@@ -46,8 +63,13 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',
@@ -75,7 +97,24 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_asset_tracker_template.zip',
@@ -86,8 +125,13 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',
@@ -109,7 +153,24 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_serial_lte_modem.zip',
@@ -120,8 +181,13 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',
@@ -143,7 +209,24 @@ const programConfig = [
         programmingOptions: {
             actions: [
                 {
-                    type: 'programming',
+                    type: 'program-modem-firmware',
+                    firmware: {
+                        core: 'Modem',
+                        file: 'mfw_nrf91x1_2.0.3.zip',
+                        link: {
+                            label: 'Firmware v2.0.3',
+                            href: 'https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/sip/nrf91x1-sip/nrf91x1-lte-modem-firmware/release-notes/mfw_nrf91x1_2.0.3_release_notes.txt',
+                        },
+                    },
+                    version: '2.0.3',
+                    vComIndex: 0,
+                },
+                {
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_modem_shell.zip',
@@ -154,8 +237,13 @@ const programConfig = [
                     },
                 },
                 {
-                    type: 'programming',
+                    type: 'wait',
+                    durationMs: 2000,
+                },
+                {
+                    type: 'program',
                     firmware: {
+                        coreLabel: 'nRF5340',
                         file: 'thingy91x_connectivity_bridge.zip',
                         link: {
                             label: 'Connectivity bridge',
