@@ -1,3 +1,10 @@
+## 1.7.1 - unreleased
+
+### Changed
+
+- Updated modem firmware packages for the nRF9151 DK, the nRF9151 SMA DK, the
+  nRF9161 DK, and the Thingy:91 X to v2.0.4.
+
 ## 1.7.0 - 2025-12-16
 
 ### Added
