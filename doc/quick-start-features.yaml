@@ -65,91 +65,91 @@ shared_features: []
 supported_devices:
   - device: "Nordic Thingy:91 X"
     pca: PCA20049
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF52 DK
     pca: PCA10040
-    verification_version:
+    verification_version: 1.13.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF52833 DK
     pca: PCA10100
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF52840 DK
     pca: PCA10056
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF5340 DK
     pca: PCA10095
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF54L15 DK
     pca: PCA10156
-    verification_version:
+    verification_version: 1.14.0
     support:
       nrf_cloud_support: full
 
   - device: nRF54LC10 DK
     pca: PCA10226
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF54LM20 DK
     pca: PCA10184
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF54LS05 DK
     pca: PCA10214
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF54LV10 DK
     pca: PCA10188
-    verification_version:
+    verification_version: 1.13.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF7002 DK
     pca: PCA10143
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF9151 DK
     pca: PCA10171
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF9151 SMA DK
     pca: PCA10201
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF9160 DK
     pca: PCA10090
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
   - device: nRF9161 DK
     pca: PCA10153
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
@@ -161,7 +161,7 @@ supported_devices:
 
   - device: nRF93M1 DK
     pca: PCA10232
-    verification_version:
+    verification_version: 1.12.0
     support:
       nrf_cloud_support: unsupported
 
