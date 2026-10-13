@@ -1,3 +1,10 @@
+## 1.14.1 - Unreleased
+
+### Changed
+
+- Updated the Asset Tracker Template firmware for the Nordic Thingy:91 X, the
+  nRF9151 DK, and the nRF9151 SMA DK to v1.6.1.
+
 ## 1.14.0 - 2026-10-12
 
 ### Added
