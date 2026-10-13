@@ -10,11 +10,11 @@ import Develop from '../../../common/steps/Develop';
 import Evaluate from '../../../common/steps/Evaluate';
 import Info from '../../../common/steps/Info';
 import Learn from '../../../common/steps/Learn';
+import NrfCloudOnboarding from '../../../common/steps/NrfCloudOnboarding';
 import Program from '../../../common/steps/Program';
 import Rename from '../../../common/steps/Rename';
 import { type Choice } from '../../device/deviceSlice';
 import { nrfCloud } from '../learnConfig';
-import CustomEvaluate from './Evaluate';
 import SIM from './SIM';
 
 const infoConfig = {
@@ -334,7 +334,7 @@ const evaluateConfig = [
     },
     {
         ref: 'Asset Tracker',
-        component: CustomEvaluate,
+        component: () => NrfCloudOnboarding({ vComIndex: 0 }),
     },
     {
         ref: 'AT Commands',

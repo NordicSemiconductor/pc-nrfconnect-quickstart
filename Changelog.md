@@ -1,3 +1,12 @@
+## 1.15.0 - Unreleased
+
+### Added
+
+- nRF Cloud Onboarding for the Asset Tracker Template on the Nordic Thingy:91 X,
+  the nRF9151 DK, and the nRF9151 SMA DK. After signing in with myNordic, Quick
+  Start onboards the device to the selected nRF Cloud project. Manual onboarding
+  is still available.
+
 ## 1.14.1 - 2026-10-13
 
 ### Changed
