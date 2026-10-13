@@ -10,20 +10,20 @@ general_app_features:
     name: Device detection
     description: "Identify connected kits, distiguish supported from not supported and mark not supported as incompatible/non-selectable"
   - id: device_list_kit_selection
-    name: Device list / kit selection
+    name: Device listing and selection
     description: List connected kits with family, device, and serial number, and select one to start the flow
   - id: custom_device_naming
     name: Custom device naming
     description: Assign and display a custom name for a connected kit
   - id: device_info_step
-    name: Device info step
+    name: Device information
     description: Display device overview, description, onboard features, and included hardware for the selected kit
   - id: firmware_selection
     name: Firmware selection
-    description: Present the list of available applications/samples for the selected device and choose one to program
+    description: Present the list of available applications and samples for the selected device and choose one to program
   - id: program_device
-    name: Program device
-    description: "Erase, program modem core and application core, and reset the device with per-stage progress"
+    name: Device programming
+    description: Erase, program modem core and application core, and reset the device with per-stage progress
   - id: programming_failure_reporting
     name: Programming failure reporting
     description: Report which programming stage failed and link to support and the log for troubleshooting
@@ -35,7 +35,7 @@ general_app_features:
     description: Show manufacturer, hardware version, and IMEI returned by the device
   - id: launch_related_nrf_connect_app
     name: Launch related nRF Connect app
-    description: Open a related app (e.g. Cellular Monitor) directly from the evaluation step
+    description: Open a related app (such as Cellular Monitor) directly from the evaluation step
   - id: launch_vs_code
     name: Launch VS Code
     description: Open VS Code with the nRF Connect extension
@@ -46,14 +46,14 @@ general_app_features:
     name: Recommended apps installation
     description: Install the selected apps and show ongoing installation status
   - id: submit_feedback
-    name: Submit feedback
-    description: Send feedback about the app and receive a response via DevZone
+    name: Feedback button
+    description: Send feedback about the app and receive a response through DevZone
   - id: step_navigation
     name: Step navigation
     description: Move backward and forward through the guided flow via a persistent step sidebar
   - id: restart_application
-    name: Restart application
-    description: Restart the app via a keyboard shortcut (Ctrl+R / Command+R)
+    name: Application restart
+    description: Restart the app using a keyboard shortcut (Ctrl+R or Command+R)
 
 device_specific_features:
   - id: nrf_cloud_support
