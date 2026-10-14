@@ -58,6 +58,11 @@ const onboardingStages: {
     icon: string;
 }[] = [
     { id: 'read-token', label: 'Read token', icon: 'mdi-key-chain-variant' },
+    {
+        id: 'upload-symbols',
+        label: 'Upload symbols',
+        icon: 'mdi-file-upload-outline',
+    },
     { id: 'onboard', label: 'Onboard', icon: 'mdi-cloud-upload-outline' },
     { id: 'reboot-device', label: 'Reboot', icon: 'mdi-restart' },
 ];

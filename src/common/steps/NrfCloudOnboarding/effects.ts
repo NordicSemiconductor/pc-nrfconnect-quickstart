@@ -7,15 +7,25 @@
 import { createSerialPort } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { inMain as auth } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/auth';
 import describeError from '@nordicsemiconductor/pc-nrfconnect-shared/src/logging/describeError';
+import fs from 'fs';
+import path from 'path';
 
 import { type AppThunk, type RootState } from '../../../app/store';
-import { getSelectedDeviceUnsafely } from '../../../features/device/deviceSlice';
+import { getFirmwareFolder } from '../../../features/device/deviceGuides';
+import {
+    findElfFile,
+    getChoice,
+    getSelectedDeviceUnsafely,
+} from '../../../features/device/deviceSlice';
 import {
     fetchMemfaultToken,
     fetchOrganizations,
     fetchProjects,
+    finalizeSymbolFile,
     HttpError,
     provisionMyNordicAccount,
+    requestSymbolUploadUrl,
+    uploadSymbolBinary,
 } from '../../../features/flows/nRF54L15_cloud/evaluate/api';
 import { reportEvaluateError } from '../../../features/flows/nRF54L15_cloud/evaluate/reportError';
 import runVerification from '../../sendATCommands';
@@ -50,9 +60,9 @@ const getSerialPortPath = (state: RootState, vComIndex: number) =>
 
 // The device reboots without answering, so the command is written without
 // waiting for a shell response.
-const rebootOverShell = async (path: string) => {
+const rebootOverShell = async (serialPortPath: string) => {
     const serialPort = await createSerialPort(
-        { path, baudRate: 115200 },
+        { path: serialPortPath, baudRate: 115200 },
         { overwrite: true, settingsLocked: true },
     );
     try {
@@ -186,6 +196,29 @@ export const readAttestationToken =
         }
     };
 
+const uploadSymbols =
+    (orgSlug: string, projectSlug: string): AppThunk<Promise<void>> =>
+    async (dispatch, getState) => {
+        const elfFile = findElfFile(getChoice(getState()));
+        if (!elfFile) {
+            throw new Error('No ELF file is configured for this firmware.');
+        }
+        const bytes = await fs.promises.readFile(
+            path.join(getFirmwareFolder(), elfFile),
+        );
+        const { uploadUrl, uploadToken } = await dispatch(
+            withAccessToken(t =>
+                requestSymbolUploadUrl(t, orgSlug, projectSlug),
+            ),
+        );
+        await uploadSymbolBinary(uploadUrl, bytes);
+        await dispatch(
+            withAccessToken(t =>
+                finalizeSymbolFile(t, orgSlug, projectSlug, uploadToken),
+            ),
+        );
+    };
+
 export const onboard =
     (vComIndex: number): AppThunk<Promise<void>> =>
     async (dispatch, getState) => {
@@ -202,6 +235,12 @@ export const onboard =
             const attestationToken = await dispatch(
                 readAttestationToken(vComIndex),
             );
+
+            phase = 'upload-symbols';
+            dispatch(
+                setOnboarding({ status: 'loading', stage: 'upload-symbols' }),
+            );
+            await dispatch(uploadSymbols(selectedOrgSlug, selectedProjectSlug));
 
             phase = 'onboard';
             dispatch(setOnboarding({ status: 'loading', stage: 'onboard' }));

@@ -15,7 +15,11 @@ import {
 } from '../../../features/flows/nRF54L15_cloud/evaluate/types';
 import { type Provisioning } from './api';
 
-export type OnboardingStage = 'read-token' | 'onboard' | 'reboot-device';
+export type OnboardingStage =
+    | 'read-token'
+    | 'upload-symbols'
+    | 'onboard'
+    | 'reboot-device';
 
 interface AccountState {
     status: AsyncStatus;

@@ -23,7 +23,7 @@ const infoConfig = {
         '![Thingy:91 X](Thingy91X.png)  \n&nbsp;  \nThe Nordic Thingy:91 X Prototyping Platform is perfect for running Cellular IoT or DECT NR+ prototypes.  \n&nbsp;  \nIt includes an nRF9151 SiP, an nRF7002 (Wi-Fi IC), an nRF5340 (short range IC), and all the necessary external circuirty like (e)SIM interface, antennas, programmable button and LEDs, and module interfaces.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/category/nrf-91-series)  \n&nbsp;  \n![9151 Cores](9151Cores.png)  \nYou have two options for leveraging the nRF9151 SiP:  \n&nbsp;  \n**Option 1** *Recommended*  \nHarness the full potential of nRF9151 by using the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by nRF9151.  \n&nbsp;  \n**Option 2**  \nIntegrate nRF9151 as a [cellular](https://www.nordicsemi.com/Products/Low-power-cellular-IoT/What-is-cellular-IoT#infotabs) or [NR+](https://www.nordicsemi.com/Products/DECT-NR) modem alongside your existing design running a serial AT command set on the application core.',
 };
 
-const programConfig = [
+export const programConfig = [
     {
         name: 'Start testing',
         type: 'action-list',
@@ -121,6 +121,7 @@ const programConfig = [
                     firmware: {
                         core: 'Application',
                         file: 'thingy91x_asset_tracker_template.zip',
+                        elfFile: 'thingy91x_asset_tracker_template.elf',
                         link: {
                             label: 'Asset Tracker Template',
                             href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',

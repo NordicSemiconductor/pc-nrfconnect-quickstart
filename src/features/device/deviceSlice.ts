@@ -98,6 +98,16 @@ interface ActionListChoice extends ChoiceInfo {
 
 export type Choice = BatchChoice | ActionListChoice;
 
+export const findElfFile = (choice?: Choice) => {
+    const firmwares =
+        choice?.type === 'jlink-batch'
+            ? choice.programmingOptions.firmwareList
+            : choice?.programmingOptions.actions.flatMap(action =>
+                  action.type === 'program' ? [action.firmware] : [],
+              );
+    return firmwares?.find(firmware => firmware.elfFile)?.elfFile;
+};
+
 interface State {
     choice?: Choice;
     connectedDevices: Map<string, DeviceWithSerialnumber>;
