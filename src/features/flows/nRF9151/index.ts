@@ -10,10 +10,10 @@ import Develop from '../../../common/steps/Develop';
 import Evaluate from '../../../common/steps/Evaluate';
 import Info from '../../../common/steps/Info';
 import Learn from '../../../common/steps/Learn';
+import NrfCloudOnboarding from '../../../common/steps/NrfCloudOnboarding';
 import Program from '../../../common/steps/Program';
 import Rename from '../../../common/steps/Rename';
 import { type Choice } from '../../device/deviceSlice';
-import CustomEvaluate from './Evaluate';
 import { nrf91LearnConfig } from './learnConfig';
 import SIM from './SIM';
 
@@ -23,7 +23,7 @@ const infoConfig = {
         "![nRF9151 DK](9151DK.png)  \n&nbsp;  \nThe nRF9151 Development Kit is perfect for evaluating the nRF9151 SiP and developing cellular IoT or DECT NR+ applications.  \n&nbsp;  \nIt includes SEGGER's J-Link OB debug probe and all the necessary external circuitry, like (e)SIM interface, antennas, access to all IO pins, programmable buttons, and module interfaces.  \n&nbsp;  \n[Hardware documentation](https://docs.nordicsemi.com/bundle/ug_nrf9151_dk/page/UG/nrf91_DK/intro.html)  \n&nbsp;  \n![nRF9151 SiP Cores](9151Cores.png)  \nYou have two options for leveraging the nRF9151 SiP:  \n&nbsp;  \n**Option 1** *Recommended*  \nHarness the full potential of nRF9151 by using the entire application core for your code, eliminating the need for an external MCU, and fully capitalizing on the advantages offered by nRF9151.  \n&nbsp;  \n**Option 2**  \nIntegrate nRF9151 as a [cellular](https://www.nordicsemi.com/Products/Low-power-cellular-IoT/What-is-cellular-IoT#infotabs) or [NR+](https://www.nordicsemi.com/Products/DECT-NR) modem alongside your existing design running a serial AT command set on the application core.",
 };
 
-const programConfig = [
+export const programConfig = [
     {
         name: 'Asset Tracker',
         type: 'action-list',
@@ -64,6 +64,7 @@ const programConfig = [
                     firmware: {
                         core: 'Application',
                         file: 'nrf9151dk_asset_tracker_template.hex',
+                        elfFile: 'nrf9151dk_asset_tracker_template.elf',
                         link: {
                             label: 'Asset Tracker',
                             href: 'https://docs.nordicsemi.com/bundle/asset-tracker-template-latest/page/index.html',
@@ -272,7 +273,7 @@ const verificationConfig = {
 const evaluationConfig = [
     {
         ref: 'Asset Tracker',
-        component: CustomEvaluate,
+        component: () => NrfCloudOnboarding({ vComIndex: 0 }),
     },
     {
         ref: 'AT Commands',

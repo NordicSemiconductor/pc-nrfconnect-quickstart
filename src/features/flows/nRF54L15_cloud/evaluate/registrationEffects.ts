@@ -16,6 +16,7 @@ import { type AppThunk } from '../../../../app/store';
 import { getFirmwareFolder } from '../../../device/deviceGuides';
 import { reset } from '../../../device/deviceLib';
 import {
+    findElfFile,
     getChoice,
     getSelectedDeviceUnsafely,
 } from '../../../device/deviceSlice';
@@ -104,18 +105,9 @@ export const registerDevice =
             );
 
             phase = 'upload-symbols';
-            const choice = getChoice(state);
-            const firmware =
-                choice?.type === 'jlink-batch'
-                    ? choice.programmingOptions.firmwareList.find(
-                          f => f.elfFile,
-                      )
-                    : undefined;
-            if (firmware?.elfFile) {
-                const elfPath = path.join(
-                    getFirmwareFolder(),
-                    firmware.elfFile,
-                );
+            const elfFile = findElfFile(getChoice(state));
+            if (elfFile) {
+                const elfPath = path.join(getFirmwareFolder(), elfFile);
                 const bytes = await fs.promises.readFile(elfPath);
                 const { uploadUrl, uploadToken } = await dispatch(
                     withMemfaultToken(t =>
