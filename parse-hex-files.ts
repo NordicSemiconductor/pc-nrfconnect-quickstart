@@ -201,37 +201,41 @@ const readSamples = () => {
 function parseIntelHex(text: string) {
     const mem = new Map<number, number>(); // absolute address -> byte
     let base = 0;
+    let ended = false;
 
-    for (const raw of text.split(/\r?\n/)) {
-        const line = raw.trim();
-        if (!line) continue;
-        if (line[0] !== ':') throw new Error(`Bad record: ${line}`);
+    text.split(/\r?\n/)
+        .map(raw => raw.trim())
+        .filter(Boolean)
+        .forEach(line => {
+            if (ended) return;
+            if (line[0] !== ':') throw new Error(`Bad record: ${line}`);
 
-        const rec = Buffer.from(line.slice(1), 'hex');
-        const len = rec[0];
-        const addr = (rec[1] << 8) | rec[2];
-        const type = rec[3];
-        const data = rec.subarray(4, 4 + len);
+            const rec = Buffer.from(line.slice(1), 'hex');
+            const len = rec[0];
+            const addr = rec.readUInt16BE(1);
+            const type = rec[3];
+            const data = rec.subarray(4, 4 + len);
 
-        // all bytes of a record (incl. checksum) must sum to 0 mod 256
-        if (rec.reduce((a, b) => (a + b) & 0xff, 0) !== 0)
-            throw new Error(`Checksum error: ${line}`);
+            // all bytes of a record (incl. checksum) must sum to 0 mod 256
+            if (rec.reduce((a, b) => (a + b) % 256, 0) !== 0)
+                throw new Error(`Checksum error: ${line}`);
 
-        switch (type) {
-            case 0x00:
-                data.forEach((b, i) => mem.set(base + addr + i, b));
-                break;
-            case 0x01:
-                return mem; // end of file
-            case 0x02:
-                base = ((data[0] << 8) | data[1]) * 16;
-                break; // ext. segment address
-            case 0x04:
-                base = ((data[0] << 8) | data[1]) * 65536;
-                break; // ext. linear address
-            // 0x03 / 0x05 = start address, not needed here
-        }
-    }
+            switch (type) {
+                case 0x00:
+                    data.forEach((b, i) => mem.set(base + addr + i, b));
+                    break;
+                case 0x01:
+                    ended = true; // end of file
+                    break;
+                case 0x02:
+                    base = data.readUInt16BE(0) * 16;
+                    break; // ext. segment address
+                case 0x04:
+                    base = data.readUInt16BE(0) * 65536;
+                    break; // ext. linear address
+                // 0x03 / 0x05 = start address, not needed here
+            }
+        });
     return mem;
 }
 
@@ -239,14 +243,14 @@ function parseIntelHex(text: string) {
 function toRegions(mem: Map<number, number>) {
     const addrs = [...mem.keys()].sort((a, b) => a - b);
     const regions: { start: number; arr: number[] }[] = [];
-    let cur: { start: number; arr: number[] } | null = null;
-    for (const a of addrs) {
-        if (!cur || a !== cur.start + cur.arr.length) {
-            cur = { start: a, arr: [] };
-            regions.push(cur);
+    addrs.forEach(a => {
+        const cur = regions[regions.length - 1];
+        if (cur && a === cur.start + cur.arr.length) {
+            cur.arr.push(mem.get(a) as number);
+        } else {
+            regions.push({ start: a, arr: [mem.get(a) as number] });
         }
-        cur.arr.push(mem.get(a) as number);
-    }
+    });
     return regions.map(r => ({ start: r.start, bytes: Buffer.from(r.arr) }));
 }
 
@@ -256,18 +260,17 @@ const isPrintable = (b: number) =>
 // Pull out NUL-terminated runs of printable ASCII (C strings)
 function extractStrings(regions: { bytes: Buffer }[]) {
     const out: string[] = [];
-    for (const { bytes } of regions) {
+    regions.forEach(({ bytes }) => {
         let s = '';
-        for (let i = 0; i <= bytes.length; i++) {
-            const b = bytes[i];
+        bytes.forEach(b => {
             if (isPrintable(b)) {
                 s += String.fromCharCode(b);
             } else {
                 if (b === 0 && s.trim()) out.push(s.trim());
                 s = '';
             }
-        }
-    }
+        });
+    });
     return out;
 }
 
