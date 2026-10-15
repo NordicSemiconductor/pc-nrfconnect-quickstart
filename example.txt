@@ -1,0 +1,212 @@
+nRF52 DK - Hello World (nrf52dk_hello_world.hex [2024-09-30])
+
+*** Booting nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Hello World! nrf52dk/nrf52832
+
+---------
+nRF52 DK - Peripheral LED Button Service (nrf52dk_lbs.hex [2024-09-30])
+
+*** Using nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Starting Bluetooth Peripheral LBS example
+
+---------
+nRF52 DK - Peripheral UART (nrf52dk_peripheral_uart.hex [2024-09-30])
+
+*** Using nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Starting Nordic UART service example
+
+---------
+nRF54L15 DK - nRF Cloud Bluetooth Quick Start (nrf54l15dk_quickstart_bluetooth.hex [2026-08-26])
+
+*** Booting Quickstart Bluetooth v1.1.1-643be9fd4c23 ***
+*** Using nRF Connect SDK v3.4.99-40e850a75071 ***
+*** Using Zephyr OS v4.4.0-59969b286a15 ***
+
+---------
+nRF54L15 DK - Hello World (nrf54l15dk_hello_world.hex [2024-09-17])
+
+*** Booting nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Hello World! nrf54l15pdk@0.3.0/nrf54l15/cpuapp
+
+---------
+nRF54L15 DK - Peripheral LED Button Service (nrf54l15dk_lbs.hex [2024-10-02])
+
+*** Using nRF Connect SDK v2.7.99-7b1f88d80097 ***
+*** Using Zephyr OS v3.6.99-5d10d27a0a97 ***
+Starting Bluetooth Peripheral LBS example
+
+---------
+nRF54L15 DK - Peripheral UART (nrf54l15dk_peripheral_uart.hex [2024-10-04])
+
+*** Using nRF Connect SDK v2.7.99-7b1f88d80097 ***
+*** Using Zephyr OS v3.6.99-5d10d27a0a97 ***
+Starting Nordic UART service example
+
+---------
+nRF54LC10 DK - Hello World (nrf54lc10dk_hello_world.hex [2026-08-17])
+
+*** Booting nRF Connect SDK v3.5.0-preview1-f62d6ecf1b15 ***
+*** Using Zephyr OS v4.4.0-b1fd0755fc8e ***
+Hello world from nrf54lc10dk@0.8.0/nrf54lc10a/cpuapp
+
+---------
+nRF54LC10 DK - Peripheral LED Button Service (nrf54lc10dk_lbs.hex [2026-08-17])
+
+*** Using nRF Connect SDK v3.5.0-preview1-f62d6ecf1b15 ***
+*** Using Zephyr OS v4.4.0-b1fd0755fc8e ***
+Starting Bluetooth Peripheral LBS sample
+
+---------
+nRF54LC10 DK - Peripheral UART (nrf54lc10dk_peripheral_uart.hex [2026-08-17])
+
+*** Using nRF Connect SDK v3.5.0-preview1-f62d6ecf1b15 ***
+*** Using Zephyr OS v4.4.0-b1fd0755fc8e ***
+Starting Nordic UART service sample
+
+---------
+nRF54LM20 DK - Hello World (nrf54lm20dk_hello_world.hex [2026-03-10])
+
+*** Booting nRF Connect SDK v3.3.0-preview2-ede152ec210b ***
+*** Using Zephyr OS v4.3.99-4b6df5ff11b1 ***
+Hello World! nrf54lm20dk/nrf54lm20a/cpuapp
+
+---------
+nRF54LM20 DK - Peripheral LED Button Service (nrf54lm20dk_lbs.hex [2026-03-10])
+
+*** Using nRF Connect SDK v3.3.0-preview2-ede152ec210b ***
+*** Using Zephyr OS v4.3.99-4b6df5ff11b1 ***
+Starting Bluetooth Peripheral LBS sample
+
+---------
+nRF54LM20 DK - Peripheral UART (nrf54lm20dk_peripheral_uart.hex [2026-03-10])
+
+*** Using nRF Connect SDK v3.3.0-preview2-ede152ec210b ***
+*** Using Zephyr OS v4.3.99-4b6df5ff11b1 ***
+Starting Nordic UART service sample
+
+---------
+nRF54LS05 DK - Hello World (nrf54ls05dk_hello_world.hex [2026-04-23])
+
+*** Booting nRF Connect SDK v3.2.99-fc3a0cd9b5db ***
+*** Using Zephyr OS v4.3.99-ea552daabfbf ***
+Hello World! nrf54ls05dk@0.2.0/nrf54ls05b/cpuapp
+
+---------
+nRF54LS05 DK - Peripheral LED Button Service (nrf54ls05dk_lbs.hex [2026-04-23])
+
+*** Using nRF Connect SDK v3.2.99-fc3a0cd9b5db ***
+*** Using Zephyr OS v4.3.99-ea552daabfbf ***
+Starting Bluetooth Peripheral LBS sample
+
+---------
+nRF54LS05 DK - Peripheral UART (nrf54ls05dk_peripheral_uart.hex [2026-04-23])
+
+*** Using nRF Connect SDK v3.2.99-fc3a0cd9b5db ***
+*** Using Zephyr OS v4.3.99-ea552daabfbf ***
+Starting Nordic UART service sample
+
+---------
+nRF54LV10 DK - Hello World (nrf54lv10dk_hello_world.hex [2026-09-23])
+
+*** Booting nRF Connect SDK v3.4.1-b20f8619ba9a ***
+*** Using Zephyr OS v4.4.2-33fa6a7aac6a ***
+Hello world from nrf54lv10dk@0.7.0/nrf54lv10a/cpuapp
+
+---------
+nRF54LV10 DK - Peripheral LED Button Service (nrf54lv10dk_lbs.hex [2026-09-23])
+
+*** Using nRF Connect SDK v3.4.1-b20f8619ba9a ***
+*** Using Zephyr OS v4.4.2-33fa6a7aac6a ***
+Starting Bluetooth Peripheral LBS sample
+
+---------
+nRF54LV10 DK - Peripheral UART (nrf54lv10dk_peripheral_uart.hex [2026-09-23])
+
+*** Using nRF Connect SDK v3.4.1-b20f8619ba9a ***
+*** Using Zephyr OS v4.4.2-33fa6a7aac6a ***
+Starting Nordic UART service sample
+
+---------
+nRF5340 DK - Hello World (nrf53dk_hello_world.hex [2024-10-08])
+
+*** Booting nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Hello World! nrf5340dk/nrf5340/cpuapp
+
+---------
+nRF5340 DK - Peripheral LED Button Service (nrf53dk_lbs_app.hex [2024-10-08], nrf53dk_lbs_net.hex [2024-10-08])
+
+*** Using nRF Connect SDK v2.7.99-7b1f88d80097 ***
+*** Using Zephyr OS v3.6.99-5d10d27a0a97 ***
+Starting Bluetooth Peripheral LBS example
+
+---------
+nRF5340 DK - Peripheral UART (nrf53dk_peripheral_uart_app.hex [2024-10-08], nrf53dk_peripheral_uart_net.hex [2024-10-08])
+
+*** Using nRF Connect SDK v2.7.99-cs2-d73b286ff6d9 ***
+*** Using Zephyr OS v3.6.99-3d01dcc251bf ***
+Starting Nordic UART service example
+
+---------
+nRF7002 DK - Hello World (nrf53dk_hello_world.hex [2024-10-08])
+
+*** Booting nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Hello World! nrf5340dk/nrf5340/cpuapp
+
+---------
+nRF7002 DK - Wi-Fi Scan (nrf7002dk_wifi_scan_sample_ncs2.9.0.hex [2025-05-22])
+
+*** Booting nRF Connect SDK v2.9.0-7787b2649840 ***
+*** Using Zephyr OS v3.7.99-1f8f3dc29142 ***
+
+---------
+nRF7002 DK - Wi-Fi Bluetooth LE Provisioning (nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged.hex [2025-05-22], nrf7002dk_wifi_ble_provisioning_sample_ncs2.9.0_merged_CPUNET.hex [2025-05-22])
+
+*** Booting nRF Connect SDK v2.9.0-7787b2649840 ***
+*** Using Zephyr OS v3.7.99-1f8f3dc29142 ***
+
+---------
+nRF52833 DK - Hello World (nrf52833dk_hello_world.hex [2024-09-30])
+
+*** Booting nRF Connect SDK 3758bcbfa5cd ***
+Hello World! nrf52833dk_nrf52833
+
+---------
+nRF52833 DK - Peripheral LED Button Service (nrf52833dk_lbs.hex [2024-09-30])
+
+*** Booting nRF Connect SDK 3758bcbfa5cd ***
+Starting Bluetooth Peripheral LBS example
+
+---------
+nRF52833 DK - Peripheral UART (nrf52833dk_peripheral_uart.hex [2024-09-30])
+
+*** Booting nRF Connect SDK 3758bcbfa5cd ***
+Starting Nordic UART service example
+
+---------
+nRF52840 DK - Hello World (nrf52840dk_hello_world.hex [2024-09-30])
+
+*** Booting nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Hello World! nrf52840dk/nrf52840
+
+---------
+nRF52840 DK - Peripheral LED Button Service (nrf52840dk_lbs.hex [2024-09-30])
+
+*** Using nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Starting Bluetooth Peripheral LBS example
+
+---------
+nRF52840 DK - Peripheral UART (nrf52840dk_peripheral_uart.hex [2024-09-30])
+
+*** Using nRF Connect SDK v2.7.0-5cb85570ca43 ***
+*** Using Zephyr OS v3.6.99-100befc70c74 ***
+Starting Nordic UART service example
+
+OK, 31 sample(s) match their Verify regex.
