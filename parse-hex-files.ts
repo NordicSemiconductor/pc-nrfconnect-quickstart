@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
+ */
+
 // Reads the device flows (src/features/flows/index.tsx) to find which firmware
 // each sample programs and which regex its Verify step expects on the UART.
 // Then extracts the strings from those .hex files and prints only the ones the
