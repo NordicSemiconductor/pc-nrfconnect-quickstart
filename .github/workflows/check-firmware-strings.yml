@@ -1,0 +1,45 @@
+name: Check firmware strings
+
+# Checks that the bundled firmware still prints what Quick Start expects.
+#
+# During the Verify step, the app reads the device's UART output and tests it
+# against a regex from the device's config (src/features/flows/*/index.ts).
+# This job runs parse-hex-files.ts, which:
+#   1. reads those configs to see which .hex files each sample programs and
+#      which regex its Verify step uses,
+#   2. extracts the text strings from each .hex file,
+#   3. checks that every line of the regex matches a string in the firmware.
+#
+# The job fails if a line is not found or a .hex file is missing. Either the
+# firmware or its regex then needs updating. The log shows the matched
+# strings and each file's last commit date for every sample.
+
+on:
+    workflow_dispatch:
+    pull_request:
+        types: [opened, reopened, synchronize]
+        paths:
+            - 'resources/devices/firmware/**'
+            - 'src/features/flows/**'
+            - 'parse-hex-files.ts'
+            - '.github/workflows/check-firmware-strings.yml'
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  # full history, needed for each .hex file's last commit date
+                  fetch-depth: 0
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            # typescript and tsx come with pc-nrfconnect-shared
+            - run: npm ci
+
+            - name: Check firmware against Verify regexes
+              run: npx tsx parse-hex-files.ts
